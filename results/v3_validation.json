@@ -1,0 +1,13 @@
+{
+  "old_files_sha256_unchanged": 94,
+  "changed_old_files": [],
+  "old_evaluation_and_history_files_unchanged": 17,
+  "unique_qa_units": 200,
+  "real_completed_answers": 197,
+  "failed_units": 3,
+  "actual_prompts_contexts_sources_verified": 197,
+  "old_finished_units_reused_unchanged": 174,
+  "review_scores_filled": 0,
+  "http_send_attempts": 206,
+  "retries": 6
+}

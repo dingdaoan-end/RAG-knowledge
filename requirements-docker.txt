@@ -1,0 +1,4 @@
+-r requirements.txt
+torch==2.14.0+cpu
+transformers==4.57.6
+huggingface-hub==0.36.2

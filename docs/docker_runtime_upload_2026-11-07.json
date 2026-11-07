@@ -1,0 +1,18 @@
+{
+  "http_status": 201,
+  "result": {
+    "status": "indexed",
+    "document_id": "bfa523d6243c45fc8eca7e7ea82dae4f",
+    "filename": "docker-acceptance-20261107.pdf",
+    "file_type": ".pdf",
+    "size": 945,
+    "sha256": "5af21a0acf17a2aa0698b3f4e1f83641f7ea90a30abf8ca492a4b67ed628753e",
+    "chunk_count": 1
+  },
+  "request_id": "a279584bef0545f89b65e53ae693bef9",
+  "pdf_sha256": "5af21a0acf17a2aa0698b3f4e1f83641f7ea90a30abf8ca492a4b67ed628753e",
+  "expected_facts": [
+    "RAG-PDF-7821",
+    "47 minutes"
+  ]
+}

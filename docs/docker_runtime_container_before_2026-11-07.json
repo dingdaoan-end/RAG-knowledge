@@ -1,0 +1,29 @@
+{
+  "container_id": "153c20cd73cacbd734f6a7fa674fc7fda56df963cc92ef6c34bd03633668dfa8",
+  "image_id": "sha256:e57763d7ff903a5db5f307dce149c765fcf8f812197b4f1c6d94eac2c33634cc",
+  "started_at": "2026-11-07T00:22:11.731081767Z",
+  "mounts": [
+    {
+      "destination": "/app/knowledge",
+      "source": "D:\\RAGrepository\\data",
+      "type": "bind",
+      "writable": false
+    },
+    {
+      "destination": "/models/hub",
+      "source": "C:/Users/吴志武/.cache/huggingface/hub",
+      "type": "bind",
+      "writable": false
+    },
+    {
+      "destination": "/app/data/uploads",
+      "source": "D:\\RAGrepository\\data\\uploads",
+      "type": "bind",
+      "writable": true
+    }
+  ],
+  "persisted_file_sha256": {
+    "bfa523d6243c45fc8eca7e7ea82dae4f.pdf": "5af21a0acf17a2aa0698b3f4e1f83641f7ea90a30abf8ca492a4b67ed628753e",
+    "manifest.json": "296a9f1f2495106701fd6755f520f96abe1f01dd70517ce09fdc77f859288b61"
+  }
+}

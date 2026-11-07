@@ -1,0 +1,54 @@
+{
+  "version": "2.0",
+  "corpus_sha256": "d204aef8d060a86909f8a239e8bf93630ce375136db9efbf971c28539ecc458e",
+  "metadata": {
+    "name": "rag_qa_teaching_v2",
+    "annotation_status": "teaching_references_pending_human_review",
+    "corpus_file": "retrieval_eval_v2.json",
+    "purpose": "采集实际答案、提示词、上下文与来源，供人工独立评审；参考答案和标签不进入生成提示词。",
+    "answerable_definition": "true 表示已有资料能回答所请求的事实；false 表示所请求的事实或确定结论无法由现有资料支持，期望说明证据限制，而不是猜测。",
+    "limitations": "仅 5 个教学问题，参考答案和关键事实尚待用户复核；CUDA 编号来自示例日志，不能当作真实环境诊断结论。"
+  },
+  "samples": [
+    {
+      "id": "qa_001",
+      "question": "RAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？",
+      "reference_answer": "RAG 检索外部知识，为生成模型提供相关事实和证据，减少仅凭参数记忆编造答案的情况。但检索错误、资料过时或模型误读仍会导致错误，因此不能保证完全消除幻觉。",
+      "required_facts": ["检索外部知识", "向生成模型提供相关事实和证据", "不能保证完全消除幻觉"],
+      "relevant_document_ids": ["rag_evidence", "rag_limits", "rag_overview"],
+      "answerable": true
+    },
+    {
+      "id": "qa_002",
+      "question": "FAISS IndexFlatIP 在什么条件下等价于余弦相似度检索？",
+      "reference_answer": "查询向量和文档向量都需要做 L2 归一化，使范数为 1；此时内积等于余弦相似度，IndexFlatIP 才能按余弦相似度进行检索。",
+      "required_facts": ["查询向量和文档向量都需要 L2 归一化", "归一化后的范数为 1", "单位向量的内积等于余弦相似度"],
+      "relevant_document_ids": ["faiss_ip", "cosine_unit"],
+      "answerable": true
+    },
+    {
+      "id": "qa_003",
+      "question": "Cross-Encoder 为什么不能提前为每篇文档计算一个适用于所有问题的固定重排分数？",
+      "reference_answer": "Cross-Encoder 将问题和文档组成文本对联合编码，相关性分数同时依赖问题与文档。同一篇文档面对不同问题会得到不同分数，因此不能预计算适用于所有问题的固定分数。它只重排召回候选。",
+      "required_facts": ["联合编码 query 与 document 文本对", "相关性分数依赖具体问题", "不能预计算适用于所有问题的固定重排分数"],
+      "relevant_document_ids": ["reranker_pairs"],
+      "answerable": true
+    },
+    {
+      "id": "qa_004",
+      "question": "只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？",
+      "reference_answer": "不能仅凭这一编号确定显卡损坏，也不能给出唯一修复命令。知识库只有示例日志线索，缺少用户的完整日志和环境信息。应明确说明证据不足，并请求完整错误日志及驱动、运行时和框架版本。",
+      "required_facts": ["不能仅凭错误编号认定显卡损坏", "证据不足，不能给出唯一修复命令", "需要完整日志和环境版本信息"],
+      "relevant_document_ids": ["cuda_1175"],
+      "answerable": false
+    },
+    {
+      "id": "qa_005",
+      "question": "这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？",
+      "reference_answer": "知识库没有当前机器的实际硬件和软件版本信息，无法确定这些值。应说明资料不足，需要用户提供环境检测结果，不能把技术文档或示例日志当作当前机器的事实。",
+      "required_facts": ["现有资料不能确定当前机器的型号和版本", "不编造具体硬件型号或版本号", "需要当前环境的实际检测信息"],
+      "relevant_document_ids": [],
+      "answerable": false
+    }
+  ]
+}

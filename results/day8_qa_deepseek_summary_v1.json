@@ -1,0 +1,14 @@
+{
+  "capture_sha256": "e29a46452400e91b326eace11ec51f9de0c746bdd96ea56f60ab0686292999c2",
+  "generation": {
+    "mode": "real_api",
+    "implementation": "OpenAILLM",
+    "model": "deepseek-flash"
+  },
+  "total_count": 5,
+  "reviewed_count": 0,
+  "pending_count": 5,
+  "human_review_metrics": null,
+  "real_llm_quality_metrics": null,
+  "message": "尚无已审核评分"
+}

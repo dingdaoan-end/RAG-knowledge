@@ -1,0 +1,51 @@
+{
+  "docker_desktop_version": "4.98.0",
+  "docker_engine_version": "29.9.2",
+  "compose_version": "v5.6.1",
+  "installation_directory": "D:/DockerDesktop",
+  "wsl_data_directory": "D:/DockerData",
+  "installer_sha256": "cd6273d9eaa4f07fa7593fc6813d37e1004381cebc3f26047a2554fa5db24388",
+  "installer_signature": "Valid Docker Inc",
+  "engine_check": "passed_linux_amd64",
+  "image_build": "passed",
+  "pip_check": "No broken requirements found",
+  "image": {
+    "image_id": "sha256:e57763d7ff903a5db5f307dce149c765fcf8f812197b4f1c6d94eac2c33634cc",
+    "tag": [
+      "rag-knowledge-api:local"
+    ],
+    "size_bytes": 2274566025,
+    "os": "linux",
+    "architecture": "amd64",
+    "runtime_user": "10001:10001",
+    "command": [
+      "uvicorn",
+      "app.deployment:create_deployment_app",
+      "--factory",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "8000",
+      "--workers",
+      "1",
+      "--no-access-log"
+    ],
+    "ports": [
+      "8000/tcp"
+    ]
+  },
+  "protected_files_checked": 291,
+  "protected_changes": [],
+  "rag_application_started": false,
+  "compose_config_run": false,
+  "health_ready_validated": false,
+  "real_llm_calls": 0,
+  "model_downloads": 0,
+  "real_env_created_or_read": false,
+  "build_network": "existing Windows system proxy inherited by build process only",
+  "build_attempts": 3,
+  "initial_build_issues_resolved": [
+    "credential helper absent from old process PATH",
+    "Docker Hub token endpoint required existing system proxy"
+  ]
+}

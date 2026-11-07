@@ -1,0 +1,1425 @@
+[
+  {
+    "id": "qa_001",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_001 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 rag_evidence、rag_limits、rag_overview。降低幻觉及不能保证消除均与冻结参考一致；检索外部知识由外部证据与检索资料的连贯表述体现。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "检索外部知识",
+          "covered": true,
+          "answer_quote": "因为它向模型提供可参考的**外部事实和证据**，减少模型仅凭参数记忆编造答案的情况；同时要求模型根据检索到的资料作答",
+          "notes": "将外部证据和检索到的资料连贯说明，语义覆盖检索外部知识；不要求逐字出现“知识库”。"
+        },
+        {
+          "fact": "向生成模型提供相关事实和证据",
+          "covered": true,
+          "answer_quote": "它向模型提供可参考的**外部事实和证据**",
+          "notes": "明确给出提供外部事实和证据的机制。"
+        },
+        {
+          "fact": "不能保证完全消除幻觉",
+          "covered": true,
+          "answer_quote": "**RAG 不能保证完全消除幻觉**",
+          "notes": "直接限定不能彻底消除。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 context 的 rag_evidence 与 rag_limits 支持机制、错误来源和核查建议，Document 2/3 引用对应正确；rag_terms 未被误用作机制证据。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_002",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_002 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 faiss_ip、cosine_unit。归一化条件与等式同冻结参考。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "查询向量和文档向量都需要 L2 归一化",
+          "covered": true,
+          "answer_quote": "**查询向量和文档向量都做了单位长度归一化（L2 归一化，范数为 1）**",
+          "notes": "同时要求查询和文档两方归一化。"
+        },
+        {
+          "fact": "归一化后的范数为 1",
+          "covered": true,
+          "answer_quote": "L2 归一化，范数为 1",
+          "notes": "范数值明确为1。"
+        },
+        {
+          "fact": "单位向量的内积等于余弦相似度",
+          "covered": true,
+          "answer_quote": "此时 `cosine(q,d)=q·d`",
+          "notes": "等式明确表示单位向量内积与余弦相等。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "两个相关实际 Chunk 均支持答案；条件、范数和等式完整，没有以未归一化内积代替余弦。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_003",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_003 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 reranker_pairs。输入、问题依赖性和预计算限制均正确。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "联合编码 query 与 document 文本对",
+          "covered": true,
+          "answer_quote": "**query 与 document.text 组成文本对，联合编码后输出相关性分数**",
+          "notes": "明确文本对联合编码。"
+        },
+        {
+          "fact": "相关性分数依赖具体问题",
+          "covered": true,
+          "answer_quote": "同一篇文档面对不同问题会得到不同分数",
+          "notes": "明确相关性随问题改变。"
+        },
+        {
+          "fact": "不能预计算适用于所有问题的固定重排分数",
+          "covered": true,
+          "answer_quote": "不能提前计算一个适用于所有问题的固定 rerank score",
+          "notes": "直接说明不可跨所有问题预计算固定分数。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "答案直接概括实际 reranker_pairs 正文，额外说明只重排召回候选也有同一上下文依据。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_006",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_006 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 rag_overview、rag_evidence。与冻结参考的检索→提示词→大语言模型顺序一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "先从外部知识库检索与问题相关的信息",
+          "covered": true,
+          "answer_quote": "系统先根据用户问题，从外部知识库中检索与问题相关的信息",
+          "notes": "明确第一步外部检索。"
+        },
+        {
+          "fact": "把检索结果放入提示词",
+          "covered": true,
+          "answer_quote": "再把检索结果放入提示词",
+          "notes": "明确提示词组装步骤。"
+        },
+        {
+          "fact": "交给大语言模型组织答案",
+          "covered": true,
+          "answer_quote": "交给大语言模型组织答案",
+          "notes": "明确生成方及职责。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 rag_overview 支持三步流程，rag_evidence 支持根据资料作答及缺证说明；流程顺序直接回答问题。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_007",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_007 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 rag_terms。对 rag_terms 能否独立解释的否定与该 Chunk 及冻结参考一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "只是术语索引",
+          "covered": true,
+          "answer_quote": "只是术语索引",
+          "notes": "明确索引性质。"
+        },
+        {
+          "fact": "不解释 RAG 为什么可以降低大模型幻觉",
+          "covered": true,
+          "answer_quote": "不解释 RAG 为什么可以降低大模型幻觉",
+          "notes": "明确不能解释原因。"
+        },
+        {
+          "fact": "没有给出相关机制",
+          "covered": true,
+          "answer_quote": "也没有给出相关机制",
+          "notes": "明确缺少机制内容。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "正确区分术语索引与机制说明，未把同场其他文档的机制归给 rag_terms。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_008",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_008 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 rag_limits。四类风险与冻结参考一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "检索错误",
+          "covered": true,
+          "answer_quote": "检索错误",
+          "notes": "列出检索环节错误。"
+        },
+        {
+          "fact": "资料过时",
+          "covered": true,
+          "answer_quote": "资料过时",
+          "notes": "列出资料时效风险。"
+        },
+        {
+          "fact": "上下文缺失",
+          "covered": true,
+          "answer_quote": "上下文缺失",
+          "notes": "列出上下文缺失。"
+        },
+        {
+          "fact": "模型误读",
+          "covered": true,
+          "answer_quote": "模型误读",
+          "notes": "列出模型理解风险。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "四类环节均在实际 rag_limits 中，不能保证完全消除幻觉的补充同样有依据。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_009",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_009 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 rag_evidence、rag_limits。缺证表述和来源核查与冻结参考及两份 RAG Chunk 一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "资料不足时应说明无法回答",
+          "covered": true,
+          "answer_quote": "当检索资料不足或知识库缺乏答案时，助手应明确说明“资料不足，无法回答”或“无法根据现有资料作答”",
+          "notes": "明确缺证时应说明不能回答。"
+        },
+        {
+          "fact": "核查来源和引用",
+          "covered": true,
+          "answer_quote": "同时应核查来源和引用",
+          "notes": "直接覆盖核查要求。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际资料只给出核查来源与引用的一般要求，答案如实说明没有更具体检查项；“不能编造”是依据资料作答要求的直接解释。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_010",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_010 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 embedding_bge。定义和通常更接近均与冻结参考一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": true,
+          "answer_quote": "将文本编码为稠密语义向量",
+          "notes": "完整说明输入与输出。"
+        },
+        {
+          "fact": "含义接近的文本通常在向量空间更接近",
+          "covered": true,
+          "answer_quote": "含义接近的文本，在向量空间中通常会更接近",
+          "notes": "保留通常这一概率性限定。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 embedding_bge 支持定义和语义邻近关系；答案简短但回应两部分，无需补充未被问到的模型信息。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_011",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_011 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 embedding_bge。模型名称、版本和预计算对象均同冻结参考。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "sentence-transformers",
+          "covered": true,
+          "answer_quote": "加载库：`sentence-transformers`",
+          "notes": "明确加载库。"
+        },
+        {
+          "fact": "BAAI/bge-small-zh-v1.5",
+          "covered": true,
+          "answer_quote": "中文 Embedding 模型：`BAAI/bge-small-zh-v1.5`",
+          "notes": "模型全名和版本正确。"
+        },
+        {
+          "fact": "文档向量可以提前计算",
+          "covered": true,
+          "answer_quote": "可提前计算的对象：文档向量",
+          "notes": "明确可提前计算的是文档向量。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "模型、加载库、预计算对象三项均直接由实际 embedding_bge 支持。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_012",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_012 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 cosine_unit。除以欧几里得长度和单位范数与冻结参考一致；按教学语料所述归一化情形核对。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "把向量除以它的欧几里得长度",
+          "covered": true,
+          "answer_quote": "L2 归一化是把向量除以它的欧几里得长度",
+          "notes": "计算方法清楚。"
+        },
+        {
+          "fact": "使向量范数等于 1",
+          "covered": true,
+          "answer_quote": "归一化后的向量范数为 **1**",
+          "notes": "范数值清楚。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 cosine_unit 支持计算方法；补充的 v/||v||₂ 公式是对该文字定义的直接数学表达，没有引入独立无依据事实。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_013",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_013 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 faiss_ip。全部文档、精确内积及最大Top-K均与冻结参考一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "对索引内全部文档向量执行精确内积搜索",
+          "covered": true,
+          "answer_quote": "检查**索引内的全部文档向量**，执行精确内积搜索",
+          "notes": "同时覆盖全部文档和精确内积搜索。"
+        },
+        {
+          "fact": "返回内积最大的 Top-K",
+          "covered": true,
+          "answer_quote": "按**内积最大**选出 Top-K",
+          "notes": "明确按最大内积返回。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 faiss_ip 直接支持搜索范围与选择标准，没有混入近似搜索或仅比较候选的说法。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_014",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_014 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 bm25_terms。BM25三项评分因素与冻结参考一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "词频",
+          "covered": true,
+          "answer_quote": "1. 词频",
+          "notes": "列出词频因素。"
+        },
+        {
+          "fact": "文档频率",
+          "covered": true,
+          "answer_quote": "2. 文档频率",
+          "notes": "列出文档频率因素。"
+        },
+        {
+          "fact": "文档长度",
+          "covered": true,
+          "answer_quote": "3. 文档长度",
+          "notes": "列出长度因素。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 bm25_terms 虽列第二条，答案仍取对依据并完整列出三种统计因素。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_015",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_015 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 bm25_terms。核心比较与冻结参考一致；没有引入检索准确率保证。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "基于词项匹配",
+          "covered": true,
+          "answer_quote": "它基于词项匹配计算分数",
+          "notes": "说明词项检索属性。"
+        },
+        {
+          "fact": "错误编号、产品型号等精确关键词",
+          "covered": true,
+          "answer_quote": "错误编号、产品型号等**精确关键词**",
+          "notes": "同时包含错误编号和型号。"
+        },
+        {
+          "fact": "纯向量语义检索可能混淆很相似的编号",
+          "covered": true,
+          "answer_quote": "纯向量语义检索可能混淆很相似的编号",
+          "notes": "保留可能而非必然混淆的限定。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 bm25_terms 支持精确关键词补充及向量混淆风险；未声称关键词检索能保证所有编号排名正确。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_016",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_016 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 hybrid_fusion。融合机制和归一化原因与冻结参考一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "融合向量语义匹配和 BM25 关键词匹配",
+          "covered": true,
+          "answer_quote": "**向量语义匹配**和 **BM25 关键词匹配**",
+          "notes": "明确融合的两路方式。"
+        },
+        {
+          "fact": "两路原始分数范围不同",
+          "covered": true,
+          "answer_quote": "**两路原始分数的范围不同**",
+          "notes": "明确归一化的原因。"
+        },
+        {
+          "fact": "分别做 Min-Max 归一化",
+          "covered": true,
+          "answer_quote": "应分别做 **Min-Max 归一化**",
+          "notes": "明确两路分别处理。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 hybrid_fusion 同时支持匹配方式、范围差异、Min-Max、融合式及默认alpha；额外公式有直接依据。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_017",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_017 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 hybrid_fusion。公式、默认alpha及先归一化均同冻结参考。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "默认 alpha=0.7",
+          "covered": true,
+          "answer_quote": "默认 Hybrid 权重参数为 **alpha=0.7**",
+          "notes": "默认值准确。"
+        },
+        {
+          "fact": "alpha*vector_norm+(1-alpha)*bm25_norm",
+          "covered": true,
+          "answer_quote": "alpha * vector_norm + (1 - alpha) * bm25_norm",
+          "notes": "空格差异不改变与参考公式的语义一致性。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "明确融合的是分别归一化后的分数；默认值及公式直接来自实际 hybrid_fusion。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_018",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_018 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 cosine_unit、hybrid_fusion。处理对象和目的的比较与冻结参考一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "把向量除以它的欧几里得长度",
+          "covered": true,
+          "answer_quote": "把向量除以它的欧几里得长度",
+          "notes": "说明向量处理操作。"
+        },
+        {
+          "fact": "使向量范数等于 1",
+          "covered": true,
+          "answer_quote": "使其范数等于 1",
+          "notes": "说明L2操作结果。"
+        },
+        {
+          "fact": "两路原始分数范围不同",
+          "covered": true,
+          "answer_quote": "向量语义匹配和 BM25 的原始分数范围不同",
+          "notes": "说明两路分数范围差异。"
+        },
+        {
+          "fact": "分别做 Min-Max 归一化",
+          "covered": true,
+          "answer_quote": "分别做 Min-Max 归一化",
+          "notes": "说明各路分数分别归一化。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 cosine_unit 与 hybrid_fusion 分别支持向量长度和分数范围的区别；末句“量纲/范围”作为尺度差异解释，未引入额外数值性质。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_019",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_019 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 chunk_overlap。按冻结参考的教学范围核对，不以未提供的额外切块动机扣分。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "把长文档拆成较短的 chunk",
+          "covered": true,
+          "answer_quote": "文本切块会把长文档拆成较短的 chunk",
+          "notes": "说明切块结果。"
+        },
+        {
+          "fact": "相邻块保留一段重复内容",
+          "covered": true,
+          "answer_quote": "让相邻块保留一段重复内容",
+          "notes": "说明相邻块重叠。"
+        },
+        {
+          "fact": "减少句子和上下文在边界被截断的影响",
+          "covered": true,
+          "answer_quote": "减少句子和上下文在块边界被截断的影响",
+          "notes": "说明重叠目的。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 chunk_overlap 支持切块、重复内容、边界效果和步长约束；答案如实说明资料未扩展其他切块原因，仍完整覆盖本题参考所需内容。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_020",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_020 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 chunk_overlap。约束和后果与冻结参考一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "overlap 必须小于 chunk_size",
+          "covered": true,
+          "answer_quote": "`chunk_overlap` 必须小于 `chunk_size`",
+          "notes": "明确严格小于关系。"
+        },
+        {
+          "fact": "步长不能正常前进",
+          "covered": true,
+          "answer_quote": "会导致步长不能正常前进",
+          "notes": "说明不满足约束的影响。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "关系和后果均直接由实际 chunk_overlap 支持，没有把小于误写成小于等于。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_021",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_021 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 reranker_pairs。输入和输出与冻结参考一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "query 与 document.text 组成文本对",
+          "covered": true,
+          "answer_quote": "**query 与候选文档文本（document.text）组成的文本对**",
+          "notes": "说明每个候选的成对输入。"
+        },
+        {
+          "fact": "联合编码后输出相关性分数",
+          "covered": true,
+          "answer_quote": "联合编码后输出 **相关性分数**",
+          "notes": "说明联合编码和输出。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 reranker_pairs 支持成对输入、联合编码、相关性输出以及仅重排召回候选的补充。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_022",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_022 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 reranker_pairs。处理范围及不能找回的结论与冻结参考一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "只重排检索召回的候选",
+          "covered": true,
+          "answer_quote": "**只重排检索召回的候选**",
+          "notes": "明确处理范围；据此推出候选外Chunk不能靠本次重排找回。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "不能找回候选外文档是“只重排检索召回候选”的直接逻辑结论，属于有依据推论。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_023",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_023 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 embedding_bge、reranker_pairs。两类预计算性质及原因均同冻结参考。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "文档向量可以提前计算",
+          "covered": true,
+          "answer_quote": "**文档向量可以提前计算**",
+          "notes": "明确文档表示可预计算。"
+        },
+        {
+          "fact": "同一篇文档面对不同问题会得到不同分数",
+          "covered": true,
+          "answer_quote": "同一篇文档面对不同问题会得到不同分数",
+          "notes": "明确问题依赖性。"
+        },
+        {
+          "fact": "不能提前计算适用于所有问题的固定 rerank score",
+          "covered": true,
+          "answer_quote": "**适用于所有问题的固定 rerank score 不能提前计算**",
+          "notes": "明确不可预计算跨问题固定分数。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 embedding_bge 与 reranker_pairs 同时在上下文中，比较完整；“不存在适用于所有问题的固定分数”按问题相关性含义理解，有直接依据。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_024",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_024 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 cuda_1175。仅按 cuda_1175 示例日志核对，不将1175解释为官方CUDA错误码定义。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "driver initialization failed",
+          "covered": true,
+          "answer_quote": "**driver initialization failed**",
+          "notes": "示例1175日志线索正确。"
+        },
+        {
+          "fact": "记录完整错误日志",
+          "covered": true,
+          "answer_quote": "先记录**完整错误日志**",
+          "notes": "明确先记录完整日志。"
+        },
+        {
+          "fact": "GPU 驱动、CUDA 运行时与框架版本",
+          "covered": true,
+          "answer_quote": "核对 **GPU 驱动、CUDA 运行时与框架版本**",
+          "notes": "核对对象三项齐全。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 cuda_1175 支持全部内容，虽排名第二仍被正确引用；答案保留“示例”和编号不足以修复的限制。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_025",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_025 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 cuda_1176、cuda_1175。按两个冻结示例的线索和排查对象核对，不当作官方编号释义。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "device index out of range",
+          "covered": true,
+          "answer_quote": "**device index out of range**",
+          "notes": "示例1176线索正确。"
+        },
+        {
+          "fact": "请求的设备序号和可见 GPU 列表",
+          "covered": true,
+          "answer_quote": "请求的设备序号是否正确；\n- 可见 GPU 列表是否与请求的设备序号匹配",
+          "notes": "同时覆盖序号和可见GPU列表；匹配性是设备序号越界检查的直接解释。"
+        },
+        {
+          "fact": "不能把 CUDA error 1175 的日志线索直接套过来",
+          "covered": true,
+          "answer_quote": "不能把 1175 的日志线索直接套到 1176 上",
+          "notes": "明确不能照搬。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "两份示例均为实际 context；对序号和可见列表是否匹配的说明属检查对象的直接展开，1175扩展也有实际证据。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_026",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_026 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 cuda_oom。OOM含义及措施与冻结参考一致，1175仅按示例限定。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "当前计算需要的 GPU 显存不足",
+          "covered": true,
+          "answer_quote": "当前计算需要的 GPU 显存不足",
+          "notes": "说明OOM含义。"
+        },
+        {
+          "fact": "减少 batch size、缩短输入或释放不再使用的张量",
+          "covered": true,
+          "answer_quote": "减少 batch size\n- 缩短输入\n- 释放不再使用的张量",
+          "notes": "三项初步方向完整。"
+        },
+        {
+          "fact": "其他进程占用显存",
+          "covered": true,
+          "answer_quote": "检查是否有其他进程占用显存",
+          "notes": "包含其他进程检查。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 cuda_oom 支持定义、三项措施、其他进程检查及与1175驱动初始化线索的区别。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_027",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_027 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 cuda_1175、cuda_1176。仅按冻结示例核对两种日志，不认证官方CUDA错误码定义。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "driver initialization failed",
+          "covered": true,
+          "answer_quote": "**1175**：日志线索是 `driver initialization failed`",
+          "notes": "编号和线索对应准确。"
+        },
+        {
+          "fact": "device index out of range",
+          "covered": true,
+          "answer_quote": "**1176**：日志线索是 `device index out of range`",
+          "notes": "编号和线索对应准确。"
+        },
+        {
+          "fact": "核对 GPU 驱动、CUDA 运行时与框架版本",
+          "covered": true,
+          "answer_quote": "核对 **GPU 驱动、CUDA 运行时与框架版本**",
+          "notes": "1175核对对象齐全。"
+        },
+        {
+          "fact": "请求的设备序号和可见 GPU 列表",
+          "covered": true,
+          "answer_quote": "**请求的设备序号**和**可见 GPU 列表**",
+          "notes": "1176核对对象齐全。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "两份实际 CUDA 示例支持两组对应关系和不可套用警示；没有把排查方向说成唯一修复办法。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_028",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_028 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 cuda_oom、cuda_1176。OOM与1176示例的区别同冻结参考，不推广成官方错误码定义。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "GPU 显存不足",
+          "covered": true,
+          "answer_quote": "当前计算需要的 GPU 显存不足",
+          "notes": "明确OOM资源不足。"
+        },
+        {
+          "fact": "device index out of range",
+          "covered": true,
+          "answer_quote": "设备序号越界（device index out of range，示例中与 CUDA error 1176 相关）",
+          "notes": "明确设备索引越界并保留示例限定。"
+        },
+        {
+          "fact": "减少 batch size",
+          "covered": true,
+          "answer_quote": "减少 batch size",
+          "notes": "包含显存方向措施。"
+        },
+        {
+          "fact": "设备序号和可见 GPU 列表",
+          "covered": true,
+          "answer_quote": "应检查请求的设备序号和可见 GPU 列表",
+          "notes": "包含设备索引方向检查。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "两份实际文档分别给出不同含义和检查方向；据此判断不是同一种问题属于直接比较，没有无依据扩展。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_029",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_029 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 pdf_ocr。问题限定的无文本层场景和处理顺序与冻结参考一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "只有图片，没有可提取的文本层",
+          "covered": true,
+          "answer_quote": "页面可能只有图片、没有可提取的文本层",
+          "notes": "保留可能这一限定。"
+        },
+        {
+          "fact": "先用 OCR 把图片转成文字",
+          "covered": true,
+          "answer_quote": "**先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。**",
+          "notes": "完整引文包含OCR先于后续处理。"
+        },
+        {
+          "fact": "清洗、切块和 Embedding",
+          "covered": true,
+          "answer_quote": "再进行清洗、切块和 Embedding",
+          "notes": "后续环节齐全。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 pdf_ocr 支持无文本层原因和OCR先行顺序；“所以返回空字符串”承接无文本层情形，不视为所有扫描PDF必为空。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_030",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_030 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 pdf_ocr、chunk_overlap。OCR→清洗→切块的衔接、边界目的及overlap约束与冻结资料一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "先用 OCR 把图片转成文字",
+          "covered": true,
+          "answer_quote": "扫描文档经 OCR 转成文字后",
+          "notes": "明确OCR将图像文档识别为文字的前置步骤。"
+        },
+        {
+          "fact": "把长文档拆成较短的 chunk",
+          "covered": true,
+          "answer_quote": "再做长文档切块",
+          "notes": "在该语境中，长文档切块语义即拆分成较短chunk；无需重复术语定义。"
+        },
+        {
+          "fact": "相邻块保留一段重复内容",
+          "covered": true,
+          "answer_quote": "让相邻 chunk 保留一段重复内容",
+          "notes": "重叠内容明确。"
+        },
+        {
+          "fact": "减少句子和上下文在边界被截断的影响",
+          "covered": true,
+          "answer_quote": "为减少句子和上下文在切块边界被截断的影响",
+          "notes": "边界目的明确。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 pdf_ocr 和 chunk_overlap 同时支持清洗后切块、重叠目的和步长限制。语义边界：将“长文档切块”视作对拆成短chunk的等价表达。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_031",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 1,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_031 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 pdf_ocr、embedding_bge。冻结参考与 embedding_bge 可补足文本→稠密语义向量，但不能用它替代实际context为忠实度背书。已回答OCR事实正确，未声称全库不存在Embedding定义。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "OCR 把图片转成文字",
+          "covered": true,
+          "answer_quote": "把扫描版 PDF 页面中的**图片转换成文字**",
+          "notes": "准确回答OCR转换方向。"
+        },
+        {
+          "fact": "Embedding 将文本编码为稠密语义向量",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "答案明确说实际资料未说明Embedding把什么转成什么，未给出文本→稠密语义向量，故不覆盖。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 context 为 pdf_ocr、hybrid_fusion、api_stream，确实没有 embedding_bge；对该次上下文的缺证说明忠实。只回答OCR，未完成Embedding定义和作用比较，切题性1；遗漏不作为错误事实。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_032",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_032 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 transformer_attention。QKV交互和权重计算同冻结参考，缺失目的属于覆盖问题。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "Query、Key、Value",
+          "covered": true,
+          "answer_quote": "**Query、Key、Value**",
+          "notes": "交互所用三种表示明确。"
+        },
+        {
+          "fact": "建模上下文关系",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说Token通过QKV交互，未说明建模上下文关系这一作用/目的；不把交互动作自动视为已解释目的。"
+        },
+        {
+          "fact": "缩放点积及 softmax",
+          "covered": true,
+          "answer_quote": "注意力权重来自**缩放点积及 softmax**",
+          "notes": "权重来源完整。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 transformer_attention 支持所有已说的机制，答案直接回答问题中的表示与权重来源；建模上下文关系目的未明确，单独记覆盖缺失，三项分数不因此降为事实错误。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_033",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_033 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 bm25_terms、transformer_attention。统计检索与上下文交互的区别与冻结参考一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "词频、文档频率和文档长度",
+          "covered": true,
+          "answer_quote": "**词频、文档频率和文档长度**",
+          "notes": "BM25三种统计因素齐全。"
+        },
+        {
+          "fact": "与其他 Token 交互",
+          "covered": true,
+          "answer_quote": "与其他 Token 交互",
+          "notes": "明确Token间交互。"
+        },
+        {
+          "fact": "缩放点积及 softmax",
+          "covered": true,
+          "answer_quote": "注意力权重来自**缩放点积及 softmax**",
+          "notes": "权重来源明确。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际两份文档完整支持比较；“关注查询词与文档的词项层面匹配程度”是词项检索定义的解释性转述。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_034",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_034 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 python_venv。命令和环境一致性同冻结参考，未声称当前机器已安装依赖。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "虚拟环境 Python",
+          "covered": true,
+          "answer_quote": ".\\.venv\\Scripts\\python.exe main.py",
+          "notes": "显式调用.venv下解释器，语义覆盖虚拟环境Python。"
+        },
+        {
+          "fact": ".\\.venv\\Scripts\\python.exe main.py",
+          "covered": true,
+          "answer_quote": ".\\.venv\\Scripts\\python.exe main.py",
+          "notes": "命令与参考一致。"
+        },
+        {
+          "fact": "当前目录",
+          "covered": true,
+          "answer_quote": "`.\\` 表示当前目录",
+          "notes": "路径前缀含义准确。"
+        },
+        {
+          "fact": "同一个 .venv 环境",
+          "covered": true,
+          "answer_quote": "项目依赖应安装到同一个 `.venv` 虚拟环境中",
+          "notes": "依赖环境要求准确。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 python_venv 支持项目根目录、解释器路径、当前目录含义及同环境依赖；命令本身已明确使用虚拟环境解释器。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_035",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 1,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_035 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 api_stream、embedding_bge。api_stream 支持已答事实；冻结参考及 embedding_bge 提供向量化的另一职责，遗漏不等于事实错误，不据未召回语料降忠实度。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "FastAPI 可以把 RAG 问答封装为 HTTP 接口",
+          "covered": true,
+          "answer_quote": "**把 RAG 问答封装为 HTTP 接口**",
+          "notes": "准确回答FastAPI接口职责。"
+        },
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "未说明Embedding将文本编码为稠密语义向量，且对是否向量化保留判断，职责对比未完整完成。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 context 为 rag_overview、rag_terms、api_stream，无 embedding_bge。接口和响应时机均有实际依据；答案忠实限定资料未说明向量化，但没有完成向量化职责的对比，F2/R1/C2。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_036",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_036 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 api_stream。普通与流式响应差别同冻结参考。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "普通响应在答案生成结束后一次返回",
+          "covered": true,
+          "answer_quote": "普通响应是在答案生成结束后**一次性返回**",
+          "notes": "完整表达普通响应发送时点。"
+        },
+        {
+          "fact": "随生成进度逐段发送内容",
+          "covered": true,
+          "answer_quote": "会**随生成进度逐段发送内容**",
+          "notes": "完整表达流式发送。"
+        },
+        {
+          "fact": "更早看到输出",
+          "covered": true,
+          "answer_quote": "让客户端更早看到输出",
+          "notes": "明确用户可更早看到。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 api_stream 支持两种时机差别；用户通常等生成完成是一次性返回的直接推论，没有捏造具体节省时间。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_037",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_037 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 rag_overview、api_stream。检索→提示词→模型与HTTP封装的职责区分同冻结参考。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "把检索结果放入提示词",
+          "covered": true,
+          "answer_quote": "并被放入提示词中",
+          "notes": "说明检索结果进入提示词。"
+        },
+        {
+          "fact": "交给大语言模型组织答案",
+          "covered": true,
+          "answer_quote": "**生成模型**：即大语言模型，负责根据包含检索结果的提示词来组织答案",
+          "notes": "明确大语言模型职责。"
+        },
+        {
+          "fact": "封装为 HTTP 接口",
+          "covered": true,
+          "answer_quote": "负责把 RAG 问答封装成 HTTP 接口",
+          "notes": "明确FastAPI封装职责。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 rag_overview 与 api_stream 完整支持三方分工及普通/流式响应补充；资料没有细节的说明与本次上下文相符。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_038",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_038 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 hybrid_fusion、reranker_pairs。融合分数与文本对联合评分的区别同冻结参考。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "融合向量语义匹配和 BM25 关键词匹配",
+          "covered": true,
+          "answer_quote": "融合两路检索分数——向量语义匹配分数和 BM25 关键词匹配分数",
+          "notes": "两路融合对象完整。"
+        },
+        {
+          "fact": "分别做 Min-Max 归一化",
+          "covered": true,
+          "answer_quote": "两路原始分数先分别做 Min-Max 归一化",
+          "notes": "归一化方式和分别处理明确。"
+        },
+        {
+          "fact": "alpha*vector_norm+(1-alpha)*bm25_norm",
+          "covered": true,
+          "answer_quote": "alpha * vector_norm + (1-alpha) * bm25_norm",
+          "notes": "与参考表达式语义相同。"
+        },
+        {
+          "fact": "联合编码后输出相关性分数",
+          "covered": true,
+          "answer_quote": "联合编码后输出相关性分数",
+          "notes": "Cross-Encoder输出机制准确。"
+        },
+        {
+          "fact": "只重排检索召回的候选",
+          "covered": true,
+          "answer_quote": "只用于重排检索召回的候选",
+          "notes": "处理范围明确。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 hybrid_fusion、reranker_pairs 均在context，支持公式、默认值、问题依赖性和候选范围；两种评分依据比较完整。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_039",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_039 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 embedding_bge、faiss_ip。核心定义、搜索范围和Top-K同冻结参考；语义邻近按教学语料通常成立的机制核对，未认证检索保证。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": true,
+          "answer_quote": "把文本编码为稠密语义向量",
+          "notes": "表示步骤明确。"
+        },
+        {
+          "fact": "对索引内全部文档向量执行精确内积搜索",
+          "covered": true,
+          "answer_quote": "对索引内全部文档向量执行精确内积搜索",
+          "notes": "全部文档精确内积搜索明确。"
+        },
+        {
+          "fact": "返回内积最大的 Top-K",
+          "covered": true,
+          "answer_quote": "返回内积最大的 Top-K",
+          "notes": "搜索返回依据明确。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 embedding_bge 与 faiss_ip 支持表示/搜索分工及双边归一化条件。语义边界：省略“通常”的一般机制表述未出现所有、一定或保证性措辞，不解读为任意语义匹配必然成功。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_040",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 1,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_040 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 faiss_ip、cosine_unit、chunk_overlap、embedding_bge、rag_overview。已给出的单位化、内积和Top-K与 faiss_ip/cosine_unit 一致。冻结参考、chunk_overlap、embedding_bge、rag_overview 提供其他环节但未进入实际context，不能据此假定答案已覆盖。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "把长文档拆成较短的 chunk",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "答案明确缺少切块资料，未给出把长文档拆成短chunk的步骤。"
+        },
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "答案明确缺少向量表示生成过程，未给出文本编码为稠密语义向量。"
+        },
+        {
+          "fact": "返回内积最大的 Top-K",
+          "covered": true,
+          "answer_quote": "并返回内积最大的 Top-K",
+          "notes": "只覆盖搜索环节的返回依据。"
+        },
+        {
+          "fact": "把检索结果放入提示词",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "答案明确缺少RAG提示词内容，未给出把检索结果放入提示词。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际context为 faiss_ip、cosine_unit、bm25_terms，确实缺少切块、Embedding生成与RAG提示词说明。标题“向量表示与归一化”下实际只解释归一化，后文明确未说明表示如何生成；未捏造完整顺序。流程只答搜索部分，R1，遗漏不作事实错误。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_041",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 1,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_041 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 bm25_terms、hybrid_fusion、embedding_bge。已答的编号风险、公式、默认alpha与两份实际资料一致；冻结参考与 embedding_bge 可补足语义邻近帮助，缺失不作事实错误。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "含义接近的文本通常在向量空间更接近",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "答案明确未展开语义匹配帮助，没有给出含义接近文本在向量空间通常更接近。"
+        },
+        {
+          "fact": "纯向量语义检索可能混淆很相似的编号",
+          "covered": true,
+          "answer_quote": "纯向量语义检索可能混淆很相似的编号",
+          "notes": "准确覆盖编号风险。"
+        },
+        {
+          "fact": "向量语义匹配和 BM25 关键词匹配",
+          "covered": true,
+          "answer_quote": "Hybrid Search 同时使用向量语义匹配和 BM25 关键词匹配",
+          "notes": "两种匹配方式明确。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际context为 bm25_terms、hybrid_fusion、cosine_unit，无 embedding_bge；如实承认未说明语义表示帮助，风险和Hybrid补充有据。最后关键词可补充编号混淆风险是两份资料的直接组合推论，未声称完全解决。遗漏语义帮助使R1。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_042",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_042 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 rag_limits、rag_evidence。证据态度、核查和缺证说明与冻结参考一致。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "资料过时",
+          "covered": true,
+          "answer_quote": "注意资料过时可能导致错误回答",
+          "notes": "说明过时的风险而非仅出现词语。"
+        },
+        {
+          "fact": "核查来源和引用",
+          "covered": true,
+          "answer_quote": "应核查答案所依据的来源和引用",
+          "notes": "核查行为明确。"
+        },
+        {
+          "fact": "知识库缺乏答案时明确说明",
+          "covered": true,
+          "answer_quote": "如果知识库缺乏答案或资料不足，应明确说明无法回答",
+          "notes": "缺证限制表述明确。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际 rag_limits 支持过时风险与引用核查，rag_evidence 支持资料不足说明；不能视为完全可靠是对已列风险的直接结论。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  },
+  {
+    "id": "qa_044",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T12:00:00+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结的 qa_044 reference_answer、required_facts，以及 data/evaluation/retrieval_eval_v3.json（18 Chunk）中的 bm25_terms、cuda_1175、cuda_1176。仅按两份示例日志及 bm25_terms 核对，未把1175/1176当作官方错误码定义。本判断仅针对冻结教学语料与参考答案，未引入外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "词项匹配",
+          "covered": true,
+          "answer_quote": "即使使用 BM25L、jieba 分词保留错误编号等精确关键词",
+          "notes": "在检索语境下说明精确关键词方式，语义覆盖词项匹配；不要求复述该术语。"
+        },
+        {
+          "fact": "编号本身不足以确定修复方法",
+          "covered": true,
+          "answer_quote": "**编号本身不足以确定修复方法，不应猜测**",
+          "notes": "直接覆盖编号不足这一限制。"
+        },
+        {
+          "fact": "不能把 CUDA error 1175 的日志线索直接套过来",
+          "covered": true,
+          "answer_quote": "**不能把 CUDA error 1175 的日志线索直接套过来**",
+          "notes": "直接覆盖不可照搬线索。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "实际三份文档均支持编号差异和词项/语义检索限制；核对完整日志与具体上下文是记录日志和不可套用警示的直接推论。词项匹配按保留精确关键词的语义判断覆盖。 completed 仅表示本次 AI 评审完成，不表示独立人工评审。"
+    }
+  }
+]

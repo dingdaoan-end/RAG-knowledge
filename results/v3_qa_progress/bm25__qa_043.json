@@ -1,0 +1,159 @@
+{
+  "method": "bm25",
+  "qa_id": "qa_043",
+  "query_id": "qa_043",
+  "question": "Self-Attention 和 IndexFlatIP 都提到点积，它们的任务和输出有何不同？",
+  "retrieval_eval_query_ids": [],
+  "experiment_id": "9915eade108441c49d79ca173144894d",
+  "unit_id": "bm25__qa_043",
+  "state": "finished",
+  "started_at": "2026-10-26T13:53:54.024154+00:00",
+  "http_attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-10-26T13:53:54.118944+00:00",
+      "http_status": 200
+    },
+    {
+      "attempt": 2,
+      "started_at": "2026-10-26T14:05:27.262025+00:00",
+      "http_status": null
+    },
+    {
+      "attempt": 3,
+      "started_at": "2026-10-26T14:05:31.432295+00:00",
+      "http_status": null
+    }
+  ],
+  "usage": null,
+  "timings_ms": {
+    "llm": 701034.5178999996,
+    "retrieval": 4.505400000198279,
+    "rerank": null,
+    "total": 701124.1776999959
+  },
+  "llm_called": true,
+  "unit_digest": "a7f8005d147044ce222193f306c155defa6838449ddeb2c9cff19c56ee43ceba",
+  "actual_prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: transformer.md\nchunk_id: 0\nrank: 1\nscore: 10.106405809748207\neval_id: transformer_attention\n\ncontent:\nTransformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。\n\n[Document 2]\nsource: retrieval.md\nchunk_id: 2\nrank: 2\nscore: 8.075941158593945\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\n[Document 3]\nsource: faiss.md\nchunk_id: 0\nrank: 3\nscore: 6.660682950061302\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\nQuestion:\n\nSelf-Attention 和 IndexFlatIP 都提到点积，它们的任务和输出有何不同？",
+  "status": "failed",
+  "record": null,
+  "pipeline_status": null,
+  "exception_type": "APIConnectionError",
+  "http_status": null,
+  "failed_stage": "llm",
+  "retrieval_candidates": [
+    {
+      "id": "transformer_attention",
+      "text": "Transformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。",
+      "metadata": {
+        "eval_id": "transformer_attention",
+        "source": "transformer.md",
+        "chunk_id": 0
+      },
+      "rank": 1,
+      "score": 10.106405809748207
+    },
+    {
+      "id": "reranker_pairs",
+      "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+      "metadata": {
+        "eval_id": "reranker_pairs",
+        "source": "retrieval.md",
+        "chunk_id": 2
+      },
+      "rank": 2,
+      "score": 8.075941158593945
+    },
+    {
+      "id": "faiss_ip",
+      "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+      "metadata": {
+        "eval_id": "faiss_ip",
+        "source": "faiss.md",
+        "chunk_id": 0
+      },
+      "rank": 3,
+      "score": 6.660682950061302
+    },
+    {
+      "id": "cosine_unit",
+      "text": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。",
+      "metadata": {
+        "eval_id": "cosine_unit",
+        "source": "faiss.md",
+        "chunk_id": 1
+      },
+      "rank": 4,
+      "score": 6.6139401603255195
+    },
+    {
+      "id": "cuda_oom",
+      "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+      "metadata": {
+        "eval_id": "cuda_oom",
+        "source": "cuda_examples.md",
+        "chunk_id": 2
+      },
+      "rank": 5,
+      "score": 6.028447793077325
+    },
+    {
+      "id": "bm25_terms",
+      "text": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+      "metadata": {
+        "eval_id": "bm25_terms",
+        "source": "retrieval.md",
+        "chunk_id": 0
+      },
+      "rank": 6,
+      "score": 4.833142077257467
+    },
+    {
+      "id": "hybrid_fusion",
+      "text": "Hybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。",
+      "metadata": {
+        "eval_id": "hybrid_fusion",
+        "source": "retrieval.md",
+        "chunk_id": 1
+      },
+      "rank": 7,
+      "score": 3.9472120045652614
+    },
+    {
+      "id": "rag_limits",
+      "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+      "metadata": {
+        "eval_id": "rag_limits",
+        "source": "rag.md",
+        "chunk_id": 2
+      },
+      "rank": 8,
+      "score": 3.9176721429273647
+    },
+    {
+      "id": "cuda_1176",
+      "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+      "metadata": {
+        "eval_id": "cuda_1176",
+        "source": "cuda_examples.md",
+        "chunk_id": 1
+      },
+      "rank": 9,
+      "score": 2.7413173285560117
+    },
+    {
+      "id": "rag_evidence",
+      "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+      "metadata": {
+        "eval_id": "rag_evidence",
+        "source": "rag.md",
+        "chunk_id": 1
+      },
+      "rank": 10,
+      "score": 2.724947090540771
+    }
+  ],
+  "reranked_candidates": [],
+  "retry_count": 2,
+  "finished_at": "2026-10-26T14:05:34.998142+00:00"
+}

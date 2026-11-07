@@ -1,0 +1,267 @@
+{
+  "method": "hybrid_reranker",
+  "qa_id": "qa_044",
+  "query_id": "qa_044",
+  "question": "检索到相似 CUDA 编号后，为什么还需要核对原始日志，而不能直接套用修复线索？",
+  "retrieval_eval_query_ids": [],
+  "experiment_id": "9915eade108441c49d79ca173144894d",
+  "unit_id": "hybrid_reranker__qa_044",
+  "state": "finished",
+  "started_at": "2026-10-26T14:05:35.006658+00:00",
+  "http_attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-10-26T14:05:36.081946+00:00",
+      "http_status": null
+    },
+    {
+      "attempt": 2,
+      "started_at": "2026-10-26T14:05:39.832897+00:00",
+      "http_status": null
+    },
+    {
+      "attempt": 3,
+      "started_at": "2026-10-26T14:05:43.060368+00:00",
+      "http_status": null
+    }
+  ],
+  "usage": null,
+  "timings_ms": {
+    "llm": 10321.81610000407,
+    "retrieval": 192.29440000344766,
+    "rerank": 869.0214999951422,
+    "total": 11405.341700003191
+  },
+  "llm_called": true,
+  "unit_digest": "d427ad972f0989441aa717910a841a5c3d4b4f533832cec504e16e7261ad024b",
+  "actual_prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 1\nscore: 3.5102927684783936\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 2\nscore: 2.8984439373016357\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 3]\nsource: retrieval.md\nchunk_id: 2\nrank: 3\nscore: -3.0083370208740234\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\nQuestion:\n\n检索到相似 CUDA 编号后，为什么还需要核对原始日志，而不能直接套用修复线索？",
+  "status": "failed",
+  "record": null,
+  "pipeline_status": null,
+  "exception_type": "APIConnectionError",
+  "http_status": null,
+  "failed_stage": "llm",
+  "retrieval_candidates": [
+    {
+      "id": "cuda_1175",
+      "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+      "metadata": {
+        "eval_id": "cuda_1175",
+        "source": "cuda_examples.md",
+        "chunk_id": 0
+      },
+      "rank": 1,
+      "score": 1.0,
+      "vector_score": 0.6706926822662354,
+      "bm25_score": 19.639035525533515,
+      "normalized_vector_score": 1.0,
+      "normalized_bm25_score": 1.0,
+      "final_score": 1.0
+    },
+    {
+      "id": "cuda_1176",
+      "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+      "metadata": {
+        "eval_id": "cuda_1176",
+        "source": "cuda_examples.md",
+        "chunk_id": 1
+      },
+      "rank": 2,
+      "score": 0.904735171807391,
+      "vector_score": 0.6367874145507812,
+      "bm25_score": 18.7087387338152,
+      "normalized_vector_score": 0.8854806137673467,
+      "normalized_bm25_score": 0.9496624739008283,
+      "final_score": 0.904735171807391
+    },
+    {
+      "id": "cuda_oom",
+      "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+      "metadata": {
+        "eval_id": "cuda_oom",
+        "source": "cuda_examples.md",
+        "chunk_id": 2
+      },
+      "rank": 3,
+      "score": 0.5199426255745929,
+      "vector_score": 0.5447856187820435,
+      "bm25_score": 8.4043084122286,
+      "normalized_vector_score": 0.5747327597123426,
+      "normalized_bm25_score": 0.39209897925317705,
+      "final_score": 0.5199426255745929
+    },
+    {
+      "id": "bm25_terms",
+      "text": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+      "metadata": {
+        "eval_id": "bm25_terms",
+        "source": "retrieval.md",
+        "chunk_id": 0
+      },
+      "rank": 4,
+      "score": 0.3831300772988358,
+      "vector_score": 0.4730273485183716,
+      "bm25_score": 10.42789754578655,
+      "normalized_vector_score": 0.33236000699796403,
+      "normalized_bm25_score": 0.5015935746675366,
+      "final_score": 0.3831300772988358
+    },
+    {
+      "id": "rag_limits",
+      "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+      "metadata": {
+        "eval_id": "rag_limits",
+        "source": "rag.md",
+        "chunk_id": 2
+      },
+      "rank": 5,
+      "score": 0.3759669536990762,
+      "vector_score": 0.520882248878479,
+      "bm25_score": 3.01642980813413,
+      "normalized_vector_score": 0.49399606495382975,
+      "normalized_bm25_score": 0.10056569410465126,
+      "final_score": 0.3759669536990762
+    },
+    {
+      "id": "rag_overview",
+      "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+      "metadata": {
+        "eval_id": "rag_overview",
+        "source": "rag.md",
+        "chunk_id": 0
+      },
+      "rank": 6,
+      "score": 0.33556813574653144,
+      "vector_score": 0.489950567483902,
+      "bm25_score": 5.03298411865841,
+      "normalized_vector_score": 0.38952034754675663,
+      "normalized_bm25_score": 0.20967964154600602,
+      "final_score": 0.33556813574653144
+    },
+    {
+      "id": "reranker_pairs",
+      "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+      "metadata": {
+        "eval_id": "reranker_pairs",
+        "source": "retrieval.md",
+        "chunk_id": 2
+      },
+      "rank": 7,
+      "score": 0.31155546937260653,
+      "vector_score": 0.4784078598022461,
+      "bm25_score": 5.234935074457331,
+      "normalized_vector_score": 0.35053337330252565,
+      "normalized_bm25_score": 0.22060702686946196,
+      "final_score": 0.31155546937260653
+    },
+    {
+      "id": "api_stream",
+      "text": "FastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+      "metadata": {
+        "eval_id": "api_stream",
+        "source": "api.md",
+        "chunk_id": 0
+      },
+      "rank": 8,
+      "score": 0.3030273594376656,
+      "vector_score": 0.4931485950946808,
+      "bm25_score": 2.5625434239619254,
+      "normalized_vector_score": 0.4003220955882427,
+      "normalized_bm25_score": 0.07600630841965253,
+      "final_score": 0.3030273594376656
+    },
+    {
+      "id": "pdf_ocr",
+      "text": "扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。",
+      "metadata": {
+        "eval_id": "pdf_ocr",
+        "source": "ingestion_notes.md",
+        "chunk_id": 0
+      },
+      "rank": 9,
+      "score": 0.271926092651465,
+      "vector_score": 0.48312050104141235,
+      "bm25_score": 2.107201324481012,
+      "normalized_vector_score": 0.3664509229521342,
+      "normalized_bm25_score": 0.05136815528323679,
+      "final_score": 0.271926092651465
+    },
+    {
+      "id": "chunk_overlap",
+      "text": "文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。",
+      "metadata": {
+        "eval_id": "chunk_overlap",
+        "source": "chunking.md",
+        "chunk_id": 0
+      },
+      "rank": 10,
+      "score": 0.2411099169800628,
+      "vector_score": 0.47232067584991455,
+      "bm25_score": 1.7818266126981794,
+      "normalized_vector_score": 0.3299731295092426,
+      "normalized_bm25_score": 0.033762421078643204,
+      "final_score": 0.2411099169800628
+    }
+  ],
+  "reranked_candidates": [
+    {
+      "id": "cuda_1176",
+      "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+      "metadata": {
+        "eval_id": "cuda_1176",
+        "source": "cuda_examples.md",
+        "chunk_id": 1
+      },
+      "rank": 1,
+      "score": 3.5102927684783936,
+      "vector_score": 0.6367874145507812,
+      "bm25_score": 18.7087387338152,
+      "normalized_vector_score": 0.8854806137673467,
+      "normalized_bm25_score": 0.9496624739008283,
+      "final_score": 0.904735171807391,
+      "rerank_score": 3.5102927684783936,
+      "retrieval_score": 0.904735171807391,
+      "retrieval_rank": 2.0
+    },
+    {
+      "id": "cuda_1175",
+      "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+      "metadata": {
+        "eval_id": "cuda_1175",
+        "source": "cuda_examples.md",
+        "chunk_id": 0
+      },
+      "rank": 2,
+      "score": 2.8984439373016357,
+      "vector_score": 0.6706926822662354,
+      "bm25_score": 19.639035525533515,
+      "normalized_vector_score": 1.0,
+      "normalized_bm25_score": 1.0,
+      "final_score": 1.0,
+      "rerank_score": 2.8984439373016357,
+      "retrieval_score": 1.0,
+      "retrieval_rank": 1.0
+    },
+    {
+      "id": "reranker_pairs",
+      "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+      "metadata": {
+        "eval_id": "reranker_pairs",
+        "source": "retrieval.md",
+        "chunk_id": 2
+      },
+      "rank": 3,
+      "score": -3.0083370208740234,
+      "vector_score": 0.4784078598022461,
+      "bm25_score": 5.234935074457331,
+      "normalized_vector_score": 0.35053337330252565,
+      "normalized_bm25_score": 0.22060702686946196,
+      "final_score": 0.31155546937260653,
+      "rerank_score": -3.0083370208740234,
+      "retrieval_score": 0.31155546937260653,
+      "retrieval_rank": 7.0
+    }
+  ],
+  "retry_count": 2,
+  "finished_at": "2026-10-26T14:05:46.413437+00:00"
+}

@@ -1,0 +1,34 @@
+Query: RAG 为什么可以降低大模型幻觉？
+Corpus=5, Hybrid Top-N=4, Rerank Top-K=3, alpha=0.7
+Scorer: BAAI/bge-reranker-base
+A.txt: RAG、大模型、幻觉、检索增强生成是本文的关键词。本文是这些术语的索引，不解释 RAG 为什么可以降低大模型幻觉。
+B.txt: 检索增强生成把外部知识库中找到的证据放入提示词，交给语言模型参考。模型据此组织回答，可以减少缺乏事实依据的编造。
+C.txt: RAG 通过检索外部知识并提供给大语言模型，减少模型仅依赖参数知识生成答案的情况，从而降低幻觉，但不能保证完全消除幻觉。
+D.txt: FAISS 用于高维向量相似度搜索，IndexFlatIP 进行精确内积搜索。
+E.txt: CUDA 是 GPU 并行计算平台，需要根据错误日志排查 CUDA 环境问题。
+
+Vector Top-4: rank | document | raw score
+1 | C.txt | 0.777354
+2 | A.txt | 0.752128
+3 | E.txt | 0.434171
+4 | B.txt | 0.400037
+
+BM25 Top-4: rank | document | raw score
+1 | A.txt | 13.241231
+2 | C.txt | 7.115509
+3 | B.txt | 2.613182
+
+Hybrid Top-N: rank | document | hybrid score
+1 | A.txt | 0.955508
+2 | C.txt | 0.827088
+3 | E.txt | 0.094719
+4 | B.txt | 0.034517
+
+Cross-Encoder input pairs=4（只使用 Hybrid 候选，未扫描全库）
+Rerank Top-K: final rank | document | hybrid score | reranker score | original rank
+1 | C.txt | 0.827088 | 8.835895 | 2
+2 | A.txt | 0.955508 | 2.350604 | 1
+3 | B.txt | 0.034517 | -5.054113 | 4
+Hybrid order: A.txt > C.txt > E.txt > B.txt
+Rerank order: C.txt > A.txt > B.txt
+重排分数为 logit（fake 模式除外），不是概率；Hybrid 分数保持不变。

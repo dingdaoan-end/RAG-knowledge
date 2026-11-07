@@ -1,0 +1,1154 @@
+[
+  {
+    "method": "vector",
+    "id": "qa_004",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.138772+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_004 的参考答案/关键事实以及实际上下文 cuda_1175,cuda_1176,cuda_oom 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "不能仅凭错误编号认定显卡损坏",
+          "covered": true,
+          "answer_quote": "不能确定显卡已经损坏",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "证据不足，不能给出唯一修复命令",
+          "covered": true,
+          "answer_quote": "不能给出唯一的修复命令",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要完整日志和环境版本信息",
+          "covered": true,
+          "answer_quote": "你需要先收集完整错误日志，并检查 GPU 驱动、CUDA 运行时和框架版本",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "vector",
+    "id": "qa_005",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.138772+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_005 的参考答案/关键事实以及实际上下文 cuda_oom,cuda_1175,cuda_1176 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "现有资料不能确定当前机器的型号和版本",
+          "covered": true,
+          "answer_quote": "无法根据现有资料确定",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不编造具体硬件型号或版本号",
+          "covered": true,
+          "answer_quote": "没有给出实际型号或版本号",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要当前环境的实际检测信息",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说明现有资料没有具体值，没有明确提出取得当前机器的实际环境检测信息。拒答正确不等同补充取证要求已覆盖。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "vector",
+    "id": "qa_045",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.138772+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_045 的参考答案/关键事实以及实际上下文 hybrid_fusion,transformer_attention,faiss_ip 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "资料只提供默认权重和融合方式",
+          "covered": true,
+          "answer_quote": "本项目默认 alpha=0.7",
+          "notes": "回答明确区分资料给出的默认值与未提供的效果依据；该事实要点为默认配置并非最优证明，不要求再抄写与提问无关的融合算式。"
+        },
+        {
+          "fact": "缺少不同权重的对比依据",
+          "covered": true,
+          "answer_quote": "没有提供在本数据集上对不同 alpha 值的实验比较或效果评估结果",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能断言默认值最优",
+          "covered": true,
+          "answer_quote": "不足以认定 alpha=0.7 是本数据集上效果最好的融合权重",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "vector",
+    "id": "qa_046",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.138772+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_046 的参考答案/关键事实以及实际上下文 faiss_ip,cosine_unit,embedding_bge 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "缺少指定机器和规模下的耗时测量",
+          "covered": true,
+          "answer_quote": "没有提供在你机器上搜索十万条向量的具体毫秒耗时，也没有相关硬件或性能基准数据",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能给出确定毫秒数",
+          "covered": true,
+          "answer_quote": "不能。",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要实际环境与测量结果",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "说明缺少基准数据，但没有进一步提出需要实际环境和测量结果；对测试这一行动的要求未覆盖。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "vector",
+    "id": "qa_047",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.138772+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_047 的参考答案/关键事实以及实际上下文 pdf_ocr,rag_limits,reranker_pairs 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "缺少当前文件的 OCR 结果与核验",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "说明没有准确率/保证，但没有交代当前文件实际 OCR 识别结果及其核验均缺失；复合事实只覆盖部分。"
+        },
+        {
+          "fact": "不能编造准确率或保证完全正确",
+          "covered": true,
+          "answer_quote": "没有任何资料能保证表格文字全部正确",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要对应文件的识别核验资料",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "没有要求提供或核查该文件的实际识别核验资料；核查 RAG 引用不能直接等同 OCR 文件核验。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。所引 RAG 不可靠性仅为背景，不据此证明 OCR 错误或给出准确率。"
+    }
+  },
+  {
+    "method": "vector",
+    "id": "qa_048",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.138772+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_048 的参考答案/关键事实以及实际上下文 api_stream,rag_evidence,transformer_attention 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "资料只有逐段返回的定性说明",
+          "covered": true,
+          "answer_quote": "可以随生成进度逐段发送内容，让客户端更早看到输出",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "没有本次请求的计时对照",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说缺少具体延迟数据，没有指出本次请求的计时及普通/流式对照；定量结果缺失不自动等于计时对照要求已覆盖。"
+        },
+        {
+          "fact": "不能给出确定的延迟减少量",
+          "covered": true,
+          "answer_quote": "无法确定本次问答会减少多少毫秒",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "vector",
+    "id": "qa_049",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.138772+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_049 的参考答案/关键事实以及实际上下文 cuda_1176,cuda_1175,cuda_oom 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "示例没有当前机器的实际 GPU 清单",
+          "covered": true,
+          "answer_quote": "日志没有说明你实际有几张 GPU",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能确定 GPU 数量或设备序号",
+          "covered": true,
+          "answer_quote": "不能仅凭这个示例日志确定 GPU 数量或替你填写正确设备序号",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要当前可见 GPU 和设备配置信息",
+          "covered": true,
+          "answer_quote": "提示应检查请求的设备序号和可见 GPU 列表",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "vector",
+    "id": "qa_050",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.138772+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_050 的参考答案/关键事实以及实际上下文 embedding_bge,cosine_unit,faiss_ip 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "没有该句的实际向量数值",
+          "covered": true,
+          "answer_quote": "没有给出“向量检索”这句话的实际 Embedding 数值",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能凭模型名称编造向量",
+          "covered": true,
+          "answer_quote": "不能直接列出具体数值",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要实际编码结果",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "正确拒绝凭空列值，但未说明需取得该文本实际模型编码输出；没有给出下一步取证要求。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "bm25",
+    "id": "qa_004",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.142777+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_004 的参考答案/关键事实以及实际上下文 cuda_1175,cuda_1176,cuda_oom 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "不能仅凭错误编号认定显卡损坏",
+          "covered": true,
+          "answer_quote": "不能确定显卡已经损坏",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "证据不足，不能给出唯一修复命令",
+          "covered": true,
+          "answer_quote": "不能给出唯一修复命令",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要完整日志和环境版本信息",
+          "covered": true,
+          "answer_quote": "应先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "bm25",
+    "id": "qa_005",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.142777+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_005 的参考答案/关键事实以及实际上下文 cuda_1175,cuda_oom,cuda_1176 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "现有资料不能确定当前机器的型号和版本",
+          "covered": true,
+          "answer_quote": "无法根据现有资料回答",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不编造具体硬件型号或版本号",
+          "covered": true,
+          "answer_quote": "未给出实际型号或版本号",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要当前环境的实际检测信息",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说明现有资料没有具体值，没有明确提出取得当前机器的实际环境检测信息。拒答正确不等同补充取证要求已覆盖。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "bm25",
+    "id": "qa_045",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.142777+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_045 的参考答案/关键事实以及实际上下文 hybrid_fusion,rag_overview,cuda_oom 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "资料只提供默认权重和融合方式",
+          "covered": true,
+          "answer_quote": "Hybrid Search 使用 `alpha*vector_norm+(1-alpha)*bm25_norm` 融合，且“本项目默认 alpha=0.7”",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "缺少不同权重的对比依据",
+          "covered": true,
+          "answer_quote": "没有提供在本数据集上对不同 alpha 取值进行效果对比的实验结果",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能断言默认值最优",
+          "covered": true,
+          "answer_quote": "不足以认定 alpha=0.7 是本数据集上效果最好的融合权重",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "bm25",
+    "id": "qa_046",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.142777+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_046 的参考答案/关键事实以及实际上下文 cosine_unit,faiss_ip,embedding_bge 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "缺少指定机器和规模下的耗时测量",
+          "covered": true,
+          "answer_quote": "没有提供任何关于你机器配置、十万条向量搜索的具体毫秒耗时或性能基准数据",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能给出确定毫秒数",
+          "covered": true,
+          "answer_quote": "无法根据知识库给出该具体耗时",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要实际环境与测量结果",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "说明缺少基准数据，但没有进一步提出需要实际环境和测量结果；对测试这一行动的要求未覆盖。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "bm25",
+    "id": "qa_047",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.142777+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_047 的参考答案/关键事实以及实际上下文 pdf_ocr,rag_limits,rag_evidence 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "缺少当前文件的 OCR 结果与核验",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "说明没有准确率/保证，但没有交代当前文件实际 OCR 识别结果及其核验均缺失；复合事实只覆盖部分。"
+        },
+        {
+          "fact": "不能编造准确率或保证完全正确",
+          "covered": true,
+          "answer_quote": "没有提供你这份扫描 PDF 的 OCR 准确率，也不能保证表格文字全部正确",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要对应文件的识别核验资料",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "没有要求提供或核查该文件的实际识别核验资料；核查 RAG 引用不能直接等同 OCR 文件核验。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。所引 RAG 不可靠性仅为背景，不据此证明 OCR 错误或给出准确率。"
+    }
+  },
+  {
+    "method": "bm25",
+    "id": "qa_048",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.142777+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_048 的参考答案/关键事实以及实际上下文 api_stream,reranker_pairs,chunk_overlap 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "资料只有逐段返回的定性说明",
+          "covered": true,
+          "answer_quote": "随生成进度逐段发送内容，让客户端更早看到输出",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "没有本次请求的计时对照",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说缺少具体延迟数据，没有指出本次请求的计时及普通/流式对照；定量结果缺失不自动等于计时对照要求已覆盖。"
+        },
+        {
+          "fact": "不能给出确定的延迟减少量",
+          "covered": true,
+          "answer_quote": "无法回答“这次问答具体减少多少毫秒”",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "bm25",
+    "id": "qa_049",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.142777+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_049 的参考答案/关键事实以及实际上下文 cuda_1176,cuda_1175,cuda_oom 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "示例没有当前机器的实际 GPU 清单",
+          "covered": true,
+          "answer_quote": "资料没有提供你机器上有几张 GPU",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能确定 GPU 数量或设备序号",
+          "covered": true,
+          "answer_quote": "不能确定 GPU 数量，也不能替你填一个正确的设备序号",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要当前可见 GPU 和设备配置信息",
+          "covered": true,
+          "answer_quote": "应检查“请求的设备序号”和“可见 GPU 列表”",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "bm25",
+    "id": "qa_050",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.142777+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_050 的参考答案/关键事实以及实际上下文 rag_terms,embedding_bge,cosine_unit 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "没有该句的实际向量数值",
+          "covered": true,
+          "answer_quote": "没有给出“向量检索”这句话的实际 Embedding 数值",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能凭模型名称编造向量",
+          "covered": true,
+          "answer_quote": "无法直接列出具体向量",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要实际编码结果",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "正确拒绝凭空列值，但未说明需取得该文本实际模型编码输出；没有给出下一步取证要求。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "hybrid",
+    "id": "qa_004",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.146532+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_004 的参考答案/关键事实以及实际上下文 cuda_1175,cuda_1176,cuda_oom 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "不能仅凭错误编号认定显卡损坏",
+          "covered": true,
+          "answer_quote": "不能据此确定显卡已经损坏",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "证据不足，不能给出唯一修复命令",
+          "covered": true,
+          "answer_quote": "不能给出唯一的修复命令",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要完整日志和环境版本信息",
+          "covered": true,
+          "answer_quote": "先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "hybrid",
+    "id": "qa_005",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.146532+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_005 的参考答案/关键事实以及实际上下文 cuda_1175,cuda_oom,cuda_1176 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "现有资料不能确定当前机器的型号和版本",
+          "covered": true,
+          "answer_quote": "无法确定",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不编造具体硬件型号或版本号",
+          "covered": true,
+          "answer_quote": "资料中没有提供这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要当前环境的实际检测信息",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说明现有资料没有具体值，没有明确提出取得当前机器的实际环境检测信息。拒答正确不等同补充取证要求已覆盖。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "hybrid",
+    "id": "qa_045",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.146532+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_045 的参考答案/关键事实以及实际上下文 hybrid_fusion,transformer_attention,rag_overview 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "资料只提供默认权重和融合方式",
+          "covered": true,
+          "answer_quote": "本项目默认 alpha=0.7",
+          "notes": "回答明确区分资料给出的默认值与未提供的效果依据；该事实要点为默认配置并非最优证明，不要求再抄写与提问无关的融合算式。"
+        },
+        {
+          "fact": "缺少不同权重的对比依据",
+          "covered": true,
+          "answer_quote": "没有提供在本数据集上的效果比较、评测结果或其他 alpha 取值的对照实验",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能断言默认值最优",
+          "covered": true,
+          "answer_quote": "不能据此认定 alpha=0.7 是本数据集上效果最好的融合权重",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "hybrid",
+    "id": "qa_046",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.146532+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_046 的参考答案/关键事实以及实际上下文 faiss_ip,cosine_unit,embedding_bge 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "缺少指定机器和规模下的耗时测量",
+          "covered": true,
+          "answer_quote": "没有提供任何关于“十万条向量”的具体毫秒耗时、性能基准或机器配置数据",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能给出确定毫秒数",
+          "covered": true,
+          "answer_quote": "无法根据现有资料给出你机器上的具体耗时",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要实际环境与测量结果",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "说明缺少基准数据，但没有进一步提出需要实际环境和测量结果；对测试这一行动的要求未覆盖。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "hybrid",
+    "id": "qa_047",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.146532+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_047 的参考答案/关键事实以及实际上下文 pdf_ocr,rag_limits,faiss_ip 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "缺少当前文件的 OCR 结果与核验",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "说明没有准确率/保证，但没有交代当前文件实际 OCR 识别结果及其核验均缺失；复合事实只覆盖部分。"
+        },
+        {
+          "fact": "不能编造准确率或保证完全正确",
+          "covered": true,
+          "answer_quote": "没有提供你这份扫描 PDF 的具体 OCR 准确率，也不能保证表格文字全部正确",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要对应文件的识别核验资料",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "没有要求提供或核查该文件的实际识别核验资料；核查 RAG 引用不能直接等同 OCR 文件核验。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。所引 RAG 不可靠性仅为背景，不据此证明 OCR 错误或给出准确率。"
+    }
+  },
+  {
+    "method": "hybrid",
+    "id": "qa_048",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.146532+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_048 的参考答案/关键事实以及实际上下文 api_stream,reranker_pairs,rag_evidence 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "资料只有逐段返回的定性说明",
+          "covered": true,
+          "answer_quote": "可以随生成进度逐段发送内容，让客户端更早看到输出",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "没有本次请求的计时对照",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说缺少具体延迟数据，没有指出本次请求的计时及普通/流式对照；定量结果缺失不自动等于计时对照要求已覆盖。"
+        },
+        {
+          "fact": "不能给出确定的延迟减少量",
+          "covered": true,
+          "answer_quote": "无法确定本次问答会减少多少毫秒",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "hybrid",
+    "id": "qa_049",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.146532+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_049 的参考答案/关键事实以及实际上下文 cuda_1176,cuda_1175,cuda_oom 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "示例没有当前机器的实际 GPU 清单",
+          "covered": true,
+          "answer_quote": "没有提供你的实际 GPU 数量或可见 GPU 列表",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能确定 GPU 数量或设备序号",
+          "covered": true,
+          "answer_quote": "无法确定你有几张 GPU，也不能替你填写一个正确的设备序号",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要当前可见 GPU 和设备配置信息",
+          "covered": true,
+          "answer_quote": "应检查“请求的设备序号”和“可见 GPU 列表”",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "hybrid",
+    "id": "qa_050",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.146532+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_050 的参考答案/关键事实以及实际上下文 embedding_bge,cosine_unit,faiss_ip 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "没有该句的实际向量数值",
+          "covered": true,
+          "answer_quote": "没有给出“向量检索”这句话的实际 Embedding 数值",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能凭模型名称编造向量",
+          "covered": true,
+          "answer_quote": "无法直接列出具体向量",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要实际编码结果",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "正确拒绝凭空列值，但未说明需取得该文本实际模型编码输出；没有给出下一步取证要求。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "hybrid_reranker",
+    "id": "qa_004",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.150519+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_004 的参考答案/关键事实以及实际上下文 cuda_1175,cuda_oom,cuda_1176 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "不能仅凭错误编号认定显卡损坏",
+          "covered": true,
+          "answer_quote": "不能据此判断显卡已经损坏",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "证据不足，不能给出唯一修复命令",
+          "covered": true,
+          "answer_quote": "不能给出唯一的修复命令",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要完整日志和环境版本信息",
+          "covered": true,
+          "answer_quote": "先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "hybrid_reranker",
+    "id": "qa_005",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.150519+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_005 的参考答案/关键事实以及实际上下文 cuda_oom,cuda_1175,rag_overview 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "现有资料不能确定当前机器的型号和版本",
+          "covered": true,
+          "answer_quote": "无法确定这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不编造具体硬件型号或版本号",
+          "covered": true,
+          "answer_quote": "并未给出任何具体的 GPU 型号或版本号信息",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要当前环境的实际检测信息",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说明现有资料没有具体值，没有明确提出取得当前机器的实际环境检测信息。拒答正确不等同补充取证要求已覆盖。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "hybrid_reranker",
+    "id": "qa_045",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.150519+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_045 的参考答案/关键事实以及实际上下文 hybrid_fusion,faiss_ip,cosine_unit 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "资料只提供默认权重和融合方式",
+          "covered": true,
+          "answer_quote": "本项目默认 alpha=0.7",
+          "notes": "回答明确区分资料给出的默认值与未提供的效果依据；该事实要点为默认配置并非最优证明，不要求再抄写与提问无关的融合算式。"
+        },
+        {
+          "fact": "缺少不同权重的对比依据",
+          "covered": true,
+          "answer_quote": "没有提供在该数据集上与其他融合权重进行效果比较、评估",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能断言默认值最优",
+          "covered": true,
+          "answer_quote": "不能据此认定 alpha=0.7 是本数据集上效果最好的融合权重",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "hybrid_reranker",
+    "id": "qa_046",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.150519+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_046 的参考答案/关键事实以及实际上下文 faiss_ip,cosine_unit,hybrid_fusion 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "缺少指定机器和规模下的耗时测量",
+          "covered": true,
+          "answer_quote": "没有提供在具体机器上搜索十万条向量的毫秒耗时数据",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能给出确定毫秒数",
+          "covered": true,
+          "answer_quote": "无法根据知识库给出具体毫秒数",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要实际环境与测量结果",
+          "covered": true,
+          "answer_quote": "需要实际测试",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "hybrid_reranker",
+    "id": "qa_047",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.150519+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_047 的参考答案/关键事实以及实际上下文 pdf_ocr,rag_limits,faiss_ip 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "缺少当前文件的 OCR 结果与核验",
+          "covered": true,
+          "answer_quote": "没有足够信息给出准确率或“全部正确”的保证，需要你自行核查原始 PDF 与 OCR 结果",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能编造准确率或保证完全正确",
+          "covered": true,
+          "answer_quote": "没有提供你这份扫描 PDF 的 OCR 准确率，也不能保证表格文字全部正确",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要对应文件的识别核验资料",
+          "covered": true,
+          "answer_quote": "需要你自行核查原始 PDF 与 OCR 结果",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。所引 RAG 不可靠性仅为背景，不据此证明 OCR 错误或给出准确率。"
+    }
+  },
+  {
+    "method": "hybrid_reranker",
+    "id": "qa_048",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.150519+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_048 的参考答案/关键事实以及实际上下文 api_stream,transformer_attention,embedding_bge 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "资料只有逐段返回的定性说明",
+          "covered": true,
+          "answer_quote": "随生成进度逐段发送内容，让客户端更早看到输出",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "没有本次请求的计时对照",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说缺少具体延迟数据，没有指出本次请求的计时及普通/流式对照；定量结果缺失不自动等于计时对照要求已覆盖。"
+        },
+        {
+          "fact": "不能给出确定的延迟减少量",
+          "covered": true,
+          "answer_quote": "无法确定这次问答会减少多少毫秒",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "hybrid_reranker",
+    "id": "qa_049",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.150519+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_049 的参考答案/关键事实以及实际上下文 cuda_1176,cuda_1175,cuda_oom 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "示例没有当前机器的实际 GPU 清单",
+          "covered": true,
+          "answer_quote": "日志本身没有给出你有几张 GPU，也没有给出可见 GPU 列表",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能确定 GPU 数量或设备序号",
+          "covered": true,
+          "answer_quote": "无法确定 GPU 数量，也不能替你填一个“正确设备序号”",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要当前可见 GPU 和设备配置信息",
+          "covered": true,
+          "answer_quote": "需要进一步查看实际机器的可见 GPU 列表后再确认",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  },
+  {
+    "method": "hybrid_reranker",
+    "id": "qa_050",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:44:27.150519+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "对照冻结 qa_eval_v3 qa_050 的参考答案/关键事实以及实际上下文 embedding_bge,cosine_unit,rag_overview 正文。该语料没有当前机器检测、该文件OCR核验、当前性能/计时、最优权重对照或句子向量实测；答案没有将示例当当前事实。此为本地AI评审，不是独立人工或外部权威认证。",
+      "required_facts_covered": [
+        {
+          "fact": "没有该句的实际向量数值",
+          "covered": true,
+          "answer_quote": "没有给出“向量检索”这句话的实际 Embedding 数值",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "不能凭模型名称编造向量",
+          "covered": true,
+          "answer_quote": "无法直接列出",
+          "notes": "实际答案表达了该关键事实或其等价意思。"
+        },
+        {
+          "fact": "需要实际编码结果",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "正确拒绝凭空列值，但未说明需取得该文本实际模型编码输出；没有给出下一步取证要求。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "第一轮AI评审：说明资料不足及具体缺失信息，未发现编造型号、版本、参数、耗时、准确率或向量。insufficient_evidence_handled=true 表示不确定性及缺口表述合格，不代表逐项补证行动完整；关键事实另逐项记录。"
+    }
+  }
+]

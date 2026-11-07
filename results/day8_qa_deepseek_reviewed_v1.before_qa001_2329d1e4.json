@@ -1,0 +1,538 @@
+{
+  "schema_version": 1,
+  "run": {
+    "id": "210d494f3774412aac582e4aadb97e29",
+    "started_at": "2026-10-23T11:37:28.023544+00:00",
+    "qa_dataset": {
+      "version": "1.0",
+      "sha256": "9e33ac59dd0ba406a047249442672a5a01e22ef73f8f4d3c4eb054133d89c1eb",
+      "metadata": {
+        "name": "rag_qa_teaching_v1",
+        "annotation_status": "teaching_references_pending_human_review",
+        "corpus_file": "retrieval_eval.json",
+        "purpose": "采集实际答案、提示词、上下文与来源，供人工独立评审；参考答案和标签不进入生成提示词。",
+        "answerable_definition": "true 表示已有资料能回答所请求的事实；false 表示所请求的事实或确定结论无法由现有资料支持，期望说明证据限制，而不是猜测。",
+        "limitations": "仅 5 个教学问题，参考答案和关键事实尚待用户复核；CUDA 编号来自示例日志，不能当作真实环境诊断结论。"
+      }
+    },
+    "corpus_sha256": "085def806d480f92e1a36e832c8fbfcd10a9046a5651b42eef13df68b5fb9d71",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "pipeline": {
+      "retriever": {
+        "implementation": "HybridRetriever",
+        "top_k": 10,
+        "alpha": 0.7
+      },
+      "reranker": {
+        "implementation": "CrossEncoderReranker",
+        "model_name": "BAAI/bge-reranker-base",
+        "batch_size": 16,
+        "max_length": 512,
+        "local_files_only": true
+      },
+      "query_rewriter": null,
+      "context_top_k": 3,
+      "embedding": {
+        "implementation": "TextEmbedder",
+        "batch_size": 32,
+        "model_name": "BAAI/bge-small-zh-v1.5"
+      }
+    },
+    "quality_scope": "pending_human_review",
+    "finished_at": "2026-10-23T11:37:43.012609+00:00",
+    "elapsed_seconds": 14.98931229999289
+  },
+  "records": [
+    {
+      "id": "qa_001",
+      "question": "RAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？",
+      "reference_answer": "RAG 检索外部知识，为生成模型提供相关事实和证据，减少仅凭参数记忆编造答案的情况。但检索错误、资料过时或模型误读仍会导致错误，因此不能保证完全消除幻觉。",
+      "required_facts": [
+        "检索外部知识",
+        "向生成模型提供相关事实和证据",
+        "不能保证完全消除幻觉"
+      ],
+      "relevant_document_ids": [
+        "rag_evidence",
+        "rag_limits",
+        "rag_overview"
+      ],
+      "answerable": true,
+      "answer": "RAG 可以降低大模型幻觉，是因为它向模型提供可参考的外部事实和证据，减少模型仅凭参数记忆编造答案的情况；模型需要根据检索到的资料作答，资料不足时应说明无法回答。（资料 1）\n\n但 RAG **不能保证完全消除幻觉**。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答；因此应核查来源和引用，并在知识库缺乏答案时明确说明。（资料 2）",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: rag.md\nchunk_id: 1\nrank: 1\nscore: 10.285429954528809\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 2]\nsource: rag.md\nchunk_id: 2\nrank: 2\nscore: 7.631941795349121\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 3]\nsource: rag.md\nchunk_id: 3\nrank: 3\nscore: 3.8688011169433594\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\nQuestion:\n\nRAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？",
+      "context": "[Document 1]\nsource: rag.md\nchunk_id: 1\nrank: 1\nscore: 10.285429954528809\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 2]\nsource: rag.md\nchunk_id: 2\nrank: 2\nscore: 7.631941795349121\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 3]\nsource: rag.md\nchunk_id: 3\nrank: 3\nscore: 3.8688011169433594\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+      "context_documents": [
+        {
+          "id": "rag_evidence",
+          "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+          "metadata": {
+            "eval_id": "rag_evidence",
+            "source": "rag.md",
+            "chunk_id": 1
+          },
+          "rank": 1,
+          "score": 10.285429954528809
+        },
+        {
+          "id": "rag_limits",
+          "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+          "metadata": {
+            "eval_id": "rag_limits",
+            "source": "rag.md",
+            "chunk_id": 2
+          },
+          "rank": 2,
+          "score": 7.631941795349121
+        },
+        {
+          "id": "rag_terms",
+          "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+          "metadata": {
+            "eval_id": "rag_terms",
+            "source": "rag.md",
+            "chunk_id": 3
+          },
+          "rank": 3,
+          "score": 3.8688011169433594
+        }
+      ],
+      "context_document_ids": [
+        "rag_evidence",
+        "rag_limits",
+        "rag_terms"
+      ],
+      "retrieval_query": "RAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-23T11:37:28.023544+00:00",
+      "elapsed_seconds": 5.619280200000503,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": 2,
+        "answer_relevance": 2,
+        "factual_correctness": 2,
+        "factual_correctness_basis": 2,
+        "required_facts_covered": [
+          {
+            "fact": "检索外部知识",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "向生成模型提供相关事实和证据",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "不能保证完全消除幻觉",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_002",
+      "question": "FAISS IndexFlatIP 在什么条件下等价于余弦相似度检索？",
+      "reference_answer": "查询向量和文档向量都需要做 L2 归一化，使范数为 1；此时内积等于余弦相似度，IndexFlatIP 才能按余弦相似度进行检索。",
+      "required_facts": [
+        "查询向量和文档向量都需要 L2 归一化",
+        "归一化后的范数为 1",
+        "单位向量的内积等于余弦相似度"
+      ],
+      "relevant_document_ids": [
+        "faiss_ip",
+        "cosine_unit"
+      ],
+      "answerable": true,
+      "answer": "当查询向量和文档向量都做了 **L2 归一化（单位长度归一化）**，即向量范数为 1 时，内积等于余弦相似度。因此，在这种情况下，**FAISS IndexFlatIP 的精确内积 Top-K 检索等价于余弦相似度检索**。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: faiss.md\nchunk_id: 0\nrank: 1\nscore: 7.389914035797119\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\n[Document 2]\nsource: faiss.md\nchunk_id: 1\nrank: 2\nscore: 2.501753568649292\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\n[Document 3]\nsource: retrieval.md\nchunk_id: 0\nrank: 3\nscore: -8.785533905029297\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。\n\nQuestion:\n\nFAISS IndexFlatIP 在什么条件下等价于余弦相似度检索？",
+      "context": "[Document 1]\nsource: faiss.md\nchunk_id: 0\nrank: 1\nscore: 7.389914035797119\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\n[Document 2]\nsource: faiss.md\nchunk_id: 1\nrank: 2\nscore: 2.501753568649292\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\n[Document 3]\nsource: retrieval.md\nchunk_id: 0\nrank: 3\nscore: -8.785533905029297\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+      "context_documents": [
+        {
+          "id": "faiss_ip",
+          "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+          "metadata": {
+            "eval_id": "faiss_ip",
+            "source": "faiss.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 7.389914035797119
+        },
+        {
+          "id": "cosine_unit",
+          "text": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。",
+          "metadata": {
+            "eval_id": "cosine_unit",
+            "source": "faiss.md",
+            "chunk_id": 1
+          },
+          "rank": 2,
+          "score": 2.501753568649292
+        },
+        {
+          "id": "bm25_terms",
+          "text": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+          "metadata": {
+            "eval_id": "bm25_terms",
+            "source": "retrieval.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": -8.785533905029297
+        }
+      ],
+      "context_document_ids": [
+        "faiss_ip",
+        "cosine_unit",
+        "bm25_terms"
+      ],
+      "retrieval_query": "FAISS IndexFlatIP 在什么条件下等价于余弦相似度检索？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-23T11:37:33.642492+00:00",
+      "elapsed_seconds": 1.620632399994065,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "查询向量和文档向量都需要 L2 归一化",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "归一化后的范数为 1",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "单位向量的内积等于余弦相似度",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_003",
+      "question": "Cross-Encoder 为什么不能提前为每篇文档计算一个适用于所有问题的固定重排分数？",
+      "reference_answer": "Cross-Encoder 将问题和文档组成文本对联合编码，相关性分数同时依赖问题与文档。同一篇文档面对不同问题会得到不同分数，因此不能预计算适用于所有问题的固定分数。它只重排召回候选。",
+      "required_facts": [
+        "联合编码 query 与 document 文本对",
+        "相关性分数依赖具体问题",
+        "不能预计算适用于所有问题的固定重排分数"
+      ],
+      "relevant_document_ids": [
+        "reranker_pairs"
+      ],
+      "answerable": true,
+      "answer": "因为 Cross-Encoder 需要把 **query 与 document.text 组成文本对，联合编码后输出相关性分数**。同一篇文档面对不同问题会得到不同分数，所以不能提前计算一个适用于所有问题的固定 rerank score；它只用于重排检索召回的候选。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: retrieval.md\nchunk_id: 2\nrank: 1\nscore: 9.146780014038086\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\n[Document 2]\nsource: embedding.md\nchunk_id: 0\nrank: 2\nscore: -3.3175365924835205\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\n[Document 3]\nsource: faiss.md\nchunk_id: 0\nrank: 3\nscore: -6.686845302581787\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\nQuestion:\n\nCross-Encoder 为什么不能提前为每篇文档计算一个适用于所有问题的固定重排分数？",
+      "context": "[Document 1]\nsource: retrieval.md\nchunk_id: 2\nrank: 1\nscore: 9.146780014038086\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\n[Document 2]\nsource: embedding.md\nchunk_id: 0\nrank: 2\nscore: -3.3175365924835205\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\n[Document 3]\nsource: faiss.md\nchunk_id: 0\nrank: 3\nscore: -6.686845302581787\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+      "context_documents": [
+        {
+          "id": "reranker_pairs",
+          "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+          "metadata": {
+            "eval_id": "reranker_pairs",
+            "source": "retrieval.md",
+            "chunk_id": 2
+          },
+          "rank": 1,
+          "score": 9.146780014038086
+        },
+        {
+          "id": "embedding_bge",
+          "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+          "metadata": {
+            "eval_id": "embedding_bge",
+            "source": "embedding.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": -3.3175365924835205
+        },
+        {
+          "id": "faiss_ip",
+          "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+          "metadata": {
+            "eval_id": "faiss_ip",
+            "source": "faiss.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": -6.686845302581787
+        }
+      ],
+      "context_document_ids": [
+        "reranker_pairs",
+        "embedding_bge",
+        "faiss_ip"
+      ],
+      "retrieval_query": "Cross-Encoder 为什么不能提前为每篇文档计算一个适用于所有问题的固定重排分数？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-23T11:37:35.263017+00:00",
+      "elapsed_seconds": 1.9907052999915322,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "联合编码 query 与 document 文本对",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "相关性分数依赖具体问题",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "不能预计算适用于所有问题的固定重排分数",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_004",
+      "question": "只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？",
+      "reference_answer": "不能仅凭这一编号确定显卡损坏，也不能给出唯一修复命令。知识库只有示例日志线索，缺少用户的完整日志和环境信息。应明确说明证据不足，并请求完整错误日志及驱动、运行时和框架版本。",
+      "required_facts": [
+        "不能仅凭错误编号认定显卡损坏",
+        "证据不足，不能给出唯一修复命令",
+        "需要完整日志和环境版本信息"
+      ],
+      "relevant_document_ids": [
+        "cuda_1175"
+      ],
+      "answerable": false,
+      "answer": "不能。\n\n根据资料，CUDA error 1175 的示例日志后面出现的是 `driver initialization failed`。排查时应先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本；**编号本身不足以确定修复方法，不应猜测**。\n\n因此：\n- 只看到 `CUDA error 1175`，**不能确定显卡已经损坏**。\n- 资料中没有给出针对 1175 的**唯一修复命令**，所以不能据此提供唯一修复命令。\n- 需要先获取完整错误日志，并检查 GPU 驱动、CUDA 运行时和框架版本。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 1\nscore: 5.635067462921143\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 2\nscore: 1.3127497434616089\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 3\nscore: -1.488585352897644\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\nQuestion:\n\n只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？",
+      "context": "[Document 1]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 1\nscore: 5.635067462921143\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 2\nscore: 1.3127497434616089\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 3\nscore: -1.488585352897644\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+      "context_documents": [
+        {
+          "id": "cuda_1175",
+          "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+          "metadata": {
+            "eval_id": "cuda_1175",
+            "source": "cuda_examples.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 5.635067462921143
+        },
+        {
+          "id": "cuda_oom",
+          "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+          "metadata": {
+            "eval_id": "cuda_oom",
+            "source": "cuda_examples.md",
+            "chunk_id": 2
+          },
+          "rank": 2,
+          "score": 1.3127497434616089
+        },
+        {
+          "id": "cuda_1176",
+          "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+          "metadata": {
+            "eval_id": "cuda_1176",
+            "source": "cuda_examples.md",
+            "chunk_id": 1
+          },
+          "rank": 3,
+          "score": -1.488585352897644
+        }
+      ],
+      "context_document_ids": [
+        "cuda_1175",
+        "cuda_oom",
+        "cuda_1176"
+      ],
+      "retrieval_query": "只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-23T11:37:37.254086+00:00",
+      "elapsed_seconds": 3.8076130999979796,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "不能仅凭错误编号认定显卡损坏",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "证据不足，不能给出唯一修复命令",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "需要完整日志和环境版本信息",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_005",
+      "question": "这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？",
+      "reference_answer": "知识库没有当前机器的实际硬件和软件版本信息，无法确定这些值。应说明资料不足，需要用户提供环境检测结果，不能把技术文档或示例日志当作当前机器的事实。",
+      "required_facts": [
+        "现有资料不能确定当前机器的型号和版本",
+        "不编造具体硬件型号或版本号",
+        "需要当前环境的实际检测信息"
+      ],
+      "relevant_document_ids": [],
+      "answerable": false,
+      "answer": "资料中没有提供这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本，因此无法根据现有资料回答。文档仅提到排查 CUDA error 1175 时应核对 GPU 驱动、CUDA 运行时与框架版本，但没有给出具体版本信息。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 1\nscore: -0.2830550968647003\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 2\nscore: -2.188504219055176\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 3]\nsource: rag.md\nchunk_id: 0\nrank: 3\nscore: -8.638917922973633\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\nQuestion:\n\n这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？",
+      "context": "[Document 1]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 1\nscore: -0.2830550968647003\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 2\nscore: -2.188504219055176\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 3]\nsource: rag.md\nchunk_id: 0\nrank: 3\nscore: -8.638917922973633\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+      "context_documents": [
+        {
+          "id": "cuda_oom",
+          "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+          "metadata": {
+            "eval_id": "cuda_oom",
+            "source": "cuda_examples.md",
+            "chunk_id": 2
+          },
+          "rank": 1,
+          "score": -0.2830550968647003
+        },
+        {
+          "id": "cuda_1175",
+          "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+          "metadata": {
+            "eval_id": "cuda_1175",
+            "source": "cuda_examples.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": -2.188504219055176
+        },
+        {
+          "id": "rag_overview",
+          "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+          "metadata": {
+            "eval_id": "rag_overview",
+            "source": "rag.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": -8.638917922973633
+        }
+      ],
+      "context_document_ids": [
+        "cuda_oom",
+        "cuda_1175",
+        "rag_overview"
+      ],
+      "retrieval_query": "这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-23T11:37:41.061335+00:00",
+      "elapsed_seconds": 1.9509710999991512,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "现有资料不能确定当前机器的型号和版本",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "不编造具体硬件型号或版本号",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "需要当前环境的实际检测信息",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    }
+  ],
+  "capture_sha256": "e29a46452400e91b326eace11ec51f9de0c746bdd96ea56f60ab0686292999c2"
+}

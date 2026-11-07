@@ -1,0 +1,339 @@
+{
+  "method": "hybrid",
+  "qa_id": "qa_032",
+  "query_id": "qa_032",
+  "question": "Self-Attention 用哪些表示让 Token 交互，注意力权重来自什么？",
+  "retrieval_eval_query_ids": [],
+  "experiment_id": "9915eade108441c49d79ca173144894d",
+  "unit_id": "hybrid__qa_032",
+  "state": "finished",
+  "started_at": "2026-10-26T13:51:35.652870+00:00",
+  "http_attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-10-26T13:51:35.696387+00:00",
+      "http_status": 200
+    }
+  ],
+  "usage": {
+    "input_tokens": 337,
+    "output_tokens": 138,
+    "total_tokens": 475,
+    "cached_input_tokens": 0
+  },
+  "timings_ms": {
+    "llm": 1311.2827000004472,
+    "retrieval": 23.701899997831788,
+    "rerank": null,
+    "total": 1374.8660999990534
+  },
+  "llm_called": true,
+  "unit_digest": "ddd4df92bb802f3f7ac58219c541767fcb5da789729ff64ff7d371d536e84a4b",
+  "actual_prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: transformer.md\nchunk_id: 0\nrank: 1\nscore: 1.0\neval_id: transformer_attention\n\ncontent:\nTransformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 0.2519657304582624\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: api.md\nchunk_id: 0\nrank: 3\nscore: 0.22272573887182018\neval_id: api_stream\n\ncontent:\nFastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。\n\nQuestion:\n\nSelf-Attention 用哪些表示让 Token 交互，注意力权重来自什么？",
+  "returned_generation_parameters": {
+    "temperature": 1.0,
+    "top_p": 1.0
+  },
+  "provider_response_status": "completed",
+  "returned_model": "deepseek-flash",
+  "status": "success",
+  "record": {
+    "id": "qa_032",
+    "question": "Self-Attention 用哪些表示让 Token 交互，注意力权重来自什么？",
+    "reference_answer": "Self-Attention 让 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系；注意力权重来自缩放点积及 softmax，不是简单词频匹配。",
+    "required_facts": [
+      "Query、Key、Value",
+      "建模上下文关系",
+      "缩放点积及 softmax"
+    ],
+    "relevant_document_ids": [
+      "transformer_attention"
+    ],
+    "answerable": true,
+    "answer": "Self-Attention 让每个 Token 根据 **Query、Key、Value** 与其他 Token 交互，以建模上下文关系。注意力权重来自**缩放点积及 softmax**，而不是简单按词频匹配。",
+    "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: transformer.md\nchunk_id: 0\nrank: 1\nscore: 1.0\neval_id: transformer_attention\n\ncontent:\nTransformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 0.2519657304582624\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: api.md\nchunk_id: 0\nrank: 3\nscore: 0.22272573887182018\neval_id: api_stream\n\ncontent:\nFastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。\n\nQuestion:\n\nSelf-Attention 用哪些表示让 Token 交互，注意力权重来自什么？",
+    "context": "[Document 1]\nsource: transformer.md\nchunk_id: 0\nrank: 1\nscore: 1.0\neval_id: transformer_attention\n\ncontent:\nTransformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 0.2519657304582624\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: api.md\nchunk_id: 0\nrank: 3\nscore: 0.22272573887182018\neval_id: api_stream\n\ncontent:\nFastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+    "pipeline_status": "answered",
+    "llm_called": true,
+    "context_documents": [
+      {
+        "id": "transformer_attention",
+        "text": "Transformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。",
+        "metadata": {
+          "eval_id": "transformer_attention",
+          "source": "transformer.md",
+          "chunk_id": 0
+        },
+        "rank": 1,
+        "score": 1.0
+      },
+      {
+        "id": "rag_overview",
+        "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+        "metadata": {
+          "eval_id": "rag_overview",
+          "source": "rag.md",
+          "chunk_id": 0
+        },
+        "rank": 2,
+        "score": 0.2519657304582624
+      },
+      {
+        "id": "api_stream",
+        "text": "FastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+        "metadata": {
+          "eval_id": "api_stream",
+          "source": "api.md",
+          "chunk_id": 0
+        },
+        "rank": 3,
+        "score": 0.22272573887182018
+      }
+    ],
+    "context_document_ids": [
+      "transformer_attention",
+      "rag_overview",
+      "api_stream"
+    ],
+    "retrieval_query": "Self-Attention 用哪些表示让 Token 交互，注意力权重来自什么？",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "started_at": "2026-10-26T13:51:35.655868+00:00",
+    "elapsed_seconds": 1.3744885999985854,
+    "review": {
+      "status": "pending",
+      "reviewer": null,
+      "reviewed_at": null,
+      "faithfulness": null,
+      "answer_relevance": null,
+      "factual_correctness": null,
+      "factual_correctness_basis": null,
+      "required_facts_covered": [
+        {
+          "fact": "Query、Key、Value",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "建模上下文关系",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "缩放点积及 softmax",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        }
+      ],
+      "unsupported_claims": null,
+      "insufficient_evidence_handled": null,
+      "review_notes": ""
+    }
+  },
+  "bundle_run": {
+    "id": "9e9a0ca0740943938806f126cd3eb0ed",
+    "started_at": "2026-10-26T13:51:35.655868+00:00",
+    "qa_dataset": {
+      "version": "3.0",
+      "sha256": "b854564a846d0ca022ffcdea59deb6487cbeab9ecdae828d4a41a749775548c4",
+      "metadata": {
+        "name": "rag_qa_teaching_v3",
+        "corpus_file": "retrieval_eval_v3.json",
+        "purpose": "采集实际答案、提示词、上下文与来源，供人工独立评审；参考答案和标签不进入生成提示词。",
+        "answerable_definition": "true 表示已有资料能回答所请求的事实；false 表示所请求的事实或确定结论无法由现有资料支持，期望说明证据限制，而不是猜测。",
+        "limitations": "50 个教学问题（42 个可回答、8 个无法确定所请求事实的负例），基于同一份 18 Chunk 冻结正文；新增问题由 Codex 对照正文检查，不代表独立人工认证。CUDA 编号为示例，不是当前用户环境事实。"
+      }
+    },
+    "corpus_sha256": "33a7d07e4554df865667592b3515133c210b23678c4fcb895a8cdfa9240e04d9",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "pipeline": {
+      "retriever": {
+        "implementation": "TimedSearch"
+      },
+      "reranker": null,
+      "query_rewriter": null,
+      "context_top_k": 3
+    },
+    "quality_scope": "pending_human_review",
+    "finished_at": "2026-10-26T13:51:37.030561+00:00",
+    "elapsed_seconds": 1.3745968000002904
+  },
+  "exception_type": null,
+  "pipeline_status": "answered",
+  "failed_stage": null,
+  "retrieval_candidates": [
+    {
+      "id": "transformer_attention",
+      "text": "Transformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。",
+      "metadata": {
+        "eval_id": "transformer_attention",
+        "source": "transformer.md",
+        "chunk_id": 0
+      },
+      "rank": 1,
+      "score": 1.0,
+      "vector_score": 0.7972199320793152,
+      "bm25_score": 27.198338186546916,
+      "normalized_vector_score": 1.0,
+      "normalized_bm25_score": 1.0,
+      "final_score": 1.0
+    },
+    {
+      "id": "rag_overview",
+      "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+      "metadata": {
+        "eval_id": "rag_overview",
+        "source": "rag.md",
+        "chunk_id": 0
+      },
+      "rank": 2,
+      "score": 0.2519657304582624,
+      "vector_score": 0.5140675902366638,
+      "bm25_score": null,
+      "normalized_vector_score": 0.35995104351180346,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.2519657304582624
+    },
+    {
+      "id": "api_stream",
+      "text": "FastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+      "metadata": {
+        "eval_id": "api_stream",
+        "source": "api.md",
+        "chunk_id": 0
+      },
+      "rank": 3,
+      "score": 0.22272573887182018,
+      "vector_score": 0.4943429231643677,
+      "bm25_score": 2.5625434239619254,
+      "normalized_vector_score": 0.3153646117184339,
+      "normalized_bm25_score": 0.006568368896388333,
+      "final_score": 0.22272573887182018
+    },
+    {
+      "id": "reranker_pairs",
+      "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+      "metadata": {
+        "eval_id": "reranker_pairs",
+        "source": "retrieval.md",
+        "chunk_id": 2
+      },
+      "rank": 4,
+      "score": 0.21521278813101571,
+      "vector_score": 0.4908401668071747,
+      "bm25_score": null,
+      "normalized_vector_score": 0.30744684018716534,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.21521278813101571
+    },
+    {
+      "id": "rag_terms",
+      "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+      "metadata": {
+        "eval_id": "rag_terms",
+        "source": "rag.md",
+        "chunk_id": 3
+      },
+      "rank": 5,
+      "score": 0.2095088843442039,
+      "vector_score": 0.4872353672981262,
+      "bm25_score": null,
+      "normalized_vector_score": 0.29929840620600556,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.2095088843442039
+    },
+    {
+      "id": "chunk_overlap",
+      "text": "文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。",
+      "metadata": {
+        "eval_id": "chunk_overlap",
+        "source": "chunking.md",
+        "chunk_id": 0
+      },
+      "rank": 6,
+      "score": 0.20001459155567944,
+      "vector_score": 0.4812350869178772,
+      "bm25_score": null,
+      "normalized_vector_score": 0.2857351307938278,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.20001459155567944
+    },
+    {
+      "id": "hybrid_fusion",
+      "text": "Hybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。",
+      "metadata": {
+        "eval_id": "hybrid_fusion",
+        "source": "retrieval.md",
+        "chunk_id": 1
+      },
+      "rank": 7,
+      "score": 0.19156934134957204,
+      "vector_score": 0.47589778900146484,
+      "bm25_score": null,
+      "normalized_vector_score": 0.2736704876422458,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.19156934134957204
+    },
+    {
+      "id": "rag_limits",
+      "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+      "metadata": {
+        "eval_id": "rag_limits",
+        "source": "rag.md",
+        "chunk_id": 2
+      },
+      "rank": 8,
+      "score": 0.17728668742179604,
+      "vector_score": 0.46687132120132446,
+      "bm25_score": null,
+      "normalized_vector_score": 0.2532666963168515,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.17728668742179604
+    },
+    {
+      "id": "embedding_bge",
+      "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+      "metadata": {
+        "eval_id": "embedding_bge",
+        "source": "embedding.md",
+        "chunk_id": 0
+      },
+      "rank": 9,
+      "score": 0.1742907432814509,
+      "vector_score": 0.4649779200553894,
+      "bm25_score": null,
+      "normalized_vector_score": 0.24898677611635842,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.1742907432814509
+    },
+    {
+      "id": "faiss_ip",
+      "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+      "metadata": {
+        "eval_id": "faiss_ip",
+        "source": "faiss.md",
+        "chunk_id": 0
+      },
+      "rank": 10,
+      "score": 0.1688204997479824,
+      "vector_score": 0.461520791053772,
+      "bm25_score": null,
+      "normalized_vector_score": 0.24117214249711774,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.1688204997479824
+    }
+  ],
+  "reranked_candidates": [],
+  "retry_count": 0,
+  "finished_at": "2026-10-26T13:51:37.030561+00:00"
+}

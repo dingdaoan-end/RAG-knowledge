@@ -1,0 +1,49 @@
+{
+  "container_id": "ae40b3a46bbca9e3b7868e82d7f329c9091cf4a8f38cf98e8bd4f1f56c4dc4f5",
+  "previous_container_id": "153c20cd73cacbd734f6a7fa674fc7fda56df963cc92ef6c34bd03633668dfa8",
+  "container_recreated": true,
+  "image_id_unchanged": true,
+  "image_id": "sha256:e57763d7ff903a5db5f307dce149c765fcf8f812197b4f1c6d94eac2c33634cc",
+  "ready_seconds": 0.078,
+  "persisted_files_identical": true,
+  "persisted_file_sha256": {
+    "bfa523d6243c45fc8eca7e7ea82dae4f.pdf": "5af21a0acf17a2aa0698b3f4e1f83641f7ea90a30abf8ca492a4b67ed628753e",
+    "manifest.json": "296a9f1f2495106701fd6755f520f96abe1f01dd70517ce09fdc77f859288b61"
+  },
+  "http_status": 200,
+  "status": "answered",
+  "elapsed_seconds": 3.375,
+  "request_id": "5410cf7fc4bc4a4280ca08998b49ae56",
+  "answer_nonempty": true,
+  "expected_code_present": true,
+  "expected_window_present": true,
+  "obvious_missing_evidence_phrase": false,
+  "uploaded_document_in_sources": true,
+  "sources": [
+    {
+      "document_id": "bfa523d6243c45fc8eca7e7ea82dae4f",
+      "source": "docker-acceptance-20261107.pdf",
+      "chunk_id": 0,
+      "content": "Orion RAG Deployment Acceptance Sample\nSynthetic test evidence for PDF ingestion and persistence.\nThe Orion launch code is RAG-PDF-7821.\nThe verification window is 47 minutes.\nThese are test labels, not production configuration.",
+      "rank": 1,
+      "score": 8.634111404418945,
+      "page": 1
+    },
+    {
+      "document_id": "base_5bb634d59b83bee6446dc5ecd0c6f429",
+      "source": "knowledge.txt",
+      "chunk_id": 0,
+      "content": "RAG 是 Retrieval-Augmented Generation 的缩写，中文叫检索增强生成。它先从知识库中检索与用户问题相关的文本，再把这些文本交给大语言模型生成答案。\n\n文本切块会把长文档分成较短的 chunk。chunk 太大会混入过多无关内容，太小则可能破坏完整语义。相邻 chunk 可以保留少量重叠，避免关键信息刚好被切断。\n\nEmbedding 模型把文本转换成向量。语义相近的文本，其向量通常也更接近。本项目使用 BAAI/bge-small-zh-v1.5 和 sentence-transformers 生成向量。\n\n",
+      "rank": 2,
+      "score": -0.6523411273956299
+    },
+    {
+      "document_id": "base_5bb634d59b83bee6446dc5ecd0c6f429",
+      "source": "knowledge.txt",
+      "chunk_id": 1,
+      "content": "/bge-small-zh-v1.5 和 sentence-transformers 生成向量。\n\nFAISS 是一个向量检索库。IndexFlatIP 使用内积搜索；当文档向量和查询向量都经过 L2 归一化后，内积就等于余弦相似度。\n",
+      "rank": 3,
+      "score": -9.763107299804688
+    }
+  ]
+}

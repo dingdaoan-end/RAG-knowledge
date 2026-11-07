@@ -1,0 +1,70 @@
+{
+  "container_name": "rag-knowledge-api",
+  "platform": "linux/amd64",
+  "build": {
+    "context": ".",
+    "dockerfile": "Dockerfile"
+  },
+  "image": "rag-knowledge-api:local",
+  "init": true,
+  "restart": "unless-stopped",
+  "ports": [
+    "127.0.0.1:8000:8000"
+  ],
+  "env_file": [
+    ".env"
+  ],
+  "environment": {
+    "UPLOAD_DIR": "/app/data/uploads",
+    "KNOWLEDGE_FILE": "/app/knowledge/knowledge.txt",
+    "MAX_UPLOAD_BYTES": "${MAX_UPLOAD_BYTES:-10485760}",
+    "HF_HOME": "/tmp/huggingface",
+    "HF_HUB_CACHE": "/models/hub",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "HF_HUB_DISABLE_TELEMETRY": "1",
+    "EMBEDDING_MODEL_PATH": "/models/hub/models--BAAI--bge-small-zh-v1.5/snapshots/${EMBEDDING_REVISION:-7999e1d3359715c523056ef9478215996d62a620}",
+    "RERANKER_MODEL_PATH": "/models/hub/models--BAAI--bge-reranker-base/snapshots/${RERANKER_REVISION:-2cfc18c9415c912f9d8155881c133215df768a70}"
+  },
+  "volumes": [
+    {
+      "type": "bind",
+      "source": "${UPLOAD_DATA_DIR:-./data/uploads}",
+      "target": "/app/data/uploads",
+      "bind": {
+        "create_host_path": false
+      }
+    },
+    {
+      "type": "bind",
+      "source": "${KNOWLEDGE_DIR:-./data}",
+      "target": "/app/knowledge",
+      "read_only": true,
+      "bind": {
+        "create_host_path": false
+      }
+    },
+    {
+      "type": "bind",
+      "source": "${HF_CACHE_DIR:?Set HF_CACHE_DIR to an existing Hugging Face hub directory}",
+      "target": "/models/hub",
+      "read_only": true,
+      "bind": {
+        "create_host_path": false
+      }
+    }
+  ],
+  "healthcheck": {
+    "test": [
+      "CMD",
+      "python",
+      "-c",
+      "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/ready', timeout=3).close()"
+    ],
+    "interval": "30s",
+    "timeout": "5s",
+    "retries": 3,
+    "start_period": "180s"
+  },
+  "stop_grace_period": "120s"
+}

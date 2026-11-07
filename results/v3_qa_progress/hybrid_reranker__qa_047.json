@@ -1,0 +1,400 @@
+{
+  "method": "hybrid_reranker",
+  "qa_id": "qa_047",
+  "query_id": "qa_047",
+  "question": "知识库能说明我这份扫描 PDF 的 OCR 准确率，并保证表格文字全部正确吗？",
+  "retrieval_eval_query_ids": [],
+  "experiment_id": "9915eade108441c49d79ca173144894d",
+  "unit_id": "hybrid_reranker__qa_047",
+  "state": "finished",
+  "started_at": "2026-10-26T14:19:42.177060+00:00",
+  "http_attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-10-26T14:19:42.610067+00:00",
+      "http_status": 200
+    }
+  ],
+  "usage": {
+    "input_tokens": 359,
+    "output_tokens": 302,
+    "total_tokens": 661,
+    "cached_input_tokens": 0
+  },
+  "timings_ms": {
+    "llm": 2838.577600006829,
+    "retrieval": 8.553499996196479,
+    "rerank": 412.01120000187075,
+    "total": 3275.7334999987506
+  },
+  "llm_called": true,
+  "unit_digest": "0534a94ba1098956c8ef9f54ed276abf9d44a3efe55de255b800615d7e9d700c",
+  "actual_prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: ingestion_notes.md\nchunk_id: 0\nrank: 1\nscore: -1.204543948173523\neval_id: pdf_ocr\n\ncontent:\n扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。\n\n[Document 2]\nsource: rag.md\nchunk_id: 2\nrank: 2\nscore: -5.785606861114502\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 3]\nsource: faiss.md\nchunk_id: 0\nrank: 3\nscore: -7.746883869171143\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\nQuestion:\n\n知识库能说明我这份扫描 PDF 的 OCR 准确率，并保证表格文字全部正确吗？",
+  "returned_generation_parameters": {
+    "temperature": 1.0,
+    "top_p": 1.0
+  },
+  "provider_response_status": "completed",
+  "returned_model": "deepseek-flash",
+  "status": "success",
+  "record": {
+    "id": "qa_047",
+    "question": "知识库能说明我这份扫描 PDF 的 OCR 准确率，并保证表格文字全部正确吗？",
+    "reference_answer": "不能。知识库只说明扫描 PDF 可先做 OCR，没有这份文件的识别结果和准确率核验。应请求实际文件对应的识别与核验资料，不能给出准确率或保证完全正确。",
+    "required_facts": [
+      "缺少当前文件的 OCR 结果与核验",
+      "不能编造准确率或保证完全正确",
+      "需要对应文件的识别核验资料"
+    ],
+    "relevant_document_ids": [
+      "pdf_ocr"
+    ],
+    "answerable": false,
+    "answer": "不能。\n\n现有资料只能说明：扫描版 PDF 如果页面只有图片、没有可提取文本层，需要先 OCR 再进行清洗、切块和 Embedding；但资料中没有提供你这份扫描 PDF 的 OCR 准确率，也不能保证表格文字全部正确。\n\n资料还指出，RAG 不能保证完全消除幻觉，检索错误、上下文缺失或模型误读等都可能导致错误回答。因此，对本问题，知识库没有足够信息给出准确率或“全部正确”的保证，需要你自行核查原始 PDF 与 OCR 结果。",
+    "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: ingestion_notes.md\nchunk_id: 0\nrank: 1\nscore: -1.204543948173523\neval_id: pdf_ocr\n\ncontent:\n扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。\n\n[Document 2]\nsource: rag.md\nchunk_id: 2\nrank: 2\nscore: -5.785606861114502\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 3]\nsource: faiss.md\nchunk_id: 0\nrank: 3\nscore: -7.746883869171143\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\nQuestion:\n\n知识库能说明我这份扫描 PDF 的 OCR 准确率，并保证表格文字全部正确吗？",
+    "context": "[Document 1]\nsource: ingestion_notes.md\nchunk_id: 0\nrank: 1\nscore: -1.204543948173523\neval_id: pdf_ocr\n\ncontent:\n扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。\n\n[Document 2]\nsource: rag.md\nchunk_id: 2\nrank: 2\nscore: -5.785606861114502\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 3]\nsource: faiss.md\nchunk_id: 0\nrank: 3\nscore: -7.746883869171143\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+    "pipeline_status": "answered",
+    "llm_called": true,
+    "context_documents": [
+      {
+        "id": "pdf_ocr",
+        "text": "扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。",
+        "metadata": {
+          "eval_id": "pdf_ocr",
+          "source": "ingestion_notes.md",
+          "chunk_id": 0
+        },
+        "rank": 1,
+        "score": -1.204543948173523
+      },
+      {
+        "id": "rag_limits",
+        "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+        "metadata": {
+          "eval_id": "rag_limits",
+          "source": "rag.md",
+          "chunk_id": 2
+        },
+        "rank": 2,
+        "score": -5.785606861114502
+      },
+      {
+        "id": "faiss_ip",
+        "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+        "metadata": {
+          "eval_id": "faiss_ip",
+          "source": "faiss.md",
+          "chunk_id": 0
+        },
+        "rank": 3,
+        "score": -7.746883869171143
+      }
+    ],
+    "context_document_ids": [
+      "pdf_ocr",
+      "rag_limits",
+      "faiss_ip"
+    ],
+    "retrieval_query": "知识库能说明我这份扫描 PDF 的 OCR 准确率，并保证表格文字全部正确吗？",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "started_at": "2026-10-26T14:19:42.178060+00:00",
+    "elapsed_seconds": 3.275588099997549,
+    "review": {
+      "status": "pending",
+      "reviewer": null,
+      "reviewed_at": null,
+      "faithfulness": null,
+      "answer_relevance": null,
+      "factual_correctness": null,
+      "factual_correctness_basis": null,
+      "required_facts_covered": [
+        {
+          "fact": "缺少当前文件的 OCR 结果与核验",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "不能编造准确率或保证完全正确",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "需要对应文件的识别核验资料",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        }
+      ],
+      "unsupported_claims": null,
+      "insufficient_evidence_handled": null,
+      "review_notes": ""
+    }
+  },
+  "bundle_run": {
+    "id": "57b51b8c1dd74c12af6a7b2e15d535ec",
+    "started_at": "2026-10-26T14:19:42.178060+00:00",
+    "qa_dataset": {
+      "version": "3.0",
+      "sha256": "b854564a846d0ca022ffcdea59deb6487cbeab9ecdae828d4a41a749775548c4",
+      "metadata": {
+        "name": "rag_qa_teaching_v3",
+        "corpus_file": "retrieval_eval_v3.json",
+        "purpose": "采集实际答案、提示词、上下文与来源，供人工独立评审；参考答案和标签不进入生成提示词。",
+        "answerable_definition": "true 表示已有资料能回答所请求的事实；false 表示所请求的事实或确定结论无法由现有资料支持，期望说明证据限制，而不是猜测。",
+        "limitations": "50 个教学问题（42 个可回答、8 个无法确定所请求事实的负例），基于同一份 18 Chunk 冻结正文；新增问题由 Codex 对照正文检查，不代表独立人工认证。CUDA 编号为示例，不是当前用户环境事实。"
+      }
+    },
+    "corpus_sha256": "33a7d07e4554df865667592b3515133c210b23678c4fcb895a8cdfa9240e04d9",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "pipeline": {
+      "retriever": {
+        "implementation": "TimedSearch"
+      },
+      "reranker": {
+        "implementation": "TimedReranker",
+        "model_name": "C:\\Users\\吴志武\\.cache\\huggingface\\hub\\models--BAAI--bge-reranker-base\\snapshots\\2cfc18c9415c912f9d8155881c133215df768a70"
+      },
+      "query_rewriter": null,
+      "context_top_k": 3
+    },
+    "quality_scope": "pending_human_review",
+    "finished_at": "2026-10-26T14:19:45.453447+00:00",
+    "elapsed_seconds": 3.2756269999954384
+  },
+  "exception_type": null,
+  "pipeline_status": "answered",
+  "failed_stage": null,
+  "retrieval_candidates": [
+    {
+      "id": "pdf_ocr",
+      "text": "扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。",
+      "metadata": {
+        "eval_id": "pdf_ocr",
+        "source": "ingestion_notes.md",
+        "chunk_id": 0
+      },
+      "rank": 1,
+      "score": 1.0,
+      "vector_score": 0.6745429039001465,
+      "bm25_score": 13.284722753855057,
+      "normalized_vector_score": 1.0,
+      "normalized_bm25_score": 1.0,
+      "final_score": 1.0
+    },
+    {
+      "id": "rag_limits",
+      "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+      "metadata": {
+        "eval_id": "rag_limits",
+        "source": "rag.md",
+        "chunk_id": 2
+      },
+      "rank": 2,
+      "score": 0.5777834192537861,
+      "vector_score": 0.5019928812980652,
+      "bm25_score": 10.975975333069806,
+      "normalized_vector_score": 0.47276427724546644,
+      "normalized_bm25_score": 0.8228280839398651,
+      "final_score": 0.5777834192537861
+    },
+    {
+      "id": "faiss_ip",
+      "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+      "metadata": {
+        "eval_id": "faiss_ip",
+        "source": "faiss.md",
+        "chunk_id": 0
+      },
+      "rank": 3,
+      "score": 0.3874827115339857,
+      "vector_score": 0.4941301941871643,
+      "bm25_score": 3.4403728273172107,
+      "normalized_vector_score": 0.44873942080561235,
+      "normalized_bm25_score": 0.24455038990019026,
+      "final_score": 0.3874827115339857
+    },
+    {
+      "id": "reranker_pairs",
+      "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+      "metadata": {
+        "eval_id": "reranker_pairs",
+        "source": "retrieval.md",
+        "chunk_id": 2
+      },
+      "rank": 4,
+      "score": 0.32999662206243957,
+      "vector_score": 0.4977372884750366,
+      "bm25_score": 0.6082228169421201,
+      "normalized_vector_score": 0.4597610882341692,
+      "normalized_bm25_score": 0.027212867661737056,
+      "final_score": 0.32999662206243957
+    },
+    {
+      "id": "chunk_overlap",
+      "text": "文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。",
+      "metadata": {
+        "eval_id": "chunk_overlap",
+        "source": "chunking.md",
+        "chunk_id": 0
+      },
+      "rank": 5,
+      "score": 0.32985502404980405,
+      "vector_score": 0.49743354320526123,
+      "bm25_score": 0.630292259618135,
+      "normalized_vector_score": 0.45883297849284155,
+      "normalized_bm25_score": 0.02890646368271668,
+      "final_score": 0.32985502404980405
+    },
+    {
+      "id": "cuda_1175",
+      "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+      "metadata": {
+        "eval_id": "cuda_1175",
+        "source": "cuda_examples.md",
+        "chunk_id": 0
+      },
+      "rank": 6,
+      "score": 0.31768271363027056,
+      "vector_score": 0.46249401569366455,
+      "bm25_score": 3.3476874683437874,
+      "normalized_vector_score": 0.3520734037186312,
+      "normalized_bm25_score": 0.23743777009076233,
+      "final_score": 0.31768271363027056
+    },
+    {
+      "id": "rag_overview",
+      "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+      "metadata": {
+        "eval_id": "rag_overview",
+        "source": "rag.md",
+        "chunk_id": 0
+      },
+      "rank": 7,
+      "score": 0.3096243655709482,
+      "vector_score": 0.4634718596935272,
+      "bm25_score": 2.9068081407044475,
+      "normalized_vector_score": 0.35506125779267966,
+      "normalized_bm25_score": 0.2036049503869081,
+      "final_score": 0.3096243655709482
+    },
+    {
+      "id": "bm25_terms",
+      "text": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+      "metadata": {
+        "eval_id": "bm25_terms",
+        "source": "retrieval.md",
+        "chunk_id": 0
+      },
+      "rank": 8,
+      "score": 0.29263528108829856,
+      "vector_score": 0.48015445470809937,
+      "bm25_score": 0.6189237147774651,
+      "normalized_vector_score": 0.4060358094461028,
+      "normalized_bm25_score": 0.028034048253422133,
+      "final_score": 0.29263528108829856
+    },
+    {
+      "id": "transformer_attention",
+      "text": "Transformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。",
+      "metadata": {
+        "eval_id": "transformer_attention",
+        "source": "transformer.md",
+        "chunk_id": 0
+      },
+      "rank": 9,
+      "score": 0.2785662294543532,
+      "vector_score": 0.47740650177001953,
+      "bm25_score": 0.26310955212096254,
+      "normalized_vector_score": 0.39763929386438596,
+      "normalized_bm25_score": 0.0007290791642768883,
+      "final_score": 0.2785662294543532
+    },
+    {
+      "id": "cosine_unit",
+      "text": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。",
+      "metadata": {
+        "eval_id": "cosine_unit",
+        "source": "faiss.md",
+        "chunk_id": 1
+      },
+      "rank": 10,
+      "score": 0.23265492930812479,
+      "vector_score": 0.45604372024536133,
+      "bm25_score": 0.25360883847794247,
+      "normalized_vector_score": 0.3323641847258926,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.23265492930812479
+    }
+  ],
+  "reranked_candidates": [
+    {
+      "id": "pdf_ocr",
+      "text": "扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。",
+      "metadata": {
+        "eval_id": "pdf_ocr",
+        "source": "ingestion_notes.md",
+        "chunk_id": 0
+      },
+      "rank": 1,
+      "score": -1.204543948173523,
+      "vector_score": 0.6745429039001465,
+      "bm25_score": 13.284722753855057,
+      "normalized_vector_score": 1.0,
+      "normalized_bm25_score": 1.0,
+      "final_score": 1.0,
+      "rerank_score": -1.204543948173523,
+      "retrieval_score": 1.0,
+      "retrieval_rank": 1.0
+    },
+    {
+      "id": "rag_limits",
+      "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+      "metadata": {
+        "eval_id": "rag_limits",
+        "source": "rag.md",
+        "chunk_id": 2
+      },
+      "rank": 2,
+      "score": -5.785606861114502,
+      "vector_score": 0.5019928812980652,
+      "bm25_score": 10.975975333069806,
+      "normalized_vector_score": 0.47276427724546644,
+      "normalized_bm25_score": 0.8228280839398651,
+      "final_score": 0.5777834192537861,
+      "rerank_score": -5.785606861114502,
+      "retrieval_score": 0.5777834192537861,
+      "retrieval_rank": 2.0
+    },
+    {
+      "id": "faiss_ip",
+      "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+      "metadata": {
+        "eval_id": "faiss_ip",
+        "source": "faiss.md",
+        "chunk_id": 0
+      },
+      "rank": 3,
+      "score": -7.746883869171143,
+      "vector_score": 0.4941301941871643,
+      "bm25_score": 3.4403728273172107,
+      "normalized_vector_score": 0.44873942080561235,
+      "normalized_bm25_score": 0.24455038990019026,
+      "final_score": 0.3874827115339857,
+      "rerank_score": -7.746883869171143,
+      "retrieval_score": 0.3874827115339857,
+      "retrieval_rank": 3.0
+    }
+  ],
+  "retry_count": 0,
+  "finished_at": "2026-10-26T14:19:45.453447+00:00"
+}

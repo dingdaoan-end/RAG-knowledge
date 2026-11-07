@@ -1,0 +1,27 @@
+{
+  "review_type": "AI-assisted, not human",
+  "original_files_checked": 307,
+  "original_files_changed": [],
+  "original_pending_records_unchanged": 197,
+  "reviewed_records_valid": 197,
+  "capture_fingerprints_unchanged": 4,
+  "source_answer_prompt_context_reference_fields_equal": 197,
+  "exact_answer_quotes_validated": 545,
+  "round_1_count": 32,
+  "round_2_count": 165,
+  "failed_original_api_units_not_scored": 3,
+  "new_real_llm_calls": 0,
+  "production_code_modified": false,
+  "datasets_modified": false,
+  "test_command": ".\\.venv\\Scripts\\python.exe -B -m pytest -q -p no:cacheprovider --tb=short -m \"not integration\"",
+  "tests": {
+    "passed": 485,
+    "failed": 0,
+    "skipped": 0,
+    "deselected": 10,
+    "warnings": 1,
+    "elapsed_seconds": 62.94
+  },
+  "warning": "Existing jieba/pkg_resources DeprecationWarning",
+  "semantic_review_limit": "Structural validation proves field consistency and exact quotations, not independent human agreement on semantic judgments."
+}

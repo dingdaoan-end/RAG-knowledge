@@ -1,0 +1,346 @@
+{
+  "method": "hybrid",
+  "qa_id": "qa_008",
+  "query_id": "qa_008",
+  "question": "知识库列举了哪些仍会使 RAG 回答出错的环节？",
+  "retrieval_eval_query_ids": [],
+  "experiment_id": "9915eade108441c49d79ca173144894d",
+  "unit_id": "hybrid__qa_008",
+  "state": "finished",
+  "started_at": "2026-10-26T13:48:22.557782+00:00",
+  "http_attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-10-26T13:48:22.581805+00:00",
+      "http_status": 200
+    }
+  ],
+  "usage": {
+    "input_tokens": 327,
+    "output_tokens": 111,
+    "total_tokens": 438,
+    "cached_input_tokens": 0
+  },
+  "timings_ms": {
+    "llm": 1332.9723999995622,
+    "retrieval": 9.21070000185864,
+    "rerank": null,
+    "total": 1362.684799998533
+  },
+  "llm_called": true,
+  "unit_digest": "e0fbb972f2992a19b51287235ada4855267411a8b746d4682dd39cf506e04291",
+  "actual_prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: rag.md\nchunk_id: 2\nrank: 1\nscore: 1.0\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 0.6929054653582905\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: rag.md\nchunk_id: 3\nrank: 3\nscore: 0.5973133482000866\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\nQuestion:\n\n知识库列举了哪些仍会使 RAG 回答出错的环节？",
+  "returned_generation_parameters": {
+    "temperature": 1.0,
+    "top_p": 1.0
+  },
+  "provider_response_status": "completed",
+  "returned_model": "deepseek-flash",
+  "status": "success",
+  "record": {
+    "id": "qa_008",
+    "question": "知识库列举了哪些仍会使 RAG 回答出错的环节？",
+    "reference_answer": "资料列出检索错误、资料过时、上下文缺失或模型误读；这些情况都可能导致错误回答，因此不能将检索到资料等同于回答必然正确。",
+    "required_facts": [
+      "检索错误",
+      "资料过时",
+      "上下文缺失",
+      "模型误读"
+    ],
+    "relevant_document_ids": [
+      "rag_limits"
+    ],
+    "answerable": true,
+    "answer": "知识库列举的环节包括：**检索错误、资料过时、上下文缺失，或模型误读**。这些情况都可能导致 RAG 回答出错。",
+    "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: rag.md\nchunk_id: 2\nrank: 1\nscore: 1.0\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 0.6929054653582905\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: rag.md\nchunk_id: 3\nrank: 3\nscore: 0.5973133482000866\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\nQuestion:\n\n知识库列举了哪些仍会使 RAG 回答出错的环节？",
+    "context": "[Document 1]\nsource: rag.md\nchunk_id: 2\nrank: 1\nscore: 1.0\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 0.6929054653582905\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: rag.md\nchunk_id: 3\nrank: 3\nscore: 0.5973133482000866\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+    "pipeline_status": "answered",
+    "llm_called": true,
+    "context_documents": [
+      {
+        "id": "rag_limits",
+        "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+        "metadata": {
+          "eval_id": "rag_limits",
+          "source": "rag.md",
+          "chunk_id": 2
+        },
+        "rank": 1,
+        "score": 1.0
+      },
+      {
+        "id": "rag_overview",
+        "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+        "metadata": {
+          "eval_id": "rag_overview",
+          "source": "rag.md",
+          "chunk_id": 0
+        },
+        "rank": 2,
+        "score": 0.6929054653582905
+      },
+      {
+        "id": "rag_terms",
+        "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+        "metadata": {
+          "eval_id": "rag_terms",
+          "source": "rag.md",
+          "chunk_id": 3
+        },
+        "rank": 3,
+        "score": 0.5973133482000866
+      }
+    ],
+    "context_document_ids": [
+      "rag_limits",
+      "rag_overview",
+      "rag_terms"
+    ],
+    "retrieval_query": "知识库列举了哪些仍会使 RAG 回答出错的环节？",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "started_at": "2026-10-26T13:48:22.558805+00:00",
+    "elapsed_seconds": 1.3625461000046926,
+    "review": {
+      "status": "pending",
+      "reviewer": null,
+      "reviewed_at": null,
+      "faithfulness": null,
+      "answer_relevance": null,
+      "factual_correctness": null,
+      "factual_correctness_basis": null,
+      "required_facts_covered": [
+        {
+          "fact": "检索错误",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "资料过时",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "上下文缺失",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "模型误读",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        }
+      ],
+      "unsupported_claims": null,
+      "insufficient_evidence_handled": null,
+      "review_notes": ""
+    }
+  },
+  "bundle_run": {
+    "id": "789f60e075e442fa86256d8090d55678",
+    "started_at": "2026-10-26T13:48:22.558805+00:00",
+    "qa_dataset": {
+      "version": "3.0",
+      "sha256": "b854564a846d0ca022ffcdea59deb6487cbeab9ecdae828d4a41a749775548c4",
+      "metadata": {
+        "name": "rag_qa_teaching_v3",
+        "corpus_file": "retrieval_eval_v3.json",
+        "purpose": "采集实际答案、提示词、上下文与来源，供人工独立评审；参考答案和标签不进入生成提示词。",
+        "answerable_definition": "true 表示已有资料能回答所请求的事实；false 表示所请求的事实或确定结论无法由现有资料支持，期望说明证据限制，而不是猜测。",
+        "limitations": "50 个教学问题（42 个可回答、8 个无法确定所请求事实的负例），基于同一份 18 Chunk 冻结正文；新增问题由 Codex 对照正文检查，不代表独立人工认证。CUDA 编号为示例，不是当前用户环境事实。"
+      }
+    },
+    "corpus_sha256": "33a7d07e4554df865667592b3515133c210b23678c4fcb895a8cdfa9240e04d9",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "pipeline": {
+      "retriever": {
+        "implementation": "TimedSearch"
+      },
+      "reranker": null,
+      "query_rewriter": null,
+      "context_top_k": 3
+    },
+    "quality_scope": "pending_human_review",
+    "finished_at": "2026-10-26T13:48:23.922082+00:00",
+    "elapsed_seconds": 1.3625898000027519
+  },
+  "exception_type": null,
+  "pipeline_status": "answered",
+  "failed_stage": null,
+  "retrieval_candidates": [
+    {
+      "id": "rag_limits",
+      "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+      "metadata": {
+        "eval_id": "rag_limits",
+        "source": "rag.md",
+        "chunk_id": 2
+      },
+      "rank": 1,
+      "score": 1.0,
+      "vector_score": 0.7028595209121704,
+      "bm25_score": 7.390970932813516,
+      "normalized_vector_score": 1.0,
+      "normalized_bm25_score": 1.0,
+      "final_score": 1.0
+    },
+    {
+      "id": "rag_overview",
+      "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+      "metadata": {
+        "eval_id": "rag_overview",
+        "source": "rag.md",
+        "chunk_id": 0
+      },
+      "rank": 2,
+      "score": 0.6929054653582905,
+      "vector_score": 0.6055381298065186,
+      "bm25_score": 4.521481862705154,
+      "normalized_vector_score": 0.7334726708126749,
+      "normalized_bm25_score": 0.5982486526313934,
+      "final_score": 0.6929054653582905
+    },
+    {
+      "id": "rag_terms",
+      "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+      "metadata": {
+        "eval_id": "rag_terms",
+        "source": "rag.md",
+        "chunk_id": 3
+      },
+      "rank": 3,
+      "score": 0.5973133482000866,
+      "vector_score": 0.560907781124115,
+      "bm25_score": 4.282593240102004,
+      "normalized_vector_score": 0.6112466370509229,
+      "normalized_bm25_score": 0.5648023408814686,
+      "final_score": 0.5973133482000866
+    },
+    {
+      "id": "rag_evidence",
+      "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+      "metadata": {
+        "eval_id": "rag_evidence",
+        "source": "rag.md",
+        "chunk_id": 1
+      },
+      "rank": 4,
+      "score": 0.5853906077163497,
+      "vector_score": 0.5927119255065918,
+      "bm25_score": 2.5471539699355583,
+      "normalized_vector_score": 0.6983464366227082,
+      "normalized_bm25_score": 0.32182700693484656,
+      "final_score": 0.5853906077163497
+    },
+    {
+      "id": "cuda_1176",
+      "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+      "metadata": {
+        "eval_id": "cuda_1176",
+        "source": "cuda_examples.md",
+        "chunk_id": 1
+      },
+      "rank": 5,
+      "score": 0.4846373557050813,
+      "vector_score": 0.5729764699935913,
+      "bm25_score": 1.0491543290346699,
+      "normalized_vector_score": 0.6442983163850412,
+      "normalized_bm25_score": 0.11209511411850841,
+      "final_score": 0.4846373557050813
+    },
+    {
+      "id": "api_stream",
+      "text": "FastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+      "metadata": {
+        "eval_id": "api_stream",
+        "source": "api.md",
+        "chunk_id": 0
+      },
+      "rank": 6,
+      "score": 0.46615372311456954,
+      "vector_score": 0.5520032644271851,
+      "bm25_score": 1.5663360576743355,
+      "normalized_vector_score": 0.5868604561098775,
+      "normalized_bm25_score": 0.18450467945885116,
+      "final_score": 0.46615372311456954
+    },
+    {
+      "id": "cuda_1175",
+      "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+      "metadata": {
+        "eval_id": "cuda_1175",
+        "source": "cuda_examples.md",
+        "chunk_id": 0
+      },
+      "rank": 7,
+      "score": 0.4283181634876223,
+      "vector_score": 0.5611401796340942,
+      "bm25_score": 0.2485205368087276,
+      "normalized_vector_score": 0.6118830906966033,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.4283181634876223
+    },
+    {
+      "id": "reranker_pairs",
+      "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+      "metadata": {
+        "eval_id": "reranker_pairs",
+        "source": "retrieval.md",
+        "chunk_id": 2
+      },
+      "rank": 8,
+      "score": 0.4254694407189929,
+      "vector_score": 0.48555871844291687,
+      "bm25_score": 3.6303294548657843,
+      "normalized_vector_score": 0.404893396462875,
+      "normalized_bm25_score": 0.4734802106499347,
+      "final_score": 0.4254694407189929
+    },
+    {
+      "id": "chunk_overlap",
+      "text": "文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。",
+      "metadata": {
+        "eval_id": "chunk_overlap",
+        "source": "chunking.md",
+        "chunk_id": 0
+      },
+      "rank": 9,
+      "score": 0.3977689318612099,
+      "vector_score": 0.49098843336105347,
+      "bm25_score": 2.723012152129332,
+      "normalized_vector_score": 0.4197633792995207,
+      "normalized_bm25_score": 0.3464485545051513,
+      "final_score": 0.3977689318612099
+    },
+    {
+      "id": "transformer_attention",
+      "text": "Transformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。",
+      "metadata": {
+        "eval_id": "transformer_attention",
+        "source": "transformer.md",
+        "chunk_id": 0
+      },
+      "rank": 10,
+      "score": 0.2821375313636825,
+      "vector_score": 0.4845672845840454,
+      "bm25_score": 0.26310955212096254,
+      "normalized_vector_score": 0.40217822546635656,
+      "normalized_bm25_score": 0.002042578457443047,
+      "final_score": 0.2821375313636825
+    }
+  ],
+  "reranked_candidates": [],
+  "retry_count": 0,
+  "finished_at": "2026-10-26T13:48:23.922082+00:00"
+}

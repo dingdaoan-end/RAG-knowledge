@@ -1,0 +1,1364 @@
+{
+  "schema_version": 1,
+  "review_type": "AI-assisted semantic review; not independent human review",
+  "reviewer": "Codex AI（非人工评审）",
+  "review_date": "2026-10-27",
+  "created_at": "2026-10-27T22:08:56.356706+08:00",
+  "source_experiment_id": "9915eade108441c49d79ca173144894d",
+  "source_bundles": {
+    "vector": {
+      "path": "results/v3_qa_review/vector.json",
+      "file_sha256": "e417c4d6dd608411d5854a9f4bab63ee1f3e642ba815b0f699bb4e5ed9bf86b9",
+      "capture_sha256": "b51e0c379f6f85b184dcad9cb226cb52949a19c45c2892dfeea7a899274684af"
+    },
+    "bm25": {
+      "path": "results/v3_qa_review/bm25.json",
+      "file_sha256": "3bf48cd75f631736c93ae5c51f60cffb865574767d82a68610391dacff86db95",
+      "capture_sha256": "14e4af49dd0284ed8bca90d0695f3afbf311caef461e7f3a680fbe05bfdca69f"
+    },
+    "hybrid": {
+      "path": "results/v3_qa_review/hybrid.json",
+      "file_sha256": "4bb357e17874bfd591332c8de41abbb15b346daf94f30de686d6941b9c6afedc",
+      "capture_sha256": "66c871fafc49d783b3806cae121a769a51d26fc7c9f1ed527a71466c1556e009"
+    },
+    "hybrid_reranker": {
+      "path": "results/v3_qa_review/hybrid_reranker.json",
+      "file_sha256": "8f9f009f389a3e7783e92dc14c64d0af6eae1fb3b3aeedab35a1cf16d524f9a6",
+      "capture_sha256": "56fc61417a944f4f626b670b1b8eff8a9c134e581e045ecbea4b37889f39be85"
+    }
+  },
+  "rubric_source": "docs/day8_qa_evaluation.md; app/evaluation/qa_review.py",
+  "aggregation_implementation": "Existing summarize_reviews; numeric metrics reused unchanged, labels explicitly renamed to ai_review_metrics, never presented as human scores",
+  "reviewed_answer_count": 197,
+  "new_real_api_calls": 0,
+  "failed_units_not_scored": [
+    {
+      "unit_id": "bm25__qa_043",
+      "qa_id": "qa_043",
+      "method": "bm25",
+      "status": "failed",
+      "exception_type": "APIConnectionError",
+      "http_attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-10-26T13:53:54.118944+00:00",
+          "http_status": 200
+        },
+        {
+          "attempt": 2,
+          "started_at": "2026-10-26T14:05:27.262025+00:00",
+          "http_status": null
+        },
+        {
+          "attempt": 3,
+          "started_at": "2026-10-26T14:05:31.432295+00:00",
+          "http_status": null
+        }
+      ],
+      "retry_count": 2
+    },
+    {
+      "unit_id": "hybrid_reranker__qa_044",
+      "qa_id": "qa_044",
+      "method": "hybrid_reranker",
+      "status": "failed",
+      "exception_type": "APIConnectionError",
+      "http_attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-10-26T14:05:36.081946+00:00",
+          "http_status": null
+        },
+        {
+          "attempt": 2,
+          "started_at": "2026-10-26T14:05:39.832897+00:00",
+          "http_status": null
+        },
+        {
+          "attempt": 3,
+          "started_at": "2026-10-26T14:05:43.060368+00:00",
+          "http_status": null
+        }
+      ],
+      "retry_count": 2
+    },
+    {
+      "unit_id": "vector__qa_044",
+      "qa_id": "qa_044",
+      "method": "vector",
+      "status": "failed",
+      "exception_type": "APIConnectionError",
+      "http_attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-10-26T14:05:46.440710+00:00",
+          "http_status": null
+        },
+        {
+          "attempt": 2,
+          "started_at": "2026-10-26T14:05:50.101072+00:00",
+          "http_status": null
+        },
+        {
+          "attempt": 3,
+          "started_at": "2026-10-26T14:05:53.690939+00:00",
+          "http_status": null
+        }
+      ],
+      "retry_count": 2
+    }
+  ],
+  "human_review_performed_this_task": false,
+  "original_pending_files_unchanged": true,
+  "round_1": {
+    "description": "All insufficient-evidence answers",
+    "answer_count": 32,
+    "unique_qa_count": 8,
+    "methods": {
+      "vector": {
+        "answer_count": 8,
+        "ai_review_metrics": {
+          "faithfulness_mean": 2.0,
+          "answer_relevance_mean": 2.0,
+          "factual_correctness_mean": 2.0,
+          "required_facts_coverage": 0.75,
+          "unsupported_claims_count": 0,
+          "insufficient_evidence_handled_rate": 1.0
+        },
+        "score_distributions": {
+          "faithfulness": {
+            "0": 0,
+            "1": 0,
+            "2": 8
+          },
+          "answer_relevance": {
+            "0": 0,
+            "1": 0,
+            "2": 8
+          },
+          "factual_correctness": {
+            "0": 0,
+            "1": 0,
+            "2": 8
+          }
+        },
+        "required_facts_covered": 18,
+        "required_facts_total": 24,
+        "answers_with_unsupported_claims": 0,
+        "insufficient_evidence_handled_count": 8,
+        "insufficient_evidence_sample_count": 8
+      },
+      "bm25": {
+        "answer_count": 8,
+        "ai_review_metrics": {
+          "faithfulness_mean": 2.0,
+          "answer_relevance_mean": 2.0,
+          "factual_correctness_mean": 2.0,
+          "required_facts_coverage": 0.75,
+          "unsupported_claims_count": 0,
+          "insufficient_evidence_handled_rate": 1.0
+        },
+        "score_distributions": {
+          "faithfulness": {
+            "0": 0,
+            "1": 0,
+            "2": 8
+          },
+          "answer_relevance": {
+            "0": 0,
+            "1": 0,
+            "2": 8
+          },
+          "factual_correctness": {
+            "0": 0,
+            "1": 0,
+            "2": 8
+          }
+        },
+        "required_facts_covered": 18,
+        "required_facts_total": 24,
+        "answers_with_unsupported_claims": 0,
+        "insufficient_evidence_handled_count": 8,
+        "insufficient_evidence_sample_count": 8
+      },
+      "hybrid": {
+        "answer_count": 8,
+        "ai_review_metrics": {
+          "faithfulness_mean": 2.0,
+          "answer_relevance_mean": 2.0,
+          "factual_correctness_mean": 2.0,
+          "required_facts_coverage": 0.75,
+          "unsupported_claims_count": 0,
+          "insufficient_evidence_handled_rate": 1.0
+        },
+        "score_distributions": {
+          "faithfulness": {
+            "0": 0,
+            "1": 0,
+            "2": 8
+          },
+          "answer_relevance": {
+            "0": 0,
+            "1": 0,
+            "2": 8
+          },
+          "factual_correctness": {
+            "0": 0,
+            "1": 0,
+            "2": 8
+          }
+        },
+        "required_facts_covered": 18,
+        "required_facts_total": 24,
+        "answers_with_unsupported_claims": 0,
+        "insufficient_evidence_handled_count": 8,
+        "insufficient_evidence_sample_count": 8
+      },
+      "hybrid_reranker": {
+        "answer_count": 8,
+        "ai_review_metrics": {
+          "faithfulness_mean": 2.0,
+          "answer_relevance_mean": 2.0,
+          "factual_correctness_mean": 2.0,
+          "required_facts_coverage": 0.875,
+          "unsupported_claims_count": 0,
+          "insufficient_evidence_handled_rate": 1.0
+        },
+        "score_distributions": {
+          "faithfulness": {
+            "0": 0,
+            "1": 0,
+            "2": 8
+          },
+          "answer_relevance": {
+            "0": 0,
+            "1": 0,
+            "2": 8
+          },
+          "factual_correctness": {
+            "0": 0,
+            "1": 0,
+            "2": 8
+          }
+        },
+        "required_facts_covered": 21,
+        "required_facts_total": 24,
+        "answers_with_unsupported_claims": 0,
+        "insufficient_evidence_handled_count": 8,
+        "insufficient_evidence_sample_count": 8
+      }
+    }
+  },
+  "round_2": {
+    "description": "All successful answerable questions",
+    "answer_count": 165,
+    "unique_qa_count": 42,
+    "methods_actual_successes": {
+      "vector": {
+        "answer_count": 41,
+        "ai_review_metrics": {
+          "faithfulness_mean": 2.0,
+          "answer_relevance_mean": 1.951219512195122,
+          "factual_correctness_mean": 2.0,
+          "required_facts_coverage": 0.9669421487603306,
+          "unsupported_claims_count": 0,
+          "insufficient_evidence_handled_rate": null
+        },
+        "score_distributions": {
+          "faithfulness": {
+            "0": 0,
+            "1": 0,
+            "2": 41
+          },
+          "answer_relevance": {
+            "0": 0,
+            "1": 2,
+            "2": 39
+          },
+          "factual_correctness": {
+            "0": 0,
+            "1": 0,
+            "2": 41
+          }
+        },
+        "required_facts_covered": 117,
+        "required_facts_total": 121,
+        "answers_with_unsupported_claims": 0,
+        "insufficient_evidence_handled_count": 0,
+        "insufficient_evidence_sample_count": 0
+      },
+      "bm25": {
+        "answer_count": 41,
+        "ai_review_metrics": {
+          "faithfulness_mean": 2.0,
+          "answer_relevance_mean": 1.9024390243902438,
+          "factual_correctness_mean": 2.0,
+          "required_facts_coverage": 0.9421487603305785,
+          "unsupported_claims_count": 0,
+          "insufficient_evidence_handled_rate": null
+        },
+        "score_distributions": {
+          "faithfulness": {
+            "0": 0,
+            "1": 0,
+            "2": 41
+          },
+          "answer_relevance": {
+            "0": 0,
+            "1": 4,
+            "2": 37
+          },
+          "factual_correctness": {
+            "0": 0,
+            "1": 0,
+            "2": 41
+          }
+        },
+        "required_facts_covered": 114,
+        "required_facts_total": 121,
+        "answers_with_unsupported_claims": 0,
+        "insufficient_evidence_handled_count": 0,
+        "insufficient_evidence_sample_count": 0
+      },
+      "hybrid": {
+        "answer_count": 42,
+        "ai_review_metrics": {
+          "faithfulness_mean": 1.9523809523809523,
+          "answer_relevance_mean": 1.9523809523809523,
+          "factual_correctness_mean": 1.9761904761904763,
+          "required_facts_coverage": 0.967741935483871,
+          "unsupported_claims_count": 2,
+          "insufficient_evidence_handled_rate": null
+        },
+        "score_distributions": {
+          "faithfulness": {
+            "0": 0,
+            "1": 2,
+            "2": 40
+          },
+          "answer_relevance": {
+            "0": 0,
+            "1": 2,
+            "2": 40
+          },
+          "factual_correctness": {
+            "0": 0,
+            "1": 1,
+            "2": 41
+          }
+        },
+        "required_facts_covered": 120,
+        "required_facts_total": 124,
+        "answers_with_unsupported_claims": 2,
+        "insufficient_evidence_handled_count": 0,
+        "insufficient_evidence_sample_count": 0
+      },
+      "hybrid_reranker": {
+        "answer_count": 41,
+        "ai_review_metrics": {
+          "faithfulness_mean": 2.0,
+          "answer_relevance_mean": 1.951219512195122,
+          "factual_correctness_mean": 2.0,
+          "required_facts_coverage": 0.9669421487603306,
+          "unsupported_claims_count": 0,
+          "insufficient_evidence_handled_rate": null
+        },
+        "score_distributions": {
+          "faithfulness": {
+            "0": 0,
+            "1": 0,
+            "2": 41
+          },
+          "answer_relevance": {
+            "0": 0,
+            "1": 2,
+            "2": 39
+          },
+          "factual_correctness": {
+            "0": 0,
+            "1": 0,
+            "2": 41
+          }
+        },
+        "required_facts_covered": 117,
+        "required_facts_total": 121,
+        "answers_with_unsupported_claims": 0,
+        "insufficient_evidence_handled_count": 0,
+        "insufficient_evidence_sample_count": 0
+      }
+    },
+    "common_success_ids": [
+      "qa_001",
+      "qa_002",
+      "qa_003",
+      "qa_006",
+      "qa_007",
+      "qa_008",
+      "qa_009",
+      "qa_010",
+      "qa_011",
+      "qa_012",
+      "qa_013",
+      "qa_014",
+      "qa_015",
+      "qa_016",
+      "qa_017",
+      "qa_018",
+      "qa_019",
+      "qa_020",
+      "qa_021",
+      "qa_022",
+      "qa_023",
+      "qa_024",
+      "qa_025",
+      "qa_026",
+      "qa_027",
+      "qa_028",
+      "qa_029",
+      "qa_030",
+      "qa_031",
+      "qa_032",
+      "qa_033",
+      "qa_034",
+      "qa_035",
+      "qa_036",
+      "qa_037",
+      "qa_038",
+      "qa_039",
+      "qa_040",
+      "qa_041",
+      "qa_042"
+    ],
+    "common_success_qa_count": 40,
+    "methods_common_40": {
+      "vector": {
+        "answer_count": 40,
+        "ai_review_metrics": {
+          "faithfulness_mean": 2.0,
+          "answer_relevance_mean": 1.95,
+          "factual_correctness_mean": 2.0,
+          "required_facts_coverage": 0.9661016949152542,
+          "unsupported_claims_count": 0,
+          "insufficient_evidence_handled_rate": null
+        },
+        "score_distributions": {
+          "faithfulness": {
+            "0": 0,
+            "1": 0,
+            "2": 40
+          },
+          "answer_relevance": {
+            "0": 0,
+            "1": 2,
+            "2": 38
+          },
+          "factual_correctness": {
+            "0": 0,
+            "1": 0,
+            "2": 40
+          }
+        },
+        "required_facts_covered": 114,
+        "required_facts_total": 118,
+        "answers_with_unsupported_claims": 0,
+        "insufficient_evidence_handled_count": 0,
+        "insufficient_evidence_sample_count": 0
+      },
+      "bm25": {
+        "answer_count": 40,
+        "ai_review_metrics": {
+          "faithfulness_mean": 2.0,
+          "answer_relevance_mean": 1.9,
+          "factual_correctness_mean": 2.0,
+          "required_facts_coverage": 0.940677966101695,
+          "unsupported_claims_count": 0,
+          "insufficient_evidence_handled_rate": null
+        },
+        "score_distributions": {
+          "faithfulness": {
+            "0": 0,
+            "1": 0,
+            "2": 40
+          },
+          "answer_relevance": {
+            "0": 0,
+            "1": 4,
+            "2": 36
+          },
+          "factual_correctness": {
+            "0": 0,
+            "1": 0,
+            "2": 40
+          }
+        },
+        "required_facts_covered": 111,
+        "required_facts_total": 118,
+        "answers_with_unsupported_claims": 0,
+        "insufficient_evidence_handled_count": 0,
+        "insufficient_evidence_sample_count": 0
+      },
+      "hybrid": {
+        "answer_count": 40,
+        "ai_review_metrics": {
+          "faithfulness_mean": 1.975,
+          "answer_relevance_mean": 1.95,
+          "factual_correctness_mean": 1.975,
+          "required_facts_coverage": 0.9745762711864406,
+          "unsupported_claims_count": 1,
+          "insufficient_evidence_handled_rate": null
+        },
+        "score_distributions": {
+          "faithfulness": {
+            "0": 0,
+            "1": 1,
+            "2": 39
+          },
+          "answer_relevance": {
+            "0": 0,
+            "1": 2,
+            "2": 38
+          },
+          "factual_correctness": {
+            "0": 0,
+            "1": 1,
+            "2": 39
+          }
+        },
+        "required_facts_covered": 115,
+        "required_facts_total": 118,
+        "answers_with_unsupported_claims": 1,
+        "insufficient_evidence_handled_count": 0,
+        "insufficient_evidence_sample_count": 0
+      },
+      "hybrid_reranker": {
+        "answer_count": 40,
+        "ai_review_metrics": {
+          "faithfulness_mean": 2.0,
+          "answer_relevance_mean": 1.95,
+          "factual_correctness_mean": 2.0,
+          "required_facts_coverage": 0.9661016949152542,
+          "unsupported_claims_count": 0,
+          "insufficient_evidence_handled_rate": null
+        },
+        "score_distributions": {
+          "faithfulness": {
+            "0": 0,
+            "1": 0,
+            "2": 40
+          },
+          "answer_relevance": {
+            "0": 0,
+            "1": 2,
+            "2": 38
+          },
+          "factual_correctness": {
+            "0": 0,
+            "1": 0,
+            "2": 40
+          }
+        },
+        "required_facts_covered": 114,
+        "required_facts_total": 118,
+        "answers_with_unsupported_claims": 0,
+        "insufficient_evidence_handled_count": 0,
+        "insufficient_evidence_sample_count": 0
+      }
+    },
+    "paired_common_40": {
+      "vector__vs__bm25": {
+        "faithfulness": {
+          "direction": "bm25 compared with vector",
+          "higher": 0,
+          "equal": 40,
+          "lower": 0,
+          "changed": []
+        },
+        "answer_relevance": {
+          "direction": "bm25 compared with vector",
+          "higher": 0,
+          "equal": 38,
+          "lower": 2,
+          "changed": [
+            {
+              "id": "qa_031",
+              "reference": 2,
+              "comparison": 1
+            },
+            {
+              "id": "qa_041",
+              "reference": 2,
+              "comparison": 1
+            }
+          ]
+        },
+        "factual_correctness": {
+          "direction": "bm25 compared with vector",
+          "higher": 0,
+          "equal": 40,
+          "lower": 0,
+          "changed": []
+        },
+        "required_facts_coverage": {
+          "direction": "bm25 compared with vector",
+          "higher": 0,
+          "equal": 37,
+          "lower": 3,
+          "changed": [
+            {
+              "id": "qa_031",
+              "reference": 1.0,
+              "comparison": 0.5
+            },
+            {
+              "id": "qa_040",
+              "reference": 0.5,
+              "comparison": 0.25
+            },
+            {
+              "id": "qa_041",
+              "reference": 1.0,
+              "comparison": 0.6666666666666666
+            }
+          ]
+        }
+      },
+      "vector__vs__hybrid": {
+        "faithfulness": {
+          "direction": "hybrid compared with vector",
+          "higher": 0,
+          "equal": 39,
+          "lower": 1,
+          "changed": [
+            {
+              "id": "qa_042",
+              "reference": 2,
+              "comparison": 1
+            }
+          ]
+        },
+        "answer_relevance": {
+          "direction": "hybrid compared with vector",
+          "higher": 0,
+          "equal": 40,
+          "lower": 0,
+          "changed": []
+        },
+        "factual_correctness": {
+          "direction": "hybrid compared with vector",
+          "higher": 0,
+          "equal": 39,
+          "lower": 1,
+          "changed": [
+            {
+              "id": "qa_042",
+              "reference": 2,
+              "comparison": 1
+            }
+          ]
+        },
+        "required_facts_coverage": {
+          "direction": "hybrid compared with vector",
+          "higher": 1,
+          "equal": 39,
+          "lower": 0,
+          "changed": [
+            {
+              "id": "qa_032",
+              "reference": 0.6666666666666666,
+              "comparison": 1.0
+            }
+          ]
+        }
+      },
+      "hybrid__vs__hybrid_reranker": {
+        "faithfulness": {
+          "direction": "hybrid_reranker compared with hybrid",
+          "higher": 1,
+          "equal": 39,
+          "lower": 0,
+          "changed": [
+            {
+              "id": "qa_042",
+              "reference": 1,
+              "comparison": 2
+            }
+          ]
+        },
+        "answer_relevance": {
+          "direction": "hybrid_reranker compared with hybrid",
+          "higher": 0,
+          "equal": 40,
+          "lower": 0,
+          "changed": []
+        },
+        "factual_correctness": {
+          "direction": "hybrid_reranker compared with hybrid",
+          "higher": 1,
+          "equal": 39,
+          "lower": 0,
+          "changed": [
+            {
+              "id": "qa_042",
+              "reference": 1,
+              "comparison": 2
+            }
+          ]
+        },
+        "required_facts_coverage": {
+          "direction": "hybrid_reranker compared with hybrid",
+          "higher": 0,
+          "equal": 39,
+          "lower": 1,
+          "changed": [
+            {
+              "id": "qa_032",
+              "reference": 1.0,
+              "comparison": 0.6666666666666666
+            }
+          ]
+        }
+      }
+    }
+  },
+  "all_successful_answers": {
+    "vector": {
+      "answer_count": 49,
+      "ai_review_metrics": {
+        "faithfulness_mean": 2.0,
+        "answer_relevance_mean": 1.9591836734693877,
+        "factual_correctness_mean": 2.0,
+        "required_facts_coverage": 0.9310344827586207,
+        "unsupported_claims_count": 0,
+        "insufficient_evidence_handled_rate": 1.0
+      },
+      "score_distributions": {
+        "faithfulness": {
+          "0": 0,
+          "1": 0,
+          "2": 49
+        },
+        "answer_relevance": {
+          "0": 0,
+          "1": 2,
+          "2": 47
+        },
+        "factual_correctness": {
+          "0": 0,
+          "1": 0,
+          "2": 49
+        }
+      },
+      "required_facts_covered": 135,
+      "required_facts_total": 145,
+      "answers_with_unsupported_claims": 0,
+      "insufficient_evidence_handled_count": 8,
+      "insufficient_evidence_sample_count": 8
+    },
+    "bm25": {
+      "answer_count": 49,
+      "ai_review_metrics": {
+        "faithfulness_mean": 2.0,
+        "answer_relevance_mean": 1.9183673469387754,
+        "factual_correctness_mean": 2.0,
+        "required_facts_coverage": 0.9103448275862069,
+        "unsupported_claims_count": 0,
+        "insufficient_evidence_handled_rate": 1.0
+      },
+      "score_distributions": {
+        "faithfulness": {
+          "0": 0,
+          "1": 0,
+          "2": 49
+        },
+        "answer_relevance": {
+          "0": 0,
+          "1": 4,
+          "2": 45
+        },
+        "factual_correctness": {
+          "0": 0,
+          "1": 0,
+          "2": 49
+        }
+      },
+      "required_facts_covered": 132,
+      "required_facts_total": 145,
+      "answers_with_unsupported_claims": 0,
+      "insufficient_evidence_handled_count": 8,
+      "insufficient_evidence_sample_count": 8
+    },
+    "hybrid": {
+      "answer_count": 50,
+      "ai_review_metrics": {
+        "faithfulness_mean": 1.96,
+        "answer_relevance_mean": 1.96,
+        "factual_correctness_mean": 1.98,
+        "required_facts_coverage": 0.9324324324324325,
+        "unsupported_claims_count": 2,
+        "insufficient_evidence_handled_rate": 1.0
+      },
+      "score_distributions": {
+        "faithfulness": {
+          "0": 0,
+          "1": 2,
+          "2": 48
+        },
+        "answer_relevance": {
+          "0": 0,
+          "1": 2,
+          "2": 48
+        },
+        "factual_correctness": {
+          "0": 0,
+          "1": 1,
+          "2": 49
+        }
+      },
+      "required_facts_covered": 138,
+      "required_facts_total": 148,
+      "answers_with_unsupported_claims": 2,
+      "insufficient_evidence_handled_count": 8,
+      "insufficient_evidence_sample_count": 8
+    },
+    "hybrid_reranker": {
+      "answer_count": 49,
+      "ai_review_metrics": {
+        "faithfulness_mean": 2.0,
+        "answer_relevance_mean": 1.9591836734693877,
+        "factual_correctness_mean": 2.0,
+        "required_facts_coverage": 0.9517241379310345,
+        "unsupported_claims_count": 0,
+        "insufficient_evidence_handled_rate": 1.0
+      },
+      "score_distributions": {
+        "faithfulness": {
+          "0": 0,
+          "1": 0,
+          "2": 49
+        },
+        "answer_relevance": {
+          "0": 0,
+          "1": 2,
+          "2": 47
+        },
+        "factual_correctness": {
+          "0": 0,
+          "1": 0,
+          "2": 49
+        }
+      },
+      "required_facts_covered": 138,
+      "required_facts_total": 145,
+      "answers_with_unsupported_claims": 0,
+      "insufficient_evidence_handled_count": 8,
+      "insufficient_evidence_sample_count": 8
+    }
+  },
+  "unsupported_claim_cases": [
+    {
+      "method": "hybrid",
+      "id": "qa_042",
+      "claims": [
+        {
+          "claim": "把资料已过时直接视为必须无法回答的充分条件",
+          "answer_quote": "如果资料不足或已过时，应明确说明无法回答",
+          "reason": "实际 rag_limits 仅说资料过时可能导致错误，应核查来源；rag_evidence 在资料不足时要求说明无法回答。并未规定一切过时资料均不能回答，条件被扩大。",
+          "context_document_ids": [
+            "rag_limits",
+            "rag_evidence"
+          ]
+        }
+      ],
+      "review_notes": "AI离线逐份语义核对，不是人工认证。“已过时”被直接并入必须无法回答，超出原文“资料不足/缺乏答案才拒答”；过期资料应核查适用性，并非一概不能回答。核心方向正确，但存在局部政策条件过度扩展，忠实度1、事实正确性1。"
+    },
+    {
+      "method": "hybrid",
+      "id": "qa_043",
+      "claims": [
+        {
+          "claim": "声称资料明确将注意力权重称作 Self-Attention 的输出",
+          "answer_quote": "资料明确提到输出“注意力权重”",
+          "reason": "实际 transformer_attention 只解释注意力权重的来源，没有明确将该中间量定义为 Self-Attention 的最终输出；后续限制语降低了实质错误程度，但无法使“资料明确”这一来源归因成立。",
+          "context_document_ids": [
+            "transformer_attention"
+          ]
+        }
+      ],
+      "review_notes": "AI离线逐份语义核对，不是人工认证。“资料明确提到输出注意力权重”比原文“权重来自缩放点积及softmax”更强，是不准确的来源归因。答案随后明确最终上下文表示形式未说明，未断言 Self-Attention 最终只输出权重；故忠实度1，核心机制/Top-K与参考相符，事实正确性2，建议用户复核这一边界。"
+    }
+  ],
+  "coverage_gaps": [
+    {
+      "method": "vector",
+      "id": "qa_005",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "需要当前环境的实际检测信息",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说明现有资料没有具体值，没有明确提出取得当前机器的实际环境检测信息。拒答正确不等同补充取证要求已覆盖。"
+        }
+      ]
+    },
+    {
+      "method": "vector",
+      "id": "qa_032",
+      "answerable": true,
+      "missing_facts": [
+        {
+          "fact": "建模上下文关系",
+          "covered": false,
+          "answer_quote": "Self-Attention 让每个 Token 通过 **Query、Key、Value** 与其他 Token 交互",
+          "notes": "只描述 Token 通过 QKV 与其他 Token 交互，未表述其建模上下文关系的目的；不将机制与目的自动视作同一事实。"
+        }
+      ]
+    },
+    {
+      "method": "vector",
+      "id": "qa_035",
+      "answerable": true,
+      "missing_facts": [
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": false,
+          "answer_quote": "资料中**没有提到 FastAPI 本身在做知识向量化**",
+          "notes": "只说明资料未提到 FastAPI 做向量化，没有给出 Embedding 将文本编码为稠密语义向量的事实；实际 context 缺少 embedding_bge。"
+        }
+      ]
+    },
+    {
+      "method": "vector",
+      "id": "qa_040",
+      "answerable": true,
+      "missing_facts": [
+        {
+          "fact": "把长文档拆成较短的 chunk",
+          "covered": false,
+          "answer_quote": "资料中没有说明“切块”和“向量表示”的具体步骤",
+          "notes": "承认缺切块步骤，但未描述把长文档拆成较短 chunk；本次 context 缺少 chunk_overlap。"
+        },
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": false,
+          "answer_quote": "资料中没有说明“切块”和“向量表示”的具体步骤",
+          "notes": "承认缺向量表示步骤，但未描述文本编码为稠密语义向量；本次 context 缺少 embedding_bge。"
+        }
+      ]
+    },
+    {
+      "method": "vector",
+      "id": "qa_046",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "需要实际环境与测量结果",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "说明缺少基准数据，但没有进一步提出需要实际环境和测量结果；对测试这一行动的要求未覆盖。"
+        }
+      ]
+    },
+    {
+      "method": "vector",
+      "id": "qa_047",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "缺少当前文件的 OCR 结果与核验",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "说明没有准确率/保证，但没有交代当前文件实际 OCR 识别结果及其核验均缺失；复合事实只覆盖部分。"
+        },
+        {
+          "fact": "需要对应文件的识别核验资料",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "没有要求提供或核查该文件的实际识别核验资料；核查 RAG 引用不能直接等同 OCR 文件核验。"
+        }
+      ]
+    },
+    {
+      "method": "vector",
+      "id": "qa_048",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "没有本次请求的计时对照",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说缺少具体延迟数据，没有指出本次请求的计时及普通/流式对照；定量结果缺失不自动等于计时对照要求已覆盖。"
+        }
+      ]
+    },
+    {
+      "method": "vector",
+      "id": "qa_050",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "需要实际编码结果",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "正确拒绝凭空列值，但未说明需取得该文本实际模型编码输出；没有给出下一步取证要求。"
+        }
+      ]
+    },
+    {
+      "method": "bm25",
+      "id": "qa_005",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "需要当前环境的实际检测信息",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说明现有资料没有具体值，没有明确提出取得当前机器的实际环境检测信息。拒答正确不等同补充取证要求已覆盖。"
+        }
+      ]
+    },
+    {
+      "method": "bm25",
+      "id": "qa_031",
+      "answerable": true,
+      "missing_facts": [
+        {
+          "fact": "Embedding 将文本编码为稠密语义向量",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "答案明确说实际资料未说明Embedding把什么转成什么，未给出文本→稠密语义向量，故不覆盖。"
+        }
+      ]
+    },
+    {
+      "method": "bm25",
+      "id": "qa_032",
+      "answerable": true,
+      "missing_facts": [
+        {
+          "fact": "建模上下文关系",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说Token通过QKV交互，未说明建模上下文关系这一作用/目的；不把交互动作自动视为已解释目的。"
+        }
+      ]
+    },
+    {
+      "method": "bm25",
+      "id": "qa_035",
+      "answerable": true,
+      "missing_facts": [
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "未说明Embedding将文本编码为稠密语义向量，且对是否向量化保留判断，职责对比未完整完成。"
+        }
+      ]
+    },
+    {
+      "method": "bm25",
+      "id": "qa_040",
+      "answerable": true,
+      "missing_facts": [
+        {
+          "fact": "把长文档拆成较短的 chunk",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "答案明确缺少切块资料，未给出把长文档拆成短chunk的步骤。"
+        },
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "答案明确缺少向量表示生成过程，未给出文本编码为稠密语义向量。"
+        },
+        {
+          "fact": "把检索结果放入提示词",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "答案明确缺少RAG提示词内容，未给出把检索结果放入提示词。"
+        }
+      ]
+    },
+    {
+      "method": "bm25",
+      "id": "qa_041",
+      "answerable": true,
+      "missing_facts": [
+        {
+          "fact": "含义接近的文本通常在向量空间更接近",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "答案明确未展开语义匹配帮助，没有给出含义接近文本在向量空间通常更接近。"
+        }
+      ]
+    },
+    {
+      "method": "bm25",
+      "id": "qa_046",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "需要实际环境与测量结果",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "说明缺少基准数据，但没有进一步提出需要实际环境和测量结果；对测试这一行动的要求未覆盖。"
+        }
+      ]
+    },
+    {
+      "method": "bm25",
+      "id": "qa_047",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "缺少当前文件的 OCR 结果与核验",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "说明没有准确率/保证，但没有交代当前文件实际 OCR 识别结果及其核验均缺失；复合事实只覆盖部分。"
+        },
+        {
+          "fact": "需要对应文件的识别核验资料",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "没有要求提供或核查该文件的实际识别核验资料；核查 RAG 引用不能直接等同 OCR 文件核验。"
+        }
+      ]
+    },
+    {
+      "method": "bm25",
+      "id": "qa_048",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "没有本次请求的计时对照",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说缺少具体延迟数据，没有指出本次请求的计时及普通/流式对照；定量结果缺失不自动等于计时对照要求已覆盖。"
+        }
+      ]
+    },
+    {
+      "method": "bm25",
+      "id": "qa_050",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "需要实际编码结果",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "正确拒绝凭空列值，但未说明需取得该文本实际模型编码输出；没有给出下一步取证要求。"
+        }
+      ]
+    },
+    {
+      "method": "hybrid",
+      "id": "qa_005",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "需要当前环境的实际检测信息",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说明现有资料没有具体值，没有明确提出取得当前机器的实际环境检测信息。拒答正确不等同补充取证要求已覆盖。"
+        }
+      ]
+    },
+    {
+      "method": "hybrid",
+      "id": "qa_035",
+      "answerable": true,
+      "missing_facts": [
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "实际上下文缺少该部分证据，答案未覆盖；不以参考答案补入生成。"
+        }
+      ]
+    },
+    {
+      "method": "hybrid",
+      "id": "qa_040",
+      "answerable": true,
+      "missing_facts": [
+        {
+          "fact": "把长文档拆成较短的 chunk",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "实际上下文缺少该部分证据，答案未覆盖；不以参考答案补入生成。"
+        },
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "实际上下文缺少该部分证据，答案未覆盖；不以参考答案补入生成。"
+        }
+      ]
+    },
+    {
+      "method": "hybrid",
+      "id": "qa_044",
+      "answerable": true,
+      "missing_facts": [
+        {
+          "fact": "词项匹配",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "实际上下文缺少该部分证据，答案未覆盖；不以参考答案补入生成。"
+        }
+      ]
+    },
+    {
+      "method": "hybrid",
+      "id": "qa_046",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "需要实际环境与测量结果",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "说明缺少基准数据，但没有进一步提出需要实际环境和测量结果；对测试这一行动的要求未覆盖。"
+        }
+      ]
+    },
+    {
+      "method": "hybrid",
+      "id": "qa_047",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "缺少当前文件的 OCR 结果与核验",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "说明没有准确率/保证，但没有交代当前文件实际 OCR 识别结果及其核验均缺失；复合事实只覆盖部分。"
+        },
+        {
+          "fact": "需要对应文件的识别核验资料",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "没有要求提供或核查该文件的实际识别核验资料；核查 RAG 引用不能直接等同 OCR 文件核验。"
+        }
+      ]
+    },
+    {
+      "method": "hybrid",
+      "id": "qa_048",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "没有本次请求的计时对照",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说缺少具体延迟数据，没有指出本次请求的计时及普通/流式对照；定量结果缺失不自动等于计时对照要求已覆盖。"
+        }
+      ]
+    },
+    {
+      "method": "hybrid",
+      "id": "qa_050",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "需要实际编码结果",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "正确拒绝凭空列值，但未说明需取得该文本实际模型编码输出；没有给出下一步取证要求。"
+        }
+      ]
+    },
+    {
+      "method": "hybrid_reranker",
+      "id": "qa_005",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "需要当前环境的实际检测信息",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说明现有资料没有具体值，没有明确提出取得当前机器的实际环境检测信息。拒答正确不等同补充取证要求已覆盖。"
+        }
+      ]
+    },
+    {
+      "method": "hybrid_reranker",
+      "id": "qa_032",
+      "answerable": true,
+      "missing_facts": [
+        {
+          "fact": "建模上下文关系",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "答案说明Token交互，但未明确其建模上下文关系的作用；只覆盖机制不自动当作目的事实。"
+        }
+      ]
+    },
+    {
+      "method": "hybrid_reranker",
+      "id": "qa_035",
+      "answerable": true,
+      "missing_facts": [
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "未说明Embedding把文本编码为稠密语义向量；实际context没有embedding_bge，答案明确承认资料未说明。"
+        }
+      ]
+    },
+    {
+      "method": "hybrid_reranker",
+      "id": "qa_040",
+      "answerable": true,
+      "missing_facts": [
+        {
+          "fact": "把长文档拆成较短的 chunk",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "未给出长文档拆成较短chunk的步骤；答案明确说当前资料未说明切块。"
+        },
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "未给出文本编码为稠密语义向量的步骤；实际context没有embedding_bge，答案明确承认缺证。"
+        }
+      ]
+    },
+    {
+      "method": "hybrid_reranker",
+      "id": "qa_048",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "没有本次请求的计时对照",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "只说缺少具体延迟数据，没有指出本次请求的计时及普通/流式对照；定量结果缺失不自动等于计时对照要求已覆盖。"
+        }
+      ]
+    },
+    {
+      "method": "hybrid_reranker",
+      "id": "qa_050",
+      "answerable": false,
+      "missing_facts": [
+        {
+          "fact": "需要实际编码结果",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "正确拒绝凭空列值，但未说明需取得该文本实际模型编码输出；没有给出下一步取证要求。"
+        }
+      ]
+    }
+  ],
+  "interpretation_limits": [
+    "AI scores do not establish independent human agreement or production accuracy.",
+    "Correctness checked locally against frozen references and teaching corpus, not newly certified vendor documents.",
+    "No single combined score; coverage omissions do not automatically mean false factual claims.",
+    "Comparisons use the same 40 successful answerable questions; failed API units are excluded transparently, not assigned fake scores.",
+    "Evidence handling is semantic AI judgment; all 32 negative units retain actual pipeline_status=answered.",
+    "Single stochastic API run and small 18-chunk teaching corpus; retrieval/answer quality differences are not causal proof."
+  ]
+}

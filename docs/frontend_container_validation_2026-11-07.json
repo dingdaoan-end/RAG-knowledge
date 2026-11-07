@@ -1,0 +1,58 @@
+{
+  "compose_config": "passed",
+  "nginx_config": "passed",
+  "backend_unchanged": true,
+  "backend_before": "ae40b3a46bbca9e3b7868e82d7f329c9091cf4a8f38cf98e8bd4f1f56c4dc4f5 sha256:e57763d7ff903a5db5f307dce149c765fcf8f812197b4f1c6d94eac2c33634cc",
+  "backend_after": "ae40b3a46bbca9e3b7868e82d7f329c9091cf4a8f38cf98e8bd4f1f56c4dc4f5 sha256:e57763d7ff903a5db5f307dce149c765fcf8f812197b4f1c6d94eac2c33634cc",
+  "/": {
+    "status": 200,
+    "content_type": "text/html",
+    "size": 614
+  },
+  "/api/health": {
+    "status": 200,
+    "content_type": "application/json",
+    "size": 15,
+    "body": {
+      "status": "ok"
+    }
+  },
+  "/api/ready": {
+    "status": 200,
+    "content_type": "application/json",
+    "size": 18,
+    "body": {
+      "status": "ready"
+    }
+  },
+  "services": "NAME                IMAGE                     COMMAND                  SERVICE    CREATED              STATUS                        PORTS\nrag-knowledge-api   rag-knowledge-api:local   \"uvicorn app.deploym…\"   rag-api    47 minutes ago       Up 47 minutes (healthy)       127.0.0.1:8000->8000/tcp\nrag-knowledge-web   rag-knowledge-web:local   \"/docker-entrypoint.…\"   frontend   About a minute ago   Up About a minute (healthy)   127.0.0.1:8080->8080/tcp\n",
+  "frontend_image": "sha256:67f6784acbef895cd0db487953685027dc0d96fca07869ec93039c808e5e763c",
+  "frontend_user": "101",
+  "browser": {
+    "desktop_viewport": [
+      1440,
+      900
+    ],
+    "mobile_viewport": [
+      390,
+      844
+    ],
+    "mobile_page_width": 390,
+    "real_duplicate_document_id": "bfa523d6243c45fc8eca7e7ea82dae4f",
+    "real_llm_calls": 0,
+    "mock_chat_verified": [
+      "normal",
+      "sources_before_tokens",
+      "stream_done",
+      "no_evidence",
+      "midstream_error",
+      "source_expansion"
+    ],
+    "production_console_warnings_or_errors": 0
+  },
+  "temporary_ports_stopped": {
+    "5173": true,
+    "5174": true,
+    "18001": true
+  }
+}

@@ -1,0 +1,565 @@
+Documents=18, Queries=50, candidate_k=10
+Method | Recall@3 | Recall@5 | Recall@10 | MRR@10 | nDCG@3 | nDCG@5 | nDCG@10 | Mean candidates
+vector | 0.882000 | 0.927000 | 0.961000 | 0.990000 | 0.961251 | 0.964810 | 0.971228 | 10.00
+bm25 | 0.828667 | 0.927000 | 0.975000 | 0.940000 | 0.902416 | 0.925464 | 0.935813 | 9.56
+hybrid | 0.885333 | 0.953667 | 0.967667 | 0.980000 | 0.960652 | 0.970535 | 0.972568 | 10.00
+hybrid_reranker | 0.911333 | 0.945333 | 0.967667 | 1.000000 | 0.976200 | 0.983482 | 0.987185 | 10.00
+
+q01: RAG 为什么可以降低大模型幻觉？
+Ground truth: [{'id': 'rag_evidence', 'relevance': 3}, {'id': 'rag_overview', 'relevance': 2}, {'id': 'rag_limits', 'relevance': 1}, {'id': 'rag_terms', 'relevance': 0}]
+vector [10]: 1:rag_evidence(rel=3), 2:rag_terms(rel=0), 3:rag_limits(rel=1), 4:rag_overview(rel=2), 5:api_stream(rel=0), 6:cuda_oom(rel=0), 7:chunk_overlap(rel=0), 8:transformer_attention(rel=0), 9:cuda_1175(rel=0), 10:embedding_bge(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.798485, nDCG@5=0.936040, nDCG@10=0.936040
+bm25 [6]: 1:rag_terms(rel=0), 2:rag_evidence(rel=3), 3:api_stream(rel=0), 4:rag_overview(rel=2), 5:rag_limits(rel=1), 6:embedding_bge(rel=0)
+  first_relevant_rank=2, RR@10=0.500000, Recall@3=0.333333, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.470202, nDCG@5=0.648944, nDCG@10=0.648944
+hybrid [10]: 1:rag_terms(rel=0), 2:rag_evidence(rel=3), 3:rag_limits(rel=1), 4:rag_overview(rel=2), 5:api_stream(rel=0), 6:cuda_oom(rel=0), 7:chunk_overlap(rel=0), 8:transformer_attention(rel=0), 9:cuda_1175(rel=0), 10:embedding_bge(rel=0)
+  first_relevant_rank=2, RR@10=0.500000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.523434, nDCG@5=0.660990, nDCG@10=0.660990
+hybrid_reranker [10]: 1:rag_evidence(rel=3), 2:rag_limits(rel=1), 3:rag_terms(rel=0), 4:rag_overview(rel=2), 5:cuda_oom(rel=0), 6:transformer_attention(rel=0), 7:api_stream(rel=0), 8:chunk_overlap(rel=0), 9:embedding_bge(rel=0), 10:cuda_1175(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.812424, nDCG@5=0.949980, nDCG@10=0.949980
+
+q02: FAISS 的内积搜索在什么条件下等价于余弦相似度？
+Ground truth: [{'id': 'faiss_ip', 'relevance': 3}, {'id': 'cosine_unit', 'relevance': 3}, {'id': 'embedding_bge', 'relevance': 1}]
+vector [10]: 1:faiss_ip(rel=3), 2:cosine_unit(rel=3), 3:bm25_terms(rel=0), 4:hybrid_fusion(rel=0), 5:transformer_attention(rel=0), 6:chunk_overlap(rel=0), 7:cuda_1176(rel=0), 8:api_stream(rel=0), 9:reranker_pairs(rel=0), 10:cuda_oom(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=0.666667, Recall@10=0.666667, nDCG@3=0.958041, nDCG@5=0.958041, nDCG@10=0.958041
+bm25 [10]: 1:faiss_ip(rel=3), 2:reranker_pairs(rel=0), 3:bm25_terms(rel=0), 4:cosine_unit(rel=3), 5:python_venv(rel=0), 6:chunk_overlap(rel=0), 7:embedding_bge(rel=1), 8:rag_limits(rel=0), 9:api_stream(rel=0), 10:cuda_1176(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.333333, Recall@5=0.666667, Recall@10=1.000000, nDCG@3=0.587420, nDCG@5=0.840409, nDCG@10=0.868381
+hybrid [10]: 1:faiss_ip(rel=3), 2:cosine_unit(rel=3), 3:bm25_terms(rel=0), 4:hybrid_fusion(rel=0), 5:transformer_attention(rel=0), 6:chunk_overlap(rel=0), 7:reranker_pairs(rel=0), 8:api_stream(rel=0), 9:cuda_1176(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=0.666667, Recall@10=0.666667, nDCG@3=0.958041, nDCG@5=0.958041, nDCG@10=0.958041
+hybrid_reranker [10]: 1:faiss_ip(rel=3), 2:cosine_unit(rel=3), 3:hybrid_fusion(rel=0), 4:api_stream(rel=0), 5:chunk_overlap(rel=0), 6:reranker_pairs(rel=0), 7:rag_evidence(rel=0), 8:cuda_1176(rel=0), 9:bm25_terms(rel=0), 10:transformer_attention(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=0.666667, Recall@10=0.666667, nDCG@3=0.958041, nDCG@5=0.958041, nDCG@10=0.958041
+
+q03: 本项目用什么模型把中文文本编码成语义向量？
+Ground truth: [{'id': 'embedding_bge', 'relevance': 3}]
+vector [10]: 1:embedding_bge(rel=3), 2:cosine_unit(rel=0), 3:transformer_attention(rel=0), 4:faiss_ip(rel=0), 5:reranker_pairs(rel=0), 6:bm25_terms(rel=0), 7:python_venv(rel=0), 8:chunk_overlap(rel=0), 9:api_stream(rel=0), 10:rag_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:embedding_bge(rel=3), 2:pdf_ocr(rel=0), 3:cosine_unit(rel=0), 4:hybrid_fusion(rel=0), 5:rag_evidence(rel=0), 6:python_venv(rel=0), 7:reranker_pairs(rel=0), 8:rag_terms(rel=0), 9:faiss_ip(rel=0), 10:bm25_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:embedding_bge(rel=3), 2:cosine_unit(rel=0), 3:faiss_ip(rel=0), 4:transformer_attention(rel=0), 5:reranker_pairs(rel=0), 6:bm25_terms(rel=0), 7:python_venv(rel=0), 8:hybrid_fusion(rel=0), 9:chunk_overlap(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:embedding_bge(rel=3), 2:cosine_unit(rel=0), 3:hybrid_fusion(rel=0), 4:faiss_ip(rel=0), 5:transformer_attention(rel=0), 6:bm25_terms(rel=0), 7:reranker_pairs(rel=0), 8:chunk_overlap(rel=0), 9:python_venv(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q04: 示例日志里 CUDA error 1175 应该根据什么线索排查？
+Ground truth: [{'id': 'cuda_1175', 'relevance': 3}, {'id': 'cuda_1176', 'relevance': 0}, {'id': 'cuda_oom', 'relevance': 1}]
+vector [10]: 1:cuda_1176(rel=0), 2:cuda_1175(rel=3), 3:cuda_oom(rel=1), 4:bm25_terms(rel=0), 5:reranker_pairs(rel=0), 6:rag_limits(rel=0), 7:rag_overview(rel=0), 8:faiss_ip(rel=0), 9:api_stream(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=2, RR@10=0.500000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.644287, nDCG@5=0.644287, nDCG@10=0.644287
+bm25 [6]: 1:cuda_1176(rel=0), 2:cuda_1175(rel=3), 3:cuda_oom(rel=1), 4:rag_limits(rel=0), 5:transformer_attention(rel=0), 6:rag_evidence(rel=0)
+  first_relevant_rank=2, RR@10=0.500000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.644287, nDCG@5=0.644287, nDCG@10=0.644287
+hybrid [10]: 1:cuda_1176(rel=0), 2:cuda_1175(rel=3), 3:cuda_oom(rel=1), 4:bm25_terms(rel=0), 5:rag_limits(rel=0), 6:reranker_pairs(rel=0), 7:rag_overview(rel=0), 8:faiss_ip(rel=0), 9:api_stream(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=2, RR@10=0.500000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.644287, nDCG@5=0.644287, nDCG@10=0.644287
+hybrid_reranker [10]: 1:cuda_1175(rel=3), 2:cuda_oom(rel=1), 3:cuda_1176(rel=0), 4:faiss_ip(rel=0), 5:rag_limits(rel=0), 6:rag_overview(rel=0), 7:reranker_pairs(rel=0), 8:bm25_terms(rel=0), 9:chunk_overlap(rel=0), 10:api_stream(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q05: 示例 CUDA error 1176 对应的日志线索和排查对象是什么？
+Ground truth: [{'id': 'cuda_1176', 'relevance': 3}, {'id': 'cuda_1175', 'relevance': 0}]
+vector [10]: 1:cuda_1176(rel=3), 2:cuda_1175(rel=0), 3:cuda_oom(rel=0), 4:bm25_terms(rel=0), 5:reranker_pairs(rel=0), 6:api_stream(rel=0), 7:rag_limits(rel=0), 8:faiss_ip(rel=0), 9:rag_overview(rel=0), 10:embedding_bge(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:cuda_1176(rel=3), 2:cuda_1175(rel=0), 3:cuda_oom(rel=0), 4:bm25_terms(rel=0), 5:rag_overview(rel=0), 6:rag_terms(rel=0), 7:rag_evidence(rel=0), 8:pdf_ocr(rel=0), 9:chunk_overlap(rel=0), 10:faiss_ip(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:cuda_1176(rel=3), 2:cuda_1175(rel=0), 3:cuda_oom(rel=0), 4:bm25_terms(rel=0), 5:reranker_pairs(rel=0), 6:rag_overview(rel=0), 7:faiss_ip(rel=0), 8:rag_limits(rel=0), 9:api_stream(rel=0), 10:embedding_bge(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:cuda_1176(rel=3), 2:cuda_1175(rel=0), 3:cuda_oom(rel=0), 4:faiss_ip(rel=0), 5:rag_overview(rel=0), 6:reranker_pairs(rel=0), 7:rag_limits(rel=0), 8:api_stream(rel=0), 9:bm25_terms(rel=0), 10:embedding_bge(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q06: CUDA out of memory 时如何减少 GPU 显存占用？
+Ground truth: [{'id': 'cuda_oom', 'relevance': 3}]
+vector [10]: 1:cuda_oom(rel=3), 2:cuda_1175(rel=0), 3:cuda_1176(rel=0), 4:rag_evidence(rel=0), 5:rag_limits(rel=0), 6:transformer_attention(rel=0), 7:chunk_overlap(rel=0), 8:reranker_pairs(rel=0), 9:python_venv(rel=0), 10:embedding_bge(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [8]: 1:cuda_oom(rel=3), 2:cuda_1176(rel=0), 3:cuda_1175(rel=0), 4:rag_evidence(rel=0), 5:chunk_overlap(rel=0), 6:rag_limits(rel=0), 7:faiss_ip(rel=0), 8:pdf_ocr(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:cuda_oom(rel=3), 2:cuda_1175(rel=0), 3:cuda_1176(rel=0), 4:rag_evidence(rel=0), 5:rag_limits(rel=0), 6:transformer_attention(rel=0), 7:chunk_overlap(rel=0), 8:reranker_pairs(rel=0), 9:python_venv(rel=0), 10:embedding_bge(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:cuda_oom(rel=3), 2:cuda_1175(rel=0), 3:cuda_1176(rel=0), 4:rag_evidence(rel=0), 5:transformer_attention(rel=0), 6:embedding_bge(rel=0), 7:chunk_overlap(rel=0), 8:python_venv(rel=0), 9:reranker_pairs(rel=0), 10:rag_limits(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q07: 切块时为什么保留 chunk_overlap，它与 chunk_size 有什么约束？
+Ground truth: [{'id': 'chunk_overlap', 'relevance': 3}]
+vector [10]: 1:chunk_overlap(rel=3), 2:transformer_attention(rel=0), 3:cuda_oom(rel=0), 4:pdf_ocr(rel=0), 5:reranker_pairs(rel=0), 6:rag_terms(rel=0), 7:faiss_ip(rel=0), 8:rag_limits(rel=0), 9:rag_overview(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:chunk_overlap(rel=3), 2:cuda_1175(rel=0), 3:cuda_oom(rel=0), 4:pdf_ocr(rel=0), 5:rag_evidence(rel=0), 6:reranker_pairs(rel=0), 7:rag_terms(rel=0), 8:bm25_terms(rel=0), 9:cosine_unit(rel=0), 10:rag_overview(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:chunk_overlap(rel=3), 2:cuda_oom(rel=0), 3:transformer_attention(rel=0), 4:pdf_ocr(rel=0), 5:reranker_pairs(rel=0), 6:rag_terms(rel=0), 7:cuda_1175(rel=0), 8:faiss_ip(rel=0), 9:rag_evidence(rel=0), 10:rag_limits(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:chunk_overlap(rel=3), 2:faiss_ip(rel=0), 3:cuda_oom(rel=0), 4:pdf_ocr(rel=0), 5:transformer_attention(rel=0), 6:rag_terms(rel=0), 7:reranker_pairs(rel=0), 8:rag_limits(rel=0), 9:cuda_1175(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q08: 错误编号或产品型号必须精确匹配时，BM25 为什么有帮助？
+Ground truth: [{'id': 'bm25_terms', 'relevance': 3}, {'id': 'hybrid_fusion', 'relevance': 1}]
+vector [10]: 1:bm25_terms(rel=3), 2:cuda_1175(rel=0), 3:cuda_1176(rel=0), 4:hybrid_fusion(rel=1), 5:rag_limits(rel=0), 6:rag_overview(rel=0), 7:api_stream(rel=0), 8:cuda_oom(rel=0), 9:rag_terms(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.917319, nDCG@5=0.973758, nDCG@10=0.973758
+bm25 [10]: 1:bm25_terms(rel=3), 2:cuda_oom(rel=0), 3:rag_limits(rel=0), 4:hybrid_fusion(rel=1), 5:cuda_1175(rel=0), 6:faiss_ip(rel=0), 7:rag_terms(rel=0), 8:chunk_overlap(rel=0), 9:transformer_attention(rel=0), 10:pdf_ocr(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.917319, nDCG@5=0.973758, nDCG@10=0.973758
+hybrid [10]: 1:bm25_terms(rel=3), 2:cuda_1175(rel=0), 3:hybrid_fusion(rel=1), 4:cuda_1176(rel=0), 5:rag_limits(rel=0), 6:cuda_oom(rel=0), 7:rag_terms(rel=0), 8:rag_overview(rel=0), 9:api_stream(rel=0), 10:faiss_ip(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.982842, nDCG@5=0.982842, nDCG@10=0.982842
+hybrid_reranker [10]: 1:bm25_terms(rel=3), 2:hybrid_fusion(rel=1), 3:cuda_oom(rel=0), 4:cuda_1175(rel=0), 5:faiss_ip(rel=0), 6:rag_limits(rel=0), 7:rag_overview(rel=0), 8:cuda_1176(rel=0), 9:rag_terms(rel=0), 10:api_stream(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q09: Hybrid 为什么不能直接相加向量分数和 BM25 分数？
+Ground truth: [{'id': 'hybrid_fusion', 'relevance': 3}, {'id': 'bm25_terms', 'relevance': 1}]
+vector [10]: 1:hybrid_fusion(rel=3), 2:bm25_terms(rel=1), 3:faiss_ip(rel=0), 4:cosine_unit(rel=0), 5:embedding_bge(rel=0), 6:reranker_pairs(rel=0), 7:rag_evidence(rel=0), 8:cuda_1176(rel=0), 9:transformer_attention(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:hybrid_fusion(rel=3), 2:reranker_pairs(rel=0), 3:bm25_terms(rel=1), 4:cosine_unit(rel=0), 5:embedding_bge(rel=0), 6:cuda_1176(rel=0), 7:faiss_ip(rel=0), 8:rag_terms(rel=0), 9:rag_limits(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.982842, nDCG@5=0.982842, nDCG@10=0.982842
+hybrid [10]: 1:hybrid_fusion(rel=3), 2:bm25_terms(rel=1), 3:cosine_unit(rel=0), 4:faiss_ip(rel=0), 5:reranker_pairs(rel=0), 6:embedding_bge(rel=0), 7:cuda_1176(rel=0), 8:chunk_overlap(rel=0), 9:rag_evidence(rel=0), 10:transformer_attention(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:hybrid_fusion(rel=3), 2:bm25_terms(rel=1), 3:cosine_unit(rel=0), 4:reranker_pairs(rel=0), 5:faiss_ip(rel=0), 6:embedding_bge(rel=0), 7:rag_evidence(rel=0), 8:chunk_overlap(rel=0), 9:cuda_1176(rel=0), 10:transformer_attention(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q10: 为什么不能提前为文档计算一个固定的 Cross-Encoder 重排分数？
+Ground truth: [{'id': 'reranker_pairs', 'relevance': 3}, {'id': 'embedding_bge', 'relevance': 1}]
+vector [10]: 1:reranker_pairs(rel=3), 2:chunk_overlap(rel=0), 3:cuda_1175(rel=0), 4:transformer_attention(rel=0), 5:cuda_oom(rel=0), 6:faiss_ip(rel=0), 7:pdf_ocr(rel=0), 8:embedding_bge(rel=1), 9:bm25_terms(rel=0), 10:cuda_1176(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=0.500000, Recall@10=1.000000, nDCG@3=0.917319, nDCG@5=0.917319, nDCG@10=0.958660
+bm25 [10]: 1:reranker_pairs(rel=3), 2:embedding_bge(rel=1), 3:bm25_terms(rel=0), 4:chunk_overlap(rel=0), 5:faiss_ip(rel=0), 6:rag_terms(rel=0), 7:cuda_1176(rel=0), 8:cuda_oom(rel=0), 9:api_stream(rel=0), 10:hybrid_fusion(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:reranker_pairs(rel=3), 2:chunk_overlap(rel=0), 3:embedding_bge(rel=1), 4:cuda_1175(rel=0), 5:bm25_terms(rel=0), 6:cuda_oom(rel=0), 7:faiss_ip(rel=0), 8:transformer_attention(rel=0), 9:cuda_1176(rel=0), 10:pdf_ocr(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.982842, nDCG@5=0.982842, nDCG@10=0.982842
+hybrid_reranker [10]: 1:reranker_pairs(rel=3), 2:embedding_bge(rel=1), 3:faiss_ip(rel=0), 4:chunk_overlap(rel=0), 5:cuda_1175(rel=0), 6:bm25_terms(rel=0), 7:transformer_attention(rel=0), 8:pdf_ocr(rel=0), 9:cuda_oom(rel=0), 10:cuda_1176(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q11: Transformer 的 Self-Attention 如何建模 Token 之间的关系？
+Ground truth: [{'id': 'transformer_attention', 'relevance': 3}]
+vector [10]: 1:transformer_attention(rel=3), 2:reranker_pairs(rel=0), 3:chunk_overlap(rel=0), 4:embedding_bge(rel=0), 5:rag_evidence(rel=0), 6:rag_terms(rel=0), 7:api_stream(rel=0), 8:rag_overview(rel=0), 9:hybrid_fusion(rel=0), 10:rag_limits(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:transformer_attention(rel=3), 2:cuda_1176(rel=0), 3:rag_evidence(rel=0), 4:cuda_oom(rel=0), 5:python_venv(rel=0), 6:pdf_ocr(rel=0), 7:chunk_overlap(rel=0), 8:bm25_terms(rel=0), 9:reranker_pairs(rel=0), 10:rag_overview(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:transformer_attention(rel=3), 2:reranker_pairs(rel=0), 3:chunk_overlap(rel=0), 4:embedding_bge(rel=0), 5:rag_evidence(rel=0), 6:rag_terms(rel=0), 7:api_stream(rel=0), 8:rag_overview(rel=0), 9:hybrid_fusion(rel=0), 10:python_venv(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:transformer_attention(rel=3), 2:embedding_bge(rel=0), 3:rag_overview(rel=0), 4:rag_terms(rel=0), 5:rag_evidence(rel=0), 6:api_stream(rel=0), 7:reranker_pairs(rel=0), 8:python_venv(rel=0), 9:hybrid_fusion(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q12: 扫描版 PDF 提取不到文字时，入库之前需要做什么？
+Ground truth: [{'id': 'pdf_ocr', 'relevance': 3}]
+vector [10]: 1:pdf_ocr(rel=3), 2:chunk_overlap(rel=0), 3:reranker_pairs(rel=0), 4:embedding_bge(rel=0), 5:cuda_oom(rel=0), 6:cuda_1175(rel=0), 7:transformer_attention(rel=0), 8:faiss_ip(rel=0), 9:rag_overview(rel=0), 10:python_venv(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [7]: 1:pdf_ocr(rel=3), 2:faiss_ip(rel=0), 3:cuda_1175(rel=0), 4:rag_evidence(rel=0), 5:hybrid_fusion(rel=0), 6:cuda_oom(rel=0), 7:rag_limits(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:pdf_ocr(rel=3), 2:chunk_overlap(rel=0), 3:reranker_pairs(rel=0), 4:cuda_1175(rel=0), 5:embedding_bge(rel=0), 6:faiss_ip(rel=0), 7:cuda_oom(rel=0), 8:transformer_attention(rel=0), 9:rag_overview(rel=0), 10:python_venv(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:pdf_ocr(rel=3), 2:faiss_ip(rel=0), 3:chunk_overlap(rel=0), 4:rag_overview(rel=0), 5:reranker_pairs(rel=0), 6:embedding_bge(rel=0), 7:cuda_1175(rel=0), 8:python_venv(rel=0), 9:transformer_attention(rel=0), 10:cuda_oom(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q13: 使用 RAG 是否就能保证完全没有幻觉？
+Ground truth: [{'id': 'rag_limits', 'relevance': 3}, {'id': 'rag_evidence', 'relevance': 2}, {'id': 'rag_overview', 'relevance': 1}]
+vector [10]: 1:rag_limits(rel=3), 2:rag_evidence(rel=2), 3:rag_terms(rel=0), 4:rag_overview(rel=1), 5:api_stream(rel=0), 6:transformer_attention(rel=0), 7:cuda_oom(rel=0), 8:cuda_1175(rel=0), 9:cuda_1176(rel=0), 10:python_venv(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.946768, nDCG@5=0.992620, nDCG@10=0.992620
+bm25 [9]: 1:rag_terms(rel=0), 2:rag_limits(rel=3), 3:cuda_oom(rel=0), 4:rag_evidence(rel=2), 5:pdf_ocr(rel=0), 6:python_venv(rel=0), 7:embedding_bge(rel=0), 8:rag_overview(rel=1), 9:api_stream(rel=0)
+  first_relevant_rank=2, RR@10=0.500000, Recall@3=0.333333, Recall@5=0.666667, Recall@10=1.000000, nDCG@3=0.470202, nDCG@5=0.607757, nDCG@10=0.641343
+hybrid [10]: 1:rag_limits(rel=3), 2:rag_terms(rel=0), 3:rag_evidence(rel=2), 4:rag_overview(rel=1), 5:cuda_oom(rel=0), 6:api_stream(rel=0), 7:transformer_attention(rel=0), 8:cuda_1175(rel=0), 9:cuda_1176(rel=0), 10:python_venv(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.904950, nDCG@5=0.950801, nDCG@10=0.950801
+hybrid_reranker [10]: 1:rag_limits(rel=3), 2:rag_evidence(rel=2), 3:rag_terms(rel=0), 4:rag_overview(rel=1), 5:api_stream(rel=0), 6:python_venv(rel=0), 7:cuda_1176(rel=0), 8:transformer_attention(rel=0), 9:cuda_1175(rel=0), 10:cuda_oom(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.946768, nDCG@5=0.992620, nDCG@10=0.992620
+
+q14: 在 PowerShell 中怎样使用项目 .venv 的 Python 启动 main.py？
+Ground truth: [{'id': 'python_venv', 'relevance': 3}]
+vector [10]: 1:python_venv(rel=3), 2:api_stream(rel=0), 3:reranker_pairs(rel=0), 4:cuda_1175(rel=0), 5:transformer_attention(rel=0), 6:cuda_1176(rel=0), 7:cuda_oom(rel=0), 8:hybrid_fusion(rel=0), 9:pdf_ocr(rel=0), 10:rag_overview(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:python_venv(rel=3), 2:embedding_bge(rel=0), 3:cuda_1176(rel=0), 4:cuda_oom(rel=0), 5:cuda_1175(rel=0), 6:hybrid_fusion(rel=0), 7:chunk_overlap(rel=0), 8:rag_limits(rel=0), 9:api_stream(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:python_venv(rel=3), 2:api_stream(rel=0), 3:cuda_1175(rel=0), 4:reranker_pairs(rel=0), 5:cuda_1176(rel=0), 6:transformer_attention(rel=0), 7:cuda_oom(rel=0), 8:embedding_bge(rel=0), 9:hybrid_fusion(rel=0), 10:pdf_ocr(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:python_venv(rel=3), 2:cuda_1175(rel=0), 3:embedding_bge(rel=0), 4:pdf_ocr(rel=0), 5:api_stream(rel=0), 6:hybrid_fusion(rel=0), 7:cuda_1176(rel=0), 8:reranker_pairs(rel=0), 9:transformer_attention(rel=0), 10:cuda_oom(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q15: IndexFlatIP 返回 Top-K 前，会对索引里的哪些文档向量进行比较？
+Ground truth: [{'id': 'faiss_ip', 'relevance': 3}]
+vector [10]: 1:faiss_ip(rel=3), 2:cosine_unit(rel=0), 3:api_stream(rel=0), 4:hybrid_fusion(rel=0), 5:reranker_pairs(rel=0), 6:embedding_bge(rel=0), 7:chunk_overlap(rel=0), 8:transformer_attention(rel=0), 9:pdf_ocr(rel=0), 10:bm25_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:faiss_ip(rel=3), 2:cosine_unit(rel=0), 3:embedding_bge(rel=0), 4:reranker_pairs(rel=0), 5:pdf_ocr(rel=0), 6:bm25_terms(rel=0), 7:rag_terms(rel=0), 8:api_stream(rel=0), 9:chunk_overlap(rel=0), 10:hybrid_fusion(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:faiss_ip(rel=3), 2:cosine_unit(rel=0), 3:embedding_bge(rel=0), 4:reranker_pairs(rel=0), 5:api_stream(rel=0), 6:hybrid_fusion(rel=0), 7:pdf_ocr(rel=0), 8:chunk_overlap(rel=0), 9:bm25_terms(rel=0), 10:transformer_attention(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:faiss_ip(rel=3), 2:cosine_unit(rel=0), 3:embedding_bge(rel=0), 4:bm25_terms(rel=0), 5:hybrid_fusion(rel=0), 6:reranker_pairs(rel=0), 7:transformer_attention(rel=0), 8:chunk_overlap(rel=0), 9:pdf_ocr(rel=0), 10:api_stream(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q16: L2 归一化具体用向量除以什么量，结果的范数是多少？
+Ground truth: [{'id': 'cosine_unit', 'relevance': 3}, {'id': 'faiss_ip', 'relevance': 1}]
+vector [10]: 1:cosine_unit(rel=3), 2:faiss_ip(rel=1), 3:hybrid_fusion(rel=0), 4:bm25_terms(rel=0), 5:embedding_bge(rel=0), 6:transformer_attention(rel=0), 7:cuda_oom(rel=0), 8:reranker_pairs(rel=0), 9:cuda_1176(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:cosine_unit(rel=3), 2:embedding_bge(rel=0), 3:faiss_ip(rel=1), 4:rag_overview(rel=0), 5:bm25_terms(rel=0), 6:pdf_ocr(rel=0), 7:hybrid_fusion(rel=0), 8:rag_terms(rel=0), 9:cuda_1176(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.982842, nDCG@5=0.982842, nDCG@10=0.982842
+hybrid [10]: 1:cosine_unit(rel=3), 2:faiss_ip(rel=1), 3:hybrid_fusion(rel=0), 4:embedding_bge(rel=0), 5:bm25_terms(rel=0), 6:transformer_attention(rel=0), 7:cuda_oom(rel=0), 8:reranker_pairs(rel=0), 9:cuda_1176(rel=0), 10:rag_overview(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:cosine_unit(rel=3), 2:faiss_ip(rel=1), 3:hybrid_fusion(rel=0), 4:embedding_bge(rel=0), 5:transformer_attention(rel=0), 6:bm25_terms(rel=0), 7:rag_overview(rel=0), 8:cuda_oom(rel=0), 9:cuda_1176(rel=0), 10:reranker_pairs(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q17: 两段文字的含义相近时，Embedding 如何在向量空间中表示这种接近？
+Ground truth: [{'id': 'embedding_bge', 'relevance': 3}, {'id': 'hybrid_fusion', 'relevance': 1}]
+vector [10]: 1:embedding_bge(rel=3), 2:transformer_attention(rel=0), 3:hybrid_fusion(rel=1), 4:chunk_overlap(rel=0), 5:bm25_terms(rel=0), 6:faiss_ip(rel=0), 7:cosine_unit(rel=0), 8:pdf_ocr(rel=0), 9:reranker_pairs(rel=0), 10:rag_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.982842, nDCG@5=0.982842, nDCG@10=0.982842
+bm25 [10]: 1:embedding_bge(rel=3), 2:cosine_unit(rel=0), 3:pdf_ocr(rel=0), 4:cuda_1175(rel=0), 5:faiss_ip(rel=0), 6:python_venv(rel=0), 7:cuda_1176(rel=0), 8:cuda_oom(rel=0), 9:rag_limits(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=0.500000, Recall@10=0.500000, nDCG@3=0.917319, nDCG@5=0.917319, nDCG@10=0.917319
+hybrid [10]: 1:embedding_bge(rel=3), 2:cosine_unit(rel=0), 3:faiss_ip(rel=0), 4:chunk_overlap(rel=0), 5:hybrid_fusion(rel=1), 6:bm25_terms(rel=0), 7:transformer_attention(rel=0), 8:pdf_ocr(rel=0), 9:reranker_pairs(rel=0), 10:cuda_1176(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.917319, nDCG@5=0.968015, nDCG@10=0.968015
+hybrid_reranker [10]: 1:embedding_bge(rel=3), 2:cosine_unit(rel=0), 3:hybrid_fusion(rel=1), 4:faiss_ip(rel=0), 5:chunk_overlap(rel=0), 6:pdf_ocr(rel=0), 7:transformer_attention(rel=0), 8:reranker_pairs(rel=0), 9:cuda_1176(rel=0), 10:bm25_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.982842, nDCG@5=0.982842, nDCG@10=0.982842
+
+q18: BM25 计算词项检索分数时综合哪些统计因素？
+Ground truth: [{'id': 'bm25_terms', 'relevance': 3}]
+vector [10]: 1:bm25_terms(rel=3), 2:hybrid_fusion(rel=0), 3:faiss_ip(rel=0), 4:rag_overview(rel=0), 5:cosine_unit(rel=0), 6:reranker_pairs(rel=0), 7:cuda_1176(rel=0), 8:cuda_1175(rel=0), 9:transformer_attention(rel=0), 10:api_stream(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:bm25_terms(rel=3), 2:reranker_pairs(rel=0), 3:rag_overview(rel=0), 4:hybrid_fusion(rel=0), 5:cuda_1175(rel=0), 6:rag_limits(rel=0), 7:rag_evidence(rel=0), 8:embedding_bge(rel=0), 9:cuda_oom(rel=0), 10:faiss_ip(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:bm25_terms(rel=3), 2:hybrid_fusion(rel=0), 3:rag_overview(rel=0), 4:reranker_pairs(rel=0), 5:faiss_ip(rel=0), 6:cuda_1175(rel=0), 7:cosine_unit(rel=0), 8:cuda_1176(rel=0), 9:transformer_attention(rel=0), 10:rag_limits(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:bm25_terms(rel=3), 2:hybrid_fusion(rel=0), 3:cosine_unit(rel=0), 4:faiss_ip(rel=0), 5:reranker_pairs(rel=0), 6:transformer_attention(rel=0), 7:rag_overview(rel=0), 8:rag_limits(rel=0), 9:cuda_1176(rel=0), 10:cuda_1175(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q19: 本项目 Hybrid 的默认 alpha 和加权融合表达式分别是什么？
+Ground truth: [{'id': 'hybrid_fusion', 'relevance': 3}]
+vector [10]: 1:hybrid_fusion(rel=3), 2:transformer_attention(rel=0), 3:reranker_pairs(rel=0), 4:python_venv(rel=0), 5:rag_overview(rel=0), 6:bm25_terms(rel=0), 7:faiss_ip(rel=0), 8:embedding_bge(rel=0), 9:rag_terms(rel=0), 10:api_stream(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:hybrid_fusion(rel=3), 2:python_venv(rel=0), 3:embedding_bge(rel=0), 4:bm25_terms(rel=0), 5:rag_overview(rel=0), 6:rag_terms(rel=0), 7:cuda_1176(rel=0), 8:rag_evidence(rel=0), 9:pdf_ocr(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:hybrid_fusion(rel=3), 2:transformer_attention(rel=0), 3:python_venv(rel=0), 4:reranker_pairs(rel=0), 5:rag_overview(rel=0), 6:bm25_terms(rel=0), 7:embedding_bge(rel=0), 8:faiss_ip(rel=0), 9:rag_terms(rel=0), 10:api_stream(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:hybrid_fusion(rel=3), 2:embedding_bge(rel=0), 3:transformer_attention(rel=0), 4:rag_overview(rel=0), 5:faiss_ip(rel=0), 6:api_stream(rel=0), 7:reranker_pairs(rel=0), 8:bm25_terms(rel=0), 9:python_venv(rel=0), 10:rag_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q20: Cross-Encoder 计算相关性时，输入是单独的文档还是问题与文档的文本对？
+Ground truth: [{'id': 'reranker_pairs', 'relevance': 3}, {'id': 'embedding_bge', 'relevance': 1}]
+vector [10]: 1:reranker_pairs(rel=3), 2:transformer_attention(rel=0), 3:embedding_bge(rel=1), 4:chunk_overlap(rel=0), 5:cuda_1175(rel=0), 6:python_venv(rel=0), 7:pdf_ocr(rel=0), 8:bm25_terms(rel=0), 9:faiss_ip(rel=0), 10:api_stream(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.982842, nDCG@5=0.982842, nDCG@10=0.982842
+bm25 [10]: 1:reranker_pairs(rel=3), 2:bm25_terms(rel=0), 3:faiss_ip(rel=0), 4:embedding_bge(rel=1), 5:cuda_oom(rel=0), 6:pdf_ocr(rel=0), 7:rag_overview(rel=0), 8:cuda_1175(rel=0), 9:chunk_overlap(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.917319, nDCG@5=0.973758, nDCG@10=0.973758
+hybrid [10]: 1:reranker_pairs(rel=3), 2:embedding_bge(rel=1), 3:bm25_terms(rel=0), 4:transformer_attention(rel=0), 5:faiss_ip(rel=0), 6:chunk_overlap(rel=0), 7:cuda_1175(rel=0), 8:pdf_ocr(rel=0), 9:rag_overview(rel=0), 10:python_venv(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:reranker_pairs(rel=3), 2:rag_overview(rel=0), 3:embedding_bge(rel=1), 4:python_venv(rel=0), 5:faiss_ip(rel=0), 6:chunk_overlap(rel=0), 7:cuda_1175(rel=0), 8:transformer_attention(rel=0), 9:bm25_terms(rel=0), 10:pdf_ocr(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.982842, nDCG@5=0.982842, nDCG@10=0.982842
+
+q21: FastAPI 在知识库问答系统中负责把什么能力封装成 HTTP 接口？
+Ground truth: [{'id': 'api_stream', 'relevance': 3}, {'id': 'rag_overview', 'relevance': 1}]
+vector [10]: 1:api_stream(rel=3), 2:rag_overview(rel=1), 3:transformer_attention(rel=0), 4:python_venv(rel=0), 5:rag_limits(rel=0), 6:embedding_bge(rel=0), 7:cuda_1176(rel=0), 8:rag_evidence(rel=0), 9:bm25_terms(rel=0), 10:cuda_1175(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:api_stream(rel=3), 2:rag_overview(rel=1), 3:pdf_ocr(rel=0), 4:rag_limits(rel=0), 5:cuda_1176(rel=0), 6:chunk_overlap(rel=0), 7:cuda_1175(rel=0), 8:python_venv(rel=0), 9:embedding_bge(rel=0), 10:cosine_unit(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:api_stream(rel=3), 2:rag_overview(rel=1), 3:rag_limits(rel=0), 4:transformer_attention(rel=0), 5:python_venv(rel=0), 6:cuda_1176(rel=0), 7:embedding_bge(rel=0), 8:cuda_1175(rel=0), 9:rag_evidence(rel=0), 10:bm25_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:api_stream(rel=3), 2:rag_overview(rel=1), 3:cuda_1176(rel=0), 4:bm25_terms(rel=0), 5:rag_evidence(rel=0), 6:python_venv(rel=0), 7:embedding_bge(rel=0), 8:cuda_1175(rel=0), 9:transformer_attention(rel=0), 10:rag_limits(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q22: 扫描文档提取文字和问答响应逐段返回，分别由哪两种处理负责？
+Ground truth: [{'id': 'pdf_ocr', 'relevance': 2}, {'id': 'api_stream', 'relevance': 2}]
+vector [10]: 1:pdf_ocr(rel=2), 2:api_stream(rel=2), 3:reranker_pairs(rel=0), 4:chunk_overlap(rel=0), 5:transformer_attention(rel=0), 6:rag_overview(rel=0), 7:faiss_ip(rel=0), 8:embedding_bge(rel=0), 9:bm25_terms(rel=0), 10:cosine_unit(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:pdf_ocr(rel=2), 2:api_stream(rel=2), 3:faiss_ip(rel=0), 4:bm25_terms(rel=0), 5:hybrid_fusion(rel=0), 6:cosine_unit(rel=0), 7:chunk_overlap(rel=0), 8:embedding_bge(rel=0), 9:reranker_pairs(rel=0), 10:rag_limits(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:pdf_ocr(rel=2), 2:api_stream(rel=2), 3:chunk_overlap(rel=0), 4:reranker_pairs(rel=0), 5:faiss_ip(rel=0), 6:bm25_terms(rel=0), 7:transformer_attention(rel=0), 8:rag_overview(rel=0), 9:embedding_bge(rel=0), 10:cosine_unit(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:pdf_ocr(rel=2), 2:api_stream(rel=2), 3:faiss_ip(rel=0), 4:cosine_unit(rel=0), 5:chunk_overlap(rel=0), 6:reranker_pairs(rel=0), 7:embedding_bge(rel=0), 8:rag_overview(rel=0), 9:transformer_attention(rel=0), 10:bm25_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q23: 哪条 RAG 资料只是关键词索引，并没有解释降低幻觉的机制？
+Ground truth: [{'id': 'rag_terms', 'relevance': 3}, {'id': 'rag_evidence', 'relevance': 0}]
+vector [10]: 1:rag_terms(rel=3), 2:rag_limits(rel=0), 3:rag_evidence(rel=0), 4:rag_overview(rel=0), 5:transformer_attention(rel=0), 6:faiss_ip(rel=0), 7:cuda_oom(rel=0), 8:cuda_1175(rel=0), 9:api_stream(rel=0), 10:cuda_1176(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:rag_terms(rel=3), 2:rag_evidence(rel=0), 3:rag_limits(rel=0), 4:cuda_oom(rel=0), 5:pdf_ocr(rel=0), 6:faiss_ip(rel=0), 7:bm25_terms(rel=0), 8:hybrid_fusion(rel=0), 9:rag_overview(rel=0), 10:api_stream(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:rag_terms(rel=3), 2:rag_evidence(rel=0), 3:rag_limits(rel=0), 4:rag_overview(rel=0), 5:transformer_attention(rel=0), 6:faiss_ip(rel=0), 7:cuda_oom(rel=0), 8:api_stream(rel=0), 9:cuda_1175(rel=0), 10:cuda_1176(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:rag_terms(rel=3), 2:rag_evidence(rel=0), 3:rag_limits(rel=0), 4:rag_overview(rel=0), 5:api_stream(rel=0), 6:faiss_ip(rel=0), 7:cuda_1176(rel=0), 8:cuda_1175(rel=0), 9:cuda_oom(rel=0), 10:transformer_attention(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q24: 示例 1175 与 1176 的日志线索分别是什么，为什么排查对象不同？
+Ground truth: [{'id': 'cuda_1175', 'relevance': 2}, {'id': 'cuda_1176', 'relevance': 2}, {'id': 'cuda_oom', 'relevance': 1}]
+vector [10]: 1:cuda_1176(rel=2), 2:cuda_1175(rel=2), 3:bm25_terms(rel=0), 4:faiss_ip(rel=0), 5:hybrid_fusion(rel=0), 6:reranker_pairs(rel=0), 7:transformer_attention(rel=0), 8:cosine_unit(rel=0), 9:api_stream(rel=0), 10:rag_overview(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=0.666667, Recall@10=0.666667, nDCG@3=0.907284, nDCG@5=0.907284, nDCG@10=0.907284
+bm25 [10]: 1:cuda_1176(rel=2), 2:cuda_1175(rel=2), 3:cuda_oom(rel=1), 4:reranker_pairs(rel=0), 5:rag_terms(rel=0), 6:hybrid_fusion(rel=0), 7:rag_overview(rel=0), 8:bm25_terms(rel=0), 9:transformer_attention(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:cuda_1176(rel=2), 2:cuda_1175(rel=2), 3:bm25_terms(rel=0), 4:reranker_pairs(rel=0), 5:hybrid_fusion(rel=0), 6:faiss_ip(rel=0), 7:cuda_oom(rel=1), 8:transformer_attention(rel=0), 9:rag_overview(rel=0), 10:cosine_unit(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=0.666667, Recall@10=1.000000, nDCG@3=0.907284, nDCG@5=0.907284, nDCG@10=0.969095
+hybrid_reranker [10]: 1:cuda_1176(rel=2), 2:cuda_1175(rel=2), 3:cuda_oom(rel=1), 4:rag_overview(rel=0), 5:faiss_ip(rel=0), 6:cosine_unit(rel=0), 7:reranker_pairs(rel=0), 8:hybrid_fusion(rel=0), 9:transformer_attention(rel=0), 10:bm25_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q25: 示例日志提示 device index out of range，应优先检查哪两类 GPU 设备信息？
+Ground truth: [{'id': 'cuda_1176', 'relevance': 3}, {'id': 'cuda_1175', 'relevance': 0}, {'id': 'cuda_oom', 'relevance': 0}]
+vector [10]: 1:cuda_1176(rel=3), 2:cuda_oom(rel=0), 3:cuda_1175(rel=0), 4:rag_overview(rel=0), 5:api_stream(rel=0), 6:hybrid_fusion(rel=0), 7:transformer_attention(rel=0), 8:reranker_pairs(rel=0), 9:cosine_unit(rel=0), 10:bm25_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [7]: 1:cuda_1176(rel=3), 2:cuda_1175(rel=0), 3:cuda_oom(rel=0), 4:rag_overview(rel=0), 5:python_venv(rel=0), 6:hybrid_fusion(rel=0), 7:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:cuda_1176(rel=3), 2:cuda_oom(rel=0), 3:cuda_1175(rel=0), 4:rag_overview(rel=0), 5:api_stream(rel=0), 6:hybrid_fusion(rel=0), 7:transformer_attention(rel=0), 8:reranker_pairs(rel=0), 9:cosine_unit(rel=0), 10:bm25_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:cuda_1176(rel=3), 2:cuda_1175(rel=0), 3:cuda_oom(rel=0), 4:cosine_unit(rel=0), 5:rag_overview(rel=0), 6:hybrid_fusion(rel=0), 7:bm25_terms(rel=0), 8:transformer_attention(rel=0), 9:reranker_pairs(rel=0), 10:api_stream(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q26: CUDA 显存不足时，除了减少本次计算需求，还需要检查哪些其他进程因素？
+Ground truth: [{'id': 'cuda_oom', 'relevance': 3}]
+vector [10]: 1:cuda_oom(rel=3), 2:cuda_1175(rel=0), 3:cuda_1176(rel=0), 4:rag_evidence(rel=0), 5:rag_limits(rel=0), 6:reranker_pairs(rel=0), 7:rag_overview(rel=0), 8:cosine_unit(rel=0), 9:rag_terms(rel=0), 10:faiss_ip(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:cuda_oom(rel=3), 2:cuda_1175(rel=0), 3:rag_evidence(rel=0), 4:cuda_1176(rel=0), 5:pdf_ocr(rel=0), 6:transformer_attention(rel=0), 7:chunk_overlap(rel=0), 8:embedding_bge(rel=0), 9:bm25_terms(rel=0), 10:reranker_pairs(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:cuda_oom(rel=3), 2:cuda_1175(rel=0), 3:cuda_1176(rel=0), 4:rag_evidence(rel=0), 5:rag_limits(rel=0), 6:reranker_pairs(rel=0), 7:rag_overview(rel=0), 8:cosine_unit(rel=0), 9:rag_terms(rel=0), 10:faiss_ip(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:cuda_oom(rel=3), 2:cuda_1175(rel=0), 3:cuda_1176(rel=0), 4:rag_evidence(rel=0), 5:faiss_ip(rel=0), 6:rag_overview(rel=0), 7:cosine_unit(rel=0), 8:rag_limits(rel=0), 9:reranker_pairs(rel=0), 10:rag_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q27: driver initialization failed 与 out of memory 的排查方向有何不同？
+Ground truth: [{'id': 'cuda_1175', 'relevance': 2}, {'id': 'cuda_oom', 'relevance': 2}, {'id': 'cuda_1176', 'relevance': 0}]
+vector [10]: 1:cuda_1175(rel=2), 2:cuda_oom(rel=2), 3:faiss_ip(rel=0), 4:embedding_bge(rel=0), 5:cuda_1176(rel=0), 6:reranker_pairs(rel=0), 7:rag_overview(rel=0), 8:rag_limits(rel=0), 9:rag_evidence(rel=0), 10:transformer_attention(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:cuda_oom(rel=2), 2:cuda_1175(rel=2), 3:reranker_pairs(rel=0), 4:cuda_1176(rel=0), 5:hybrid_fusion(rel=0), 6:rag_overview(rel=0), 7:transformer_attention(rel=0), 8:rag_evidence(rel=0), 9:python_venv(rel=0), 10:pdf_ocr(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:cuda_1175(rel=2), 2:cuda_oom(rel=2), 3:reranker_pairs(rel=0), 4:faiss_ip(rel=0), 5:cuda_1176(rel=0), 6:embedding_bge(rel=0), 7:rag_overview(rel=0), 8:hybrid_fusion(rel=0), 9:transformer_attention(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:cuda_oom(rel=2), 2:cuda_1175(rel=2), 3:faiss_ip(rel=0), 4:rag_overview(rel=0), 5:cuda_1176(rel=0), 6:rag_evidence(rel=0), 7:hybrid_fusion(rel=0), 8:embedding_bge(rel=0), 9:transformer_attention(rel=0), 10:reranker_pairs(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q28: 扫描 PDF 进入知识库时，OCR 和长文本切块应该怎样衔接？
+Ground truth: [{'id': 'pdf_ocr', 'relevance': 3}, {'id': 'chunk_overlap', 'relevance': 2}, {'id': 'embedding_bge', 'relevance': 1}]
+vector [10]: 1:pdf_ocr(rel=3), 2:chunk_overlap(rel=2), 3:reranker_pairs(rel=0), 4:transformer_attention(rel=0), 5:embedding_bge(rel=1), 6:faiss_ip(rel=0), 7:rag_overview(rel=0), 8:bm25_terms(rel=0), 9:api_stream(rel=0), 10:cosine_unit(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.946768, nDCG@5=0.987954, nDCG@10=0.987954
+bm25 [10]: 1:pdf_ocr(rel=3), 2:chunk_overlap(rel=2), 3:rag_limits(rel=0), 4:embedding_bge(rel=1), 5:cuda_1175(rel=0), 6:rag_overview(rel=0), 7:faiss_ip(rel=0), 8:rag_evidence(rel=0), 9:bm25_terms(rel=0), 10:reranker_pairs(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.946768, nDCG@5=0.992620, nDCG@10=0.992620
+hybrid [10]: 1:pdf_ocr(rel=3), 2:chunk_overlap(rel=2), 3:reranker_pairs(rel=0), 4:embedding_bge(rel=1), 5:transformer_attention(rel=0), 6:faiss_ip(rel=0), 7:rag_overview(rel=0), 8:rag_limits(rel=0), 9:bm25_terms(rel=0), 10:api_stream(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.946768, nDCG@5=0.992620, nDCG@10=0.992620
+hybrid_reranker [10]: 1:pdf_ocr(rel=3), 2:chunk_overlap(rel=2), 3:reranker_pairs(rel=0), 4:faiss_ip(rel=0), 5:transformer_attention(rel=0), 6:rag_overview(rel=0), 7:rag_limits(rel=0), 8:embedding_bge(rel=1), 9:api_stream(rel=0), 10:bm25_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=0.666667, Recall@10=1.000000, nDCG@3=0.946768, nDCG@5=0.946768, nDCG@10=0.980354
+
+q29: 中文资料的文本向量化与 RAG 提示词组装分别处于问答流程的什么位置？
+Ground truth: [{'id': 'embedding_bge', 'relevance': 2}, {'id': 'rag_overview', 'relevance': 2}, {'id': 'pdf_ocr', 'relevance': 1}]
+vector [10]: 1:rag_overview(rel=2), 2:embedding_bge(rel=2), 3:api_stream(rel=0), 4:transformer_attention(rel=0), 5:rag_limits(rel=0), 6:bm25_terms(rel=0), 7:faiss_ip(rel=0), 8:rag_evidence(rel=0), 9:cosine_unit(rel=0), 10:rag_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=0.666667, Recall@10=0.666667, nDCG@3=0.907284, nDCG@5=0.907284, nDCG@10=0.907284
+bm25 [10]: 1:rag_evidence(rel=0), 2:rag_overview(rel=2), 3:embedding_bge(rel=2), 4:pdf_ocr(rel=1), 5:api_stream(rel=0), 6:rag_terms(rel=0), 7:reranker_pairs(rel=0), 8:rag_limits(rel=0), 9:bm25_terms(rel=0), 10:cuda_oom(rel=0)
+  first_relevant_rank=2, RR@10=0.500000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.629134, nDCG@5=0.708996, nDCG@10=0.708996
+hybrid [10]: 1:rag_overview(rel=2), 2:embedding_bge(rel=2), 3:api_stream(rel=0), 4:rag_evidence(rel=0), 5:transformer_attention(rel=0), 6:rag_limits(rel=0), 7:bm25_terms(rel=0), 8:rag_terms(rel=0), 9:chunk_overlap(rel=0), 10:faiss_ip(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=0.666667, Recall@10=0.666667, nDCG@3=0.907284, nDCG@5=0.907284, nDCG@10=0.907284
+hybrid_reranker [10]: 1:rag_overview(rel=2), 2:embedding_bge(rel=2), 3:faiss_ip(rel=0), 4:api_stream(rel=0), 5:rag_evidence(rel=0), 6:rag_limits(rel=0), 7:chunk_overlap(rel=0), 8:rag_terms(rel=0), 9:bm25_terms(rel=0), 10:transformer_attention(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=0.666667, Recall@10=0.666667, nDCG@3=0.907284, nDCG@5=0.907284, nDCG@10=0.907284
+
+q30: 可预计算的文档 Embedding 与 Cross-Encoder 相关性分数有什么区别？
+Ground truth: [{'id': 'embedding_bge', 'relevance': 2}, {'id': 'reranker_pairs', 'relevance': 2}]
+vector [10]: 1:reranker_pairs(rel=2), 2:embedding_bge(rel=2), 3:bm25_terms(rel=0), 4:hybrid_fusion(rel=0), 5:transformer_attention(rel=0), 6:faiss_ip(rel=0), 7:chunk_overlap(rel=0), 8:cuda_1175(rel=0), 9:api_stream(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:reranker_pairs(rel=2), 2:cuda_oom(rel=0), 3:bm25_terms(rel=0), 4:pdf_ocr(rel=0), 5:embedding_bge(rel=2), 6:faiss_ip(rel=0), 7:rag_evidence(rel=0), 8:python_venv(rel=0), 9:hybrid_fusion(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.613147, nDCG@5=0.850345, nDCG@10=0.850345
+hybrid [10]: 1:reranker_pairs(rel=2), 2:embedding_bge(rel=2), 3:bm25_terms(rel=0), 4:hybrid_fusion(rel=0), 5:transformer_attention(rel=0), 6:faiss_ip(rel=0), 7:cuda_oom(rel=0), 8:chunk_overlap(rel=0), 9:rag_evidence(rel=0), 10:pdf_ocr(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:reranker_pairs(rel=2), 2:embedding_bge(rel=2), 3:pdf_ocr(rel=0), 4:bm25_terms(rel=0), 5:faiss_ip(rel=0), 6:hybrid_fusion(rel=0), 7:chunk_overlap(rel=0), 8:transformer_attention(rel=0), 9:rag_evidence(rel=0), 10:cuda_oom(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q31: BM25 的词频匹配与 Self-Attention 的 Token 交互有什么区别？
+Ground truth: [{'id': 'bm25_terms', 'relevance': 2}, {'id': 'transformer_attention', 'relevance': 2}]
+vector [10]: 1:transformer_attention(rel=2), 2:bm25_terms(rel=2), 3:hybrid_fusion(rel=0), 4:api_stream(rel=0), 5:embedding_bge(rel=0), 6:chunk_overlap(rel=0), 7:rag_overview(rel=0), 8:reranker_pairs(rel=0), 9:cuda_1176(rel=0), 10:rag_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:transformer_attention(rel=2), 2:bm25_terms(rel=2), 3:hybrid_fusion(rel=0), 4:cuda_oom(rel=0), 5:reranker_pairs(rel=0), 6:rag_overview(rel=0), 7:cuda_1176(rel=0), 8:rag_evidence(rel=0), 9:cuda_1175(rel=0), 10:python_venv(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:transformer_attention(rel=2), 2:bm25_terms(rel=2), 3:hybrid_fusion(rel=0), 4:api_stream(rel=0), 5:embedding_bge(rel=0), 6:rag_overview(rel=0), 7:chunk_overlap(rel=0), 8:reranker_pairs(rel=0), 9:cuda_1176(rel=0), 10:rag_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:transformer_attention(rel=2), 2:bm25_terms(rel=2), 3:hybrid_fusion(rel=0), 4:cuda_1176(rel=0), 5:rag_terms(rel=0), 6:reranker_pairs(rel=0), 7:embedding_bge(rel=0), 8:chunk_overlap(rel=0), 9:api_stream(rel=0), 10:rag_overview(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q32: 向量的 L2 归一化与 Hybrid 对分数做 Min-Max，是同一种处理吗？
+Ground truth: [{'id': 'cosine_unit', 'relevance': 2}, {'id': 'hybrid_fusion', 'relevance': 2}, {'id': 'faiss_ip', 'relevance': 1}]
+vector [10]: 1:cosine_unit(rel=2), 2:hybrid_fusion(rel=2), 3:faiss_ip(rel=1), 4:reranker_pairs(rel=0), 5:transformer_attention(rel=0), 6:bm25_terms(rel=0), 7:embedding_bge(rel=0), 8:rag_evidence(rel=0), 9:cuda_oom(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:cosine_unit(rel=2), 2:hybrid_fusion(rel=2), 3:reranker_pairs(rel=0), 4:faiss_ip(rel=1), 5:embedding_bge(rel=0), 6:bm25_terms(rel=0), 7:rag_overview(rel=0), 8:cuda_oom(rel=0), 9:rag_terms(rel=0), 10:transformer_attention(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.907284, nDCG@5=0.987145, nDCG@10=0.987145
+hybrid [10]: 1:cosine_unit(rel=2), 2:hybrid_fusion(rel=2), 3:faiss_ip(rel=1), 4:reranker_pairs(rel=0), 5:bm25_terms(rel=0), 6:embedding_bge(rel=0), 7:transformer_attention(rel=0), 8:cuda_oom(rel=0), 9:rag_evidence(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:cosine_unit(rel=2), 2:hybrid_fusion(rel=2), 3:faiss_ip(rel=1), 4:embedding_bge(rel=0), 5:transformer_attention(rel=0), 6:reranker_pairs(rel=0), 7:bm25_terms(rel=0), 8:chunk_overlap(rel=0), 9:cuda_oom(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q33: Hybrid 的分数融合与 Cross-Encoder 的候选重排分别怎样产生排序依据？
+Ground truth: [{'id': 'hybrid_fusion', 'relevance': 2}, {'id': 'reranker_pairs', 'relevance': 2}, {'id': 'bm25_terms', 'relevance': 1}, {'id': 'embedding_bge', 'relevance': 1}]
+vector [10]: 1:hybrid_fusion(rel=2), 2:reranker_pairs(rel=2), 3:transformer_attention(rel=0), 4:faiss_ip(rel=0), 5:bm25_terms(rel=1), 6:cosine_unit(rel=0), 7:python_venv(rel=0), 8:rag_overview(rel=0), 9:cuda_1175(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=0.750000, Recall@10=0.750000, nDCG@3=0.907284, nDCG@5=0.906615, nDCG@10=0.906615
+bm25 [10]: 1:reranker_pairs(rel=2), 2:hybrid_fusion(rel=2), 3:cuda_oom(rel=0), 4:bm25_terms(rel=1), 5:rag_overview(rel=0), 6:transformer_attention(rel=0), 7:cuda_1176(rel=0), 8:rag_evidence(rel=0), 9:cuda_1175(rel=0), 10:python_venv(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=0.750000, Recall@10=0.750000, nDCG@3=0.907284, nDCG@5=0.914140, nDCG@10=0.914140
+hybrid [10]: 1:hybrid_fusion(rel=2), 2:reranker_pairs(rel=2), 3:transformer_attention(rel=0), 4:bm25_terms(rel=1), 5:faiss_ip(rel=0), 6:rag_overview(rel=0), 7:python_venv(rel=0), 8:cosine_unit(rel=0), 9:cuda_1175(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=0.750000, Recall@10=0.750000, nDCG@3=0.907284, nDCG@5=0.914140, nDCG@10=0.914140
+hybrid_reranker [10]: 1:hybrid_fusion(rel=2), 2:reranker_pairs(rel=2), 3:cosine_unit(rel=0), 4:transformer_attention(rel=0), 5:rag_overview(rel=0), 6:faiss_ip(rel=0), 7:bm25_terms(rel=1), 8:chunk_overlap(rel=0), 9:python_venv(rel=0), 10:cuda_1175(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=0.500000, Recall@10=0.750000, nDCG@3=0.907284, nDCG@5=0.840185, nDCG@10=0.897425
+
+q34: RAG 的外部证据和来源引用核查分别能帮助控制哪些回答风险？
+Ground truth: [{'id': 'rag_evidence', 'relevance': 2}, {'id': 'rag_limits', 'relevance': 2}, {'id': 'rag_overview', 'relevance': 1}]
+vector [10]: 1:rag_overview(rel=1), 2:rag_limits(rel=2), 3:rag_evidence(rel=2), 4:rag_terms(rel=0), 5:api_stream(rel=0), 6:faiss_ip(rel=0), 7:transformer_attention(rel=0), 8:cuda_1175(rel=0), 9:bm25_terms(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.814567, nDCG@5=0.814567, nDCG@10=0.814567
+bm25 [10]: 1:rag_limits(rel=2), 2:rag_evidence(rel=2), 3:rag_overview(rel=1), 4:rag_terms(rel=0), 5:hybrid_fusion(rel=0), 6:bm25_terms(rel=0), 7:cuda_1176(rel=0), 8:api_stream(rel=0), 9:pdf_ocr(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:rag_limits(rel=2), 2:rag_overview(rel=1), 3:rag_evidence(rel=2), 4:rag_terms(rel=0), 5:api_stream(rel=0), 6:faiss_ip(rel=0), 7:transformer_attention(rel=0), 8:bm25_terms(rel=0), 9:cuda_1175(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.951443, nDCG@5=0.951443, nDCG@10=0.951443
+hybrid_reranker [10]: 1:rag_limits(rel=2), 2:rag_evidence(rel=2), 3:rag_overview(rel=1), 4:api_stream(rel=0), 5:rag_terms(rel=0), 6:faiss_ip(rel=0), 7:chunk_overlap(rel=0), 8:transformer_attention(rel=0), 9:bm25_terms(rel=0), 10:cuda_1175(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q35: 知识库缺乏答案时，哪些资料要求助手明确说明无法回答？
+Ground truth: [{'id': 'rag_evidence', 'relevance': 3}, {'id': 'rag_limits', 'relevance': 3}]
+vector [10]: 1:rag_limits(rel=3), 2:cuda_1176(rel=0), 3:rag_evidence(rel=3), 4:cuda_1175(rel=0), 5:api_stream(rel=0), 6:rag_overview(rel=0), 7:transformer_attention(rel=0), 8:cuda_oom(rel=0), 9:embedding_bge(rel=0), 10:rag_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.919721, nDCG@5=0.919721, nDCG@10=0.919721
+bm25 [7]: 1:rag_limits(rel=3), 2:rag_evidence(rel=3), 3:rag_overview(rel=0), 4:cuda_1175(rel=0), 5:api_stream(rel=0), 6:faiss_ip(rel=0), 7:pdf_ocr(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:rag_limits(rel=3), 2:rag_evidence(rel=3), 3:cuda_1176(rel=0), 4:cuda_1175(rel=0), 5:rag_overview(rel=0), 6:api_stream(rel=0), 7:transformer_attention(rel=0), 8:cuda_oom(rel=0), 9:embedding_bge(rel=0), 10:rag_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:rag_limits(rel=3), 2:rag_evidence(rel=3), 3:rag_overview(rel=0), 4:cuda_oom(rel=0), 5:cuda_1175(rel=0), 6:rag_terms(rel=0), 7:embedding_bge(rel=0), 8:transformer_attention(rel=0), 9:api_stream(rel=0), 10:cuda_1176(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q36: 只根据 CUDA 错误编号给出唯一修复办法，示例资料说明了什么证据限制？
+Ground truth: [{'id': 'cuda_1175', 'relevance': 3}, {'id': 'cuda_1176', 'relevance': 1}, {'id': 'cuda_oom', 'relevance': 1}]
+vector [10]: 1:cuda_1175(rel=3), 2:cuda_1176(rel=1), 3:cuda_oom(rel=1), 4:rag_limits(rel=0), 5:rag_overview(rel=0), 6:bm25_terms(rel=0), 7:rag_evidence(rel=0), 8:reranker_pairs(rel=0), 9:rag_terms(rel=0), 10:faiss_ip(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [9]: 1:rag_evidence(rel=0), 2:cuda_1175(rel=3), 3:cuda_1176(rel=1), 4:rag_limits(rel=0), 5:cuda_oom(rel=1), 6:bm25_terms(rel=0), 7:rag_terms(rel=0), 8:reranker_pairs(rel=0), 9:transformer_attention(rel=0)
+  first_relevant_rank=2, RR@10=0.500000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.604667, nDCG@5=0.652245, nDCG@10=0.652245
+hybrid [10]: 1:cuda_1175(rel=3), 2:cuda_1176(rel=1), 3:rag_evidence(rel=0), 4:rag_limits(rel=0), 5:cuda_oom(rel=1), 6:bm25_terms(rel=0), 7:rag_overview(rel=0), 8:rag_terms(rel=0), 9:reranker_pairs(rel=0), 10:faiss_ip(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.938506, nDCG@5=0.986084, nDCG@10=0.986084
+hybrid_reranker [10]: 1:cuda_1175(rel=3), 2:cuda_oom(rel=1), 3:cuda_1176(rel=1), 4:rag_evidence(rel=0), 5:rag_limits(rel=0), 6:bm25_terms(rel=0), 7:faiss_ip(rel=0), 8:rag_overview(rel=0), 9:reranker_pairs(rel=0), 10:rag_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q37: 用户问法与资料措辞不同但意思接近，哪种文本表示能帮助语义匹配？
+Ground truth: [{'id': 'embedding_bge', 'relevance': 3}, {'id': 'hybrid_fusion', 'relevance': 1}, {'id': 'bm25_terms', 'relevance': 1}]
+vector [10]: 1:embedding_bge(rel=3), 2:transformer_attention(rel=0), 3:reranker_pairs(rel=0), 4:hybrid_fusion(rel=1), 5:chunk_overlap(rel=0), 6:bm25_terms(rel=1), 7:api_stream(rel=0), 8:cuda_1175(rel=0), 9:faiss_ip(rel=0), 10:cuda_1176(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.333333, Recall@5=0.666667, Recall@10=1.000000, nDCG@3=0.860910, nDCG@5=0.913878, nDCG@10=0.957687
+bm25 [10]: 1:embedding_bge(rel=3), 2:hybrid_fusion(rel=1), 3:reranker_pairs(rel=0), 4:rag_evidence(rel=0), 5:cuda_oom(rel=0), 6:pdf_ocr(rel=0), 7:bm25_terms(rel=1), 8:transformer_attention(rel=0), 9:python_venv(rel=0), 10:rag_limits(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=0.666667, Recall@10=1.000000, nDCG@3=0.938506, nDCG@5=0.938506, nDCG@10=0.979502
+hybrid [10]: 1:embedding_bge(rel=3), 2:transformer_attention(rel=0), 3:reranker_pairs(rel=0), 4:hybrid_fusion(rel=1), 5:bm25_terms(rel=1), 6:chunk_overlap(rel=0), 7:api_stream(rel=0), 8:cuda_1175(rel=0), 9:faiss_ip(rel=0), 10:pdf_ocr(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.333333, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.860910, nDCG@5=0.961456, nDCG@10=0.961456
+hybrid_reranker [10]: 1:embedding_bge(rel=3), 2:reranker_pairs(rel=0), 3:hybrid_fusion(rel=1), 4:bm25_terms(rel=1), 5:transformer_attention(rel=0), 6:api_stream(rel=0), 7:faiss_ip(rel=0), 8:chunk_overlap(rel=0), 9:cuda_1175(rel=0), 10:pdf_ocr(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.922404, nDCG@5=0.975371, nDCG@10=0.975371
+
+q38: 区分 1175 和 1176 这类相似编号时，哪些资料同时说明关键词检索与日志差异？
+Ground truth: [{'id': 'bm25_terms', 'relevance': 2}, {'id': 'cuda_1175', 'relevance': 2}, {'id': 'cuda_1176', 'relevance': 2}, {'id': 'hybrid_fusion', 'relevance': 1}, {'id': 'cuda_oom', 'relevance': 1}]
+vector [10]: 1:cuda_1176(rel=2), 2:bm25_terms(rel=2), 3:cuda_1175(rel=2), 4:reranker_pairs(rel=0), 5:faiss_ip(rel=0), 6:hybrid_fusion(rel=1), 7:transformer_attention(rel=0), 8:embedding_bge(rel=0), 9:rag_overview(rel=0), 10:rag_limits(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.600000, Recall@5=0.600000, Recall@10=0.800000, nDCG@3=1.000000, nDCG@5=0.886617, nDCG@10=0.936019
+bm25 [10]: 1:cuda_1175(rel=2), 2:bm25_terms(rel=2), 3:cuda_1176(rel=2), 4:rag_evidence(rel=0), 5:rag_terms(rel=0), 6:rag_limits(rel=0), 7:cuda_oom(rel=1), 8:rag_overview(rel=0), 9:faiss_ip(rel=0), 10:hybrid_fusion(rel=1)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.600000, Recall@5=0.600000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=0.886617, nDCG@10=0.972937
+hybrid [10]: 1:cuda_1176(rel=2), 2:bm25_terms(rel=2), 3:cuda_1175(rel=2), 4:faiss_ip(rel=0), 5:reranker_pairs(rel=0), 6:rag_limits(rel=0), 7:rag_overview(rel=0), 8:hybrid_fusion(rel=1), 9:rag_evidence(rel=0), 10:transformer_attention(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.600000, Recall@5=0.600000, Recall@10=0.800000, nDCG@3=1.000000, nDCG@5=0.886617, nDCG@10=0.930369
+hybrid_reranker [10]: 1:cuda_1176(rel=2), 2:cuda_1175(rel=2), 3:reranker_pairs(rel=0), 4:faiss_ip(rel=0), 5:bm25_terms(rel=2), 6:hybrid_fusion(rel=1), 7:rag_limits(rel=0), 8:rag_overview(rel=0), 9:rag_evidence(rel=0), 10:transformer_attention(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.400000, Recall@5=0.600000, Recall@10=0.800000, nDCG@3=0.765361, nDCG@5=0.839540, nDCG@10=0.888942
+
+q39: 查询和文档都是单位向量时，cosine(q,d) 与 q·d 满足什么关系？
+Ground truth: [{'id': 'cosine_unit', 'relevance': 3}, {'id': 'faiss_ip', 'relevance': 3}, {'id': 'embedding_bge', 'relevance': 1}]
+vector [10]: 1:cosine_unit(rel=3), 2:faiss_ip(rel=3), 3:embedding_bge(rel=1), 4:transformer_attention(rel=0), 5:bm25_terms(rel=0), 6:api_stream(rel=0), 7:rag_overview(rel=0), 8:reranker_pairs(rel=0), 9:pdf_ocr(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:cosine_unit(rel=3), 2:faiss_ip(rel=3), 3:bm25_terms(rel=0), 4:cuda_1175(rel=0), 5:transformer_attention(rel=0), 6:rag_limits(rel=0), 7:rag_overview(rel=0), 8:reranker_pairs(rel=0), 9:pdf_ocr(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=0.666667, Recall@10=0.666667, nDCG@3=0.958041, nDCG@5=0.958041, nDCG@10=0.958041
+hybrid [10]: 1:cosine_unit(rel=3), 2:faiss_ip(rel=3), 3:embedding_bge(rel=1), 4:transformer_attention(rel=0), 5:bm25_terms(rel=0), 6:rag_overview(rel=0), 7:api_stream(rel=0), 8:reranker_pairs(rel=0), 9:pdf_ocr(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:cosine_unit(rel=3), 2:faiss_ip(rel=3), 3:reranker_pairs(rel=0), 4:transformer_attention(rel=0), 5:embedding_bge(rel=1), 6:bm25_terms(rel=0), 7:rag_overview(rel=0), 8:pdf_ocr(rel=0), 9:rag_evidence(rel=0), 10:api_stream(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.958041, nDCG@5=0.990505, nDCG@10=0.990505
+
+q40: GPU 显存不足和请求的设备序号越界，分别应参考什么排查资料？
+Ground truth: [{'id': 'cuda_oom', 'relevance': 2}, {'id': 'cuda_1176', 'relevance': 2}, {'id': 'cuda_1175', 'relevance': 1}]
+vector [10]: 1:cuda_oom(rel=2), 2:cuda_1175(rel=1), 3:cuda_1176(rel=2), 4:rag_limits(rel=0), 5:faiss_ip(rel=0), 6:rag_overview(rel=0), 7:rag_evidence(rel=0), 8:bm25_terms(rel=0), 9:transformer_attention(rel=0), 10:api_stream(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.951443, nDCG@5=0.951443, nDCG@10=0.951443
+bm25 [10]: 1:rag_evidence(rel=0), 2:cuda_1176(rel=2), 3:cuda_oom(rel=2), 4:cuda_1175(rel=1), 5:hybrid_fusion(rel=0), 6:rag_limits(rel=0), 7:bm25_terms(rel=0), 8:python_venv(rel=0), 9:pdf_ocr(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=2, RR@10=0.500000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.629134, nDCG@5=0.708996, nDCG@10=0.708996
+hybrid [10]: 1:cuda_oom(rel=2), 2:cuda_1176(rel=2), 3:cuda_1175(rel=1), 4:rag_evidence(rel=0), 5:rag_limits(rel=0), 6:faiss_ip(rel=0), 7:bm25_terms(rel=0), 8:rag_overview(rel=0), 9:hybrid_fusion(rel=0), 10:python_venv(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:cuda_1176(rel=2), 2:cuda_oom(rel=2), 3:cuda_1175(rel=1), 4:rag_limits(rel=0), 5:rag_overview(rel=0), 6:faiss_ip(rel=0), 7:rag_evidence(rel=0), 8:hybrid_fusion(rel=0), 9:bm25_terms(rel=0), 10:python_venv(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q41: 相关文档不在已召回列表中时，Cross-Encoder 的处理范围允许它做什么？
+Ground truth: [{'id': 'reranker_pairs', 'relevance': 3}, {'id': 'hybrid_fusion', 'relevance': 1}]
+vector [10]: 1:reranker_pairs(rel=3), 2:transformer_attention(rel=0), 3:chunk_overlap(rel=0), 4:cuda_1175(rel=0), 5:cuda_1176(rel=0), 6:pdf_ocr(rel=0), 7:api_stream(rel=0), 8:cuda_oom(rel=0), 9:python_venv(rel=0), 10:rag_limits(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=0.500000, Recall@10=0.500000, nDCG@3=0.917319, nDCG@5=0.917319, nDCG@10=0.917319
+bm25 [10]: 1:reranker_pairs(rel=3), 2:cuda_1175(rel=0), 3:faiss_ip(rel=0), 4:cosine_unit(rel=0), 5:cuda_1176(rel=0), 6:hybrid_fusion(rel=1), 7:rag_terms(rel=0), 8:rag_evidence(rel=0), 9:bm25_terms(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=0.500000, Recall@10=1.000000, nDCG@3=0.917319, nDCG@5=0.917319, nDCG@10=0.963999
+hybrid [10]: 1:reranker_pairs(rel=3), 2:cuda_1175(rel=0), 3:cuda_1176(rel=0), 4:chunk_overlap(rel=0), 5:faiss_ip(rel=0), 6:transformer_attention(rel=0), 7:pdf_ocr(rel=0), 8:cosine_unit(rel=0), 9:api_stream(rel=0), 10:rag_limits(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=0.500000, Recall@10=0.500000, nDCG@3=0.917319, nDCG@5=0.917319, nDCG@10=0.917319
+hybrid_reranker [10]: 1:reranker_pairs(rel=3), 2:faiss_ip(rel=0), 3:cosine_unit(rel=0), 4:chunk_overlap(rel=0), 5:cuda_1176(rel=0), 6:pdf_ocr(rel=0), 7:api_stream(rel=0), 8:rag_limits(rel=0), 9:cuda_1175(rel=0), 10:transformer_attention(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=0.500000, Recall@10=0.500000, nDCG@3=0.917319, nDCG@5=0.917319, nDCG@10=0.917319
+
+q42: RAG 检索出的资料以什么形式交给大语言模型，接下来由谁组织答案？
+Ground truth: [{'id': 'rag_overview', 'relevance': 3}, {'id': 'rag_evidence', 'relevance': 1}]
+vector [10]: 1:rag_overview(rel=3), 2:rag_evidence(rel=1), 3:rag_terms(rel=0), 4:api_stream(rel=0), 5:rag_limits(rel=0), 6:transformer_attention(rel=0), 7:embedding_bge(rel=0), 8:reranker_pairs(rel=0), 9:cuda_1176(rel=0), 10:cuda_1175(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:rag_overview(rel=3), 2:rag_evidence(rel=1), 3:rag_terms(rel=0), 4:rag_limits(rel=0), 5:bm25_terms(rel=0), 6:api_stream(rel=0), 7:embedding_bge(rel=0), 8:reranker_pairs(rel=0), 9:cosine_unit(rel=0), 10:cuda_1176(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:rag_overview(rel=3), 2:rag_evidence(rel=1), 3:rag_terms(rel=0), 4:rag_limits(rel=0), 5:api_stream(rel=0), 6:transformer_attention(rel=0), 7:embedding_bge(rel=0), 8:reranker_pairs(rel=0), 9:cuda_1176(rel=0), 10:cuda_1175(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:rag_overview(rel=3), 2:rag_evidence(rel=1), 3:api_stream(rel=0), 4:rag_limits(rel=0), 5:rag_terms(rel=0), 6:reranker_pairs(rel=0), 7:cuda_1176(rel=0), 8:cuda_1175(rel=0), 9:transformer_attention(rel=0), 10:embedding_bge(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q43: 扫描页面明明有内容却提取不到文本，资料指出可能缺少哪一层？
+Ground truth: [{'id': 'pdf_ocr', 'relevance': 3}]
+vector [10]: 1:pdf_ocr(rel=3), 2:chunk_overlap(rel=0), 3:rag_limits(rel=0), 4:faiss_ip(rel=0), 5:embedding_bge(rel=0), 6:cuda_oom(rel=0), 7:cuda_1175(rel=0), 8:reranker_pairs(rel=0), 9:cuda_1176(rel=0), 10:transformer_attention(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [9]: 1:pdf_ocr(rel=3), 2:rag_evidence(rel=0), 3:rag_limits(rel=0), 4:embedding_bge(rel=0), 5:chunk_overlap(rel=0), 6:cuda_oom(rel=0), 7:api_stream(rel=0), 8:bm25_terms(rel=0), 9:reranker_pairs(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:pdf_ocr(rel=3), 2:chunk_overlap(rel=0), 3:rag_limits(rel=0), 4:embedding_bge(rel=0), 5:faiss_ip(rel=0), 6:cuda_oom(rel=0), 7:rag_evidence(rel=0), 8:cuda_1175(rel=0), 9:reranker_pairs(rel=0), 10:cuda_1176(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:pdf_ocr(rel=3), 2:rag_limits(rel=0), 3:faiss_ip(rel=0), 4:chunk_overlap(rel=0), 5:rag_evidence(rel=0), 6:cuda_1175(rel=0), 7:reranker_pairs(rel=0), 8:embedding_bge(rel=0), 9:cuda_1176(rel=0), 10:cuda_oom(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q44: PowerShell 路径开头的点和反斜杠表示什么，项目依赖应装在哪个环境？
+Ground truth: [{'id': 'python_venv', 'relevance': 3}]
+vector [10]: 1:python_venv(rel=3), 2:hybrid_fusion(rel=0), 3:api_stream(rel=0), 4:transformer_attention(rel=0), 5:cuda_1176(rel=0), 6:chunk_overlap(rel=0), 7:faiss_ip(rel=0), 8:cuda_1175(rel=0), 9:rag_overview(rel=0), 10:cosine_unit(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:python_venv(rel=3), 2:hybrid_fusion(rel=0), 3:embedding_bge(rel=0), 4:transformer_attention(rel=0), 5:cuda_oom(rel=0), 6:cuda_1176(rel=0), 7:rag_evidence(rel=0), 8:chunk_overlap(rel=0), 9:bm25_terms(rel=0), 10:rag_limits(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:python_venv(rel=3), 2:hybrid_fusion(rel=0), 3:api_stream(rel=0), 4:transformer_attention(rel=0), 5:cuda_1176(rel=0), 6:chunk_overlap(rel=0), 7:faiss_ip(rel=0), 8:cuda_1175(rel=0), 9:bm25_terms(rel=0), 10:cosine_unit(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:python_venv(rel=3), 2:faiss_ip(rel=0), 3:cuda_1175(rel=0), 4:cosine_unit(rel=0), 5:transformer_attention(rel=0), 6:chunk_overlap(rel=0), 7:api_stream(rel=0), 8:cuda_1176(rel=0), 9:bm25_terms(rel=0), 10:hybrid_fusion(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q45: Self-Attention 的注意力权重来自什么运算，为什么不能当作简单词频匹配？
+Ground truth: [{'id': 'transformer_attention', 'relevance': 3}, {'id': 'bm25_terms', 'relevance': 1}]
+vector [10]: 1:transformer_attention(rel=3), 2:bm25_terms(rel=1), 3:hybrid_fusion(rel=0), 4:chunk_overlap(rel=0), 5:faiss_ip(rel=0), 6:rag_terms(rel=0), 7:cuda_1175(rel=0), 8:cuda_1176(rel=0), 9:api_stream(rel=0), 10:rag_limits(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:transformer_attention(rel=3), 2:hybrid_fusion(rel=0), 3:bm25_terms(rel=1), 4:rag_terms(rel=0), 5:cuda_1176(rel=0), 6:chunk_overlap(rel=0), 7:reranker_pairs(rel=0), 8:rag_limits(rel=0), 9:rag_evidence(rel=0), 10:cuda_oom(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.982842, nDCG@5=0.982842, nDCG@10=0.982842
+hybrid [10]: 1:transformer_attention(rel=3), 2:bm25_terms(rel=1), 3:hybrid_fusion(rel=0), 4:rag_terms(rel=0), 5:chunk_overlap(rel=0), 6:cuda_1176(rel=0), 7:faiss_ip(rel=0), 8:rag_limits(rel=0), 9:reranker_pairs(rel=0), 10:cuda_1175(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:transformer_attention(rel=3), 2:bm25_terms(rel=1), 3:rag_limits(rel=0), 4:hybrid_fusion(rel=0), 5:faiss_ip(rel=0), 6:chunk_overlap(rel=0), 7:cuda_1176(rel=0), 8:cuda_1175(rel=0), 9:rag_terms(rel=0), 10:reranker_pairs(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q46: 按默认 alpha，归一化向量分数和归一化 BM25 分数各乘什么权重？
+Ground truth: [{'id': 'hybrid_fusion', 'relevance': 3}]
+vector [10]: 1:hybrid_fusion(rel=3), 2:cosine_unit(rel=0), 3:bm25_terms(rel=0), 4:faiss_ip(rel=0), 5:transformer_attention(rel=0), 6:rag_evidence(rel=0), 7:reranker_pairs(rel=0), 8:rag_overview(rel=0), 9:embedding_bge(rel=0), 10:rag_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:hybrid_fusion(rel=3), 2:cosine_unit(rel=0), 3:bm25_terms(rel=0), 4:reranker_pairs(rel=0), 5:faiss_ip(rel=0), 6:embedding_bge(rel=0), 7:transformer_attention(rel=0), 8:rag_limits(rel=0), 9:pdf_ocr(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:hybrid_fusion(rel=3), 2:cosine_unit(rel=0), 3:bm25_terms(rel=0), 4:faiss_ip(rel=0), 5:transformer_attention(rel=0), 6:reranker_pairs(rel=0), 7:embedding_bge(rel=0), 8:rag_evidence(rel=0), 9:rag_overview(rel=0), 10:rag_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:hybrid_fusion(rel=3), 2:bm25_terms(rel=0), 3:cosine_unit(rel=0), 4:faiss_ip(rel=0), 5:transformer_attention(rel=0), 6:embedding_bge(rel=0), 7:reranker_pairs(rel=0), 8:rag_overview(rel=0), 9:rag_terms(rel=0), 10:rag_evidence(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q47: OCR、Embedding 和 IndexFlatIP 在扫描资料检索链路中各承担哪一步？
+Ground truth: [{'id': 'pdf_ocr', 'relevance': 2}, {'id': 'embedding_bge', 'relevance': 2}, {'id': 'faiss_ip', 'relevance': 2}, {'id': 'chunk_overlap', 'relevance': 1}, {'id': 'rag_overview', 'relevance': 1}, {'id': 'cosine_unit', 'relevance': 1}]
+vector [10]: 1:faiss_ip(rel=2), 2:pdf_ocr(rel=2), 3:cosine_unit(rel=1), 4:transformer_attention(rel=0), 5:rag_overview(rel=1), 6:embedding_bge(rel=2), 7:chunk_overlap(rel=1), 8:reranker_pairs(rel=0), 9:hybrid_fusion(rel=0), 10:bm25_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=0.666667, Recall@10=1.000000, nDCG@3=0.843574, nDCG@5=0.801579, nDCG@10=0.949127
+bm25 [10]: 1:pdf_ocr(rel=2), 2:rag_evidence(rel=0), 3:rag_limits(rel=0), 4:rag_overview(rel=1), 5:bm25_terms(rel=0), 6:cosine_unit(rel=1), 7:embedding_bge(rel=2), 8:faiss_ip(rel=2), 9:cuda_1176(rel=0), 10:cuda_1175(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.166667, Recall@5=0.333333, Recall@10=0.833333, nDCG@3=0.469279, nDCG@5=0.475801, nDCG@10=0.757716
+hybrid [10]: 1:pdf_ocr(rel=2), 2:faiss_ip(rel=2), 3:cosine_unit(rel=1), 4:rag_overview(rel=1), 5:embedding_bge(rel=2), 6:transformer_attention(rel=0), 7:bm25_terms(rel=0), 8:chunk_overlap(rel=1), 9:reranker_pairs(rel=0), 10:hybrid_fusion(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=0.833333, Recall@10=1.000000, nDCG@3=0.843574, nDCG@5=0.968615, nDCG@10=0.964708
+hybrid_reranker [10]: 1:faiss_ip(rel=2), 2:cosine_unit(rel=1), 3:embedding_bge(rel=2), 4:pdf_ocr(rel=2), 5:reranker_pairs(rel=0), 6:rag_overview(rel=1), 7:transformer_attention(rel=0), 8:hybrid_fusion(rel=0), 9:chunk_overlap(rel=1), 10:bm25_terms(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.500000, Recall@5=0.666667, Recall@10=1.000000, nDCG@3=0.802612, nDCG@5=0.890801, nDCG@10=0.935726
+
+q48: RAG 回答出错可能与检索、资料时效、上下文和模型理解的哪些环节有关？
+Ground truth: [{'id': 'rag_limits', 'relevance': 3}, {'id': 'rag_evidence', 'relevance': 1}, {'id': 'rag_overview', 'relevance': 1}]
+vector [10]: 1:rag_limits(rel=3), 2:rag_overview(rel=1), 3:rag_evidence(rel=1), 4:rag_terms(rel=0), 5:cuda_1175(rel=0), 6:api_stream(rel=0), 7:transformer_attention(rel=0), 8:cuda_1176(rel=0), 9:reranker_pairs(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:rag_evidence(rel=1), 2:rag_limits(rel=3), 3:rag_overview(rel=1), 4:rag_terms(rel=0), 5:bm25_terms(rel=0), 6:transformer_attention(rel=0), 7:pdf_ocr(rel=0), 8:chunk_overlap(rel=0), 9:reranker_pairs(rel=0), 10:cuda_oom(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.727655, nDCG@5=0.727655, nDCG@10=0.727655
+hybrid [10]: 1:rag_limits(rel=3), 2:rag_evidence(rel=1), 3:rag_overview(rel=1), 4:rag_terms(rel=0), 5:transformer_attention(rel=0), 6:cuda_1175(rel=0), 7:api_stream(rel=0), 8:cuda_1176(rel=0), 9:chunk_overlap(rel=0), 10:reranker_pairs(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:rag_limits(rel=3), 2:rag_overview(rel=1), 3:rag_evidence(rel=1), 4:rag_terms(rel=0), 5:api_stream(rel=0), 6:cuda_1175(rel=0), 7:cuda_1176(rel=0), 8:reranker_pairs(rel=0), 9:transformer_attention(rel=0), 10:chunk_overlap(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q49: 示例 1176 能否直接套用 1175 的日志线索，应参考哪条警示？
+Ground truth: [{'id': 'cuda_1176', 'relevance': 3}, {'id': 'cuda_1175', 'relevance': 1}, {'id': 'cuda_oom', 'relevance': 1}]
+vector [10]: 1:cuda_1176(rel=3), 2:cuda_1175(rel=1), 3:api_stream(rel=0), 4:bm25_terms(rel=0), 5:rag_limits(rel=0), 6:chunk_overlap(rel=0), 7:reranker_pairs(rel=0), 8:cuda_oom(rel=1), 9:rag_evidence(rel=0), 10:hybrid_fusion(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=0.666667, Recall@10=1.000000, nDCG@3=0.938506, nDCG@5=0.938506, nDCG@10=0.977305
+bm25 [10]: 1:cuda_1176(rel=3), 2:cuda_1175(rel=1), 3:cuda_oom(rel=1), 4:rag_evidence(rel=0), 5:python_venv(rel=0), 6:hybrid_fusion(rel=0), 7:pdf_ocr(rel=0), 8:chunk_overlap(rel=0), 9:bm25_terms(rel=0), 10:reranker_pairs(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:cuda_1176(rel=3), 2:cuda_1175(rel=1), 3:api_stream(rel=0), 4:bm25_terms(rel=0), 5:cuda_oom(rel=1), 6:rag_evidence(rel=0), 7:rag_limits(rel=0), 8:chunk_overlap(rel=0), 9:reranker_pairs(rel=0), 10:hybrid_fusion(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=0.666667, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=0.938506, nDCG@5=0.986084, nDCG@10=0.986084
+hybrid_reranker [10]: 1:cuda_1176(rel=3), 2:cuda_1175(rel=1), 3:cuda_oom(rel=1), 4:rag_limits(rel=0), 5:rag_evidence(rel=0), 6:chunk_overlap(rel=0), 7:api_stream(rel=0), 8:reranker_pairs(rel=0), 9:bm25_terms(rel=0), 10:hybrid_fusion(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+q50: 普通 HTTP 问答和 StreamingResponse 的发送时机有什么不同？
+Ground truth: [{'id': 'api_stream', 'relevance': 3}]
+vector [10]: 1:api_stream(rel=3), 2:transformer_attention(rel=0), 3:embedding_bge(rel=0), 4:reranker_pairs(rel=0), 5:faiss_ip(rel=0), 6:python_venv(rel=0), 7:rag_overview(rel=0), 8:cuda_1176(rel=0), 9:pdf_ocr(rel=0), 10:rag_limits(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+bm25 [10]: 1:api_stream(rel=3), 2:cuda_oom(rel=0), 3:reranker_pairs(rel=0), 4:pdf_ocr(rel=0), 5:hybrid_fusion(rel=0), 6:bm25_terms(rel=0), 7:cuda_1176(rel=0), 8:rag_evidence(rel=0), 9:chunk_overlap(rel=0), 10:faiss_ip(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid [10]: 1:api_stream(rel=3), 2:transformer_attention(rel=0), 3:reranker_pairs(rel=0), 4:embedding_bge(rel=0), 5:faiss_ip(rel=0), 6:pdf_ocr(rel=0), 7:python_venv(rel=0), 8:cuda_oom(rel=0), 9:rag_overview(rel=0), 10:cuda_1176(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+hybrid_reranker [10]: 1:api_stream(rel=3), 2:cuda_1176(rel=0), 3:faiss_ip(rel=0), 4:rag_overview(rel=0), 5:cuda_oom(rel=0), 6:python_venv(rel=0), 7:embedding_bge(rel=0), 8:reranker_pairs(rel=0), 9:pdf_ocr(rel=0), 10:transformer_attention(rel=0)
+  first_relevant_rank=1, RR@10=1.000000, Recall@3=1.000000, Recall@5=1.000000, Recall@10=1.000000, nDCG@3=1.000000, nDCG@5=1.000000, nDCG@10=1.000000
+
+实验摘要（仅适用于本小型数据集）:
+Recall@3 最高（含并列）: hybrid_reranker
+Recall@5 最高（含并列）: hybrid
+Recall@10 最高（含并列）: bm25
+MRR@10 最高（含并列）: hybrid_reranker
+Reranker nDCG 变化: {'nDCG@3': 0.015547931682416971, 'nDCG@5': 0.012946670971679786, 'nDCG@10': 0.01461661866144226}
+重排顺序变化的 Query: ['q01', 'q02', 'q03', 'q04', 'q05', 'q06', 'q07', 'q08', 'q09', 'q10', 'q11', 'q12', 'q13', 'q14', 'q15', 'q16', 'q17', 'q18', 'q19', 'q20', 'q21', 'q22', 'q23', 'q24', 'q25', 'q26', 'q27', 'q28', 'q29', 'q30', 'q31', 'q32', 'q33', 'q34', 'q35', 'q36', 'q37', 'q38', 'q39', 'q40', 'q41', 'q42', 'q43', 'q44', 'q45', 'q46', 'q47', 'q48', 'q49', 'q50']
+各方案完全未命中的 Query: {'vector': [], 'bm25': [], 'hybrid': [], 'hybrid_reranker': []}

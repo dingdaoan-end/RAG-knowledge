@@ -1,0 +1,7 @@
+RAG 是 Retrieval-Augmented Generation 的缩写，中文叫检索增强生成。它先从知识库中检索与用户问题相关的文本，再把这些文本交给大语言模型生成答案。
+
+文本切块会把长文档分成较短的 chunk。chunk 太大会混入过多无关内容，太小则可能破坏完整语义。相邻 chunk 可以保留少量重叠，避免关键信息刚好被切断。
+
+Embedding 模型把文本转换成向量。语义相近的文本，其向量通常也更接近。本项目使用 BAAI/bge-small-zh-v1.5 和 sentence-transformers 生成向量。
+
+FAISS 是一个向量检索库。IndexFlatIP 使用内积搜索；当文档向量和查询向量都经过 L2 归一化后，内积就等于余弦相似度。

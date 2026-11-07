@@ -1,0 +1,337 @@
+{
+  "method": "hybrid",
+  "qa_id": "qa_005",
+  "query_id": "qa_005",
+  "question": "这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？",
+  "retrieval_eval_query_ids": [],
+  "experiment_id": "9915eade108441c49d79ca173144894d",
+  "unit_id": "hybrid__qa_005",
+  "state": "finished",
+  "started_at": "2026-10-26T13:47:57.547601+00:00",
+  "http_attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-10-26T13:47:57.567599+00:00",
+      "http_status": 200
+    }
+  ],
+  "usage": {
+    "input_tokens": 388,
+    "output_tokens": 96,
+    "total_tokens": 484,
+    "cached_input_tokens": 0
+  },
+  "timings_ms": {
+    "llm": 1536.5179000000353,
+    "retrieval": 8.438699995167553,
+    "rerank": null,
+    "total": 1563.26270000136
+  },
+  "llm_called": true,
+  "unit_digest": "270b8cd554c1e8df4dcaa431b2f97d370765198dce162029e504ed502581affe",
+  "actual_prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 1\nscore: 0.99402274898019\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 2\nscore: 0.9371481325005648\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 3\nscore: 0.6899300004993945\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\nQuestion:\n\n这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？",
+  "returned_generation_parameters": {
+    "temperature": 1.0,
+    "top_p": 1.0
+  },
+  "provider_response_status": "completed",
+  "returned_model": "deepseek-flash",
+  "status": "success",
+  "record": {
+    "id": "qa_005",
+    "question": "这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？",
+    "reference_answer": "知识库没有当前机器的实际硬件和软件版本信息，无法确定这些值。应说明资料不足，需要用户提供环境检测结果，不能把技术文档或示例日志当作当前机器的事实。",
+    "required_facts": [
+      "现有资料不能确定当前机器的型号和版本",
+      "不编造具体硬件型号或版本号",
+      "需要当前环境的实际检测信息"
+    ],
+    "relevant_document_ids": [],
+    "answerable": false,
+    "answer": "资料中没有提供这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本，因此无法确定。现有内容仅涉及 CUDA 错误示例及排查线索。",
+    "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 1\nscore: 0.99402274898019\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 2\nscore: 0.9371481325005648\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 3\nscore: 0.6899300004993945\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\nQuestion:\n\n这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？",
+    "context": "[Document 1]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 1\nscore: 0.99402274898019\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 2\nscore: 0.9371481325005648\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 3\nscore: 0.6899300004993945\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+    "pipeline_status": "answered",
+    "llm_called": true,
+    "context_documents": [
+      {
+        "id": "cuda_1175",
+        "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+        "metadata": {
+          "eval_id": "cuda_1175",
+          "source": "cuda_examples.md",
+          "chunk_id": 0
+        },
+        "rank": 1,
+        "score": 0.99402274898019
+      },
+      {
+        "id": "cuda_oom",
+        "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+        "metadata": {
+          "eval_id": "cuda_oom",
+          "source": "cuda_examples.md",
+          "chunk_id": 2
+        },
+        "rank": 2,
+        "score": 0.9371481325005648
+      },
+      {
+        "id": "cuda_1176",
+        "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+        "metadata": {
+          "eval_id": "cuda_1176",
+          "source": "cuda_examples.md",
+          "chunk_id": 1
+        },
+        "rank": 3,
+        "score": 0.6899300004993945
+      }
+    ],
+    "context_document_ids": [
+      "cuda_1175",
+      "cuda_oom",
+      "cuda_1176"
+    ],
+    "retrieval_query": "这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "started_at": "2026-10-26T13:47:57.548601+00:00",
+    "elapsed_seconds": 1.563128300003882,
+    "review": {
+      "status": "pending",
+      "reviewer": null,
+      "reviewed_at": null,
+      "faithfulness": null,
+      "answer_relevance": null,
+      "factual_correctness": null,
+      "factual_correctness_basis": null,
+      "required_facts_covered": [
+        {
+          "fact": "现有资料不能确定当前机器的型号和版本",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "不编造具体硬件型号或版本号",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "需要当前环境的实际检测信息",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        }
+      ],
+      "unsupported_claims": null,
+      "insufficient_evidence_handled": null,
+      "review_notes": ""
+    }
+  },
+  "bundle_run": {
+    "id": "d73e1cbc597a40b58ffa113800e803d9",
+    "started_at": "2026-10-26T13:47:57.548601+00:00",
+    "qa_dataset": {
+      "version": "3.0",
+      "sha256": "b854564a846d0ca022ffcdea59deb6487cbeab9ecdae828d4a41a749775548c4",
+      "metadata": {
+        "name": "rag_qa_teaching_v3",
+        "corpus_file": "retrieval_eval_v3.json",
+        "purpose": "采集实际答案、提示词、上下文与来源，供人工独立评审；参考答案和标签不进入生成提示词。",
+        "answerable_definition": "true 表示已有资料能回答所请求的事实；false 表示所请求的事实或确定结论无法由现有资料支持，期望说明证据限制，而不是猜测。",
+        "limitations": "50 个教学问题（42 个可回答、8 个无法确定所请求事实的负例），基于同一份 18 Chunk 冻结正文；新增问题由 Codex 对照正文检查，不代表独立人工认证。CUDA 编号为示例，不是当前用户环境事实。"
+      }
+    },
+    "corpus_sha256": "33a7d07e4554df865667592b3515133c210b23678c4fcb895a8cdfa9240e04d9",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "pipeline": {
+      "retriever": {
+        "implementation": "TimedSearch"
+      },
+      "reranker": null,
+      "query_rewriter": null,
+      "context_top_k": 3
+    },
+    "quality_scope": "pending_human_review",
+    "finished_at": "2026-10-26T13:47:59.111397+00:00",
+    "elapsed_seconds": 1.5631713000038872
+  },
+  "exception_type": null,
+  "pipeline_status": "answered",
+  "failed_stage": null,
+  "retrieval_candidates": [
+    {
+      "id": "cuda_1175",
+      "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+      "metadata": {
+        "eval_id": "cuda_1175",
+        "source": "cuda_examples.md",
+        "chunk_id": 0
+      },
+      "rank": 1,
+      "score": 0.99402274898019,
+      "vector_score": 0.6066307425498962,
+      "bm25_score": 16.160809681417714,
+      "normalized_vector_score": 0.9914610699717001,
+      "normalized_bm25_score": 1.0,
+      "final_score": 0.99402274898019
+    },
+    {
+      "id": "cuda_oom",
+      "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+      "metadata": {
+        "eval_id": "cuda_oom",
+        "source": "cuda_examples.md",
+        "chunk_id": 2
+      },
+      "rank": 2,
+      "score": 0.9371481325005648,
+      "vector_score": 0.6087297201156616,
+      "bm25_score": 12.829311488368003,
+      "normalized_vector_score": 1.0,
+      "normalized_bm25_score": 0.7904937750018829,
+      "final_score": 0.9371481325005648
+    },
+    {
+      "id": "cuda_1176",
+      "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+      "metadata": {
+        "eval_id": "cuda_1176",
+        "source": "cuda_examples.md",
+        "chunk_id": 1
+      },
+      "rank": 3,
+      "score": 0.6899300004993945,
+      "vector_score": 0.5464006662368774,
+      "bm25_score": 9.133557133983306,
+      "normalized_vector_score": 0.7464368183435082,
+      "normalized_bm25_score": 0.5580807588631291,
+      "final_score": 0.6899300004993945
+    },
+    {
+      "id": "python_venv",
+      "text": "在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。",
+      "metadata": {
+        "eval_id": "python_venv",
+        "source": "setup.md",
+        "chunk_id": 0
+      },
+      "rank": 4,
+      "score": 0.44066581008219274,
+      "vector_score": 0.4924582839012146,
+      "bm25_score": 4.063434783542819,
+      "normalized_vector_score": 0.526991772414176,
+      "normalized_bm25_score": 0.23923856464089835,
+      "final_score": 0.44066581008219274
+    },
+    {
+      "id": "hybrid_fusion",
+      "text": "Hybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。",
+      "metadata": {
+        "eval_id": "hybrid_fusion",
+        "source": "retrieval.md",
+        "chunk_id": 1
+      },
+      "rank": 5,
+      "score": 0.42577951259140867,
+      "vector_score": 0.48669111728668213,
+      "bm25_score": 4.144895978232626,
+      "normalized_vector_score": 0.5035301437687634,
+      "normalized_bm25_score": 0.24436137317758105,
+      "final_score": 0.42577951259140867
+    },
+    {
+      "id": "rag_terms",
+      "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+      "metadata": {
+        "eval_id": "rag_terms",
+        "source": "rag.md",
+        "chunk_id": 3
+      },
+      "rank": 6,
+      "score": 0.3426018160677106,
+      "vector_score": 0.4250451624393463,
+      "bm25_score": 9.041086620914385,
+      "normalized_vector_score": 0.25274590312006173,
+      "normalized_bm25_score": 0.552265612945558,
+      "final_score": 0.3426018160677106
+    },
+    {
+      "id": "bm25_terms",
+      "text": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+      "metadata": {
+        "eval_id": "bm25_terms",
+        "source": "retrieval.md",
+        "chunk_id": 0
+      },
+      "rank": 7,
+      "score": 0.3316813764805544,
+      "vector_score": 0.44945579767227173,
+      "bm25_score": 4.777610177170711,
+      "normalized_vector_score": 0.3520517316339048,
+      "normalized_bm25_score": 0.2841505477894035,
+      "final_score": 0.3316813764805544
+    },
+    {
+      "id": "api_stream",
+      "text": "FastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+      "metadata": {
+        "eval_id": "api_stream",
+        "source": "api.md",
+        "chunk_id": 0
+      },
+      "rank": 8,
+      "score": 0.26851936674916643,
+      "vector_score": 0.4572105407714844,
+      "bm25_score": null,
+      "normalized_vector_score": 0.38359909535595205,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.26851936674916643
+    },
+    {
+      "id": "rag_overview",
+      "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+      "metadata": {
+        "eval_id": "rag_overview",
+        "source": "rag.md",
+        "chunk_id": 0
+      },
+      "rank": 9,
+      "score": 0.24097716868655317,
+      "vector_score": 0.43290144205093384,
+      "bm25_score": 2.468559473731207,
+      "normalized_vector_score": 0.2847063313686803,
+      "normalized_bm25_score": 0.13894245576158987,
+      "final_score": 0.24097716868655317
+    },
+    {
+      "id": "reranker_pairs",
+      "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+      "metadata": {
+        "eval_id": "reranker_pairs",
+        "source": "retrieval.md",
+        "chunk_id": 2
+      },
+      "rank": 10,
+      "score": 0.23466516472726306,
+      "vector_score": 0.443009614944458,
+      "bm25_score": 0.6082228169421201,
+      "normalized_vector_score": 0.32582777185453243,
+      "normalized_bm25_score": 0.021952414763634655,
+      "final_score": 0.23466516472726306
+    }
+  ],
+  "reranked_candidates": [],
+  "retry_count": 0,
+  "finished_at": "2026-10-26T13:47:59.111397+00:00"
+}

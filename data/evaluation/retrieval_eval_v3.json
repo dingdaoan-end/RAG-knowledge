@@ -1,0 +1,880 @@
+{
+  "metadata": {
+    "name": "rag_knowledge_teaching_v3",
+    "version": 3,
+    "relevance_levels": {
+      "0": "不相关或不能回答问题",
+      "1": "提供部分背景或限制，有一定帮助",
+      "2": "相关，提供重要但不完整的回答",
+      "3": "高度相关，直接回答核心问题"
+    },
+    "binary_relevance_threshold": 1,
+    "unlisted_relevance": 0,
+    "chunk_policy": "每条 documents 记录已经是一个评估 Chunk，不再切块。id 是数据集内全局唯一 eval_id；source/chunk_id 也必须唯一。",
+    "limitations": "18 个合成技术 Chunk、50 个问题；新增题由 Codex 对照全部正文编写并检查，不代表独立人工认证或 50 个完全独立知识意图。CUDA 1175/1176 是示例日志标识，不是官方错误码定义。证据限制类检索题检索限制说明，不能用零正例问题绕过指标约束。"
+  },
+  "documents": [
+    {
+      "id": "rag_overview",
+      "source": "rag.md",
+      "chunk_id": 0,
+      "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。"
+    },
+    {
+      "id": "rag_evidence",
+      "source": "rag.md",
+      "chunk_id": 1,
+      "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。"
+    },
+    {
+      "id": "rag_limits",
+      "source": "rag.md",
+      "chunk_id": 2,
+      "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。"
+    },
+    {
+      "id": "rag_terms",
+      "source": "rag.md",
+      "chunk_id": 3,
+      "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。"
+    },
+    {
+      "id": "faiss_ip",
+      "source": "faiss.md",
+      "chunk_id": 0,
+      "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。"
+    },
+    {
+      "id": "cosine_unit",
+      "source": "faiss.md",
+      "chunk_id": 1,
+      "text": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。"
+    },
+    {
+      "id": "embedding_bge",
+      "source": "embedding.md",
+      "chunk_id": 0,
+      "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。"
+    },
+    {
+      "id": "chunk_overlap",
+      "source": "chunking.md",
+      "chunk_id": 0,
+      "text": "文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。"
+    },
+    {
+      "id": "bm25_terms",
+      "source": "retrieval.md",
+      "chunk_id": 0,
+      "text": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。"
+    },
+    {
+      "id": "hybrid_fusion",
+      "source": "retrieval.md",
+      "chunk_id": 1,
+      "text": "Hybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。"
+    },
+    {
+      "id": "reranker_pairs",
+      "source": "retrieval.md",
+      "chunk_id": 2,
+      "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。"
+    },
+    {
+      "id": "cuda_1175",
+      "source": "cuda_examples.md",
+      "chunk_id": 0,
+      "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。"
+    },
+    {
+      "id": "cuda_1176",
+      "source": "cuda_examples.md",
+      "chunk_id": 1,
+      "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。"
+    },
+    {
+      "id": "cuda_oom",
+      "source": "cuda_examples.md",
+      "chunk_id": 2,
+      "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。"
+    },
+    {
+      "id": "transformer_attention",
+      "source": "transformer.md",
+      "chunk_id": 0,
+      "text": "Transformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。"
+    },
+    {
+      "id": "python_venv",
+      "source": "setup.md",
+      "chunk_id": 0,
+      "text": "在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。"
+    },
+    {
+      "id": "pdf_ocr",
+      "source": "ingestion_notes.md",
+      "chunk_id": 0,
+      "text": "扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。"
+    },
+    {
+      "id": "api_stream",
+      "source": "api.md",
+      "chunk_id": 0,
+      "text": "FastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。"
+    }
+  ],
+  "queries": [
+    {
+      "id": "q01",
+      "query": "RAG 为什么可以降低大模型幻觉？",
+      "relevant_documents": [
+        {
+          "id": "rag_evidence",
+          "relevance": 3
+        },
+        {
+          "id": "rag_overview",
+          "relevance": 2
+        },
+        {
+          "id": "rag_limits",
+          "relevance": 1
+        },
+        {
+          "id": "rag_terms",
+          "relevance": 0
+        }
+      ]
+    },
+    {
+      "id": "q02",
+      "query": "FAISS 的内积搜索在什么条件下等价于余弦相似度？",
+      "relevant_documents": [
+        {
+          "id": "faiss_ip",
+          "relevance": 3
+        },
+        {
+          "id": "cosine_unit",
+          "relevance": 3
+        },
+        {
+          "id": "embedding_bge",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q03",
+      "query": "本项目用什么模型把中文文本编码成语义向量？",
+      "relevant_documents": [
+        {
+          "id": "embedding_bge",
+          "relevance": 3
+        }
+      ]
+    },
+    {
+      "id": "q04",
+      "query": "示例日志里 CUDA error 1175 应该根据什么线索排查？",
+      "relevant_documents": [
+        {
+          "id": "cuda_1175",
+          "relevance": 3
+        },
+        {
+          "id": "cuda_1176",
+          "relevance": 0
+        },
+        {
+          "id": "cuda_oom",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q05",
+      "query": "示例 CUDA error 1176 对应的日志线索和排查对象是什么？",
+      "relevant_documents": [
+        {
+          "id": "cuda_1176",
+          "relevance": 3
+        },
+        {
+          "id": "cuda_1175",
+          "relevance": 0
+        }
+      ]
+    },
+    {
+      "id": "q06",
+      "query": "CUDA out of memory 时如何减少 GPU 显存占用？",
+      "relevant_documents": [
+        {
+          "id": "cuda_oom",
+          "relevance": 3
+        }
+      ]
+    },
+    {
+      "id": "q07",
+      "query": "切块时为什么保留 chunk_overlap，它与 chunk_size 有什么约束？",
+      "relevant_documents": [
+        {
+          "id": "chunk_overlap",
+          "relevance": 3
+        }
+      ]
+    },
+    {
+      "id": "q08",
+      "query": "错误编号或产品型号必须精确匹配时，BM25 为什么有帮助？",
+      "relevant_documents": [
+        {
+          "id": "bm25_terms",
+          "relevance": 3
+        },
+        {
+          "id": "hybrid_fusion",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q09",
+      "query": "Hybrid 为什么不能直接相加向量分数和 BM25 分数？",
+      "relevant_documents": [
+        {
+          "id": "hybrid_fusion",
+          "relevance": 3
+        },
+        {
+          "id": "bm25_terms",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "query": "为什么不能提前为文档计算一个固定的 Cross-Encoder 重排分数？",
+      "relevant_documents": [
+        {
+          "id": "reranker_pairs",
+          "relevance": 3
+        },
+        {
+          "id": "embedding_bge",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "query": "Transformer 的 Self-Attention 如何建模 Token 之间的关系？",
+      "relevant_documents": [
+        {
+          "id": "transformer_attention",
+          "relevance": 3
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "query": "扫描版 PDF 提取不到文字时，入库之前需要做什么？",
+      "relevant_documents": [
+        {
+          "id": "pdf_ocr",
+          "relevance": 3
+        }
+      ]
+    },
+    {
+      "id": "q13",
+      "query": "使用 RAG 是否就能保证完全没有幻觉？",
+      "relevant_documents": [
+        {
+          "id": "rag_limits",
+          "relevance": 3
+        },
+        {
+          "id": "rag_evidence",
+          "relevance": 2
+        },
+        {
+          "id": "rag_overview",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q14",
+      "query": "在 PowerShell 中怎样使用项目 .venv 的 Python 启动 main.py？",
+      "relevant_documents": [
+        {
+          "id": "python_venv",
+          "relevance": 3
+        }
+      ]
+    },
+    {
+      "id": "q15",
+      "query": "IndexFlatIP 返回 Top-K 前，会对索引里的哪些文档向量进行比较？",
+      "relevant_documents": [
+        {
+          "id": "faiss_ip",
+          "relevance": 3
+        }
+      ]
+    },
+    {
+      "id": "q16",
+      "query": "L2 归一化具体用向量除以什么量，结果的范数是多少？",
+      "relevant_documents": [
+        {
+          "id": "cosine_unit",
+          "relevance": 3
+        },
+        {
+          "id": "faiss_ip",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q17",
+      "query": "两段文字的含义相近时，Embedding 如何在向量空间中表示这种接近？",
+      "relevant_documents": [
+        {
+          "id": "embedding_bge",
+          "relevance": 3
+        },
+        {
+          "id": "hybrid_fusion",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q18",
+      "query": "BM25 计算词项检索分数时综合哪些统计因素？",
+      "relevant_documents": [
+        {
+          "id": "bm25_terms",
+          "relevance": 3
+        }
+      ]
+    },
+    {
+      "id": "q19",
+      "query": "本项目 Hybrid 的默认 alpha 和加权融合表达式分别是什么？",
+      "relevant_documents": [
+        {
+          "id": "hybrid_fusion",
+          "relevance": 3
+        }
+      ]
+    },
+    {
+      "id": "q20",
+      "query": "Cross-Encoder 计算相关性时，输入是单独的文档还是问题与文档的文本对？",
+      "relevant_documents": [
+        {
+          "id": "reranker_pairs",
+          "relevance": 3
+        },
+        {
+          "id": "embedding_bge",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q21",
+      "query": "FastAPI 在知识库问答系统中负责把什么能力封装成 HTTP 接口？",
+      "relevant_documents": [
+        {
+          "id": "api_stream",
+          "relevance": 3
+        },
+        {
+          "id": "rag_overview",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q22",
+      "query": "扫描文档提取文字和问答响应逐段返回，分别由哪两种处理负责？",
+      "relevant_documents": [
+        {
+          "id": "pdf_ocr",
+          "relevance": 2
+        },
+        {
+          "id": "api_stream",
+          "relevance": 2
+        }
+      ]
+    },
+    {
+      "id": "q23",
+      "query": "哪条 RAG 资料只是关键词索引，并没有解释降低幻觉的机制？",
+      "relevant_documents": [
+        {
+          "id": "rag_terms",
+          "relevance": 3
+        },
+        {
+          "id": "rag_evidence",
+          "relevance": 0
+        }
+      ]
+    },
+    {
+      "id": "q24",
+      "query": "示例 1175 与 1176 的日志线索分别是什么，为什么排查对象不同？",
+      "relevant_documents": [
+        {
+          "id": "cuda_1175",
+          "relevance": 2
+        },
+        {
+          "id": "cuda_1176",
+          "relevance": 2
+        },
+        {
+          "id": "cuda_oom",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q25",
+      "query": "示例日志提示 device index out of range，应优先检查哪两类 GPU 设备信息？",
+      "relevant_documents": [
+        {
+          "id": "cuda_1176",
+          "relevance": 3
+        },
+        {
+          "id": "cuda_1175",
+          "relevance": 0
+        },
+        {
+          "id": "cuda_oom",
+          "relevance": 0
+        }
+      ]
+    },
+    {
+      "id": "q26",
+      "query": "CUDA 显存不足时，除了减少本次计算需求，还需要检查哪些其他进程因素？",
+      "relevant_documents": [
+        {
+          "id": "cuda_oom",
+          "relevance": 3
+        }
+      ]
+    },
+    {
+      "id": "q27",
+      "query": "driver initialization failed 与 out of memory 的排查方向有何不同？",
+      "relevant_documents": [
+        {
+          "id": "cuda_1175",
+          "relevance": 2
+        },
+        {
+          "id": "cuda_oom",
+          "relevance": 2
+        },
+        {
+          "id": "cuda_1176",
+          "relevance": 0
+        }
+      ]
+    },
+    {
+      "id": "q28",
+      "query": "扫描 PDF 进入知识库时，OCR 和长文本切块应该怎样衔接？",
+      "relevant_documents": [
+        {
+          "id": "pdf_ocr",
+          "relevance": 3
+        },
+        {
+          "id": "chunk_overlap",
+          "relevance": 2
+        },
+        {
+          "id": "embedding_bge",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q29",
+      "query": "中文资料的文本向量化与 RAG 提示词组装分别处于问答流程的什么位置？",
+      "relevant_documents": [
+        {
+          "id": "embedding_bge",
+          "relevance": 2
+        },
+        {
+          "id": "rag_overview",
+          "relevance": 2
+        },
+        {
+          "id": "pdf_ocr",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q30",
+      "query": "可预计算的文档 Embedding 与 Cross-Encoder 相关性分数有什么区别？",
+      "relevant_documents": [
+        {
+          "id": "embedding_bge",
+          "relevance": 2
+        },
+        {
+          "id": "reranker_pairs",
+          "relevance": 2
+        }
+      ]
+    },
+    {
+      "id": "q31",
+      "query": "BM25 的词频匹配与 Self-Attention 的 Token 交互有什么区别？",
+      "relevant_documents": [
+        {
+          "id": "bm25_terms",
+          "relevance": 2
+        },
+        {
+          "id": "transformer_attention",
+          "relevance": 2
+        }
+      ]
+    },
+    {
+      "id": "q32",
+      "query": "向量的 L2 归一化与 Hybrid 对分数做 Min-Max，是同一种处理吗？",
+      "relevant_documents": [
+        {
+          "id": "cosine_unit",
+          "relevance": 2
+        },
+        {
+          "id": "hybrid_fusion",
+          "relevance": 2
+        },
+        {
+          "id": "faiss_ip",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q33",
+      "query": "Hybrid 的分数融合与 Cross-Encoder 的候选重排分别怎样产生排序依据？",
+      "relevant_documents": [
+        {
+          "id": "hybrid_fusion",
+          "relevance": 2
+        },
+        {
+          "id": "reranker_pairs",
+          "relevance": 2
+        },
+        {
+          "id": "bm25_terms",
+          "relevance": 1
+        },
+        {
+          "id": "embedding_bge",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q34",
+      "query": "RAG 的外部证据和来源引用核查分别能帮助控制哪些回答风险？",
+      "relevant_documents": [
+        {
+          "id": "rag_evidence",
+          "relevance": 2
+        },
+        {
+          "id": "rag_limits",
+          "relevance": 2
+        },
+        {
+          "id": "rag_overview",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q35",
+      "query": "知识库缺乏答案时，哪些资料要求助手明确说明无法回答？",
+      "relevant_documents": [
+        {
+          "id": "rag_evidence",
+          "relevance": 3
+        },
+        {
+          "id": "rag_limits",
+          "relevance": 3
+        }
+      ]
+    },
+    {
+      "id": "q36",
+      "query": "只根据 CUDA 错误编号给出唯一修复办法，示例资料说明了什么证据限制？",
+      "relevant_documents": [
+        {
+          "id": "cuda_1175",
+          "relevance": 3
+        },
+        {
+          "id": "cuda_1176",
+          "relevance": 1
+        },
+        {
+          "id": "cuda_oom",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q37",
+      "query": "用户问法与资料措辞不同但意思接近，哪种文本表示能帮助语义匹配？",
+      "relevant_documents": [
+        {
+          "id": "embedding_bge",
+          "relevance": 3
+        },
+        {
+          "id": "hybrid_fusion",
+          "relevance": 1
+        },
+        {
+          "id": "bm25_terms",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q38",
+      "query": "区分 1175 和 1176 这类相似编号时，哪些资料同时说明关键词检索与日志差异？",
+      "relevant_documents": [
+        {
+          "id": "bm25_terms",
+          "relevance": 2
+        },
+        {
+          "id": "cuda_1175",
+          "relevance": 2
+        },
+        {
+          "id": "cuda_1176",
+          "relevance": 2
+        },
+        {
+          "id": "hybrid_fusion",
+          "relevance": 1
+        },
+        {
+          "id": "cuda_oom",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q39",
+      "query": "查询和文档都是单位向量时，cosine(q,d) 与 q·d 满足什么关系？",
+      "relevant_documents": [
+        {
+          "id": "cosine_unit",
+          "relevance": 3
+        },
+        {
+          "id": "faiss_ip",
+          "relevance": 3
+        },
+        {
+          "id": "embedding_bge",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q40",
+      "query": "GPU 显存不足和请求的设备序号越界，分别应参考什么排查资料？",
+      "relevant_documents": [
+        {
+          "id": "cuda_oom",
+          "relevance": 2
+        },
+        {
+          "id": "cuda_1176",
+          "relevance": 2
+        },
+        {
+          "id": "cuda_1175",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q41",
+      "query": "相关文档不在已召回列表中时，Cross-Encoder 的处理范围允许它做什么？",
+      "relevant_documents": [
+        {
+          "id": "reranker_pairs",
+          "relevance": 3
+        },
+        {
+          "id": "hybrid_fusion",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q42",
+      "query": "RAG 检索出的资料以什么形式交给大语言模型，接下来由谁组织答案？",
+      "relevant_documents": [
+        {
+          "id": "rag_overview",
+          "relevance": 3
+        },
+        {
+          "id": "rag_evidence",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q43",
+      "query": "扫描页面明明有内容却提取不到文本，资料指出可能缺少哪一层？",
+      "relevant_documents": [
+        {
+          "id": "pdf_ocr",
+          "relevance": 3
+        }
+      ]
+    },
+    {
+      "id": "q44",
+      "query": "PowerShell 路径开头的点和反斜杠表示什么，项目依赖应装在哪个环境？",
+      "relevant_documents": [
+        {
+          "id": "python_venv",
+          "relevance": 3
+        }
+      ]
+    },
+    {
+      "id": "q45",
+      "query": "Self-Attention 的注意力权重来自什么运算，为什么不能当作简单词频匹配？",
+      "relevant_documents": [
+        {
+          "id": "transformer_attention",
+          "relevance": 3
+        },
+        {
+          "id": "bm25_terms",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q46",
+      "query": "按默认 alpha，归一化向量分数和归一化 BM25 分数各乘什么权重？",
+      "relevant_documents": [
+        {
+          "id": "hybrid_fusion",
+          "relevance": 3
+        }
+      ]
+    },
+    {
+      "id": "q47",
+      "query": "OCR、Embedding 和 IndexFlatIP 在扫描资料检索链路中各承担哪一步？",
+      "relevant_documents": [
+        {
+          "id": "pdf_ocr",
+          "relevance": 2
+        },
+        {
+          "id": "embedding_bge",
+          "relevance": 2
+        },
+        {
+          "id": "faiss_ip",
+          "relevance": 2
+        },
+        {
+          "id": "chunk_overlap",
+          "relevance": 1
+        },
+        {
+          "id": "rag_overview",
+          "relevance": 1
+        },
+        {
+          "id": "cosine_unit",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q48",
+      "query": "RAG 回答出错可能与检索、资料时效、上下文和模型理解的哪些环节有关？",
+      "relevant_documents": [
+        {
+          "id": "rag_limits",
+          "relevance": 3
+        },
+        {
+          "id": "rag_evidence",
+          "relevance": 1
+        },
+        {
+          "id": "rag_overview",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q49",
+      "query": "示例 1176 能否直接套用 1175 的日志线索，应参考哪条警示？",
+      "relevant_documents": [
+        {
+          "id": "cuda_1176",
+          "relevance": 3
+        },
+        {
+          "id": "cuda_1175",
+          "relevance": 1
+        },
+        {
+          "id": "cuda_oom",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "q50",
+      "query": "普通 HTTP 问答和 StreamingResponse 的发送时机有什么不同？",
+      "relevant_documents": [
+        {
+          "id": "api_stream",
+          "relevance": 3
+        }
+      ]
+    }
+  ]
+}

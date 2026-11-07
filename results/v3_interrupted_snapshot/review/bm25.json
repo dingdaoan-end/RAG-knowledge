@@ -1,0 +1,4222 @@
+{
+  "schema_version": 1,
+  "run": {
+    "id": "9915eade108441c49d79ca173144894d__bm25",
+    "started_at": "2026-10-26T13:47:23.977845+00:00",
+    "qa_dataset": {
+      "version": "3.0",
+      "sha256": "b854564a846d0ca022ffcdea59deb6487cbeab9ecdae828d4a41a749775548c4",
+      "metadata": {
+        "name": "rag_qa_teaching_v3",
+        "corpus_file": "retrieval_eval_v3.json",
+        "purpose": "采集实际答案、提示词、上下文与来源，供人工独立评审；参考答案和标签不进入生成提示词。",
+        "answerable_definition": "true 表示已有资料能回答所请求的事实；false 表示所请求的事实或确定结论无法由现有资料支持，期望说明证据限制，而不是猜测。",
+        "limitations": "50 个教学问题（42 个可回答、8 个无法确定所请求事实的负例），基于同一份 18 Chunk 冻结正文；新增问题由 Codex 对照正文检查，不代表独立人工认证。CUDA 编号为示例，不是当前用户环境事实。"
+      }
+    },
+    "corpus_sha256": "33a7d07e4554df865667592b3515133c210b23678c4fcb895a8cdfa9240e04d9",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "pipeline": {
+      "retriever": {
+        "implementation": "TimedSearch"
+      },
+      "reranker": null,
+      "query_rewriter": null,
+      "context_top_k": 3
+    },
+    "quality_scope": "pending_human_review",
+    "finished_at": "2026-10-26T14:05:56.669200+00:00",
+    "elapsed_seconds": 1.814972399995895,
+    "experiment_id": "9915eade108441c49d79ca173144894d",
+    "experiment_config": {
+      "provider": "DeepSeek",
+      "model": "deepseek-flash",
+      "base_url": "https://api.deepseek.com",
+      "retrieval_sha256": "33a7d07e4554df865667592b3515133c210b23678c4fcb895a8cdfa9240e04d9",
+      "qa_sha256": "b854564a846d0ca022ffcdea59deb6487cbeab9ecdae828d4a41a749775548c4",
+      "candidate_k": 10,
+      "context_top_k": 3,
+      "ks": [
+        3,
+        5,
+        10
+      ],
+      "alpha": 0.7,
+      "embedding_model": "BAAI/bge-small-zh-v1.5",
+      "reranker_model": "BAAI/bge-reranker-base",
+      "prompt_source_sha256": "12a96aa1195f6534d5e2d43822c3ec5a1ecec7e161273f49aa360061b0ecb1ab",
+      "runner_sha256": "cbd3c1dfc6f635dafe7d373032c313e5d553c282972b3ae4d4d945dfa65b01d5",
+      "request_parameters": "Existing OpenAILLM sends model and input only; no additional generation parameters",
+      "query_id_definition": "QA query_id equals qa_id; retrieval_eval_query_ids contains exact question matches only"
+    }
+  },
+  "records": [
+    {
+      "id": "qa_001",
+      "question": "RAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？",
+      "reference_answer": "RAG 检索外部知识，为生成模型提供相关事实和证据，减少仅凭参数记忆编造答案的情况。但检索错误、资料过时或模型误读仍会导致错误，因此不能保证完全消除幻觉。",
+      "required_facts": [
+        "检索外部知识",
+        "向生成模型提供相关事实和证据",
+        "不能保证完全消除幻觉"
+      ],
+      "relevant_document_ids": [
+        "rag_evidence",
+        "rag_limits",
+        "rag_overview"
+      ],
+      "answerable": true,
+      "answer": "根据资料：\n\n- **RAG 可以降低大模型幻觉**，因为它向模型提供可参考的**外部事实和证据**，减少模型仅凭参数记忆编造答案的情况；同时要求模型根据检索到的资料作答，资料不足时应说明无法回答。（Document 2）\n\n- **RAG 不能保证完全消除幻觉**。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。因此还应核查来源和引用，并在知识库缺乏答案时明确说明。（Document 3）",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: rag.md\nchunk_id: 3\nrank: 1\nscore: 32.30586278185182\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\n[Document 2]\nsource: rag.md\nchunk_id: 1\nrank: 2\nscore: 20.271269621341254\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 3]\nsource: rag.md\nchunk_id: 2\nrank: 3\nscore: 17.157043152080597\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\nQuestion:\n\nRAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？",
+      "context": "[Document 1]\nsource: rag.md\nchunk_id: 3\nrank: 1\nscore: 32.30586278185182\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\n[Document 2]\nsource: rag.md\nchunk_id: 1\nrank: 2\nscore: 20.271269621341254\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 3]\nsource: rag.md\nchunk_id: 2\nrank: 3\nscore: 17.157043152080597\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "rag_terms",
+          "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+          "metadata": {
+            "eval_id": "rag_terms",
+            "source": "rag.md",
+            "chunk_id": 3
+          },
+          "rank": 1,
+          "score": 32.30586278185182
+        },
+        {
+          "id": "rag_evidence",
+          "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+          "metadata": {
+            "eval_id": "rag_evidence",
+            "source": "rag.md",
+            "chunk_id": 1
+          },
+          "rank": 2,
+          "score": 20.271269621341254
+        },
+        {
+          "id": "rag_limits",
+          "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+          "metadata": {
+            "eval_id": "rag_limits",
+            "source": "rag.md",
+            "chunk_id": 2
+          },
+          "rank": 3,
+          "score": 17.157043152080597
+        }
+      ],
+      "context_document_ids": [
+        "rag_terms",
+        "rag_evidence",
+        "rag_limits"
+      ],
+      "retrieval_query": "RAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:47:23.977845+00:00",
+      "elapsed_seconds": 1.814915099996142,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "检索外部知识",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "向生成模型提供相关事实和证据",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "不能保证完全消除幻觉",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_002",
+      "question": "FAISS IndexFlatIP 在什么条件下等价于余弦相似度检索？",
+      "reference_answer": "查询向量和文档向量都需要做 L2 归一化，使范数为 1；此时内积等于余弦相似度，IndexFlatIP 才能按余弦相似度进行检索。",
+      "required_facts": [
+        "查询向量和文档向量都需要 L2 归一化",
+        "归一化后的范数为 1",
+        "单位向量的内积等于余弦相似度"
+      ],
+      "relevant_document_ids": [
+        "faiss_ip",
+        "cosine_unit"
+      ],
+      "answerable": true,
+      "answer": "只有当**查询向量和文档向量都做了单位长度归一化（L2 归一化，范数为 1）**时，FAISS `IndexFlatIP` 的内积检索才等价于余弦相似度检索。此时 `cosine(q,d)=q·d`，因此可用 `IndexFlatIP` 实现余弦检索。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: faiss.md\nchunk_id: 0\nrank: 1\nscore: 14.002469295080381\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\n[Document 2]\nsource: faiss.md\nchunk_id: 1\nrank: 2\nscore: 6.210499340753902\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\n[Document 3]\nsource: retrieval.md\nchunk_id: 0\nrank: 3\nscore: 5.285344630994445\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。\n\nQuestion:\n\nFAISS IndexFlatIP 在什么条件下等价于余弦相似度检索？",
+      "context": "[Document 1]\nsource: faiss.md\nchunk_id: 0\nrank: 1\nscore: 14.002469295080381\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\n[Document 2]\nsource: faiss.md\nchunk_id: 1\nrank: 2\nscore: 6.210499340753902\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\n[Document 3]\nsource: retrieval.md\nchunk_id: 0\nrank: 3\nscore: 5.285344630994445\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "faiss_ip",
+          "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+          "metadata": {
+            "eval_id": "faiss_ip",
+            "source": "faiss.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 14.002469295080381
+        },
+        {
+          "id": "cosine_unit",
+          "text": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。",
+          "metadata": {
+            "eval_id": "cosine_unit",
+            "source": "faiss.md",
+            "chunk_id": 1
+          },
+          "rank": 2,
+          "score": 6.210499340753902
+        },
+        {
+          "id": "bm25_terms",
+          "text": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+          "metadata": {
+            "eval_id": "bm25_terms",
+            "source": "retrieval.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 5.285344630994445
+        }
+      ],
+      "context_document_ids": [
+        "faiss_ip",
+        "cosine_unit",
+        "bm25_terms"
+      ],
+      "retrieval_query": "FAISS IndexFlatIP 在什么条件下等价于余弦相似度检索？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:47:45.682301+00:00",
+      "elapsed_seconds": 1.4416554999988875,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "查询向量和文档向量都需要 L2 归一化",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "归一化后的范数为 1",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "单位向量的内积等于余弦相似度",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_003",
+      "question": "Cross-Encoder 为什么不能提前为每篇文档计算一个适用于所有问题的固定重排分数？",
+      "reference_answer": "Cross-Encoder 将问题和文档组成文本对联合编码，相关性分数同时依赖问题与文档。同一篇文档面对不同问题会得到不同分数，因此不能预计算适用于所有问题的固定分数。它只重排召回候选。",
+      "required_facts": [
+        "联合编码 query 与 document 文本对",
+        "相关性分数依赖具体问题",
+        "不能预计算适用于所有问题的固定重排分数"
+      ],
+      "relevant_document_ids": [
+        "reranker_pairs"
+      ],
+      "answerable": true,
+      "answer": "因为 Cross-Encoder 是将 **query 与 document.text 组成文本对，联合编码后输出相关性分数**。同一篇文档面对不同问题会得到不同分数，所以不能提前计算一个适用于所有问题的固定 rerank score；它只用于重排检索召回的候选。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: retrieval.md\nchunk_id: 2\nrank: 1\nscore: 36.9730158652203\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\n[Document 2]\nsource: embedding.md\nchunk_id: 0\nrank: 2\nscore: 8.620608484580977\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\n[Document 3]\nsource: retrieval.md\nchunk_id: 0\nrank: 3\nscore: 7.678022861608511\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。\n\nQuestion:\n\nCross-Encoder 为什么不能提前为每篇文档计算一个适用于所有问题的固定重排分数？",
+      "context": "[Document 1]\nsource: retrieval.md\nchunk_id: 2\nrank: 1\nscore: 36.9730158652203\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\n[Document 2]\nsource: embedding.md\nchunk_id: 0\nrank: 2\nscore: 8.620608484580977\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\n[Document 3]\nsource: retrieval.md\nchunk_id: 0\nrank: 3\nscore: 7.678022861608511\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "reranker_pairs",
+          "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+          "metadata": {
+            "eval_id": "reranker_pairs",
+            "source": "retrieval.md",
+            "chunk_id": 2
+          },
+          "rank": 1,
+          "score": 36.9730158652203
+        },
+        {
+          "id": "embedding_bge",
+          "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+          "metadata": {
+            "eval_id": "embedding_bge",
+            "source": "embedding.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 8.620608484580977
+        },
+        {
+          "id": "bm25_terms",
+          "text": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+          "metadata": {
+            "eval_id": "bm25_terms",
+            "source": "retrieval.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 7.678022861608511
+        }
+      ],
+      "context_document_ids": [
+        "reranker_pairs",
+        "embedding_bge",
+        "bm25_terms"
+      ],
+      "retrieval_query": "Cross-Encoder 为什么不能提前为每篇文档计算一个适用于所有问题的固定重排分数？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:47:50.377471+00:00",
+      "elapsed_seconds": 1.8905204000038793,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "联合编码 query 与 document 文本对",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "相关性分数依赖具体问题",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "不能预计算适用于所有问题的固定重排分数",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_004",
+      "question": "只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？",
+      "reference_answer": "不能仅凭这一编号确定显卡损坏，也不能给出唯一修复命令。知识库只有示例日志线索，缺少用户的完整日志和环境信息。应明确说明证据不足，并请求完整错误日志及驱动、运行时和框架版本。",
+      "required_facts": [
+        "不能仅凭错误编号认定显卡损坏",
+        "证据不足，不能给出唯一修复命令",
+        "需要完整日志和环境版本信息"
+      ],
+      "relevant_document_ids": [
+        "cuda_1175"
+      ],
+      "answerable": false,
+      "answer": "不能确定显卡已经损坏，也不能给出唯一修复命令。\n\n资料中说明：CUDA error 1175 的示例后面出现了 `driver initialization failed`，排查时应先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本；**错误编号本身不足以确定修复方法，不应猜测**。因此仅看到 CUDA error 1175 时，无法据此判断显卡损坏，也没有资料支持的唯一修复命令。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 1\nscore: 16.409330218226444\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 2\nscore: 15.539010320532734\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 8.448445712168393\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\nQuestion:\n\n只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？",
+      "context": "[Document 1]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 1\nscore: 16.409330218226444\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 2\nscore: 15.539010320532734\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 8.448445712168393\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "cuda_1175",
+          "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+          "metadata": {
+            "eval_id": "cuda_1175",
+            "source": "cuda_examples.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 16.409330218226444
+        },
+        {
+          "id": "cuda_1176",
+          "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+          "metadata": {
+            "eval_id": "cuda_1176",
+            "source": "cuda_examples.md",
+            "chunk_id": 1
+          },
+          "rank": 2,
+          "score": 15.539010320532734
+        },
+        {
+          "id": "cuda_oom",
+          "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+          "metadata": {
+            "eval_id": "cuda_oom",
+            "source": "cuda_examples.md",
+            "chunk_id": 2
+          },
+          "rank": 3,
+          "score": 8.448445712168393
+        }
+      ],
+      "context_document_ids": [
+        "cuda_1175",
+        "cuda_1176",
+        "cuda_oom"
+      ],
+      "retrieval_query": "只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:47:30.751231+00:00",
+      "elapsed_seconds": 2.7851201000012225,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "不能仅凭错误编号认定显卡损坏",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "证据不足，不能给出唯一修复命令",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "需要完整日志和环境版本信息",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_005",
+      "question": "这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？",
+      "reference_answer": "知识库没有当前机器的实际硬件和软件版本信息，无法确定这些值。应说明资料不足，需要用户提供环境检测结果，不能把技术文档或示例日志当作当前机器的事实。",
+      "required_facts": [
+        "现有资料不能确定当前机器的型号和版本",
+        "不编造具体硬件型号或版本号",
+        "需要当前环境的实际检测信息"
+      ],
+      "relevant_document_ids": [],
+      "answerable": false,
+      "answer": "资料中没有提供这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本，因此无法根据现有资料回答。资料仅建议排查时核对 GPU 驱动、CUDA 运行时与框架版本，但未给出实际型号或版本号。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 1\nscore: 16.160809681417714\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 2\nscore: 12.829311488368003\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 3\nscore: 9.133557133983306\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\nQuestion:\n\n这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？",
+      "context": "[Document 1]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 1\nscore: 16.160809681417714\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 2\nscore: 12.829311488368003\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 3\nscore: 9.133557133983306\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "cuda_1175",
+          "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+          "metadata": {
+            "eval_id": "cuda_1175",
+            "source": "cuda_examples.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 16.160809681417714
+        },
+        {
+          "id": "cuda_oom",
+          "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+          "metadata": {
+            "eval_id": "cuda_oom",
+            "source": "cuda_examples.md",
+            "chunk_id": 2
+          },
+          "rank": 2,
+          "score": 12.829311488368003
+        },
+        {
+          "id": "cuda_1176",
+          "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+          "metadata": {
+            "eval_id": "cuda_1176",
+            "source": "cuda_examples.md",
+            "chunk_id": 1
+          },
+          "rank": 3,
+          "score": 9.133557133983306
+        }
+      ],
+      "context_document_ids": [
+        "cuda_1175",
+        "cuda_oom",
+        "cuda_1176"
+      ],
+      "retrieval_query": "这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:47:55.933434+00:00",
+      "elapsed_seconds": 1.6058735999977216,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "现有资料不能确定当前机器的型号和版本",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "不编造具体硬件型号或版本号",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "需要当前环境的实际检测信息",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_006",
+      "question": "RAG 从用户问题到模型组织答案，资料描述了怎样的基本流程？",
+      "reference_answer": "RAG 先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+      "required_facts": [
+        "先从外部知识库检索与问题相关的信息",
+        "把检索结果放入提示词",
+        "交给大语言模型组织答案"
+      ],
+      "relevant_document_ids": [
+        "rag_overview"
+      ],
+      "answerable": true,
+      "answer": "根据资料，基本流程是：\n\n1. 系统先根据用户问题，从外部知识库中检索与问题相关的信息；\n2. 再把检索结果放入提示词；\n3. 交给大语言模型组织答案；\n4. 模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: rag.md\nchunk_id: 1\nrank: 1\nscore: 19.274081635152957\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 14.626129084659743\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: rag.md\nchunk_id: 3\nrank: 3\nscore: 8.30000272647854\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\nQuestion:\n\nRAG 从用户问题到模型组织答案，资料描述了怎样的基本流程？",
+      "context": "[Document 1]\nsource: rag.md\nchunk_id: 1\nrank: 1\nscore: 19.274081635152957\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 14.626129084659743\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: rag.md\nchunk_id: 3\nrank: 3\nscore: 8.30000272647854\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "rag_evidence",
+          "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+          "metadata": {
+            "eval_id": "rag_evidence",
+            "source": "rag.md",
+            "chunk_id": 1
+          },
+          "rank": 1,
+          "score": 19.274081635152957
+        },
+        {
+          "id": "rag_overview",
+          "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+          "metadata": {
+            "eval_id": "rag_overview",
+            "source": "rag.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 14.626129084659743
+        },
+        {
+          "id": "rag_terms",
+          "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+          "metadata": {
+            "eval_id": "rag_terms",
+            "source": "rag.md",
+            "chunk_id": 3
+          },
+          "rank": 3,
+          "score": 8.30000272647854
+        }
+      ],
+      "context_document_ids": [
+        "rag_evidence",
+        "rag_overview",
+        "rag_terms"
+      ],
+      "retrieval_query": "RAG 从用户问题到模型组织答案，资料描述了怎样的基本流程？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:48:01.081692+00:00",
+      "elapsed_seconds": 1.4591155000016443,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "先从外部知识库检索与问题相关的信息",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "把检索结果放入提示词",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "交给大语言模型组织答案",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_007",
+      "question": "rag_terms 这条资料能独立解释 RAG 降低幻觉的机制吗？",
+      "reference_answer": "不能。该条正文说明它只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+      "required_facts": [
+        "只是术语索引",
+        "不解释 RAG 为什么可以降低大模型幻觉",
+        "没有给出相关机制"
+      ],
+      "relevant_document_ids": [
+        "rag_terms"
+      ],
+      "answerable": true,
+      "answer": "不能。`rag_terms` 这条资料只是术语索引，明确说明它**不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制**。因此它不能独立解释该机制。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: rag.md\nchunk_id: 3\nrank: 1\nscore: 25.5928117794778\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\n[Document 2]\nsource: rag.md\nchunk_id: 1\nrank: 2\nscore: 13.223764919273911\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 3]\nsource: rag.md\nchunk_id: 2\nrank: 3\nscore: 6.312521557594402\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\nQuestion:\n\nrag_terms 这条资料能独立解释 RAG 降低幻觉的机制吗？",
+      "context": "[Document 1]\nsource: rag.md\nchunk_id: 3\nrank: 1\nscore: 25.5928117794778\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\n[Document 2]\nsource: rag.md\nchunk_id: 1\nrank: 2\nscore: 13.223764919273911\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 3]\nsource: rag.md\nchunk_id: 2\nrank: 3\nscore: 6.312521557594402\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "rag_terms",
+          "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+          "metadata": {
+            "eval_id": "rag_terms",
+            "source": "rag.md",
+            "chunk_id": 3
+          },
+          "rank": 1,
+          "score": 25.5928117794778
+        },
+        {
+          "id": "rag_evidence",
+          "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+          "metadata": {
+            "eval_id": "rag_evidence",
+            "source": "rag.md",
+            "chunk_id": 1
+          },
+          "rank": 2,
+          "score": 13.223764919273911
+        },
+        {
+          "id": "rag_limits",
+          "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+          "metadata": {
+            "eval_id": "rag_limits",
+            "source": "rag.md",
+            "chunk_id": 2
+          },
+          "rank": 3,
+          "score": 6.312521557594402
+        }
+      ],
+      "context_document_ids": [
+        "rag_terms",
+        "rag_evidence",
+        "rag_limits"
+      ],
+      "retrieval_query": "rag_terms 这条资料能独立解释 RAG 降低幻觉的机制吗？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:48:16.085872+00:00",
+      "elapsed_seconds": 1.4530846999987261,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "只是术语索引",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "不解释 RAG 为什么可以降低大模型幻觉",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "没有给出相关机制",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_008",
+      "question": "知识库列举了哪些仍会使 RAG 回答出错的环节？",
+      "reference_answer": "资料列出检索错误、资料过时、上下文缺失或模型误读；这些情况都可能导致错误回答，因此不能将检索到资料等同于回答必然正确。",
+      "required_facts": [
+        "检索错误",
+        "资料过时",
+        "上下文缺失",
+        "模型误读"
+      ],
+      "relevant_document_ids": [
+        "rag_limits"
+      ],
+      "answerable": true,
+      "answer": "知识库列举的仍会使 RAG 回答出错的环节包括：**检索错误、资料过时、上下文缺失、模型误读**。这些情况都可能导致错误回答，因此 RAG 不能保证完全消除幻觉。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: rag.md\nchunk_id: 2\nrank: 1\nscore: 7.390970932813516\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 4.521481862705154\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: rag.md\nchunk_id: 3\nrank: 3\nscore: 4.282593240102004\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\nQuestion:\n\n知识库列举了哪些仍会使 RAG 回答出错的环节？",
+      "context": "[Document 1]\nsource: rag.md\nchunk_id: 2\nrank: 1\nscore: 7.390970932813516\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 4.521481862705154\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: rag.md\nchunk_id: 3\nrank: 3\nscore: 4.282593240102004\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "rag_limits",
+          "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+          "metadata": {
+            "eval_id": "rag_limits",
+            "source": "rag.md",
+            "chunk_id": 2
+          },
+          "rank": 1,
+          "score": 7.390970932813516
+        },
+        {
+          "id": "rag_overview",
+          "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+          "metadata": {
+            "eval_id": "rag_overview",
+            "source": "rag.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 4.521481862705154
+        },
+        {
+          "id": "rag_terms",
+          "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+          "metadata": {
+            "eval_id": "rag_terms",
+            "source": "rag.md",
+            "chunk_id": 3
+          },
+          "rank": 3,
+          "score": 4.282593240102004
+        }
+      ],
+      "context_document_ids": [
+        "rag_limits",
+        "rag_overview",
+        "rag_terms"
+      ],
+      "retrieval_query": "知识库列举了哪些仍会使 RAG 回答出错的环节？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:48:20.855833+00:00",
+      "elapsed_seconds": 1.6926221999965492,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "检索错误",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "资料过时",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "上下文缺失",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "模型误读",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_009",
+      "question": "如果检索资料不足或缺乏答案，助手应如何表述，并做什么来源检查？",
+      "reference_answer": "资料不足时应说明无法回答；同时应该核查来源和引用，而不是在缺少答案时给出没有证据的确定结论。",
+      "required_facts": [
+        "资料不足时应说明无法回答",
+        "核查来源和引用"
+      ],
+      "relevant_document_ids": [
+        "rag_evidence",
+        "rag_limits"
+      ],
+      "answerable": true,
+      "answer": "根据资料，当检索资料不足或知识库缺乏答案时，助手应明确说明“资料不足，无法回答”或“无法根据现有资料作答”，不能编造答案。同时应核查来源和引用。资料只提到要核查来源和引用，未进一步说明具体检查项。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: rag.md\nchunk_id: 2\nrank: 1\nscore: 17.2240370300053\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 2]\nsource: rag.md\nchunk_id: 1\nrank: 2\nscore: 13.002556058032418\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 9.598626138914746\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\nQuestion:\n\n如果检索资料不足或缺乏答案，助手应如何表述，并做什么来源检查？",
+      "context": "[Document 1]\nsource: rag.md\nchunk_id: 2\nrank: 1\nscore: 17.2240370300053\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 2]\nsource: rag.md\nchunk_id: 1\nrank: 2\nscore: 13.002556058032418\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 9.598626138914746\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "rag_limits",
+          "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+          "metadata": {
+            "eval_id": "rag_limits",
+            "source": "rag.md",
+            "chunk_id": 2
+          },
+          "rank": 1,
+          "score": 17.2240370300053
+        },
+        {
+          "id": "rag_evidence",
+          "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+          "metadata": {
+            "eval_id": "rag_evidence",
+            "source": "rag.md",
+            "chunk_id": 1
+          },
+          "rank": 2,
+          "score": 13.002556058032418
+        },
+        {
+          "id": "cuda_oom",
+          "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+          "metadata": {
+            "eval_id": "cuda_oom",
+            "source": "cuda_examples.md",
+            "chunk_id": 2
+          },
+          "rank": 3,
+          "score": 9.598626138914746
+        }
+      ],
+      "context_document_ids": [
+        "rag_limits",
+        "rag_evidence",
+        "cuda_oom"
+      ],
+      "retrieval_query": "如果检索资料不足或缺乏答案，助手应如何表述，并做什么来源检查？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:48:26.545745+00:00",
+      "elapsed_seconds": 2.105650700003025,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "资料不足时应说明无法回答",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "核查来源和引用",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_010",
+      "question": "Embedding 表示什么？含义接近的文本通常在表示空间中有什么关系？",
+      "reference_answer": "Embedding 将文本编码为稠密语义向量，含义接近的文本通常在向量空间更接近；这里的通常不意味着每个语义匹配都能保证正确。",
+      "required_facts": [
+        "将文本编码为稠密语义向量",
+        "含义接近的文本通常在向量空间更接近"
+      ],
+      "relevant_document_ids": [
+        "embedding_bge"
+      ],
+      "answerable": true,
+      "answer": "Embedding 表示将文本编码为稠密语义向量。含义接近的文本，在向量空间中通常会更接近。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: embedding.md\nchunk_id: 0\nrank: 1\nscore: 26.751185660784433\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 2\nscore: 8.826210236701392\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 3]\nsource: setup.md\nchunk_id: 0\nrank: 3\nscore: 7.744047819999324\neval_id: python_venv\n\ncontent:\n在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。\n\nQuestion:\n\nEmbedding 表示什么？含义接近的文本通常在表示空间中有什么关系？",
+      "context": "[Document 1]\nsource: embedding.md\nchunk_id: 0\nrank: 1\nscore: 26.751185660784433\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 2\nscore: 8.826210236701392\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 3]\nsource: setup.md\nchunk_id: 0\nrank: 3\nscore: 7.744047819999324\neval_id: python_venv\n\ncontent:\n在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "embedding_bge",
+          "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+          "metadata": {
+            "eval_id": "embedding_bge",
+            "source": "embedding.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 26.751185660784433
+        },
+        {
+          "id": "cuda_oom",
+          "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+          "metadata": {
+            "eval_id": "cuda_oom",
+            "source": "cuda_examples.md",
+            "chunk_id": 2
+          },
+          "rank": 2,
+          "score": 8.826210236701392
+        },
+        {
+          "id": "python_venv",
+          "text": "在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。",
+          "metadata": {
+            "eval_id": "python_venv",
+            "source": "setup.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 7.744047819999324
+        }
+      ],
+      "context_document_ids": [
+        "embedding_bge",
+        "cuda_oom",
+        "python_venv"
+      ],
+      "retrieval_query": "Embedding 表示什么？含义接近的文本通常在表示空间中有什么关系？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:48:32.770881+00:00",
+      "elapsed_seconds": 1.4049805000031483,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "将文本编码为稠密语义向量",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "含义接近的文本通常在向量空间更接近",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_011",
+      "question": "项目资料列出的中文 Embedding 模型、加载库和可提前计算的对象分别是什么？",
+      "reference_answer": "本项目资料使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+      "required_facts": [
+        "sentence-transformers",
+        "BAAI/bge-small-zh-v1.5",
+        "文档向量可以提前计算"
+      ],
+      "relevant_document_ids": [
+        "embedding_bge"
+      ],
+      "answerable": true,
+      "answer": "- 中文 Embedding 模型：`BAAI/bge-small-zh-v1.5`\n- 加载库：`sentence-transformers`\n- 可提前计算的对象：文档向量",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: embedding.md\nchunk_id: 0\nrank: 1\nscore: 17.708825752651578\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\n[Document 2]\nsource: rag.md\nchunk_id: 1\nrank: 2\nscore: 17.19534913036835\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 3]\nsource: setup.md\nchunk_id: 0\nrank: 3\nscore: 8.870074197160145\neval_id: python_venv\n\ncontent:\n在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。\n\nQuestion:\n\n项目资料列出的中文 Embedding 模型、加载库和可提前计算的对象分别是什么？",
+      "context": "[Document 1]\nsource: embedding.md\nchunk_id: 0\nrank: 1\nscore: 17.708825752651578\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\n[Document 2]\nsource: rag.md\nchunk_id: 1\nrank: 2\nscore: 17.19534913036835\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 3]\nsource: setup.md\nchunk_id: 0\nrank: 3\nscore: 8.870074197160145\neval_id: python_venv\n\ncontent:\n在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "embedding_bge",
+          "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+          "metadata": {
+            "eval_id": "embedding_bge",
+            "source": "embedding.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 17.708825752651578
+        },
+        {
+          "id": "rag_evidence",
+          "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+          "metadata": {
+            "eval_id": "rag_evidence",
+            "source": "rag.md",
+            "chunk_id": 1
+          },
+          "rank": 2,
+          "score": 17.19534913036835
+        },
+        {
+          "id": "python_venv",
+          "text": "在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。",
+          "metadata": {
+            "eval_id": "python_venv",
+            "source": "setup.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 8.870074197160145
+        }
+      ],
+      "context_document_ids": [
+        "embedding_bge",
+        "rag_evidence",
+        "python_venv"
+      ],
+      "retrieval_query": "项目资料列出的中文 Embedding 模型、加载库和可提前计算的对象分别是什么？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:48:43.519714+00:00",
+      "elapsed_seconds": 1.8682091000009677,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "sentence-transformers",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "BAAI/bge-small-zh-v1.5",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "文档向量可以提前计算",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_012",
+      "question": "资料中的 L2 归一化怎样计算，归一化后的向量范数是多少？",
+      "reference_answer": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。",
+      "required_facts": [
+        "把向量除以它的欧几里得长度",
+        "使向量范数等于 1"
+      ],
+      "relevant_document_ids": [
+        "cosine_unit"
+      ],
+      "answerable": true,
+      "answer": "根据资料，L2 归一化是把向量除以它的欧几里得长度。若向量为 \\(v\\)，则计算为：\n\n\\[\nv_{\\text{normalized}} = \\frac{v}{\\|v\\|_2}\n\\]\n\n归一化后的向量范数为 **1**。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: faiss.md\nchunk_id: 1\nrank: 1\nscore: 26.64803641392138\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\n[Document 2]\nsource: embedding.md\nchunk_id: 0\nrank: 2\nscore: 8.950270983747691\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\n[Document 3]\nsource: faiss.md\nchunk_id: 0\nrank: 3\nscore: 8.641365574752177\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\nQuestion:\n\n资料中的 L2 归一化怎样计算，归一化后的向量范数是多少？",
+      "context": "[Document 1]\nsource: faiss.md\nchunk_id: 1\nrank: 1\nscore: 26.64803641392138\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\n[Document 2]\nsource: embedding.md\nchunk_id: 0\nrank: 2\nscore: 8.950270983747691\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\n[Document 3]\nsource: faiss.md\nchunk_id: 0\nrank: 3\nscore: 8.641365574752177\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "cosine_unit",
+          "text": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。",
+          "metadata": {
+            "eval_id": "cosine_unit",
+            "source": "faiss.md",
+            "chunk_id": 1
+          },
+          "rank": 1,
+          "score": 26.64803641392138
+        },
+        {
+          "id": "embedding_bge",
+          "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+          "metadata": {
+            "eval_id": "embedding_bge",
+            "source": "embedding.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 8.950270983747691
+        },
+        {
+          "id": "faiss_ip",
+          "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+          "metadata": {
+            "eval_id": "faiss_ip",
+            "source": "faiss.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 8.641365574752177
+        }
+      ],
+      "context_document_ids": [
+        "cosine_unit",
+        "embedding_bge",
+        "faiss_ip"
+      ],
+      "retrieval_query": "资料中的 L2 归一化怎样计算，归一化后的向量范数是多少？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:48:49.055183+00:00",
+      "elapsed_seconds": 1.5312838000027114,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "把向量除以它的欧几里得长度",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "使向量范数等于 1",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_013",
+      "question": "IndexFlatIP 搜索时检查哪些向量，按什么值选出 Top-K？",
+      "reference_answer": "IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。",
+      "required_facts": [
+        "对索引内全部文档向量执行精确内积搜索",
+        "返回内积最大的 Top-K"
+      ],
+      "relevant_document_ids": [
+        "faiss_ip"
+      ],
+      "answerable": true,
+      "answer": "IndexFlatIP 搜索时会检查**索引内的全部文档向量**，执行精确内积搜索，并按**内积最大**选出 Top-K。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: faiss.md\nchunk_id: 0\nrank: 1\nscore: 14.3556034085153\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\n[Document 2]\nsource: faiss.md\nchunk_id: 1\nrank: 2\nscore: 11.802253713849302\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\n[Document 3]\nsource: embedding.md\nchunk_id: 0\nrank: 3\nscore: 6.598678381049389\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\nQuestion:\n\nIndexFlatIP 搜索时检查哪些向量，按什么值选出 Top-K？",
+      "context": "[Document 1]\nsource: faiss.md\nchunk_id: 0\nrank: 1\nscore: 14.3556034085153\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\n[Document 2]\nsource: faiss.md\nchunk_id: 1\nrank: 2\nscore: 11.802253713849302\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\n[Document 3]\nsource: embedding.md\nchunk_id: 0\nrank: 3\nscore: 6.598678381049389\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "faiss_ip",
+          "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+          "metadata": {
+            "eval_id": "faiss_ip",
+            "source": "faiss.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 14.3556034085153
+        },
+        {
+          "id": "cosine_unit",
+          "text": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。",
+          "metadata": {
+            "eval_id": "cosine_unit",
+            "source": "faiss.md",
+            "chunk_id": 1
+          },
+          "rank": 2,
+          "score": 11.802253713849302
+        },
+        {
+          "id": "embedding_bge",
+          "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+          "metadata": {
+            "eval_id": "embedding_bge",
+            "source": "embedding.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 6.598678381049389
+        }
+      ],
+      "context_document_ids": [
+        "faiss_ip",
+        "cosine_unit",
+        "embedding_bge"
+      ],
+      "retrieval_query": "IndexFlatIP 搜索时检查哪些向量，按什么值选出 Top-K？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:48:53.743331+00:00",
+      "elapsed_seconds": 1.6010422999970615,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "对索引内全部文档向量执行精确内积搜索",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "返回内积最大的 Top-K",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_014",
+      "question": "BM25 的分数是根据哪些文本统计因素计算的？",
+      "reference_answer": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。",
+      "required_facts": [
+        "词频",
+        "文档频率",
+        "文档长度"
+      ],
+      "relevant_document_ids": [
+        "bm25_terms"
+      ],
+      "answerable": true,
+      "answer": "根据资料，BM25 的分数综合以下文本统计因素计算：\n\n1. 词频\n2. 文档频率\n3. 文档长度",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: retrieval.md\nchunk_id: 2\nrank: 1\nscore: 9.698972495953765\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\n[Document 2]\nsource: retrieval.md\nchunk_id: 0\nrank: 2\nscore: 9.54743154524287\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。\n\n[Document 3]\nsource: embedding.md\nchunk_id: 0\nrank: 3\nscore: 6.925977827061283\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\nQuestion:\n\nBM25 的分数是根据哪些文本统计因素计算的？",
+      "context": "[Document 1]\nsource: retrieval.md\nchunk_id: 2\nrank: 1\nscore: 9.698972495953765\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\n[Document 2]\nsource: retrieval.md\nchunk_id: 0\nrank: 2\nscore: 9.54743154524287\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。\n\n[Document 3]\nsource: embedding.md\nchunk_id: 0\nrank: 3\nscore: 6.925977827061283\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "reranker_pairs",
+          "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+          "metadata": {
+            "eval_id": "reranker_pairs",
+            "source": "retrieval.md",
+            "chunk_id": 2
+          },
+          "rank": 1,
+          "score": 9.698972495953765
+        },
+        {
+          "id": "bm25_terms",
+          "text": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+          "metadata": {
+            "eval_id": "bm25_terms",
+            "source": "retrieval.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 9.54743154524287
+        },
+        {
+          "id": "embedding_bge",
+          "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+          "metadata": {
+            "eval_id": "embedding_bge",
+            "source": "embedding.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 6.925977827061283
+        }
+      ],
+      "context_document_ids": [
+        "reranker_pairs",
+        "bm25_terms",
+        "embedding_bge"
+      ],
+      "retrieval_query": "BM25 的分数是根据哪些文本统计因素计算的？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:48:58.444601+00:00",
+      "elapsed_seconds": 1.1748270000025514,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "词频",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "文档频率",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "文档长度",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_015",
+      "question": "检索错误编号或型号时，BM25 的词项方法相对纯向量检索能补充什么？",
+      "reference_answer": "BM25 基于词项匹配；资料中的 BM25L 与 jieba 分词用于保留错误编号、产品型号等精确关键词，而纯向量语义检索可能混淆很相似的编号。它提供关键词方面的补充，不保证所有编号都排在第一名。",
+      "required_facts": [
+        "基于词项匹配",
+        "错误编号、产品型号等精确关键词",
+        "纯向量语义检索可能混淆很相似的编号"
+      ],
+      "relevant_document_ids": [
+        "bm25_terms"
+      ],
+      "answerable": true,
+      "answer": "BM25 的词项方法能补充对错误编号、产品型号等**精确关键词**的匹配能力：它基于词项匹配计算分数，适合保留这些精确关键词；而纯向量语义检索可能混淆很相似的编号。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: retrieval.md\nchunk_id: 0\nrank: 1\nscore: 28.200301232647103\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 12.972776378021267\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: faiss.md\nchunk_id: 1\nrank: 3\nscore: 11.845256109746295\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\nQuestion:\n\n检索错误编号或型号时，BM25 的词项方法相对纯向量检索能补充什么？",
+      "context": "[Document 1]\nsource: retrieval.md\nchunk_id: 0\nrank: 1\nscore: 28.200301232647103\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 12.972776378021267\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: faiss.md\nchunk_id: 1\nrank: 3\nscore: 11.845256109746295\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "bm25_terms",
+          "text": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+          "metadata": {
+            "eval_id": "bm25_terms",
+            "source": "retrieval.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 28.200301232647103
+        },
+        {
+          "id": "rag_overview",
+          "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+          "metadata": {
+            "eval_id": "rag_overview",
+            "source": "rag.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 12.972776378021267
+        },
+        {
+          "id": "cosine_unit",
+          "text": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。",
+          "metadata": {
+            "eval_id": "cosine_unit",
+            "source": "faiss.md",
+            "chunk_id": 1
+          },
+          "rank": 3,
+          "score": 11.845256109746295
+        }
+      ],
+      "context_document_ids": [
+        "bm25_terms",
+        "rag_overview",
+        "cosine_unit"
+      ],
+      "retrieval_query": "检索错误编号或型号时，BM25 的词项方法相对纯向量检索能补充什么？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:49:10.460117+00:00",
+      "elapsed_seconds": 1.674944599995797,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "基于词项匹配",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "错误编号、产品型号等精确关键词",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "纯向量语义检索可能混淆很相似的编号",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_016",
+      "question": "Hybrid 融合哪两种匹配方式，为什么要先归一化两路分数？",
+      "reference_answer": "Hybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再执行加权融合。",
+      "required_facts": [
+        "融合向量语义匹配和 BM25 关键词匹配",
+        "两路原始分数范围不同",
+        "分别做 Min-Max 归一化"
+      ],
+      "relevant_document_ids": [
+        "hybrid_fusion"
+      ],
+      "answerable": true,
+      "answer": "Hybrid 融合的是**向量语义匹配**和 **BM25 关键词匹配**两种方式。\n\n需要先归一化两路分数，是因为**两路原始分数的范围不同**，应分别做 **Min-Max 归一化**后，再按 `alpha*vector_norm+(1-alpha)*bm25_norm` 融合。资料中默认 `alpha=0.7`。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: retrieval.md\nchunk_id: 1\nrank: 1\nscore: 24.376151556343732\neval_id: hybrid_fusion\n\ncontent:\nHybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。\n\n[Document 2]\nsource: faiss.md\nchunk_id: 1\nrank: 2\nscore: 5.269822598916234\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\n[Document 3]\nsource: retrieval.md\nchunk_id: 2\nrank: 3\nscore: 5.053640610997392\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\nQuestion:\n\nHybrid 融合哪两种匹配方式，为什么要先归一化两路分数？",
+      "context": "[Document 1]\nsource: retrieval.md\nchunk_id: 1\nrank: 1\nscore: 24.376151556343732\neval_id: hybrid_fusion\n\ncontent:\nHybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。\n\n[Document 2]\nsource: faiss.md\nchunk_id: 1\nrank: 2\nscore: 5.269822598916234\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\n[Document 3]\nsource: retrieval.md\nchunk_id: 2\nrank: 3\nscore: 5.053640610997392\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "hybrid_fusion",
+          "text": "Hybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。",
+          "metadata": {
+            "eval_id": "hybrid_fusion",
+            "source": "retrieval.md",
+            "chunk_id": 1
+          },
+          "rank": 1,
+          "score": 24.376151556343732
+        },
+        {
+          "id": "cosine_unit",
+          "text": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。",
+          "metadata": {
+            "eval_id": "cosine_unit",
+            "source": "faiss.md",
+            "chunk_id": 1
+          },
+          "rank": 2,
+          "score": 5.269822598916234
+        },
+        {
+          "id": "reranker_pairs",
+          "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+          "metadata": {
+            "eval_id": "reranker_pairs",
+            "source": "retrieval.md",
+            "chunk_id": 2
+          },
+          "rank": 3,
+          "score": 5.053640610997392
+        }
+      ],
+      "context_document_ids": [
+        "hybrid_fusion",
+        "cosine_unit",
+        "reranker_pairs"
+      ],
+      "retrieval_query": "Hybrid 融合哪两种匹配方式，为什么要先归一化两路分数？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:49:16.035602+00:00",
+      "elapsed_seconds": 1.2954300999990664,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "融合向量语义匹配和 BM25 关键词匹配",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "两路原始分数范围不同",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "分别做 Min-Max 归一化",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_017",
+      "question": "项目默认的 Hybrid 权重参数和融合表达式是什么？",
+      "reference_answer": "本项目默认 alpha=0.7，融合表达式为 alpha*vector_norm+(1-alpha)*bm25_norm；参与融合的是两路归一化后的分数。",
+      "required_facts": [
+        "默认 alpha=0.7",
+        "alpha*vector_norm+(1-alpha)*bm25_norm"
+      ],
+      "relevant_document_ids": [
+        "hybrid_fusion"
+      ],
+      "answerable": true,
+      "answer": "项目默认 Hybrid 权重参数为 **alpha=0.7**。\n\n融合表达式为：\n\n**alpha * vector_norm + (1 - alpha) * bm25_norm**\n\n其中，向量语义匹配和 BM25 关键词匹配两路原始分数应先分别做 **Min-Max 归一化**，再按上述表达式融合。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: retrieval.md\nchunk_id: 1\nrank: 1\nscore: 17.687370415775717\neval_id: hybrid_fusion\n\ncontent:\nHybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。\n\n[Document 2]\nsource: setup.md\nchunk_id: 0\nrank: 2\nscore: 6.273286818989252\neval_id: python_venv\n\ncontent:\n在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。\n\n[Document 3]\nsource: rag.md\nchunk_id: 1\nrank: 3\nscore: 4.963470353438167\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\nQuestion:\n\n项目默认的 Hybrid 权重参数和融合表达式是什么？",
+      "context": "[Document 1]\nsource: retrieval.md\nchunk_id: 1\nrank: 1\nscore: 17.687370415775717\neval_id: hybrid_fusion\n\ncontent:\nHybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。\n\n[Document 2]\nsource: setup.md\nchunk_id: 0\nrank: 2\nscore: 6.273286818989252\neval_id: python_venv\n\ncontent:\n在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。\n\n[Document 3]\nsource: rag.md\nchunk_id: 1\nrank: 3\nscore: 4.963470353438167\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "hybrid_fusion",
+          "text": "Hybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。",
+          "metadata": {
+            "eval_id": "hybrid_fusion",
+            "source": "retrieval.md",
+            "chunk_id": 1
+          },
+          "rank": 1,
+          "score": 17.687370415775717
+        },
+        {
+          "id": "python_venv",
+          "text": "在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。",
+          "metadata": {
+            "eval_id": "python_venv",
+            "source": "setup.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 6.273286818989252
+        },
+        {
+          "id": "rag_evidence",
+          "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+          "metadata": {
+            "eval_id": "rag_evidence",
+            "source": "rag.md",
+            "chunk_id": 1
+          },
+          "rank": 3,
+          "score": 4.963470353438167
+        }
+      ],
+      "context_document_ids": [
+        "hybrid_fusion",
+        "python_venv",
+        "rag_evidence"
+      ],
+      "retrieval_query": "项目默认的 Hybrid 权重参数和融合表达式是什么？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:49:20.924179+00:00",
+      "elapsed_seconds": 1.5614052999953856,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "默认 alpha=0.7",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "alpha*vector_norm+(1-alpha)*bm25_norm",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_018",
+      "question": "L2 向量归一化与 Hybrid 的分数 Min-Max 各在处理什么？",
+      "reference_answer": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。Hybrid 面对的是两路原始分数范围不同，因此分别做 Min-Max 归一化；一个处理向量长度，一个处理检索分数尺度。",
+      "required_facts": [
+        "把向量除以它的欧几里得长度",
+        "使向量范数等于 1",
+        "两路原始分数范围不同",
+        "分别做 Min-Max 归一化"
+      ],
+      "relevant_document_ids": [
+        "cosine_unit",
+        "hybrid_fusion"
+      ],
+      "answerable": true,
+      "answer": "- **L2 向量归一化**：处理的是**向量本身**，把向量除以它的欧几里得长度，使其范数等于 1。查询向量和文档向量都归一化后，可用内积实现 cosine 检索。\n- **Hybrid 的分数 Min-Max 归一化**：处理的是**两路检索的原始分数**。因为向量语义匹配和 BM25 的原始分数范围不同，所以分别做 Min-Max 归一化，再按融合公式合并。\n\n简言之：**L2 归一化处理向量长度；Min-Max 归一化处理不同检索分数的量纲/范围。**",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: faiss.md\nchunk_id: 1\nrank: 1\nscore: 17.961984551476462\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\n[Document 2]\nsource: retrieval.md\nchunk_id: 1\nrank: 2\nscore: 12.44062226924592\neval_id: hybrid_fusion\n\ncontent:\nHybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。\n\n[Document 3]\nsource: embedding.md\nchunk_id: 0\nrank: 3\nscore: 8.435712441109708\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\nQuestion:\n\nL2 向量归一化与 Hybrid 的分数 Min-Max 各在处理什么？",
+      "context": "[Document 1]\nsource: faiss.md\nchunk_id: 1\nrank: 1\nscore: 17.961984551476462\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\n[Document 2]\nsource: retrieval.md\nchunk_id: 1\nrank: 2\nscore: 12.44062226924592\neval_id: hybrid_fusion\n\ncontent:\nHybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。\n\n[Document 3]\nsource: embedding.md\nchunk_id: 0\nrank: 3\nscore: 8.435712441109708\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "cosine_unit",
+          "text": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。",
+          "metadata": {
+            "eval_id": "cosine_unit",
+            "source": "faiss.md",
+            "chunk_id": 1
+          },
+          "rank": 1,
+          "score": 17.961984551476462
+        },
+        {
+          "id": "hybrid_fusion",
+          "text": "Hybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。",
+          "metadata": {
+            "eval_id": "hybrid_fusion",
+            "source": "retrieval.md",
+            "chunk_id": 1
+          },
+          "rank": 2,
+          "score": 12.44062226924592
+        },
+        {
+          "id": "embedding_bge",
+          "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+          "metadata": {
+            "eval_id": "embedding_bge",
+            "source": "embedding.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 8.435712441109708
+        }
+      ],
+      "context_document_ids": [
+        "cosine_unit",
+        "hybrid_fusion",
+        "embedding_bge"
+      ],
+      "retrieval_query": "L2 向量归一化与 Hybrid 的分数 Min-Max 各在处理什么？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:49:26.143274+00:00",
+      "elapsed_seconds": 2.94230499999685,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "把向量除以它的欧几里得长度",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "使向量范数等于 1",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "两路原始分数范围不同",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "分别做 Min-Max 归一化",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_019",
+      "question": "为什么要把长文档切成 chunk，并让相邻块有一段重复内容？",
+      "reference_answer": "文本切块把长文档拆成较短的 chunk；chunk_overlap 让相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。",
+      "required_facts": [
+        "把长文档拆成较短的 chunk",
+        "相邻块保留一段重复内容",
+        "减少句子和上下文在边界被截断的影响"
+      ],
+      "relevant_document_ids": [
+        "chunk_overlap"
+      ],
+      "answerable": true,
+      "answer": "根据资料：\n\n- 文本切块会把长文档拆成较短的 chunk。\n- 让相邻块保留一段重复内容（`chunk_overlap`），是为了减少句子和上下文在块边界被截断的影响。\n- 另外，`overlap` 必须小于 `chunk_size`，否则步长不能正常前进。\n\n资料只说明切块是把长文档拆成较短 chunk，没有进一步展开切块的其他原因。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: chunking.md\nchunk_id: 0\nrank: 1\nscore: 24.00812533377267\neval_id: chunk_overlap\n\ncontent:\n文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。\n\n[Document 2]\nsource: api.md\nchunk_id: 0\nrank: 2\nscore: 6.480351872368196\neval_id: api_stream\n\ncontent:\nFastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 5.403709739086159\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\nQuestion:\n\n为什么要把长文档切成 chunk，并让相邻块有一段重复内容？",
+      "context": "[Document 1]\nsource: chunking.md\nchunk_id: 0\nrank: 1\nscore: 24.00812533377267\neval_id: chunk_overlap\n\ncontent:\n文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。\n\n[Document 2]\nsource: api.md\nchunk_id: 0\nrank: 2\nscore: 6.480351872368196\neval_id: api_stream\n\ncontent:\nFastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 5.403709739086159\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "chunk_overlap",
+          "text": "文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。",
+          "metadata": {
+            "eval_id": "chunk_overlap",
+            "source": "chunking.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 24.00812533377267
+        },
+        {
+          "id": "api_stream",
+          "text": "FastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+          "metadata": {
+            "eval_id": "api_stream",
+            "source": "api.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 6.480351872368196
+        },
+        {
+          "id": "cuda_oom",
+          "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+          "metadata": {
+            "eval_id": "cuda_oom",
+            "source": "cuda_examples.md",
+            "chunk_id": 2
+          },
+          "rank": 3,
+          "score": 5.403709739086159
+        }
+      ],
+      "context_document_ids": [
+        "chunk_overlap",
+        "api_stream",
+        "cuda_oom"
+      ],
+      "retrieval_query": "为什么要把长文档切成 chunk，并让相邻块有一段重复内容？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:49:45.072466+00:00",
+      "elapsed_seconds": 3.3216705000013462,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "把长文档拆成较短的 chunk",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "相邻块保留一段重复内容",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "减少句子和上下文在边界被截断的影响",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_020",
+      "question": "chunk_overlap 和 chunk_size 应满足什么关系，不满足时会影响什么？",
+      "reference_answer": "overlap 必须小于 chunk_size；如果不满足这个约束，步长不能正常前进。",
+      "required_facts": [
+        "overlap 必须小于 chunk_size",
+        "步长不能正常前进"
+      ],
+      "relevant_document_ids": [
+        "chunk_overlap"
+      ],
+      "answerable": true,
+      "answer": "`chunk_overlap` 必须小于 `chunk_size`。如果不满足，会导致步长不能正常前进。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: chunking.md\nchunk_id: 0\nrank: 1\nscore: 10.280128206042583\neval_id: chunk_overlap\n\ncontent:\n文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 2\nscore: 3.9888472653444103\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 3]\nsource: transformer.md\nchunk_id: 0\nrank: 3\nscore: 3.2810987525424147\neval_id: transformer_attention\n\ncontent:\nTransformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。\n\nQuestion:\n\nchunk_overlap 和 chunk_size 应满足什么关系，不满足时会影响什么？",
+      "context": "[Document 1]\nsource: chunking.md\nchunk_id: 0\nrank: 1\nscore: 10.280128206042583\neval_id: chunk_overlap\n\ncontent:\n文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 2\nscore: 3.9888472653444103\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 3]\nsource: transformer.md\nchunk_id: 0\nrank: 3\nscore: 3.2810987525424147\neval_id: transformer_attention\n\ncontent:\nTransformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "chunk_overlap",
+          "text": "文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。",
+          "metadata": {
+            "eval_id": "chunk_overlap",
+            "source": "chunking.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 10.280128206042583
+        },
+        {
+          "id": "cuda_1175",
+          "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+          "metadata": {
+            "eval_id": "cuda_1175",
+            "source": "cuda_examples.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 3.9888472653444103
+        },
+        {
+          "id": "transformer_attention",
+          "text": "Transformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。",
+          "metadata": {
+            "eval_id": "transformer_attention",
+            "source": "transformer.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 3.2810987525424147
+        }
+      ],
+      "context_document_ids": [
+        "chunk_overlap",
+        "cuda_1175",
+        "transformer_attention"
+      ],
+      "retrieval_query": "chunk_overlap 和 chunk_size 应满足什么关系，不满足时会影响什么？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:49:51.947720+00:00",
+      "elapsed_seconds": 1.673531100001128,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "overlap 必须小于 chunk_size",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "步长不能正常前进",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_021",
+      "question": "Cross-Encoder 对每个候选实际接收什么输入，并输出什么？",
+      "reference_answer": "Cross-Encoder 把 query 与 document.text 组成文本对，联合编码后输出相关性分数。",
+      "required_facts": [
+        "query 与 document.text 组成文本对",
+        "联合编码后输出相关性分数"
+      ],
+      "relevant_document_ids": [
+        "reranker_pairs"
+      ],
+      "answerable": true,
+      "answer": "Cross-Encoder 对每个候选接收 **query 与候选文档文本（document.text）组成的文本对**，联合编码后输出 **相关性分数**。它只用于重排检索召回的候选。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: retrieval.md\nchunk_id: 2\nrank: 1\nscore: 10.872368737156192\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 2\nscore: 5.403709739086159\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 3]\nsource: transformer.md\nchunk_id: 0\nrank: 3\nscore: 3.2810987525424147\neval_id: transformer_attention\n\ncontent:\nTransformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。\n\nQuestion:\n\nCross-Encoder 对每个候选实际接收什么输入，并输出什么？",
+      "context": "[Document 1]\nsource: retrieval.md\nchunk_id: 2\nrank: 1\nscore: 10.872368737156192\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 2\nscore: 5.403709739086159\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 3]\nsource: transformer.md\nchunk_id: 0\nrank: 3\nscore: 3.2810987525424147\neval_id: transformer_attention\n\ncontent:\nTransformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "reranker_pairs",
+          "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+          "metadata": {
+            "eval_id": "reranker_pairs",
+            "source": "retrieval.md",
+            "chunk_id": 2
+          },
+          "rank": 1,
+          "score": 10.872368737156192
+        },
+        {
+          "id": "cuda_oom",
+          "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+          "metadata": {
+            "eval_id": "cuda_oom",
+            "source": "cuda_examples.md",
+            "chunk_id": 2
+          },
+          "rank": 2,
+          "score": 5.403709739086159
+        },
+        {
+          "id": "transformer_attention",
+          "text": "Transformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。",
+          "metadata": {
+            "eval_id": "transformer_attention",
+            "source": "transformer.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 3.2810987525424147
+        }
+      ],
+      "context_document_ids": [
+        "reranker_pairs",
+        "cuda_oom",
+        "transformer_attention"
+      ],
+      "retrieval_query": "Cross-Encoder 对每个候选实际接收什么输入，并输出什么？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:49:56.571833+00:00",
+      "elapsed_seconds": 1.6436755999966408,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "query 与 document.text 组成文本对",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "联合编码后输出相关性分数",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_022",
+      "question": "一个相关 Chunk 根本没有进入召回候选，Cross-Encoder 能靠重排把它找回来吗？",
+      "reference_answer": "不能靠这次重排把候选外的 Chunk 找回来。资料规定 Cross-Encoder 只重排检索召回的候选，处理范围不包括未召回文档。",
+      "required_facts": [
+        "只重排检索召回的候选"
+      ],
+      "relevant_document_ids": [
+        "reranker_pairs"
+      ],
+      "answerable": true,
+      "answer": "不能。资料说明 Cross-Encoder **只重排检索召回的候选**。如果一个相关 Chunk 根本没有进入召回候选，它就不在重排范围内，因此 Cross-Encoder 无法靠重排把它找回来。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: retrieval.md\nchunk_id: 2\nrank: 1\nscore: 14.102005879682915\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\n[Document 2]\nsource: rag.md\nchunk_id: 3\nrank: 2\nscore: 5.283248773957957\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\n[Document 3]\nsource: chunking.md\nchunk_id: 0\nrank: 3\nscore: 4.467811479498865\neval_id: chunk_overlap\n\ncontent:\n文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。\n\nQuestion:\n\n一个相关 Chunk 根本没有进入召回候选，Cross-Encoder 能靠重排把它找回来吗？",
+      "context": "[Document 1]\nsource: retrieval.md\nchunk_id: 2\nrank: 1\nscore: 14.102005879682915\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\n[Document 2]\nsource: rag.md\nchunk_id: 3\nrank: 2\nscore: 5.283248773957957\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\n[Document 3]\nsource: chunking.md\nchunk_id: 0\nrank: 3\nscore: 4.467811479498865\neval_id: chunk_overlap\n\ncontent:\n文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "reranker_pairs",
+          "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+          "metadata": {
+            "eval_id": "reranker_pairs",
+            "source": "retrieval.md",
+            "chunk_id": 2
+          },
+          "rank": 1,
+          "score": 14.102005879682915
+        },
+        {
+          "id": "rag_terms",
+          "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+          "metadata": {
+            "eval_id": "rag_terms",
+            "source": "rag.md",
+            "chunk_id": 3
+          },
+          "rank": 2,
+          "score": 5.283248773957957
+        },
+        {
+          "id": "chunk_overlap",
+          "text": "文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。",
+          "metadata": {
+            "eval_id": "chunk_overlap",
+            "source": "chunking.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 4.467811479498865
+        }
+      ],
+      "context_document_ids": [
+        "reranker_pairs",
+        "rag_terms",
+        "chunk_overlap"
+      ],
+      "retrieval_query": "一个相关 Chunk 根本没有进入召回候选，Cross-Encoder 能靠重排把它找回来吗？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:50:01.074384+00:00",
+      "elapsed_seconds": 1.7610684999963269,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "只重排检索召回的候选",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_023",
+      "question": "文档 Embedding 和适用于所有问题的固定 rerank score，哪一种可提前计算，原因是什么？",
+      "reference_answer": "文档向量可以提前计算；而 Cross-Encoder 中同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。",
+      "required_facts": [
+        "文档向量可以提前计算",
+        "同一篇文档面对不同问题会得到不同分数",
+        "不能提前计算适用于所有问题的固定 rerank score"
+      ],
+      "relevant_document_ids": [
+        "embedding_bge",
+        "reranker_pairs"
+      ],
+      "answerable": true,
+      "answer": "**文档 Embedding 可以提前计算**。资料中说明：Embedding 将文本编码为稠密语义向量，项目使用 sentence-transformers 加载中文模型，**文档向量可以提前计算**。\n\n**适用于所有问题的固定 rerank score 不能提前计算**。因为 Cross-Encoder 会把 query 与 document 组成文本对联合编码后输出相关性分数；同一篇文档面对不同问题会得到不同分数，因此不存在适用于所有问题的固定 rerank score，它只能用于重排检索召回的候选。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: retrieval.md\nchunk_id: 2\nrank: 1\nscore: 30.20493212868684\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\n[Document 2]\nsource: retrieval.md\nchunk_id: 0\nrank: 2\nscore: 9.785132042848511\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。\n\n[Document 3]\nsource: embedding.md\nchunk_id: 0\nrank: 3\nscore: 8.620608484580977\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\nQuestion:\n\n文档 Embedding 和适用于所有问题的固定 rerank score，哪一种可提前计算，原因是什么？",
+      "context": "[Document 1]\nsource: retrieval.md\nchunk_id: 2\nrank: 1\nscore: 30.20493212868684\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\n[Document 2]\nsource: retrieval.md\nchunk_id: 0\nrank: 2\nscore: 9.785132042848511\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。\n\n[Document 3]\nsource: embedding.md\nchunk_id: 0\nrank: 3\nscore: 8.620608484580977\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "reranker_pairs",
+          "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+          "metadata": {
+            "eval_id": "reranker_pairs",
+            "source": "retrieval.md",
+            "chunk_id": 2
+          },
+          "rank": 1,
+          "score": 30.20493212868684
+        },
+        {
+          "id": "bm25_terms",
+          "text": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+          "metadata": {
+            "eval_id": "bm25_terms",
+            "source": "retrieval.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 9.785132042848511
+        },
+        {
+          "id": "embedding_bge",
+          "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+          "metadata": {
+            "eval_id": "embedding_bge",
+            "source": "embedding.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 8.620608484580977
+        }
+      ],
+      "context_document_ids": [
+        "reranker_pairs",
+        "bm25_terms",
+        "embedding_bge"
+      ],
+      "retrieval_query": "文档 Embedding 和适用于所有问题的固定 rerank score，哪一种可提前计算，原因是什么？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:50:15.302069+00:00",
+      "elapsed_seconds": 2.2427858999944874,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "文档向量可以提前计算",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "同一篇文档面对不同问题会得到不同分数",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "不能提前计算适用于所有问题的固定 rerank score",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_024",
+      "question": "示例 CUDA error 1175 后跟什么日志线索，继续排查应记录和核对哪些信息？",
+      "reference_answer": "这份示例中的线索是 driver initialization failed。应先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本，不能只凭编号猜测修复方法。",
+      "required_facts": [
+        "driver initialization failed",
+        "记录完整错误日志",
+        "GPU 驱动、CUDA 运行时与框架版本"
+      ],
+      "relevant_document_ids": [
+        "cuda_1175"
+      ],
+      "answerable": true,
+      "answer": "根据资料，示例 **CUDA error 1175** 后跟的日志线索是：**driver initialization failed**。\n\n继续排查应：\n1. 先记录**完整错误日志**；\n2. 核对 **GPU 驱动、CUDA 运行时与框架版本**。\n\n资料还指出：编号本身不足以确定修复方法，不应猜测。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 1\nscore: 29.651408771637236\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 2\nscore: 28.791973040807623\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 8.4043084122286\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\nQuestion:\n\n示例 CUDA error 1175 后跟什么日志线索，继续排查应记录和核对哪些信息？",
+      "context": "[Document 1]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 1\nscore: 29.651408771637236\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 2\nscore: 28.791973040807623\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 8.4043084122286\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "cuda_1176",
+          "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+          "metadata": {
+            "eval_id": "cuda_1176",
+            "source": "cuda_examples.md",
+            "chunk_id": 1
+          },
+          "rank": 1,
+          "score": 29.651408771637236
+        },
+        {
+          "id": "cuda_1175",
+          "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+          "metadata": {
+            "eval_id": "cuda_1175",
+            "source": "cuda_examples.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 28.791973040807623
+        },
+        {
+          "id": "cuda_oom",
+          "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+          "metadata": {
+            "eval_id": "cuda_oom",
+            "source": "cuda_examples.md",
+            "chunk_id": 2
+          },
+          "rank": 3,
+          "score": 8.4043084122286
+        }
+      ],
+      "context_document_ids": [
+        "cuda_1176",
+        "cuda_1175",
+        "cuda_oom"
+      ],
+      "retrieval_query": "示例 CUDA error 1175 后跟什么日志线索，继续排查应记录和核对哪些信息？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:50:21.392522+00:00",
+      "elapsed_seconds": 1.8998530000026221,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "driver initialization failed",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "记录完整错误日志",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "GPU 驱动、CUDA 运行时与框架版本",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_025",
+      "question": "示例 CUDA error 1176 指向什么线索，应检查什么，能否照搬 1175 的线索？",
+      "reference_answer": "该示例出现 device index out of range，应检查请求的设备序号和可见 GPU 列表；不能把 CUDA error 1175 的日志线索直接套过来。",
+      "required_facts": [
+        "device index out of range",
+        "请求的设备序号和可见 GPU 列表",
+        "不能把 CUDA error 1175 的日志线索直接套过来"
+      ],
+      "relevant_document_ids": [
+        "cuda_1176"
+      ],
+      "answerable": true,
+      "answer": "示例 **CUDA error 1176** 后面出现的线索是 **device index out of range**。\n\n应检查：\n- 请求的设备序号是否正确；\n- 可见 GPU 列表是否与请求的设备序号匹配。\n\n**不能照搬 CUDA error 1175 的线索**。资料明确说明，不能把 1175 的日志线索直接套到 1176 上；1175 对应的是 driver initialization failed，排查方向是记录完整错误日志并核对 GPU 驱动、CUDA 运行时与框架版本。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 1\nscore: 31.70253612787267\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 2\nscore: 14.226465444572524\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 3\nscore: 13.540612425735743\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\nQuestion:\n\n示例 CUDA error 1176 指向什么线索，应检查什么，能否照搬 1175 的线索？",
+      "context": "[Document 1]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 1\nscore: 31.70253612787267\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 2\nscore: 14.226465444572524\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 3\nscore: 13.540612425735743\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "cuda_1176",
+          "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+          "metadata": {
+            "eval_id": "cuda_1176",
+            "source": "cuda_examples.md",
+            "chunk_id": 1
+          },
+          "rank": 1,
+          "score": 31.70253612787267
+        },
+        {
+          "id": "cuda_oom",
+          "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+          "metadata": {
+            "eval_id": "cuda_oom",
+            "source": "cuda_examples.md",
+            "chunk_id": 2
+          },
+          "rank": 2,
+          "score": 14.226465444572524
+        },
+        {
+          "id": "cuda_1175",
+          "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+          "metadata": {
+            "eval_id": "cuda_1175",
+            "source": "cuda_examples.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 13.540612425735743
+        }
+      ],
+      "context_document_ids": [
+        "cuda_1176",
+        "cuda_oom",
+        "cuda_1175"
+      ],
+      "retrieval_query": "示例 CUDA error 1176 指向什么线索，应检查什么，能否照搬 1175 的线索？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:50:26.409175+00:00",
+      "elapsed_seconds": 1.981952399997681,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "device index out of range",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "请求的设备序号和可见 GPU 列表",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "不能把 CUDA error 1175 的日志线索直接套过来",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_026",
+      "question": "CUDA out of memory 表示什么，资料给出了哪些初步处理方向？",
+      "reference_answer": "它表示当前计算需要的 GPU 显存不足。可减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存。",
+      "required_facts": [
+        "当前计算需要的 GPU 显存不足",
+        "减少 batch size、缩短输入或释放不再使用的张量",
+        "其他进程占用显存"
+      ],
+      "relevant_document_ids": [
+        "cuda_oom"
+      ],
+      "answerable": true,
+      "answer": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。\n\n资料给出的初步处理方向包括：\n- 减少 batch size\n- 缩短输入\n- 释放不再使用的张量\n- 检查是否有其他进程占用显存\n\n资料还特别说明：这与示例错误编号 1175 的驱动初始化线索不同。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 1\nscore: 12.204573434376837\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 2\nscore: 10.12466593949513\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 3]\nsource: rag.md\nchunk_id: 1\nrank: 3\nscore: 6.165400239142724\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\nQuestion:\n\nCUDA out of memory 表示什么，资料给出了哪些初步处理方向？",
+      "context": "[Document 1]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 1\nscore: 12.204573434376837\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 2\nscore: 10.12466593949513\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 3]\nsource: rag.md\nchunk_id: 1\nrank: 3\nscore: 6.165400239142724\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "cuda_oom",
+          "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+          "metadata": {
+            "eval_id": "cuda_oom",
+            "source": "cuda_examples.md",
+            "chunk_id": 2
+          },
+          "rank": 1,
+          "score": 12.204573434376837
+        },
+        {
+          "id": "cuda_1176",
+          "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+          "metadata": {
+            "eval_id": "cuda_1176",
+            "source": "cuda_examples.md",
+            "chunk_id": 1
+          },
+          "rank": 2,
+          "score": 10.12466593949513
+        },
+        {
+          "id": "rag_evidence",
+          "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+          "metadata": {
+            "eval_id": "rag_evidence",
+            "source": "rag.md",
+            "chunk_id": 1
+          },
+          "rank": 3,
+          "score": 6.165400239142724
+        }
+      ],
+      "context_document_ids": [
+        "cuda_oom",
+        "cuda_1176",
+        "rag_evidence"
+      ],
+      "retrieval_query": "CUDA out of memory 表示什么，资料给出了哪些初步处理方向？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:50:33.402128+00:00",
+      "elapsed_seconds": 1.8994340999997803,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "当前计算需要的 GPU 显存不足",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "减少 batch size、缩短输入或释放不再使用的张量",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "其他进程占用显存",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_027",
+      "question": "两份示例日志中的 1175 和 1176 分别对应哪些线索与排查对象？",
+      "reference_answer": "1175 示例是 driver initialization failed，应核对 GPU 驱动、CUDA 运行时与框架版本；1176 示例是 device index out of range，应检查请求的设备序号和可见 GPU 列表。两者不能直接套用同一日志线索。",
+      "required_facts": [
+        "driver initialization failed",
+        "device index out of range",
+        "核对 GPU 驱动、CUDA 运行时与框架版本",
+        "请求的设备序号和可见 GPU 列表"
+      ],
+      "relevant_document_ids": [
+        "cuda_1175",
+        "cuda_1176"
+      ],
+      "answerable": true,
+      "answer": "- **1175**：日志线索是 `driver initialization failed`。排查对象包括：先记录完整错误日志，再核对 **GPU 驱动、CUDA 运行时与框架版本**。资料还强调编号本身不足以确定修复方法，不应猜测。\n- **1176**：日志线索是 `device index out of range`。排查对象是**请求的设备序号**和**可见 GPU 列表**；不能把 1175 的日志线索直接套用到 1176 上。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 1\nscore: 23.3863723754956\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 2\nscore: 17.66876172775291\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 8.892374378862554\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\nQuestion:\n\n两份示例日志中的 1175 和 1176 分别对应哪些线索与排查对象？",
+      "context": "[Document 1]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 1\nscore: 23.3863723754956\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 2\nscore: 17.66876172775291\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 8.892374378862554\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "cuda_1176",
+          "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+          "metadata": {
+            "eval_id": "cuda_1176",
+            "source": "cuda_examples.md",
+            "chunk_id": 1
+          },
+          "rank": 1,
+          "score": 23.3863723754956
+        },
+        {
+          "id": "cuda_1175",
+          "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+          "metadata": {
+            "eval_id": "cuda_1175",
+            "source": "cuda_examples.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 17.66876172775291
+        },
+        {
+          "id": "cuda_oom",
+          "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+          "metadata": {
+            "eval_id": "cuda_oom",
+            "source": "cuda_examples.md",
+            "chunk_id": 2
+          },
+          "rank": 3,
+          "score": 8.892374378862554
+        }
+      ],
+      "context_document_ids": [
+        "cuda_1176",
+        "cuda_1175",
+        "cuda_oom"
+      ],
+      "retrieval_query": "两份示例日志中的 1175 和 1176 分别对应哪些线索与排查对象？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:50:47.175355+00:00",
+      "elapsed_seconds": 1.9330154999988736,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "driver initialization failed",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "device index out of range",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "核对 GPU 驱动、CUDA 运行时与框架版本",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "请求的设备序号和可见 GPU 列表",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_028",
+      "question": "显存不足与示例中的设备序号越界是同一种问题吗，初步检查各是什么？",
+      "reference_answer": "不是同一种示例问题。OOM 是 GPU 显存不足，可先减少 batch size 等；device index out of range 则应检查设备序号和可见 GPU 列表，不能用显存措施替代设备索引检查。",
+      "required_facts": [
+        "GPU 显存不足",
+        "device index out of range",
+        "减少 batch size",
+        "设备序号和可见 GPU 列表"
+      ],
+      "relevant_document_ids": [
+        "cuda_oom",
+        "cuda_1176"
+      ],
+      "answerable": true,
+      "answer": "不是同一种问题。\n\n- **显存不足（CUDA out of memory）**：表示当前计算需要的 GPU 显存不足。初步可检查/处理：减少 batch size、缩短输入、释放不再使用的张量，并检查是否有其他进程占用显存。\n- **设备序号越界（device index out of range，示例中与 CUDA error 1176 相关）**：应检查请求的设备序号和可见 GPU 列表。资料还特别说明，不能把 CUDA error 1175 的日志线索直接套用到这个 1176 示例上。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 1\nscore: 17.372154131599917\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 2\nscore: 16.832545239952452\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 3]\nsource: retrieval.md\nchunk_id: 2\nrank: 3\nscore: 11.164720325371203\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\nQuestion:\n\n显存不足与示例中的设备序号越界是同一种问题吗，初步检查各是什么？",
+      "context": "[Document 1]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 1\nscore: 17.372154131599917\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 2\nscore: 16.832545239952452\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 3]\nsource: retrieval.md\nchunk_id: 2\nrank: 3\nscore: 11.164720325371203\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "cuda_1176",
+          "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+          "metadata": {
+            "eval_id": "cuda_1176",
+            "source": "cuda_examples.md",
+            "chunk_id": 1
+          },
+          "rank": 1,
+          "score": 17.372154131599917
+        },
+        {
+          "id": "cuda_oom",
+          "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+          "metadata": {
+            "eval_id": "cuda_oom",
+            "source": "cuda_examples.md",
+            "chunk_id": 2
+          },
+          "rank": 2,
+          "score": 16.832545239952452
+        },
+        {
+          "id": "reranker_pairs",
+          "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+          "metadata": {
+            "eval_id": "reranker_pairs",
+            "source": "retrieval.md",
+            "chunk_id": 2
+          },
+          "rank": 3,
+          "score": 11.164720325371203
+        }
+      ],
+      "context_document_ids": [
+        "cuda_1176",
+        "cuda_oom",
+        "reranker_pairs"
+      ],
+      "retrieval_query": "显存不足与示例中的设备序号越界是同一种问题吗，初步检查各是什么？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:50:54.371400+00:00",
+      "elapsed_seconds": 2.588144300003478,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "GPU 显存不足",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "device index out of range",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "减少 batch size",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "设备序号和可见 GPU 列表",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_029",
+      "question": "为什么扫描版 PDF 可能读不出文字，资料要求在入库前先做什么？",
+      "reference_answer": "扫描页面可能只有图片，没有可提取的文本层；应先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。",
+      "required_facts": [
+        "只有图片，没有可提取的文本层",
+        "先用 OCR 把图片转成文字",
+        "清洗、切块和 Embedding"
+      ],
+      "relevant_document_ids": [
+        "pdf_ocr"
+      ],
+      "answerable": true,
+      "answer": "扫描版 PDF 的页面可能只有图片、没有可提取的文本层，所以普通文本提取会返回空字符串，导致读不出文字。\n\n资料要求在入库前：**先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。**",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: ingestion_notes.md\nchunk_id: 0\nrank: 1\nscore: 16.551839716035346\neval_id: pdf_ocr\n\ncontent:\n扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。\n\n[Document 2]\nsource: rag.md\nchunk_id: 2\nrank: 2\nscore: 6.312521557594402\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 3]\nsource: rag.md\nchunk_id: 1\nrank: 3\nscore: 6.165400239142724\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\nQuestion:\n\n为什么扫描版 PDF 可能读不出文字，资料要求在入库前先做什么？",
+      "context": "[Document 1]\nsource: ingestion_notes.md\nchunk_id: 0\nrank: 1\nscore: 16.551839716035346\neval_id: pdf_ocr\n\ncontent:\n扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。\n\n[Document 2]\nsource: rag.md\nchunk_id: 2\nrank: 2\nscore: 6.312521557594402\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 3]\nsource: rag.md\nchunk_id: 1\nrank: 3\nscore: 6.165400239142724\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "pdf_ocr",
+          "text": "扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。",
+          "metadata": {
+            "eval_id": "pdf_ocr",
+            "source": "ingestion_notes.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 16.551839716035346
+        },
+        {
+          "id": "rag_limits",
+          "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+          "metadata": {
+            "eval_id": "rag_limits",
+            "source": "rag.md",
+            "chunk_id": 2
+          },
+          "rank": 2,
+          "score": 6.312521557594402
+        },
+        {
+          "id": "rag_evidence",
+          "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+          "metadata": {
+            "eval_id": "rag_evidence",
+            "source": "rag.md",
+            "chunk_id": 1
+          },
+          "rank": 3,
+          "score": 6.165400239142724
+        }
+      ],
+      "context_document_ids": [
+        "pdf_ocr",
+        "rag_limits",
+        "rag_evidence"
+      ],
+      "retrieval_query": "为什么扫描版 PDF 可能读不出文字，资料要求在入库前先做什么？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:51:01.186187+00:00",
+      "elapsed_seconds": 1.4089687999949092,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "只有图片，没有可提取的文本层",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "先用 OCR 把图片转成文字",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "清洗、切块和 Embedding",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_030",
+      "question": "扫描文档识别成文字以后，如何衔接长文档切块并减少边界截断？",
+      "reference_answer": "先用 OCR 把图片转成文字，再用文本切块把长文档拆成较短的 chunk，并让相邻块保留一段重复内容，以减少句子和上下文在边界被截断的影响。",
+      "required_facts": [
+        "先用 OCR 把图片转成文字",
+        "把长文档拆成较短的 chunk",
+        "相邻块保留一段重复内容",
+        "减少句子和上下文在边界被截断的影响"
+      ],
+      "relevant_document_ids": [
+        "pdf_ocr",
+        "chunk_overlap"
+      ],
+      "answerable": true,
+      "answer": "扫描文档经 OCR 转成文字后，应先进行清洗，再做长文档切块。为减少句子和上下文在切块边界被截断的影响，切块时使用 `chunk_overlap`，让相邻 chunk 保留一段重复内容；同时必须保证 `overlap` 小于 `chunk_size`，否则步长不能正常前进。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: chunking.md\nchunk_id: 0\nrank: 1\nscore: 16.678187885847766\neval_id: chunk_overlap\n\ncontent:\n文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。\n\n[Document 2]\nsource: ingestion_notes.md\nchunk_id: 0\nrank: 2\nscore: 12.014182299969962\neval_id: pdf_ocr\n\ncontent:\n扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。\n\n[Document 3]\nsource: faiss.md\nchunk_id: 0\nrank: 3\nscore: 6.725337826589784\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\nQuestion:\n\n扫描文档识别成文字以后，如何衔接长文档切块并减少边界截断？",
+      "context": "[Document 1]\nsource: chunking.md\nchunk_id: 0\nrank: 1\nscore: 16.678187885847766\neval_id: chunk_overlap\n\ncontent:\n文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。\n\n[Document 2]\nsource: ingestion_notes.md\nchunk_id: 0\nrank: 2\nscore: 12.014182299969962\neval_id: pdf_ocr\n\ncontent:\n扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。\n\n[Document 3]\nsource: faiss.md\nchunk_id: 0\nrank: 3\nscore: 6.725337826589784\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "chunk_overlap",
+          "text": "文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。",
+          "metadata": {
+            "eval_id": "chunk_overlap",
+            "source": "chunking.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 16.678187885847766
+        },
+        {
+          "id": "pdf_ocr",
+          "text": "扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。",
+          "metadata": {
+            "eval_id": "pdf_ocr",
+            "source": "ingestion_notes.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 12.014182299969962
+        },
+        {
+          "id": "faiss_ip",
+          "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+          "metadata": {
+            "eval_id": "faiss_ip",
+            "source": "faiss.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 6.725337826589784
+        }
+      ],
+      "context_document_ids": [
+        "chunk_overlap",
+        "pdf_ocr",
+        "faiss_ip"
+      ],
+      "retrieval_query": "扫描文档识别成文字以后，如何衔接长文档切块并减少边界截断？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:51:06.054385+00:00",
+      "elapsed_seconds": 2.308914099994581,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "先用 OCR 把图片转成文字",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "把长文档拆成较短的 chunk",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "相邻块保留一段重复内容",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "减少句子和上下文在边界被截断的影响",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_031",
+      "question": "OCR 和 Embedding 分别把什么转换成什么，它们的输出作用相同吗？",
+      "reference_answer": "两者作用不同：OCR 把图片转成文字；Embedding 将文本编码为稠密语义向量，前者解决图像文字提取，后者提供文本的向量表示。",
+      "required_facts": [
+        "OCR 把图片转成文字",
+        "Embedding 将文本编码为稠密语义向量"
+      ],
+      "relevant_document_ids": [
+        "pdf_ocr",
+        "embedding_bge"
+      ],
+      "answerable": true,
+      "answer": "根据资料：\n\n- **OCR**：把扫描版 PDF 页面中的**图片转换成文字**，以便后续清洗、切块和 Embedding。\n- **Embedding**：资料只说明文本经过清洗、切块后进入 Embedding 流程，但**没有明确说明它把什么转换成什么**。\n\n因此，资料中也**没有说明 OCR 和 Embedding 的输出作用是否相同**，无法据此判断。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: ingestion_notes.md\nchunk_id: 0\nrank: 1\nscore: 8.52269489471407\neval_id: pdf_ocr\n\ncontent:\n扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。\n\n[Document 2]\nsource: retrieval.md\nchunk_id: 1\nrank: 2\nscore: 4.144895978232626\neval_id: hybrid_fusion\n\ncontent:\nHybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。\n\n[Document 3]\nsource: api.md\nchunk_id: 0\nrank: 3\nscore: 3.917808448406271\neval_id: api_stream\n\ncontent:\nFastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。\n\nQuestion:\n\nOCR 和 Embedding 分别把什么转换成什么，它们的输出作用相同吗？",
+      "context": "[Document 1]\nsource: ingestion_notes.md\nchunk_id: 0\nrank: 1\nscore: 8.52269489471407\neval_id: pdf_ocr\n\ncontent:\n扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。\n\n[Document 2]\nsource: retrieval.md\nchunk_id: 1\nrank: 2\nscore: 4.144895978232626\neval_id: hybrid_fusion\n\ncontent:\nHybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。\n\n[Document 3]\nsource: api.md\nchunk_id: 0\nrank: 3\nscore: 3.917808448406271\neval_id: api_stream\n\ncontent:\nFastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "pdf_ocr",
+          "text": "扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。",
+          "metadata": {
+            "eval_id": "pdf_ocr",
+            "source": "ingestion_notes.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 8.52269489471407
+        },
+        {
+          "id": "hybrid_fusion",
+          "text": "Hybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。",
+          "metadata": {
+            "eval_id": "hybrid_fusion",
+            "source": "retrieval.md",
+            "chunk_id": 1
+          },
+          "rank": 2,
+          "score": 4.144895978232626
+        },
+        {
+          "id": "api_stream",
+          "text": "FastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+          "metadata": {
+            "eval_id": "api_stream",
+            "source": "api.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 3.917808448406271
+        }
+      ],
+      "context_document_ids": [
+        "pdf_ocr",
+        "hybrid_fusion",
+        "api_stream"
+      ],
+      "retrieval_query": "OCR 和 Embedding 分别把什么转换成什么，它们的输出作用相同吗？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:51:26.434004+00:00",
+      "elapsed_seconds": 3.933899100004055,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "OCR 把图片转成文字",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "Embedding 将文本编码为稠密语义向量",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_032",
+      "question": "Self-Attention 用哪些表示让 Token 交互，注意力权重来自什么？",
+      "reference_answer": "Self-Attention 让 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系；注意力权重来自缩放点积及 softmax，不是简单词频匹配。",
+      "required_facts": [
+        "Query、Key、Value",
+        "建模上下文关系",
+        "缩放点积及 softmax"
+      ],
+      "relevant_document_ids": [
+        "transformer_attention"
+      ],
+      "answerable": true,
+      "answer": "Self-Attention 让每个 Token 通过 **Query、Key、Value** 与其他 Token 交互；注意力权重来自**缩放点积及 softmax**，而不是简单按词频匹配。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: transformer.md\nchunk_id: 0\nrank: 1\nscore: 27.198338186546916\neval_id: transformer_attention\n\ncontent:\nTransformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。\n\n[Document 2]\nsource: ingestion_notes.md\nchunk_id: 0\nrank: 2\nscore: 3.162620425050737\neval_id: pdf_ocr\n\ncontent:\n扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。\n\n[Document 3]\nsource: setup.md\nchunk_id: 0\nrank: 3\nscore: 2.707577910135201\neval_id: python_venv\n\ncontent:\n在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。\n\nQuestion:\n\nSelf-Attention 用哪些表示让 Token 交互，注意力权重来自什么？",
+      "context": "[Document 1]\nsource: transformer.md\nchunk_id: 0\nrank: 1\nscore: 27.198338186546916\neval_id: transformer_attention\n\ncontent:\nTransformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。\n\n[Document 2]\nsource: ingestion_notes.md\nchunk_id: 0\nrank: 2\nscore: 3.162620425050737\neval_id: pdf_ocr\n\ncontent:\n扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。\n\n[Document 3]\nsource: setup.md\nchunk_id: 0\nrank: 3\nscore: 2.707577910135201\neval_id: python_venv\n\ncontent:\n在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "transformer_attention",
+          "text": "Transformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。",
+          "metadata": {
+            "eval_id": "transformer_attention",
+            "source": "transformer.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 27.198338186546916
+        },
+        {
+          "id": "pdf_ocr",
+          "text": "扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。",
+          "metadata": {
+            "eval_id": "pdf_ocr",
+            "source": "ingestion_notes.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 3.162620425050737
+        },
+        {
+          "id": "python_venv",
+          "text": "在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。",
+          "metadata": {
+            "eval_id": "python_venv",
+            "source": "setup.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 2.707577910135201
+        }
+      ],
+      "context_document_ids": [
+        "transformer_attention",
+        "pdf_ocr",
+        "python_venv"
+      ],
+      "retrieval_query": "Self-Attention 用哪些表示让 Token 交互，注意力权重来自什么？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:51:34.207527+00:00",
+      "elapsed_seconds": 1.4165112000046065,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "Query、Key、Value",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "建模上下文关系",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "缩放点积及 softmax",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_033",
+      "question": "BM25 和 Self-Attention 都处理文本，它们使用词频和上下文关系的方式有什么不同？",
+      "reference_answer": "BM25 以词项匹配为基础，综合词频、文档频率和文档长度评分；Self-Attention 让 Token 与其他 Token 交互，并用缩放点积及 softmax 得到权重，不能把它当成简单词频匹配。",
+      "required_facts": [
+        "词频、文档频率和文档长度",
+        "与其他 Token 交互",
+        "缩放点积及 softmax"
+      ],
+      "relevant_document_ids": [
+        "bm25_terms",
+        "transformer_attention"
+      ],
+      "answerable": true,
+      "answer": "根据资料，两者的不同在于：\n\n- **BM25**：属于基于**词项匹配**的检索方法，分数综合**词频、文档频率和文档长度**来计算。它关注的是查询词与文档在词项层面的匹配程度。\n- **Self-Attention**：让每个 Token 通过 **Query、Key、Value** 与其他 Token 交互，从而建模**上下文关系**。注意力权重来自**缩放点积及 softmax**，不是简单按词频匹配。\n\n因此，BM25 主要利用词频等统计信息做词项匹配；Self-Attention 则通过 Q/K/V 交互建模 Token 间的上下文关系，而不是简单按词频匹配。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: transformer.md\nchunk_id: 0\nrank: 1\nscore: 11.63241077402874\neval_id: transformer_attention\n\ncontent:\nTransformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。\n\n[Document 2]\nsource: retrieval.md\nchunk_id: 0\nrank: 2\nscore: 9.752408935342231\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 8.02999841891063\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\nQuestion:\n\nBM25 和 Self-Attention 都处理文本，它们使用词频和上下文关系的方式有什么不同？",
+      "context": "[Document 1]\nsource: transformer.md\nchunk_id: 0\nrank: 1\nscore: 11.63241077402874\neval_id: transformer_attention\n\ncontent:\nTransformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。\n\n[Document 2]\nsource: retrieval.md\nchunk_id: 0\nrank: 2\nscore: 9.752408935342231\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 8.02999841891063\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "transformer_attention",
+          "text": "Transformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。",
+          "metadata": {
+            "eval_id": "transformer_attention",
+            "source": "transformer.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 11.63241077402874
+        },
+        {
+          "id": "bm25_terms",
+          "text": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+          "metadata": {
+            "eval_id": "bm25_terms",
+            "source": "retrieval.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 9.752408935342231
+        },
+        {
+          "id": "cuda_oom",
+          "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+          "metadata": {
+            "eval_id": "cuda_oom",
+            "source": "cuda_examples.md",
+            "chunk_id": 2
+          },
+          "rank": 3,
+          "score": 8.02999841891063
+        }
+      ],
+      "context_document_ids": [
+        "transformer_attention",
+        "bm25_terms",
+        "cuda_oom"
+      ],
+      "retrieval_query": "BM25 和 Self-Attention 都处理文本，它们使用词频和上下文关系的方式有什么不同？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:51:39.716290+00:00",
+      "elapsed_seconds": 2.1062204999980167,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "词频、文档频率和文档长度",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "与其他 Token 交互",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "缩放点积及 softmax",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_034",
+      "question": "在 PowerShell 的项目根目录怎样使用虚拟环境 Python 启动程序，依赖要装到哪里？",
+      "reference_answer": "在 PowerShell 的项目根目录使用虚拟环境 Python 执行 .\\.venv\\Scripts\\python.exe main.py。路径前缀 .\\ 表示当前目录，项目依赖应安装到同一个 .venv 环境，避免启动解释器与依赖不一致。",
+      "required_facts": [
+        "虚拟环境 Python",
+        ".\\.venv\\Scripts\\python.exe main.py",
+        "当前目录",
+        "同一个 .venv 环境"
+      ],
+      "relevant_document_ids": [
+        "python_venv"
+      ],
+      "answerable": true,
+      "answer": "在 PowerShell 的项目根目录下运行：\n\n```powershell\n.\\.venv\\Scripts\\python.exe main.py\n```\n\n其中 `.\\` 表示当前目录。项目依赖应安装到同一个 `.venv` 虚拟环境中。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: setup.md\nchunk_id: 0\nrank: 1\nscore: 29.841890126733222\neval_id: python_venv\n\ncontent:\n在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。\n\n[Document 2]\nsource: embedding.md\nchunk_id: 0\nrank: 2\nscore: 6.143399087224819\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\n[Document 3]\nsource: rag.md\nchunk_id: 1\nrank: 3\nscore: 3.5033543283243467\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\nQuestion:\n\n在 PowerShell 的项目根目录怎样使用虚拟环境 Python 启动程序，依赖要装到哪里？",
+      "context": "[Document 1]\nsource: setup.md\nchunk_id: 0\nrank: 1\nscore: 29.841890126733222\neval_id: python_venv\n\ncontent:\n在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。\n\n[Document 2]\nsource: embedding.md\nchunk_id: 0\nrank: 2\nscore: 6.143399087224819\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\n[Document 3]\nsource: rag.md\nchunk_id: 1\nrank: 3\nscore: 3.5033543283243467\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "python_venv",
+          "text": "在 PowerShell 的项目根目录运行虚拟环境 Python，可使用 .\\.venv\\Scripts\\python.exe main.py。路径开头的 .\\ 表示当前目录；项目依赖应安装到同一个 .venv 环境。",
+          "metadata": {
+            "eval_id": "python_venv",
+            "source": "setup.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 29.841890126733222
+        },
+        {
+          "id": "embedding_bge",
+          "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+          "metadata": {
+            "eval_id": "embedding_bge",
+            "source": "embedding.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 6.143399087224819
+        },
+        {
+          "id": "rag_evidence",
+          "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+          "metadata": {
+            "eval_id": "rag_evidence",
+            "source": "rag.md",
+            "chunk_id": 1
+          },
+          "rank": 3,
+          "score": 3.5033543283243467
+        }
+      ],
+      "context_document_ids": [
+        "python_venv",
+        "embedding_bge",
+        "rag_evidence"
+      ],
+      "retrieval_query": "在 PowerShell 的项目根目录怎样使用虚拟环境 Python 启动程序，依赖要装到哪里？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:51:50.354684+00:00",
+      "elapsed_seconds": 1.44425250000495,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "虚拟环境 Python",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": ".\\.venv\\Scripts\\python.exe main.py",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "当前目录",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "同一个 .venv 环境",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_035",
+      "question": "在 RAG 系统中 FastAPI 的职责是什么，它本身是在做知识向量化吗？",
+      "reference_answer": "资料中 FastAPI 可以把 RAG 问答封装为 HTTP 接口；向量化则由 Embedding 将文本编码为稠密语义向量完成，两者职责不同。",
+      "required_facts": [
+        "FastAPI 可以把 RAG 问答封装为 HTTP 接口",
+        "将文本编码为稠密语义向量"
+      ],
+      "relevant_document_ids": [
+        "api_stream",
+        "embedding_bge"
+      ],
+      "answerable": true,
+      "answer": "根据资料，FastAPI 在 RAG 系统中的职责是：**把 RAG 问答封装为 HTTP 接口**。它支持普通响应在答案生成结束后一次返回，也可以通过 `StreamingResponse` 随生成进度逐段发送内容。\n\n资料中**没有说明 FastAPI 本身负责知识向量化**，因此不能根据现有资料判断它在做知识向量化；资料只说明它承担 HTTP 接口封装与响应返回的角色。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: rag.md\nchunk_id: 0\nrank: 1\nscore: 9.593573929091225\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 2]\nsource: rag.md\nchunk_id: 3\nrank: 2\nscore: 8.68934468011348\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\n[Document 3]\nsource: api.md\nchunk_id: 0\nrank: 3\nscore: 7.906974260106529\neval_id: api_stream\n\ncontent:\nFastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。\n\nQuestion:\n\n在 RAG 系统中 FastAPI 的职责是什么，它本身是在做知识向量化吗？",
+      "context": "[Document 1]\nsource: rag.md\nchunk_id: 0\nrank: 1\nscore: 9.593573929091225\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 2]\nsource: rag.md\nchunk_id: 3\nrank: 2\nscore: 8.68934468011348\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\n[Document 3]\nsource: api.md\nchunk_id: 0\nrank: 3\nscore: 7.906974260106529\neval_id: api_stream\n\ncontent:\nFastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "rag_overview",
+          "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+          "metadata": {
+            "eval_id": "rag_overview",
+            "source": "rag.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 9.593573929091225
+        },
+        {
+          "id": "rag_terms",
+          "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+          "metadata": {
+            "eval_id": "rag_terms",
+            "source": "rag.md",
+            "chunk_id": 3
+          },
+          "rank": 2,
+          "score": 8.68934468011348
+        },
+        {
+          "id": "api_stream",
+          "text": "FastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+          "metadata": {
+            "eval_id": "api_stream",
+            "source": "api.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 7.906974260106529
+        }
+      ],
+      "context_document_ids": [
+        "rag_overview",
+        "rag_terms",
+        "api_stream"
+      ],
+      "retrieval_query": "在 RAG 系统中 FastAPI 的职责是什么，它本身是在做知识向量化吗？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:52:08.910509+00:00",
+      "elapsed_seconds": 2.9479479000001447,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "FastAPI 可以把 RAG 问答封装为 HTTP 接口",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "将文本编码为稠密语义向量",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_036",
+      "question": "普通响应和 StreamingResponse 在答案的返回时机及用户看到输出的时间上有何区别？",
+      "reference_answer": "普通响应在答案生成结束后一次返回；StreamingResponse 可以随生成进度逐段发送内容，让客户端更早看到输出。这是返回时机的差别，不能据此算出具体节省的毫秒数。",
+      "required_facts": [
+        "普通响应在答案生成结束后一次返回",
+        "随生成进度逐段发送内容",
+        "更早看到输出"
+      ],
+      "relevant_document_ids": [
+        "api_stream"
+      ],
+      "answerable": true,
+      "answer": "普通响应是在答案生成结束后**一次性返回**，用户通常要等生成完成才能看到输出。  \nStreamingResponse 则会**随生成进度逐段发送内容**，让客户端更早看到输出。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: api.md\nchunk_id: 0\nrank: 1\nscore: 20.2726168667148\neval_id: api_stream\n\ncontent:\nFastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。\n\n[Document 2]\nsource: ingestion_notes.md\nchunk_id: 0\nrank: 2\nscore: 6.765408942877389\neval_id: pdf_ocr\n\ncontent:\n扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 5.049741130130569\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\nQuestion:\n\n普通响应和 StreamingResponse 在答案的返回时机及用户看到输出的时间上有何区别？",
+      "context": "[Document 1]\nsource: api.md\nchunk_id: 0\nrank: 1\nscore: 20.2726168667148\neval_id: api_stream\n\ncontent:\nFastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。\n\n[Document 2]\nsource: ingestion_notes.md\nchunk_id: 0\nrank: 2\nscore: 6.765408942877389\neval_id: pdf_ocr\n\ncontent:\n扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 5.049741130130569\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "api_stream",
+          "text": "FastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+          "metadata": {
+            "eval_id": "api_stream",
+            "source": "api.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 20.2726168667148
+        },
+        {
+          "id": "pdf_ocr",
+          "text": "扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。",
+          "metadata": {
+            "eval_id": "pdf_ocr",
+            "source": "ingestion_notes.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 6.765408942877389
+        },
+        {
+          "id": "cuda_oom",
+          "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+          "metadata": {
+            "eval_id": "cuda_oom",
+            "source": "cuda_examples.md",
+            "chunk_id": 2
+          },
+          "rank": 3,
+          "score": 5.049741130130569
+        }
+      ],
+      "context_document_ids": [
+        "api_stream",
+        "pdf_ocr",
+        "cuda_oom"
+      ],
+      "retrieval_query": "普通响应和 StreamingResponse 在答案的返回时机及用户看到输出的时间上有何区别？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:52:16.327067+00:00",
+      "elapsed_seconds": 1.8707662000015262,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "普通响应在答案生成结束后一次返回",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "随生成进度逐段发送内容",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "更早看到输出",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_037",
+      "question": "把 RAG 封装成 HTTP 服务后，检索结果、生成模型和 FastAPI 各负什么职责？",
+      "reference_answer": "RAG 把检索结果放入提示词，交给大语言模型组织答案；FastAPI 则把 RAG 问答封装为 HTTP 接口。HTTP 封装没有取代检索资料或生成模型的职责。",
+      "required_facts": [
+        "把检索结果放入提示词",
+        "交给大语言模型组织答案",
+        "封装为 HTTP 接口"
+      ],
+      "relevant_document_ids": [
+        "rag_overview",
+        "api_stream"
+      ],
+      "answerable": true,
+      "answer": "根据资料：\n\n- **检索结果**：由 RAG 系统从外部知识库中检索出与问题相关的信息，并被放入提示词中，作为大语言模型组织答案的参考内容。\n- **生成模型**：即大语言模型，负责根据包含检索结果的提示词来组织答案。\n- **FastAPI**：负责把 RAG 问答封装成 HTTP 接口；普通响应在答案生成结束后一次返回，`StreamingResponse` 则可以随生成进度逐段发送内容。\n\n资料没有进一步说明三者在具体实现中的更细分工。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: api.md\nchunk_id: 0\nrank: 1\nscore: 20.445598337673044\neval_id: api_stream\n\ncontent:\nFastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 15.169761260801119\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: rag.md\nchunk_id: 3\nrank: 3\nscore: 11.448897539630945\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\nQuestion:\n\n把 RAG 封装成 HTTP 服务后，检索结果、生成模型和 FastAPI 各负什么职责？",
+      "context": "[Document 1]\nsource: api.md\nchunk_id: 0\nrank: 1\nscore: 20.445598337673044\neval_id: api_stream\n\ncontent:\nFastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 15.169761260801119\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: rag.md\nchunk_id: 3\nrank: 3\nscore: 11.448897539630945\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "api_stream",
+          "text": "FastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+          "metadata": {
+            "eval_id": "api_stream",
+            "source": "api.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 20.445598337673044
+        },
+        {
+          "id": "rag_overview",
+          "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+          "metadata": {
+            "eval_id": "rag_overview",
+            "source": "rag.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 15.169761260801119
+        },
+        {
+          "id": "rag_terms",
+          "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+          "metadata": {
+            "eval_id": "rag_terms",
+            "source": "rag.md",
+            "chunk_id": 3
+          },
+          "rank": 3,
+          "score": 11.448897539630945
+        }
+      ],
+      "context_document_ids": [
+        "api_stream",
+        "rag_overview",
+        "rag_terms"
+      ],
+      "retrieval_query": "把 RAG 封装成 HTTP 服务后，检索结果、生成模型和 FastAPI 各负什么职责？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:52:24.999810+00:00",
+      "elapsed_seconds": 3.7460347000014735,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "把检索结果放入提示词",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "交给大语言模型组织答案",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "封装为 HTTP 接口",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_038",
+      "question": "Hybrid 和 Cross-Encoder 都影响候选顺序，它们的评分依据分别是什么？",
+      "reference_answer": "Hybrid 融合向量语义匹配和 BM25 关键词匹配，两路分数分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 加权融合。Cross-Encoder 将问题和文档组成文本对，联合编码后输出相关性分数，而且只重排检索召回的候选。",
+      "required_facts": [
+        "融合向量语义匹配和 BM25 关键词匹配",
+        "分别做 Min-Max 归一化",
+        "alpha*vector_norm+(1-alpha)*bm25_norm",
+        "联合编码后输出相关性分数",
+        "只重排检索召回的候选"
+      ],
+      "relevant_document_ids": [
+        "hybrid_fusion",
+        "reranker_pairs"
+      ],
+      "answerable": true,
+      "answer": "- **Hybrid 的评分依据**：融合两路检索分数——向量语义匹配分数和 BM25 关键词匹配分数。两路原始分数先分别做 Min-Max 归一化，再按 `alpha * vector_norm + (1-alpha) * bm25_norm` 融合，资料中默认 `alpha=0.7`。  \n- **Cross-Encoder 的评分依据**：将 `query` 与 `document.text` 组成文本对，联合编码后输出相关性分数。该分数依赖具体问题与文档，不能预先计算固定 rerank score，只用于重排检索召回的候选。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: retrieval.md\nchunk_id: 1\nrank: 1\nscore: 7.400894877691618\neval_id: hybrid_fusion\n\ncontent:\nHybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。\n\n[Document 2]\nsource: retrieval.md\nchunk_id: 2\nrank: 2\nscore: 6.652436092789448\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\n[Document 3]\nsource: retrieval.md\nchunk_id: 0\nrank: 3\nscore: 4.777610177170711\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。\n\nQuestion:\n\nHybrid 和 Cross-Encoder 都影响候选顺序，它们的评分依据分别是什么？",
+      "context": "[Document 1]\nsource: retrieval.md\nchunk_id: 1\nrank: 1\nscore: 7.400894877691618\neval_id: hybrid_fusion\n\ncontent:\nHybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。\n\n[Document 2]\nsource: retrieval.md\nchunk_id: 2\nrank: 2\nscore: 6.652436092789448\neval_id: reranker_pairs\n\ncontent:\nCross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。\n\n[Document 3]\nsource: retrieval.md\nchunk_id: 0\nrank: 3\nscore: 4.777610177170711\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "hybrid_fusion",
+          "text": "Hybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。",
+          "metadata": {
+            "eval_id": "hybrid_fusion",
+            "source": "retrieval.md",
+            "chunk_id": 1
+          },
+          "rank": 1,
+          "score": 7.400894877691618
+        },
+        {
+          "id": "reranker_pairs",
+          "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+          "metadata": {
+            "eval_id": "reranker_pairs",
+            "source": "retrieval.md",
+            "chunk_id": 2
+          },
+          "rank": 2,
+          "score": 6.652436092789448
+        },
+        {
+          "id": "bm25_terms",
+          "text": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+          "metadata": {
+            "eval_id": "bm25_terms",
+            "source": "retrieval.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 4.777610177170711
+        }
+      ],
+      "context_document_ids": [
+        "hybrid_fusion",
+        "reranker_pairs",
+        "bm25_terms"
+      ],
+      "retrieval_query": "Hybrid 和 Cross-Encoder 都影响候选顺序，它们的评分依据分别是什么？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:52:36.674436+00:00",
+      "elapsed_seconds": 2.653409800004738,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "融合向量语义匹配和 BM25 关键词匹配",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "分别做 Min-Max 归一化",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "alpha*vector_norm+(1-alpha)*bm25_norm",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "联合编码后输出相关性分数",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "只重排检索召回的候选",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_039",
+      "question": "Embedding 与 FAISS IndexFlatIP 在语义检索中分别负责表示还是搜索？",
+      "reference_answer": "Embedding 将文本编码为稠密语义向量；IndexFlatIP 对索引内全部文档向量执行精确内积搜索，返回内积最大的 Top-K。一个生成表示，一个在已有向量中搜索。",
+      "required_facts": [
+        "将文本编码为稠密语义向量",
+        "对索引内全部文档向量执行精确内积搜索",
+        "返回内积最大的 Top-K"
+      ],
+      "relevant_document_ids": [
+        "embedding_bge",
+        "faiss_ip"
+      ],
+      "answerable": true,
+      "answer": "Embedding 负责**表示**：把文本编码为稠密语义向量，使语义接近的文本在向量空间中更接近。  \nFAISS IndexFlatIP 负责**搜索**：对索引内全部文档向量执行精确内积搜索，返回内积最大的 Top-K。\n\n补充：只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: faiss.md\nchunk_id: 0\nrank: 1\nscore: 8.914118639196369\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 6.647657840659116\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: embedding.md\nchunk_id: 0\nrank: 3\nscore: 6.312521557594402\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。\n\nQuestion:\n\nEmbedding 与 FAISS IndexFlatIP 在语义检索中分别负责表示还是搜索？",
+      "context": "[Document 1]\nsource: faiss.md\nchunk_id: 0\nrank: 1\nscore: 8.914118639196369\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\n[Document 2]\nsource: rag.md\nchunk_id: 0\nrank: 2\nscore: 6.647657840659116\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\n[Document 3]\nsource: embedding.md\nchunk_id: 0\nrank: 3\nscore: 6.312521557594402\neval_id: embedding_bge\n\ncontent:\nEmbedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "faiss_ip",
+          "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+          "metadata": {
+            "eval_id": "faiss_ip",
+            "source": "faiss.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 8.914118639196369
+        },
+        {
+          "id": "rag_overview",
+          "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+          "metadata": {
+            "eval_id": "rag_overview",
+            "source": "rag.md",
+            "chunk_id": 0
+          },
+          "rank": 2,
+          "score": 6.647657840659116
+        },
+        {
+          "id": "embedding_bge",
+          "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+          "metadata": {
+            "eval_id": "embedding_bge",
+            "source": "embedding.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 6.312521557594402
+        }
+      ],
+      "context_document_ids": [
+        "faiss_ip",
+        "rag_overview",
+        "embedding_bge"
+      ],
+      "retrieval_query": "Embedding 与 FAISS IndexFlatIP 在语义检索中分别负责表示还是搜索？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:52:53.245936+00:00",
+      "elapsed_seconds": 1.8373520000022836,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "将文本编码为稠密语义向量",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "对索引内全部文档向量执行精确内积搜索",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "返回内积最大的 Top-K",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_040",
+      "question": "结合切块、向量表示、内积搜索和 RAG 提示词，说明文档进入回答流程的顺序。",
+      "reference_answer": "先把长文档拆成较短的 chunk，再将文本编码为稠密语义向量；IndexFlatIP 搜索这些向量并返回内积最大的 Top-K，RAG 随后把检索结果放入提示词，交给大语言模型组织答案。",
+      "required_facts": [
+        "把长文档拆成较短的 chunk",
+        "将文本编码为稠密语义向量",
+        "返回内积最大的 Top-K",
+        "把检索结果放入提示词"
+      ],
+      "relevant_document_ids": [
+        "chunk_overlap",
+        "embedding_bge",
+        "faiss_ip",
+        "rag_overview"
+      ],
+      "answerable": true,
+      "answer": "根据提供的资料，**无法完整说明“文档进入回答流程”的顺序**，因为资料中没有涉及“切块”和“RAG 提示词”的内容，也没有给出从文档处理到回答生成的完整流程。\n\n资料中只明确说明了以下相关环节：\n\n1. **向量表示与归一化**：L2 归一化会把向量除以欧几里得长度，使范数等于 1；若查询向量 q 和文档向量 d 都已归一化，则 `cosine(q,d)=q·d`。\n2. **内积搜索**：`FAISS IndexFlatIP` 会对索引内全部文档向量执行精确内积搜索，并返回内积最大的 Top-K。\n3. **余弦检索实现**：当查询和文档向量都做单位长度归一化时，内积等于余弦相似度，因此可用 `IndexFlatIP` 实现余弦检索。\n\n但资料中**没有说明切块如何进行、向量表示如何生成、RAG 提示词如何组织，以及这些步骤进入回答流程的先后顺序**。因此，基于现有资料不能给出完整顺序。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: faiss.md\nchunk_id: 0\nrank: 1\nscore: 24.924897912355664\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\n[Document 2]\nsource: faiss.md\nchunk_id: 1\nrank: 2\nscore: 11.729053918702965\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\n[Document 3]\nsource: retrieval.md\nchunk_id: 0\nrank: 3\nscore: 9.949825137052175\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。\n\nQuestion:\n\n结合切块、向量表示、内积搜索和 RAG 提示词，说明文档进入回答流程的顺序。",
+      "context": "[Document 1]\nsource: faiss.md\nchunk_id: 0\nrank: 1\nscore: 24.924897912355664\neval_id: faiss_ip\n\ncontent:\nFAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。\n\n[Document 2]\nsource: faiss.md\nchunk_id: 1\nrank: 2\nscore: 11.729053918702965\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\n[Document 3]\nsource: retrieval.md\nchunk_id: 0\nrank: 3\nscore: 9.949825137052175\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "faiss_ip",
+          "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+          "metadata": {
+            "eval_id": "faiss_ip",
+            "source": "faiss.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 24.924897912355664
+        },
+        {
+          "id": "cosine_unit",
+          "text": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。",
+          "metadata": {
+            "eval_id": "cosine_unit",
+            "source": "faiss.md",
+            "chunk_id": 1
+          },
+          "rank": 2,
+          "score": 11.729053918702965
+        },
+        {
+          "id": "bm25_terms",
+          "text": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+          "metadata": {
+            "eval_id": "bm25_terms",
+            "source": "retrieval.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 9.949825137052175
+        }
+      ],
+      "context_document_ids": [
+        "faiss_ip",
+        "cosine_unit",
+        "bm25_terms"
+      ],
+      "retrieval_query": "结合切块、向量表示、内积搜索和 RAG 提示词，说明文档进入回答流程的顺序。",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:53:05.390208+00:00",
+      "elapsed_seconds": 3.045827300004021,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "把长文档拆成较短的 chunk",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "将文本编码为稠密语义向量",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "返回内积最大的 Top-K",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "把检索结果放入提示词",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_041",
+      "question": "语义向量匹配有什么帮助和编号混淆风险，Hybrid 如何补充这一点？",
+      "reference_answer": "含义接近的文本通常在向量空间更接近，适合表达语义接近；但纯向量语义检索可能混淆很相似的编号。Hybrid 结合向量语义匹配和 BM25 关键词匹配，补充精确词项方面的信息，不保证所有错误编号都检索正确。",
+      "required_facts": [
+        "含义接近的文本通常在向量空间更接近",
+        "纯向量语义检索可能混淆很相似的编号",
+        "向量语义匹配和 BM25 关键词匹配"
+      ],
+      "relevant_document_ids": [
+        "embedding_bge",
+        "bm25_terms",
+        "hybrid_fusion"
+      ],
+      "answerable": true,
+      "answer": "根据资料：\n\n- **语义向量匹配的作用**：资料只说明 Hybrid Search 会融合“向量语义匹配”和“BM25 关键词匹配”，但没有进一步展开语义向量匹配的具体帮助。\n- **编号混淆风险**：纯向量语义检索可能混淆很相似的编号；BM25L 和 jieba 分词更适合保留错误编号、产品型号等精确关键词。\n- **Hybrid 如何补充**：Hybrid Search 同时使用向量语义匹配和 BM25 关键词匹配。由于两路原始分数范围不同，需要分别做 Min-Max 归一化，再按  \n  `alpha*vector_norm + (1-alpha)*bm25_norm`  \n  融合，本项目默认 `alpha=0.7`。这样可以用 BM25 的关键词匹配能力补充纯向量检索对相似编号的混淆风险。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: retrieval.md\nchunk_id: 0\nrank: 1\nscore: 15.93538608751899\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。\n\n[Document 2]\nsource: retrieval.md\nchunk_id: 1\nrank: 2\nscore: 13.312362973866218\neval_id: hybrid_fusion\n\ncontent:\nHybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。\n\n[Document 3]\nsource: faiss.md\nchunk_id: 1\nrank: 3\nscore: 10.139337175305958\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。\n\nQuestion:\n\n语义向量匹配有什么帮助和编号混淆风险，Hybrid 如何补充这一点？",
+      "context": "[Document 1]\nsource: retrieval.md\nchunk_id: 0\nrank: 1\nscore: 15.93538608751899\neval_id: bm25_terms\n\ncontent:\nBM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。\n\n[Document 2]\nsource: retrieval.md\nchunk_id: 1\nrank: 2\nscore: 13.312362973866218\neval_id: hybrid_fusion\n\ncontent:\nHybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。\n\n[Document 3]\nsource: faiss.md\nchunk_id: 1\nrank: 3\nscore: 10.139337175305958\neval_id: cosine_unit\n\ncontent:\nL2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "bm25_terms",
+          "text": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词；纯向量语义检索可能混淆很相似的编号。",
+          "metadata": {
+            "eval_id": "bm25_terms",
+            "source": "retrieval.md",
+            "chunk_id": 0
+          },
+          "rank": 1,
+          "score": 15.93538608751899
+        },
+        {
+          "id": "hybrid_fusion",
+          "text": "Hybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 融合。本项目默认 alpha=0.7。",
+          "metadata": {
+            "eval_id": "hybrid_fusion",
+            "source": "retrieval.md",
+            "chunk_id": 1
+          },
+          "rank": 2,
+          "score": 13.312362973866218
+        },
+        {
+          "id": "cosine_unit",
+          "text": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。",
+          "metadata": {
+            "eval_id": "cosine_unit",
+            "source": "faiss.md",
+            "chunk_id": 1
+          },
+          "rank": 3,
+          "score": 10.139337175305958
+        }
+      ],
+      "context_document_ids": [
+        "bm25_terms",
+        "hybrid_fusion",
+        "cosine_unit"
+      ],
+      "retrieval_query": "语义向量匹配有什么帮助和编号混淆风险，Hybrid 如何补充这一点？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:53:16.478499+00:00",
+      "elapsed_seconds": 4.697556399994937,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "含义接近的文本通常在向量空间更接近",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "纯向量语义检索可能混淆很相似的编号",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "向量语义匹配和 BM25 关键词匹配",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    },
+    {
+      "id": "qa_042",
+      "question": "知识库资料可能过时时，应怎样对待 RAG 答案的证据和引用？",
+      "reference_answer": "资料过时可能导致错误回答，应核查来源和引用；并在知识库缺乏答案时明确说明，不能仅因为已检索到资料就认为结论必然可靠。",
+      "required_facts": [
+        "资料过时",
+        "核查来源和引用",
+        "知识库缺乏答案时明确说明"
+      ],
+      "relevant_document_ids": [
+        "rag_limits"
+      ],
+      "answerable": true,
+      "answer": "当知识库资料可能过时时，不能把 RAG 答案及其引用视为完全可靠。应核查答案所依据的来源和引用，注意资料过时可能导致错误回答；如果知识库缺乏答案或资料不足，应明确说明无法回答。",
+      "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: rag.md\nchunk_id: 1\nrank: 1\nscore: 15.882532858227147\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 2]\nsource: rag.md\nchunk_id: 2\nrank: 2\nscore: 14.841153016914143\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 3]\nsource: rag.md\nchunk_id: 0\nrank: 3\nscore: 6.3975253359518875\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\nQuestion:\n\n知识库资料可能过时时，应怎样对待 RAG 答案的证据和引用？",
+      "context": "[Document 1]\nsource: rag.md\nchunk_id: 1\nrank: 1\nscore: 15.882532858227147\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 2]\nsource: rag.md\nchunk_id: 2\nrank: 2\nscore: 14.841153016914143\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 3]\nsource: rag.md\nchunk_id: 0\nrank: 3\nscore: 6.3975253359518875\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+      "pipeline_status": "answered",
+      "llm_called": true,
+      "context_documents": [
+        {
+          "id": "rag_evidence",
+          "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+          "metadata": {
+            "eval_id": "rag_evidence",
+            "source": "rag.md",
+            "chunk_id": 1
+          },
+          "rank": 1,
+          "score": 15.882532858227147
+        },
+        {
+          "id": "rag_limits",
+          "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+          "metadata": {
+            "eval_id": "rag_limits",
+            "source": "rag.md",
+            "chunk_id": 2
+          },
+          "rank": 2,
+          "score": 14.841153016914143
+        },
+        {
+          "id": "rag_overview",
+          "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+          "metadata": {
+            "eval_id": "rag_overview",
+            "source": "rag.md",
+            "chunk_id": 0
+          },
+          "rank": 3,
+          "score": 6.3975253359518875
+        }
+      ],
+      "context_document_ids": [
+        "rag_evidence",
+        "rag_limits",
+        "rag_overview"
+      ],
+      "retrieval_query": "知识库资料可能过时时，应怎样对待 RAG 答案的证据和引用？",
+      "generation": {
+        "mode": "real_api",
+        "implementation": "OpenAILLM",
+        "model": "deepseek-flash"
+      },
+      "started_at": "2026-10-26T13:53:28.347661+00:00",
+      "elapsed_seconds": 1.9054049999976996,
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null,
+        "faithfulness": null,
+        "answer_relevance": null,
+        "factual_correctness": null,
+        "factual_correctness_basis": null,
+        "required_facts_covered": [
+          {
+            "fact": "资料过时",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "核查来源和引用",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          },
+          {
+            "fact": "知识库缺乏答案时明确说明",
+            "covered": null,
+            "answer_quote": null,
+            "notes": ""
+          }
+        ],
+        "unsupported_claims": null,
+        "insufficient_evidence_handled": null,
+        "review_notes": ""
+      }
+    }
+  ],
+  "capture_sha256": "21a11ed32ca9732619e934e428e1960ae4c871de054ded24a4b0dd0ed138b3fa"
+}

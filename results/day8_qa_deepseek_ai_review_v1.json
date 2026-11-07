@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "artifact_type": "ai_assisted_qa_review",
+  "created_at": "2026-10-23T20:25:43+08:00",
+  "reviewer": "AI assistant",
+  "human_verified": false,
+  "source_file": "D:\\RAGrepository\\results\\day8_qa_deepseek_v1.json",
+  "source_file_sha256": "333899db1b3e45b35335c0b4fed7e282b3181205921ccdd5530a0276af84b57f",
+  "source_capture_sha256": "e29a46452400e91b326eace11ec51f9de0c746bdd96ea56f60ab0686292999c2",
+  "generation": {
+    "mode": "real_api",
+    "implementation": "OpenAILLM",
+    "model": "deepseek-flash"
+  },
+  "rubric": {
+    "scale": {
+      "0": "不合格",
+      "1": "部分合格",
+      "2": "合格"
+    },
+    "dimensions": {
+      "faithfulness": "事实性断言是否得到实际上下文支持",
+      "answer_relevance": "是否回应原始问题",
+      "factual_correctness": "关键事实是否正确，结合参考答案、逻辑和所列官方依据核对"
+    },
+    "coverage": "按含义逐项判断，不要求字面重合；未提出的补充请求不得算已覆盖"
+  },
+  "references": [
+    {
+      "id": "rag_paper",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "url": "https://arxiv.org/abs/2005.11401",
+      "used_for": "检索非参数知识与生成的结合；论文结果不是消除所有幻觉的普遍保证"
+    },
+    {
+      "id": "faiss_metrics",
+      "title": "FAISS MetricType and distances",
+      "url": "https://github.com/facebookresearch/faiss/wiki/MetricType-and-distances",
+      "used_for": "单位化向量的内积与余弦分值，以及查询范数不影响同一查询的排序"
+    },
+    {
+      "id": "cross_encoder_docs",
+      "title": "Sentence Transformers CrossEncoder Usage",
+      "url": "https://sbert.net/docs/cross_encoder/usage/usage.html",
+      "used_for": "对输入文本对计算分数，需要逐对计算，常用于候选重排"
+    }
+  ],
+  "records": [
+    {
+      "id": "qa_001",
+      "question": "RAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？",
+      "answerable": true,
+      "review_type": "ai_assisted_review",
+      "status": "ai_reviewed_pending_human_verification",
+      "reviewer": "AI assistant",
+      "human_verified": false,
+      "scores": {
+        "faithfulness": 2,
+        "answer_relevance": 2,
+        "factual_correctness": 2
+      },
+      "required_facts_covered": [
+        {
+          "fact": "检索外部知识",
+          "covered": true,
+          "answer_quote": "RAG 可以降低大模型幻觉，是因为它向模型提供可参考的外部事实和证据，减少模型仅凭参数记忆编造答案的情况；模型需要根据检索到的资料作答，资料不足时应说明无法回答。（资料 1）",
+          "notes": "按整段含义判断覆盖，不要求与标注字面完全一致。"
+        },
+        {
+          "fact": "向生成模型提供相关事实和证据",
+          "covered": true,
+          "answer_quote": "它向模型提供可参考的外部事实和证据",
+          "notes": ""
+        },
+        {
+          "fact": "不能保证完全消除幻觉",
+          "covered": true,
+          "answer_quote": "不能保证完全消除幻觉",
+          "notes": ""
+        }
+      ],
+      "supporting_context_document_ids": [
+        "rag_evidence",
+        "rag_limits"
+      ],
+      "unsupported_claims": [],
+      "factual_correctness_basis": "已对照参考答案、实际上下文和 RAG 原始论文摘要。检索非参数知识为生成提供信息这一机制一致；不能从检索增强推导出永不出错的保证。本回答没有声称某个通用降低比例。",
+      "external_reference_ids": [
+        "rag_paper"
+      ],
+      "insufficient_evidence_handled": null,
+      "review_notes": "两个子问题均得到回答，资料1/2的引用对应实际上下文顺序。第一项检索外部知识通过同段的外部事实与检索资料两处表述共同覆盖。"
+    },
+    {
+      "id": "qa_002",
+      "question": "FAISS IndexFlatIP 在什么条件下等价于余弦相似度检索？",
+      "answerable": true,
+      "review_type": "ai_assisted_review",
+      "status": "ai_reviewed_pending_human_verification",
+      "reviewer": "AI assistant",
+      "human_verified": false,
+      "scores": {
+        "faithfulness": 2,
+        "answer_relevance": 2,
+        "factual_correctness": 2
+      },
+      "required_facts_covered": [
+        {
+          "fact": "查询向量和文档向量都需要 L2 归一化",
+          "covered": true,
+          "answer_quote": "当查询向量和文档向量都做了 **L2 归一化（单位长度归一化）**",
+          "notes": ""
+        },
+        {
+          "fact": "归一化后的范数为 1",
+          "covered": true,
+          "answer_quote": "即向量范数为 1 时",
+          "notes": ""
+        },
+        {
+          "fact": "单位向量的内积等于余弦相似度",
+          "covered": true,
+          "answer_quote": "内积等于余弦相似度",
+          "notes": ""
+        }
+      ],
+      "supporting_context_document_ids": [
+        "faiss_ip",
+        "cosine_unit"
+      ],
+      "unsupported_claims": [],
+      "factual_correctness_basis": "已对照 FAISS 官方 MetricType 文档和余弦定义。对非零向量做单位化后，内积等于余弦分数，IndexFlatIP 的最大内积结果因此与余弦检索一致。注意：仅讨论同一非零查询的排序时，查询范数是常数，归一化文档即可得到同序；两边都归一化是分数也相等的充分条件。本回答表述为充分条件，没有声称它是排序等价的唯一条件。",
+      "external_reference_ids": [
+        "faiss_metrics"
+      ],
+      "insufficient_evidence_handled": null,
+      "review_notes": "三项事实均覆盖。非零向量是余弦定义和单位化的隐含前提；本题不因未展开零向量边界而扣分。没有逐段来源标记，但不构成无依据断言。"
+    },
+    {
+      "id": "qa_003",
+      "question": "Cross-Encoder 为什么不能提前为每篇文档计算一个适用于所有问题的固定重排分数？",
+      "answerable": true,
+      "review_type": "ai_assisted_review",
+      "status": "ai_reviewed_pending_human_verification",
+      "reviewer": "AI assistant",
+      "human_verified": false,
+      "scores": {
+        "faithfulness": 2,
+        "answer_relevance": 2,
+        "factual_correctness": 2
+      },
+      "required_facts_covered": [
+        {
+          "fact": "联合编码 query 与 document 文本对",
+          "covered": true,
+          "answer_quote": "query 与 document.text 组成文本对，联合编码后输出相关性分数",
+          "notes": ""
+        },
+        {
+          "fact": "相关性分数依赖具体问题",
+          "covered": true,
+          "answer_quote": "同一篇文档面对不同问题会得到不同分数",
+          "notes": ""
+        },
+        {
+          "fact": "不能预计算适用于所有问题的固定重排分数",
+          "covered": true,
+          "answer_quote": "不能提前计算一个适用于所有问题的固定 rerank score",
+          "notes": ""
+        }
+      ],
+      "supporting_context_document_ids": [
+        "reranker_pairs",
+        "embedding_bge"
+      ],
+      "unsupported_claims": [],
+      "factual_correctness_basis": "已对照 Sentence Transformers 官方 CrossEncoder 用法：对输入文本对计算分数，每对需要计算，因此不能把文档单独映射为适用于所有问题的固定相关分数。可以缓存特定 query-document 对的结果，但不等于固定文档分数。",
+      "external_reference_ids": [
+        "cross_encoder_docs"
+      ],
+      "insufficient_evidence_handled": null,
+      "review_notes": "“只用于重排候选”按当前 RAG 项目流程理解是正确的；若脱离项目作为 Cross-Encoder 所有用途的断言，则过强。建议改成“在本项目中仅对已召回候选重排”。"
+    },
+    {
+      "id": "qa_004",
+      "question": "只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？",
+      "answerable": false,
+      "review_type": "ai_assisted_review",
+      "status": "ai_reviewed_pending_human_verification",
+      "reviewer": "AI assistant",
+      "human_verified": false,
+      "scores": {
+        "faithfulness": 2,
+        "answer_relevance": 2,
+        "factual_correctness": 2
+      },
+      "required_facts_covered": [
+        {
+          "fact": "不能仅凭错误编号认定显卡损坏",
+          "covered": true,
+          "answer_quote": "不能确定显卡已经损坏",
+          "notes": ""
+        },
+        {
+          "fact": "证据不足，不能给出唯一修复命令",
+          "covered": true,
+          "answer_quote": "所以不能据此提供唯一修复命令",
+          "notes": ""
+        },
+        {
+          "fact": "需要完整日志和环境版本信息",
+          "covered": true,
+          "answer_quote": "需要先获取完整错误日志，并检查 GPU 驱动、CUDA 运行时和框架版本",
+          "notes": ""
+        }
+      ],
+      "supporting_context_document_ids": [
+        "cuda_1175"
+      ],
+      "unsupported_claims": [],
+      "factual_correctness_basis": "对照实际上下文和参考答案，结论是证据不足，不能从单个示例编号推断真实硬件损坏或唯一修复方法。本次没有将1175验证或声称为 NVIDIA 官方错误码定义；driver initialization failed 仅按教学示例日志记录核对。",
+      "external_reference_ids": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "正确拒绝了无依据的硬件损坏结论和唯一修复命令，并说明需补充完整日志与环境信息。没有把邻近编号或显存不足文档当成直接诊断依据。"
+    },
+    {
+      "id": "qa_005",
+      "question": "这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？",
+      "answerable": false,
+      "review_type": "ai_assisted_review",
+      "status": "ai_reviewed_pending_human_verification",
+      "reviewer": "AI assistant",
+      "human_verified": false,
+      "scores": {
+        "faithfulness": 2,
+        "answer_relevance": 2,
+        "factual_correctness": 2
+      },
+      "required_facts_covered": [
+        {
+          "fact": "现有资料不能确定当前机器的型号和版本",
+          "covered": true,
+          "answer_quote": "资料中没有提供这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本，因此无法根据现有资料回答",
+          "notes": ""
+        },
+        {
+          "fact": "不编造具体硬件型号或版本号",
+          "covered": true,
+          "answer_quote": "资料中没有提供这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本，因此无法根据现有资料回答。文档仅提到排查 CUDA error 1175 时应核对 GPU 驱动、CUDA 运行时与框架版本，但没有给出具体版本信息。",
+          "notes": "这是对全文没有编造具体型号/版本的判断，附完整答案供复核。"
+        },
+        {
+          "fact": "需要当前环境的实际检测信息",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "未明确请求当前环境的实际检测信息，不能把评审者的建议当作原答案已经覆盖。"
+        }
+      ],
+      "supporting_context_document_ids": [
+        "cuda_oom",
+        "cuda_1175",
+        "rag_overview"
+      ],
+      "unsupported_claims": [],
+      "factual_correctness_basis": "已检查实际提供的三份文档：它们只含通用技术说明和示例日志，没有当前机器的型号、驱动或运行时版本。回答只说明现有资料不能确定，没有声称知道实际环境，因此未发现关键事实错误。本评审未执行本机环境探测。",
+      "external_reference_ids": [],
+      "insufficient_evidence_handled": true,
+      "review_notes": "直接且忠实地说明信息不足，也没有编造数值。第三项“需要当前环境实际检测信息”没有明确提出补充请求，判为未覆盖；不因这一补充步骤缺失重复扣减核心问题的切题性或事实正确性。建议补充“请提供当前机器的实际环境检测结果，以便确认这些信息”。"
+    }
+  ],
+  "summary": {
+    "scope": "AI辅助评审这5条已采集答案；不作为独立人工审核或生产环境质量结论",
+    "sample_count": 5,
+    "ai_score_means": {
+      "faithfulness": 2.0,
+      "answer_relevance": 2.0,
+      "factual_correctness": 2.0
+    },
+    "required_facts_covered": 14,
+    "required_facts_total": 15,
+    "required_facts_coverage": 0.9333333333333333,
+    "unsupported_claims_found": 0,
+    "insufficient_evidence_cases": 2,
+    "insufficient_evidence_handled": 2,
+    "human_reviewed_count_unchanged": 1
+  },
+  "limitations": [
+    "仅5个教学问题；参考标签仍需人工复核。",
+    "AI评审可能漏判，三个维度均值满分不等于系统始终可靠。",
+    "未新增任何自动评审代码、LLM-as-a-Judge API、依赖或评审者身份伪装。",
+    "CUDA编号按合成日志解释，没有独立核验其为真实官方错误编号。"
+  ]
+}

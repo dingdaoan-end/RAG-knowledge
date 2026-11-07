@@ -1,0 +1,28 @@
+Generation: {'mode': 'mock', 'implementation': 'MockLLM', 'model': 'MockLLM'}
+
+qa_001: RAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？
+answerable=True, context_document_ids=['rag_evidence', 'rag_limits', 'rag_terms']
+answer: 这是基于知识库资料生成的测试回答
+人工评审: pending，所有评分尚未填写
+
+qa_002: FAISS IndexFlatIP 在什么条件下等价于余弦相似度检索？
+answerable=True, context_document_ids=['faiss_ip', 'cosine_unit', 'bm25_terms']
+answer: 这是基于知识库资料生成的测试回答
+人工评审: pending，所有评分尚未填写
+
+qa_003: Cross-Encoder 为什么不能提前为每篇文档计算一个适用于所有问题的固定重排分数？
+answerable=True, context_document_ids=['reranker_pairs', 'embedding_bge', 'faiss_ip']
+answer: 这是基于知识库资料生成的测试回答
+人工评审: pending，所有评分尚未填写
+
+qa_004: 只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？
+answerable=False, context_document_ids=['cuda_1175', 'cuda_oom', 'cuda_1176']
+answer: 这是基于知识库资料生成的测试回答
+人工评审: pending，所有评分尚未填写
+
+qa_005: 这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？
+answerable=False, context_document_ids=['cuda_oom', 'cuda_1175', 'rag_overview']
+answer: 这是基于知识库资料生成的测试回答
+人工评审: pending，所有评分尚未填写
+
+Records saved: D:\RAGrepository\results\day8_qa_mock.json

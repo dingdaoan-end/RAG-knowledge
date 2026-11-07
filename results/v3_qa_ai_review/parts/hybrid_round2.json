@@ -1,0 +1,1479 @@
+[
+  {
+    "id": "qa_001",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_001 参考答案及 retrieval_eval_v3 语料 rag_evidence,rag_limits,rag_overview；实际给模型的证据为 rag_evidence,rag_terms,rag_limits。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "检索外部知识",
+          "covered": true,
+          "answer_quote": "检索到的资料",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "向生成模型提供相关事实和证据",
+          "covered": true,
+          "answer_quote": "向模型提供可参考的外部事实和证据",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "不能保证完全消除幻觉",
+          "covered": true,
+          "answer_quote": "不能保证完全消除幻觉",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。“检索到的资料”与“外部事实和证据”合读覆盖外部检索，不因未复述“知识库”扣分。"
+    }
+  },
+  {
+    "id": "qa_002",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_002 参考答案及 retrieval_eval_v3 语料 faiss_ip,cosine_unit；实际给模型的证据为 faiss_ip,cosine_unit,bm25_terms。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "查询向量和文档向量都需要 L2 归一化",
+          "covered": true,
+          "answer_quote": "查询向量和文档向量都先做 **L2 单位长度归一化**",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "归一化后的范数为 1",
+          "covered": true,
+          "answer_quote": "范数为 1",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "单位向量的内积等于余弦相似度",
+          "covered": true,
+          "answer_quote": "cosine(q,d)=q·d",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_003",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_003 参考答案及 retrieval_eval_v3 语料 reranker_pairs；实际给模型的证据为 reranker_pairs,cuda_1175,chunk_overlap。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "联合编码 query 与 document 文本对",
+          "covered": true,
+          "answer_quote": "query 与 document.text 组成文本对联合编码",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "相关性分数依赖具体问题",
+          "covered": true,
+          "answer_quote": "同一篇文档面对不同问题会得到不同分数",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "不能预计算适用于所有问题的固定重排分数",
+          "covered": true,
+          "answer_quote": "不能提前计算一个适用于所有问题的固定 rerank score",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_006",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_006 参考答案及 retrieval_eval_v3 语料 rag_overview；实际给模型的证据为 rag_overview,rag_evidence,api_stream。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "先从外部知识库检索与问题相关的信息",
+          "covered": true,
+          "answer_quote": "先从外部知识库检索与问题相关的信息",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "把检索结果放入提示词",
+          "covered": true,
+          "answer_quote": "把检索结果放入提示词",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "交给大语言模型组织答案",
+          "covered": true,
+          "answer_quote": "交给大语言模型组织答案",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_007",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_007 参考答案及 retrieval_eval_v3 语料 rag_terms；实际给模型的证据为 rag_terms,rag_evidence,rag_limits。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "只是术语索引",
+          "covered": true,
+          "answer_quote": "只是术语索引",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "不解释 RAG 为什么可以降低大模型幻觉",
+          "covered": true,
+          "answer_quote": "不解释 RAG 为什么可以降低大模型幻觉",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "没有给出相关机制",
+          "covered": true,
+          "answer_quote": "没有给出相关机制",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_008",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_008 参考答案及 retrieval_eval_v3 语料 rag_limits；实际给模型的证据为 rag_limits,rag_overview,rag_terms。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "检索错误",
+          "covered": true,
+          "answer_quote": "检索错误",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "资料过时",
+          "covered": true,
+          "answer_quote": "资料过时",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "上下文缺失",
+          "covered": true,
+          "answer_quote": "上下文缺失",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "模型误读",
+          "covered": true,
+          "answer_quote": "模型误读",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_009",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_009 参考答案及 retrieval_eval_v3 语料 rag_evidence,rag_limits；实际给模型的证据为 rag_limits,rag_overview,rag_evidence。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "资料不足时应说明无法回答",
+          "covered": true,
+          "answer_quote": "助手应明确说明无法回答",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "核查来源和引用",
+          "covered": true,
+          "answer_quote": "核查来源和引用",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_010",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_010 参考答案及 retrieval_eval_v3 语料 embedding_bge；实际给模型的证据为 embedding_bge,transformer_attention,chunk_overlap。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": true,
+          "answer_quote": "稠密语义向量",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "含义接近的文本通常在向量空间更接近",
+          "covered": true,
+          "answer_quote": "向量空间中更接近",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_011",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_011 参考答案及 retrieval_eval_v3 语料 embedding_bge；实际给模型的证据为 embedding_bge,rag_evidence,transformer_attention。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "sentence-transformers",
+          "covered": true,
+          "answer_quote": "sentence-transformers",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "BAAI/bge-small-zh-v1.5",
+          "covered": true,
+          "answer_quote": "BAAI/bge-small-zh-v1.5",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "文档向量可以提前计算",
+          "covered": true,
+          "answer_quote": "可提前计算的对象：文档向量",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_012",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_012 参考答案及 retrieval_eval_v3 语料 cosine_unit；实际给模型的证据为 cosine_unit,faiss_ip,hybrid_fusion。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "把向量除以它的欧几里得长度",
+          "covered": true,
+          "answer_quote": "把向量除以它的欧几里得长度",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "使向量范数等于 1",
+          "covered": true,
+          "answer_quote": "归一化后的向量范数是：**1**",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_013",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_013 参考答案及 retrieval_eval_v3 语料 faiss_ip；实际给模型的证据为 faiss_ip,cosine_unit,hybrid_fusion。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "对索引内全部文档向量执行精确内积搜索",
+          "covered": true,
+          "answer_quote": "索引内的全部文档向量**，执行精确内积搜索",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "返回内积最大的 Top-K",
+          "covered": true,
+          "answer_quote": "内积值最大**选出 Top-K",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_014",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_014 参考答案及 retrieval_eval_v3 语料 bm25_terms；实际给模型的证据为 bm25_terms,reranker_pairs,hybrid_fusion。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "词频",
+          "covered": true,
+          "answer_quote": "词频",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "文档频率",
+          "covered": true,
+          "answer_quote": "文档频率",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "文档长度",
+          "covered": true,
+          "answer_quote": "文档长度",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_015",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_015 参考答案及 retrieval_eval_v3 语料 bm25_terms；实际给模型的证据为 bm25_terms,cosine_unit,cuda_1175。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "基于词项匹配",
+          "covered": true,
+          "answer_quote": "精确关键词的保留和匹配能力",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "错误编号、产品型号等精确关键词",
+          "covered": true,
+          "answer_quote": "错误编号、产品型号等精确关键词",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "纯向量语义检索可能混淆很相似的编号",
+          "covered": true,
+          "answer_quote": "纯向量语义检索可能混淆很相似的编号",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。精确关键词的保留/匹配是词项匹配的等价表达；“更有利于”未声称绝对保证，不认定为保证性幻觉。"
+    }
+  },
+  {
+    "id": "qa_016",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_016 参考答案及 retrieval_eval_v3 语料 hybrid_fusion；实际给模型的证据为 hybrid_fusion,cosine_unit,transformer_attention。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "融合向量语义匹配和 BM25 关键词匹配",
+          "covered": true,
+          "answer_quote": "向量语义匹配**和 **BM25 关键词匹配",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "两路原始分数范围不同",
+          "covered": true,
+          "answer_quote": "两路原始分数的范围不同",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "分别做 Min-Max 归一化",
+          "covered": true,
+          "answer_quote": "Min-Max 归一化",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_017",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_017 参考答案及 retrieval_eval_v3 语料 hybrid_fusion；实际给模型的证据为 hybrid_fusion,transformer_attention,faiss_ip。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "默认 alpha=0.7",
+          "covered": true,
+          "answer_quote": "alpha=0.7",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "alpha*vector_norm+(1-alpha)*bm25_norm",
+          "covered": true,
+          "answer_quote": "alpha * vector_norm + (1 - alpha) * bm25_norm",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_018",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_018 参考答案及 retrieval_eval_v3 语料 cosine_unit,hybrid_fusion；实际给模型的证据为 cosine_unit,hybrid_fusion,faiss_ip。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "把向量除以它的欧几里得长度",
+          "covered": true,
+          "answer_quote": "把向量除以自身欧几里得长度",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "使向量范数等于 1",
+          "covered": true,
+          "answer_quote": "使向量范数等于 1",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "两路原始分数范围不同",
+          "covered": true,
+          "answer_quote": "两路检索原始分数范围不同",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "分别做 Min-Max 归一化",
+          "covered": true,
+          "answer_quote": "分别做 Min-Max 归一化",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_019",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_019 参考答案及 retrieval_eval_v3 语料 chunk_overlap；实际给模型的证据为 chunk_overlap,pdf_ocr,transformer_attention。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "把长文档拆成较短的 chunk",
+          "covered": true,
+          "answer_quote": "把长文档拆成较短的 chunk",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "相邻块保留一段重复内容",
+          "covered": true,
+          "answer_quote": "让相邻块保留一段重复内容",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "减少句子和上下文在边界被截断的影响",
+          "covered": true,
+          "answer_quote": "减少句子和上下文在块边界被截断的影响",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。资料没有解释额外切块动机，答案没有擅自补写，三项要求均覆盖。"
+    }
+  },
+  {
+    "id": "qa_020",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_020 参考答案及 retrieval_eval_v3 语料 chunk_overlap；实际给模型的证据为 chunk_overlap,transformer_attention,rag_limits。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "overlap 必须小于 chunk_size",
+          "covered": true,
+          "answer_quote": "`chunk_overlap` 必须小于 `chunk_size`",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "步长不能正常前进",
+          "covered": true,
+          "answer_quote": "步长不能正常前进",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_021",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_021 参考答案及 retrieval_eval_v3 语料 reranker_pairs；实际给模型的证据为 reranker_pairs,transformer_attention,api_stream。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "query 与 document.text 组成文本对",
+          "covered": true,
+          "answer_quote": "query 与候选文档的 document.text 组成的文本对",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "联合编码后输出相关性分数",
+          "covered": true,
+          "answer_quote": "联合编码该文本对后，**输出一个相关性分数",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_022",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_022 参考答案及 retrieval_eval_v3 语料 reranker_pairs；实际给模型的证据为 reranker_pairs,chunk_overlap,cuda_1175。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "只重排检索召回的候选",
+          "covered": true,
+          "answer_quote": "只重排检索召回的候选",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_023",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_023 参考答案及 retrieval_eval_v3 语料 embedding_bge,reranker_pairs；实际给模型的证据为 reranker_pairs,embedding_bge,chunk_overlap。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "文档向量可以提前计算",
+          "covered": true,
+          "answer_quote": "文档向量可以提前计算",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "同一篇文档面对不同问题会得到不同分数",
+          "covered": true,
+          "answer_quote": "同一篇文档面对不同问题会得到不同分数",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "不能提前计算适用于所有问题的固定 rerank score",
+          "covered": true,
+          "answer_quote": "不能提前计算",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_024",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_024 参考答案及 retrieval_eval_v3 语料 cuda_1175；实际给模型的证据为 cuda_1176,cuda_1175,cuda_oom。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "driver initialization failed",
+          "covered": true,
+          "answer_quote": "driver initialization failed",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "记录完整错误日志",
+          "covered": true,
+          "answer_quote": "先记录完整错误日志",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "GPU 驱动、CUDA 运行时与框架版本",
+          "covered": true,
+          "answer_quote": "GPU 驱动、CUDA 运行时与框架版本",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_025",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_025 参考答案及 retrieval_eval_v3 语料 cuda_1176；实际给模型的证据为 cuda_1176,cuda_1175,cuda_oom。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "device index out of range",
+          "covered": true,
+          "answer_quote": "device index out of range",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "请求的设备序号和可见 GPU 列表",
+          "covered": true,
+          "answer_quote": "请求的设备序号**以及**可见 GPU 列表",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "不能把 CUDA error 1175 的日志线索直接套过来",
+          "covered": true,
+          "answer_quote": "不能照搬 CUDA error 1175 的线索",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。仅按本题示例理解 1175/1176，不当作官方错误码通用定义。"
+    }
+  },
+  {
+    "id": "qa_026",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_026 参考答案及 retrieval_eval_v3 语料 cuda_oom；实际给模型的证据为 cuda_oom,cuda_1176,cuda_1175。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "当前计算需要的 GPU 显存不足",
+          "covered": true,
+          "answer_quote": "当前计算所需的 GPU 显存不足",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "减少 batch size、缩短输入或释放不再使用的张量",
+          "covered": true,
+          "answer_quote": "减少 batch size\n- 缩短输入\n- 释放不再使用的张量",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "其他进程占用显存",
+          "covered": true,
+          "answer_quote": "其他进程占用显存",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_027",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_027 参考答案及 retrieval_eval_v3 语料 cuda_1175,cuda_1176；实际给模型的证据为 cuda_1176,cuda_1175,bm25_terms。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "driver initialization failed",
+          "covered": true,
+          "answer_quote": "driver initialization failed",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "device index out of range",
+          "covered": true,
+          "answer_quote": "device index out of range",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "核对 GPU 驱动、CUDA 运行时与框架版本",
+          "covered": true,
+          "answer_quote": "GPU 驱动、CUDA 运行时与框架版本",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "请求的设备序号和可见 GPU 列表",
+          "covered": true,
+          "answer_quote": "请求的设备序号**和**可见 GPU 列表",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_028",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_028 参考答案及 retrieval_eval_v3 语料 cuda_oom,cuda_1176；实际给模型的证据为 cuda_oom,cuda_1176,cuda_1175。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "GPU 显存不足",
+          "covered": true,
+          "answer_quote": "显存不足（CUDA out of memory）",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "device index out of range",
+          "covered": true,
+          "answer_quote": "device index out of range",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "减少 batch size",
+          "covered": true,
+          "answer_quote": "减少 batch size",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "设备序号和可见 GPU 列表",
+          "covered": true,
+          "answer_quote": "请求的设备序号和可见 GPU 列表",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。“显存不足（CUDA out of memory）”结合后续显存占用检查，语义覆盖 GPU 显存不足。"
+    }
+  },
+  {
+    "id": "qa_029",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_029 参考答案及 retrieval_eval_v3 语料 pdf_ocr；实际给模型的证据为 pdf_ocr,rag_limits,chunk_overlap。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "只有图片，没有可提取的文本层",
+          "covered": true,
+          "answer_quote": "只有图片、没有可提取的文本层",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "先用 OCR 把图片转成文字",
+          "covered": true,
+          "answer_quote": "OCR 把图片转成文字",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "清洗、切块和 Embedding",
+          "covered": true,
+          "answer_quote": "清洗、切块和 Embedding",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_030",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_030 参考答案及 retrieval_eval_v3 语料 pdf_ocr,chunk_overlap；实际给模型的证据为 chunk_overlap,pdf_ocr,faiss_ip。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "先用 OCR 把图片转成文字",
+          "covered": true,
+          "answer_quote": "OCR 把图片转成文字",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "把长文档拆成较短的 chunk",
+          "covered": true,
+          "answer_quote": "把长文档拆成较短的 chunk",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "相邻块保留一段重复内容",
+          "covered": true,
+          "answer_quote": "让相邻块保留一段重复内容",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "减少句子和上下文在边界被截断的影响",
+          "covered": true,
+          "answer_quote": "减少句子和上下文在边界被截断的影响",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。“切成长文档时”为局部语病，后句明确拆为短 chunk，未改变技术事实。"
+    }
+  },
+  {
+    "id": "qa_031",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_031 参考答案及 retrieval_eval_v3 语料 pdf_ocr,embedding_bge；实际给模型的证据为 pdf_ocr,embedding_bge,hybrid_fusion。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "OCR 把图片转成文字",
+          "covered": true,
+          "answer_quote": "图片转换成文字",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "Embedding 将文本编码为稠密语义向量",
+          "covered": true,
+          "answer_quote": "文本编码成稠密语义向量",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_032",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_032 参考答案及 retrieval_eval_v3 语料 transformer_attention；实际给模型的证据为 transformer_attention,rag_overview,api_stream。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "Query、Key、Value",
+          "covered": true,
+          "answer_quote": "Query、Key、Value",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "建模上下文关系",
+          "covered": true,
+          "answer_quote": "建模上下文关系",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "缩放点积及 softmax",
+          "covered": true,
+          "answer_quote": "缩放点积及 softmax",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_033",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_033 参考答案及 retrieval_eval_v3 语料 bm25_terms,transformer_attention；实际给模型的证据为 bm25_terms,transformer_attention,embedding_bge。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "词频、文档频率和文档长度",
+          "covered": true,
+          "answer_quote": "词频、文档频率和文档长度",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "与其他 Token 交互",
+          "covered": true,
+          "answer_quote": "与其他 Token 交互",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "缩放点积及 softmax",
+          "covered": true,
+          "answer_quote": "缩放点积及 softmax",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_034",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_034 参考答案及 retrieval_eval_v3 语料 python_venv；实际给模型的证据为 python_venv,api_stream,cuda_oom。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "虚拟环境 Python",
+          "covered": true,
+          "answer_quote": ".venv` 虚拟环境",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": ".\\.venv\\Scripts\\python.exe main.py",
+          "covered": true,
+          "answer_quote": ".\\.venv\\Scripts\\python.exe main.py",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "当前目录",
+          "covered": true,
+          "answer_quote": "当前目录",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "同一个 .venv 环境",
+          "covered": true,
+          "answer_quote": "同一个 `.venv` 虚拟环境",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。引用实际答案的单反斜杠 PowerShell 命令；JSON 中双反斜杠表示不作为命令错误。"
+    }
+  },
+  {
+    "id": "qa_035",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 1,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_035 参考答案及 retrieval_eval_v3 语料 api_stream,embedding_bge；实际给模型的证据为 rag_overview,api_stream,rag_terms。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "FastAPI 可以把 RAG 问答封装为 HTTP 接口",
+          "covered": true,
+          "answer_quote": "把 RAG 问答封装为 HTTP 接口",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "实际上下文缺少该部分证据，答案未覆盖；不以参考答案补入生成。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际 Top-3 没有 embedding_bge；模型忠实承认缺少向量化信息，但只完成 HTTP 职责，未完成问题两组件比较，切题性1，不能把缺失当成错误事实。"
+    }
+  },
+  {
+    "id": "qa_036",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_036 参考答案及 retrieval_eval_v3 语料 api_stream；实际给模型的证据为 api_stream,transformer_attention,reranker_pairs。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "普通响应在答案生成结束后一次返回",
+          "covered": true,
+          "answer_quote": "答案生成结束后**一次返回",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "随生成进度逐段发送内容",
+          "covered": true,
+          "answer_quote": "随生成进度**逐段发送内容",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "更早看到输出",
+          "covered": true,
+          "answer_quote": "让客户端更早看到输出",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_037",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_037 参考答案及 retrieval_eval_v3 语料 rag_overview,api_stream；实际给模型的证据为 api_stream,rag_overview,rag_terms。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "把检索结果放入提示词",
+          "covered": true,
+          "answer_quote": "放入提示词中",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "交给大语言模型组织答案",
+          "covered": true,
+          "answer_quote": "组织并生成答案",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "封装为 HTTP 接口",
+          "covered": true,
+          "answer_quote": "封装成 HTTP 接口",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_038",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_038 参考答案及 retrieval_eval_v3 语料 hybrid_fusion,reranker_pairs；实际给模型的证据为 reranker_pairs,hybrid_fusion,bm25_terms。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "融合向量语义匹配和 BM25 关键词匹配",
+          "covered": true,
+          "answer_quote": "向量语义匹配分数和 BM25 关键词匹配分数",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "分别做 Min-Max 归一化",
+          "covered": true,
+          "answer_quote": "分别做 Min-Max 归一化",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "alpha*vector_norm+(1-alpha)*bm25_norm",
+          "covered": true,
+          "answer_quote": "alpha*vector_norm+(1-alpha)*bm25_norm",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "联合编码后输出相关性分数",
+          "covered": true,
+          "answer_quote": "联合编码后输出相关性分数",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "只重排检索召回的候选",
+          "covered": true,
+          "answer_quote": "重排检索召回的候选",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_039",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_039 参考答案及 retrieval_eval_v3 语料 embedding_bge,faiss_ip；实际给模型的证据为 faiss_ip,embedding_bge,bm25_terms。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": true,
+          "answer_quote": "把文本编码为稠密语义向量",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "对索引内全部文档向量执行精确内积搜索",
+          "covered": true,
+          "answer_quote": "对索引内全部文档向量执行精确内积搜索",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "返回内积最大的 Top-K",
+          "covered": true,
+          "answer_quote": "返回内积最大的 Top-K",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_040",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 1,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_040 参考答案及 retrieval_eval_v3 语料 chunk_overlap,embedding_bge,faiss_ip,rag_overview；实际给模型的证据为 faiss_ip,rag_overview,bm25_terms。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "把长文档拆成较短的 chunk",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "实际上下文缺少该部分证据，答案未覆盖；不以参考答案补入生成。"
+        },
+        {
+          "fact": "将文本编码为稠密语义向量",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "实际上下文缺少该部分证据，答案未覆盖；不以参考答案补入生成。"
+        },
+        {
+          "fact": "返回内积最大的 Top-K",
+          "covered": true,
+          "answer_quote": "返回内积最大的 Top-K",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "把检索结果放入提示词",
+          "covered": true,
+          "answer_quote": "把检索结果放入提示词",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。全库参考可回答，但实际 context 缺 chunk_overlap 和 embedding_bge。模型未编造该两步，忠实度2；只完成后半流程，切题性1，首两项覆盖false。"
+    }
+  },
+  {
+    "id": "qa_041",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_041 参考答案及 retrieval_eval_v3 语料 embedding_bge,bm25_terms,hybrid_fusion；实际给模型的证据为 hybrid_fusion,bm25_terms,embedding_bge。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "含义接近的文本通常在向量空间更接近",
+          "covered": true,
+          "answer_quote": "含义接近的文本在向量空间中更接近",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "纯向量语义检索可能混淆很相似的编号",
+          "covered": true,
+          "answer_quote": "纯向量语义检索可能混淆很相似的编号",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "向量语义匹配和 BM25 关键词匹配",
+          "covered": true,
+          "answer_quote": "融合向量语义匹配和 BM25 关键词匹配",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际上下文支持所述核心事实；问题核心得到回答，未发现额外无依据事实。"
+    }
+  },
+  {
+    "id": "qa_042",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 1,
+      "answer_relevance": 2,
+      "factual_correctness": 1,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_042 参考答案及 retrieval_eval_v3 语料 rag_limits；实际给模型的证据为 rag_limits,rag_evidence,rag_overview。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。条件扩展与参考不符，见无依据断言。",
+      "required_facts_covered": [
+        {
+          "fact": "资料过时",
+          "covered": true,
+          "answer_quote": "资料过时仍可能导致错误回答",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "核查来源和引用",
+          "covered": true,
+          "answer_quote": "核查来源和引用",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "知识库缺乏答案时明确说明",
+          "covered": true,
+          "answer_quote": "如果资料不足或已过时，应明确说明无法回答",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [
+        {
+          "claim": "把资料已过时直接视为必须无法回答的充分条件",
+          "answer_quote": "如果资料不足或已过时，应明确说明无法回答",
+          "reason": "实际 rag_limits 仅说资料过时可能导致错误，应核查来源；rag_evidence 在资料不足时要求说明无法回答。并未规定一切过时资料均不能回答，条件被扩大。",
+          "context_document_ids": [
+            "rag_limits",
+            "rag_evidence"
+          ]
+        }
+      ],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。“已过时”被直接并入必须无法回答，超出原文“资料不足/缺乏答案才拒答”；过期资料应核查适用性，并非一概不能回答。核心方向正确，但存在局部政策条件过度扩展，忠实度1、事实正确性1。"
+    }
+  },
+  {
+    "id": "qa_043",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 1,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_043 参考答案及 retrieval_eval_v3 语料 transformer_attention,faiss_ip；实际给模型的证据为 transformer_attention,faiss_ip,cosine_unit。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "建模上下文关系",
+          "covered": true,
+          "answer_quote": "建模上下文关系",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "注意力权重来自缩放点积及 softmax",
+          "covered": true,
+          "answer_quote": "经过缩放和 softmax",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "返回内积最大的 Top-K",
+          "covered": true,
+          "answer_quote": "返回内积最大的 Top-K 文档",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [
+        {
+          "claim": "声称资料明确将注意力权重称作 Self-Attention 的输出",
+          "answer_quote": "资料明确提到输出“注意力权重”",
+          "reason": "实际 transformer_attention 只解释注意力权重的来源，没有明确将该中间量定义为 Self-Attention 的最终输出；后续限制语降低了实质错误程度，但无法使“资料明确”这一来源归因成立。",
+          "context_document_ids": [
+            "transformer_attention"
+          ]
+        }
+      ],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。“资料明确提到输出注意力权重”比原文“权重来自缩放点积及softmax”更强，是不准确的来源归因。答案随后明确最终上下文表示形式未说明，未断言 Self-Attention 最终只输出权重；故忠实度1，核心机制/Top-K与参考相符，事实正确性2，建议用户复核这一边界。"
+    }
+  },
+  {
+    "id": "qa_044",
+    "review": {
+      "status": "completed",
+      "reviewer": "Codex AI（非人工评审）",
+      "reviewed_at": "2026-10-27T21:43:33.641539+08:00",
+      "faithfulness": 2,
+      "answer_relevance": 2,
+      "factual_correctness": 2,
+      "factual_correctness_basis": "本地核对冻结 qa_eval_v3 qa_044 参考答案及 retrieval_eval_v3 语料 bm25_terms,cuda_1175,cuda_1176；实际给模型的证据为 cuda_1175,cuda_1176,cuda_oom。不将示例 CUDA 日志当作官方编号定义，不声称外部认证。核心已回答事实与这些依据一致；缺失另记覆盖。",
+      "required_facts_covered": [
+        {
+          "fact": "词项匹配",
+          "covered": false,
+          "answer_quote": null,
+          "notes": "实际上下文缺少该部分证据，答案未覆盖；不以参考答案补入生成。"
+        },
+        {
+          "fact": "编号本身不足以确定修复方法",
+          "covered": true,
+          "answer_quote": "编号本身不足以确定修复方法",
+          "notes": "答案原文覆盖该语义事实。"
+        },
+        {
+          "fact": "不能把 CUDA error 1175 的日志线索直接套过来",
+          "covered": true,
+          "answer_quote": "不能把 1175 的日志线索直接套过来",
+          "notes": "答案原文覆盖该语义事实。"
+        }
+      ],
+      "unsupported_claims": [],
+      "insufficient_evidence_handled": null,
+      "review_notes": "AI离线逐份语义核对，不是人工认证。实际 Top-3 没有 bm25_terms，答案没有解释词项匹配，第一项覆盖false；问题核心的日志核对理由已直接回答，切题性仍2。"
+    }
+  }
+]

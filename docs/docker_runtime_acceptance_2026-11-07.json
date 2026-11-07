@@ -1,0 +1,121 @@
+{
+  "date": "2026-11-07",
+  "timezone": "Asia/Shanghai",
+  "compose_config_check": "passed",
+  "image_rebuilt": false,
+  "image_id": "sha256:e57763d7ff903a5db5f307dce149c765fcf8f812197b4f1c6d94eac2c33634cc",
+  "service": {
+    "Name": "rag-knowledge-api",
+    "ID": "ae40b3a46bbc",
+    "State": "running",
+    "Health": "healthy",
+    "Image": "rag-knowledge-api:local",
+    "Ports": "127.0.0.1:8000->8000/tcp"
+  },
+  "health": {
+    "http_status": 200,
+    "body": {
+      "status": "ok"
+    }
+  },
+  "ready": {
+    "http_status": 200,
+    "body": {
+      "status": "ready"
+    }
+  },
+  "swagger": {
+    "http_status": 200,
+    "swagger_present": true
+  },
+  "pdf_upload": {
+    "http_status": 201,
+    "result": {
+      "status": "indexed",
+      "document_id": "bfa523d6243c45fc8eca7e7ea82dae4f",
+      "filename": "docker-acceptance-20261107.pdf",
+      "file_type": ".pdf",
+      "size": 945,
+      "sha256": "5af21a0acf17a2aa0698b3f4e1f83641f7ea90a30abf8ca492a4b67ed628753e",
+      "chunk_count": 1
+    },
+    "request_id": "a279584bef0545f89b65e53ae693bef9",
+    "pdf_sha256": "5af21a0acf17a2aa0698b3f4e1f83641f7ea90a30abf8ca492a4b67ed628753e",
+    "expected_facts": [
+      "RAG-PDF-7821",
+      "47 minutes"
+    ]
+  },
+  "chat_before": {
+    "question": "According to the Orion RAG Deployment Acceptance Sample PDF, what are the Orion launch code and verification window? Answer briefly in English and cite the source.",
+    "http_status": 200,
+    "status": "answered",
+    "elapsed_seconds": 4.172,
+    "request_id": "240bd12e0ded4e05bd6f54f4bcc646bb",
+    "answer_nonempty": true,
+    "expected_code_present": true,
+    "expected_window_present": true,
+    "obvious_missing_evidence_phrase": false,
+    "uploaded_document_in_sources": true
+  },
+  "chat_after": {
+    "container_id": "ae40b3a46bbca9e3b7868e82d7f329c9091cf4a8f38cf98e8bd4f1f56c4dc4f5",
+    "previous_container_id": "153c20cd73cacbd734f6a7fa674fc7fda56df963cc92ef6c34bd03633668dfa8",
+    "container_recreated": true,
+    "image_id_unchanged": true,
+    "image_id": "sha256:e57763d7ff903a5db5f307dce149c765fcf8f812197b4f1c6d94eac2c33634cc",
+    "ready_seconds": 0.078,
+    "persisted_files_identical": true,
+    "http_status": 200,
+    "status": "answered",
+    "elapsed_seconds": 3.375,
+    "request_id": "5410cf7fc4bc4a4280ca08998b49ae56",
+    "answer_nonempty": true,
+    "expected_code_present": true,
+    "expected_window_present": true,
+    "obvious_missing_evidence_phrase": false,
+    "uploaded_document_in_sources": true
+  },
+  "verified_source": {
+    "document_id": "bfa523d6243c45fc8eca7e7ea82dae4f",
+    "source": "docker-acceptance-20261107.pdf",
+    "chunk_id": 0,
+    "content": "Orion RAG Deployment Acceptance Sample\nSynthetic test evidence for PDF ingestion and persistence.\nThe Orion launch code is RAG-PDF-7821.\nThe verification window is 47 minutes.\nThese are test labels, not production configuration.",
+    "rank": 1,
+    "score": 8.634111404418945,
+    "page": 1
+  },
+  "duplicate_after_recovery": {
+    "http_status": 200,
+    "result": {
+      "status": "duplicate",
+      "document_id": "bfa523d6243c45fc8eca7e7ea82dae4f",
+      "filename": "docker-acceptance-20261107.pdf",
+      "file_type": ".pdf",
+      "size": 945,
+      "sha256": "5af21a0acf17a2aa0698b3f4e1f83641f7ea90a30abf8ca492a4b67ed628753e",
+      "chunk_count": 1
+    }
+  },
+  "pdf_and_manifest_bytes_unchanged": true,
+  "logical_real_llm_requests": 2,
+  "logical_real_llm_successes": 2,
+  "logical_real_llm_failures": 0,
+  "sdk_http_attempts": "not_separately_instrumented",
+  "protected_files_checked": 291,
+  "protected_changes": [],
+  "algorithms_modified": false,
+  "model_downloads": 0,
+  "down_v_executed": false,
+  "full_model_answers_saved": false,
+  "approval_rejection": {
+    "action": "combined full-log inspection, container identity check and browser launch",
+    "result": "blocked by policy",
+    "specific_reason": "not provided",
+    "action_not_retried": true
+  },
+  "limitations": [
+    "This confirms only the synthetic acceptance sample, not overall QA quality.",
+    "Swagger HTML was checked via HTTP; automatic browser launch and full log inspection were not completed."
+  ]
+}

@@ -1,0 +1,5 @@
+# Evaluation datasets and frozen reports bind SHA256 to the original bytes.
+# Preserve line endings on every platform, including Windows clones.
+* -text
+*.pdf binary
+*.png binary

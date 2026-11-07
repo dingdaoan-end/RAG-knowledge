@@ -1,0 +1,23 @@
+{
+  "health": {
+    "http_status": 200,
+    "body": {
+      "status": "ok"
+    }
+  },
+  "ready": {
+    "http_status": 200,
+    "body": {
+      "status": "ready"
+    }
+  },
+  "initialization_probe_seconds": 0.0,
+  "docs": {
+    "http_status": 200,
+    "swagger_present": true
+  },
+  "openapi": {
+    "http_status": 200,
+    "required_routes_present": true
+  }
+}

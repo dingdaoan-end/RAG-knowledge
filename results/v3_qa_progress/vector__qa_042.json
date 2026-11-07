@@ -1,0 +1,289 @@
+{
+  "method": "vector",
+  "qa_id": "qa_042",
+  "query_id": "qa_042",
+  "question": "知识库资料可能过时时，应怎样对待 RAG 答案的证据和引用？",
+  "retrieval_eval_query_ids": [],
+  "experiment_id": "9915eade108441c49d79ca173144894d",
+  "unit_id": "vector__qa_042",
+  "state": "finished",
+  "started_at": "2026-10-26T13:53:36.041578+00:00",
+  "http_attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-10-26T13:53:36.061745+00:00",
+      "http_status": 200
+    }
+  ],
+  "usage": {
+    "input_tokens": 342,
+    "output_tokens": 221,
+    "total_tokens": 563,
+    "cached_input_tokens": 0
+  },
+  "timings_ms": {
+    "llm": 1731.4517999984673,
+    "retrieval": 7.372200001555029,
+    "rerank": null,
+    "total": 1757.2040000013658
+  },
+  "llm_called": true,
+  "unit_digest": "1f72548ceae9cd264f5a797be35bf5134b2164ef322769e83fe3241567d381eb",
+  "actual_prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: rag.md\nchunk_id: 2\nrank: 1\nscore: 0.6837762594223022\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 2]\nsource: rag.md\nchunk_id: 1\nrank: 2\nscore: 0.6246144771575928\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 3]\nsource: rag.md\nchunk_id: 0\nrank: 3\nscore: 0.5897719860076904\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\nQuestion:\n\n知识库资料可能过时时，应怎样对待 RAG 答案的证据和引用？",
+  "returned_generation_parameters": {
+    "temperature": 1.0,
+    "top_p": 1.0
+  },
+  "provider_response_status": "completed",
+  "returned_model": "deepseek-flash",
+  "status": "success",
+  "record": {
+    "id": "qa_042",
+    "question": "知识库资料可能过时时，应怎样对待 RAG 答案的证据和引用？",
+    "reference_answer": "资料过时可能导致错误回答，应核查来源和引用；并在知识库缺乏答案时明确说明，不能仅因为已检索到资料就认为结论必然可靠。",
+    "required_facts": [
+      "资料过时",
+      "核查来源和引用",
+      "知识库缺乏答案时明确说明"
+    ],
+    "relevant_document_ids": [
+      "rag_limits"
+    ],
+    "answerable": true,
+    "answer": "应核查 RAG 答案所依据的来源和引用，不能盲信。因为 RAG 虽通过提供外部事实和证据降低幻觉，但资料过时、检索错误、上下文缺失或模型误读都可能导致错误回答；当知识库缺乏答案或资料不足时，应明确说明无法回答。",
+    "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: rag.md\nchunk_id: 2\nrank: 1\nscore: 0.6837762594223022\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 2]\nsource: rag.md\nchunk_id: 1\nrank: 2\nscore: 0.6246144771575928\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 3]\nsource: rag.md\nchunk_id: 0\nrank: 3\nscore: 0.5897719860076904\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。\n\nQuestion:\n\n知识库资料可能过时时，应怎样对待 RAG 答案的证据和引用？",
+    "context": "[Document 1]\nsource: rag.md\nchunk_id: 2\nrank: 1\nscore: 0.6837762594223022\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\n[Document 2]\nsource: rag.md\nchunk_id: 1\nrank: 2\nscore: 0.6246144771575928\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 3]\nsource: rag.md\nchunk_id: 0\nrank: 3\nscore: 0.5897719860076904\neval_id: rag_overview\n\ncontent:\nRAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+    "pipeline_status": "answered",
+    "llm_called": true,
+    "context_documents": [
+      {
+        "id": "rag_limits",
+        "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+        "metadata": {
+          "eval_id": "rag_limits",
+          "source": "rag.md",
+          "chunk_id": 2
+        },
+        "rank": 1,
+        "score": 0.6837762594223022
+      },
+      {
+        "id": "rag_evidence",
+        "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+        "metadata": {
+          "eval_id": "rag_evidence",
+          "source": "rag.md",
+          "chunk_id": 1
+        },
+        "rank": 2,
+        "score": 0.6246144771575928
+      },
+      {
+        "id": "rag_overview",
+        "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+        "metadata": {
+          "eval_id": "rag_overview",
+          "source": "rag.md",
+          "chunk_id": 0
+        },
+        "rank": 3,
+        "score": 0.5897719860076904
+      }
+    ],
+    "context_document_ids": [
+      "rag_limits",
+      "rag_evidence",
+      "rag_overview"
+    ],
+    "retrieval_query": "知识库资料可能过时时，应怎样对待 RAG 答案的证据和引用？",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "started_at": "2026-10-26T13:53:36.042564+00:00",
+    "elapsed_seconds": 1.7570784999988973,
+    "review": {
+      "status": "pending",
+      "reviewer": null,
+      "reviewed_at": null,
+      "faithfulness": null,
+      "answer_relevance": null,
+      "factual_correctness": null,
+      "factual_correctness_basis": null,
+      "required_facts_covered": [
+        {
+          "fact": "资料过时",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "核查来源和引用",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "知识库缺乏答案时明确说明",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        }
+      ],
+      "unsupported_claims": null,
+      "insufficient_evidence_handled": null,
+      "review_notes": ""
+    }
+  },
+  "bundle_run": {
+    "id": "8ddc8b7b971a49e18116b6e04fa163a6",
+    "started_at": "2026-10-26T13:53:36.042564+00:00",
+    "qa_dataset": {
+      "version": "3.0",
+      "sha256": "b854564a846d0ca022ffcdea59deb6487cbeab9ecdae828d4a41a749775548c4",
+      "metadata": {
+        "name": "rag_qa_teaching_v3",
+        "corpus_file": "retrieval_eval_v3.json",
+        "purpose": "采集实际答案、提示词、上下文与来源，供人工独立评审；参考答案和标签不进入生成提示词。",
+        "answerable_definition": "true 表示已有资料能回答所请求的事实；false 表示所请求的事实或确定结论无法由现有资料支持，期望说明证据限制，而不是猜测。",
+        "limitations": "50 个教学问题（42 个可回答、8 个无法确定所请求事实的负例），基于同一份 18 Chunk 冻结正文；新增问题由 Codex 对照正文检查，不代表独立人工认证。CUDA 编号为示例，不是当前用户环境事实。"
+      }
+    },
+    "corpus_sha256": "33a7d07e4554df865667592b3515133c210b23678c4fcb895a8cdfa9240e04d9",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "pipeline": {
+      "retriever": {
+        "implementation": "TimedSearch"
+      },
+      "reranker": null,
+      "query_rewriter": null,
+      "context_top_k": 3
+    },
+    "quality_scope": "pending_human_review",
+    "finished_at": "2026-10-26T13:53:37.799410+00:00",
+    "elapsed_seconds": 1.7571173000033014
+  },
+  "exception_type": null,
+  "pipeline_status": "answered",
+  "failed_stage": null,
+  "retrieval_candidates": [
+    {
+      "id": "rag_limits",
+      "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+      "metadata": {
+        "eval_id": "rag_limits",
+        "source": "rag.md",
+        "chunk_id": 2
+      },
+      "rank": 1,
+      "score": 0.6837762594223022
+    },
+    {
+      "id": "rag_evidence",
+      "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+      "metadata": {
+        "eval_id": "rag_evidence",
+        "source": "rag.md",
+        "chunk_id": 1
+      },
+      "rank": 2,
+      "score": 0.6246144771575928
+    },
+    {
+      "id": "rag_overview",
+      "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+      "metadata": {
+        "eval_id": "rag_overview",
+        "source": "rag.md",
+        "chunk_id": 0
+      },
+      "rank": 3,
+      "score": 0.5897719860076904
+    },
+    {
+      "id": "api_stream",
+      "text": "FastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+      "metadata": {
+        "eval_id": "api_stream",
+        "source": "api.md",
+        "chunk_id": 0
+      },
+      "rank": 4,
+      "score": 0.5475042462348938
+    },
+    {
+      "id": "cuda_1176",
+      "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+      "metadata": {
+        "eval_id": "cuda_1176",
+        "source": "cuda_examples.md",
+        "chunk_id": 1
+      },
+      "rank": 5,
+      "score": 0.5178803205490112
+    },
+    {
+      "id": "cuda_1175",
+      "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+      "metadata": {
+        "eval_id": "cuda_1175",
+        "source": "cuda_examples.md",
+        "chunk_id": 0
+      },
+      "rank": 6,
+      "score": 0.5168058276176453
+    },
+    {
+      "id": "transformer_attention",
+      "text": "Transformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。",
+      "metadata": {
+        "eval_id": "transformer_attention",
+        "source": "transformer.md",
+        "chunk_id": 0
+      },
+      "rank": 7,
+      "score": 0.5025280714035034
+    },
+    {
+      "id": "rag_terms",
+      "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+      "metadata": {
+        "eval_id": "rag_terms",
+        "source": "rag.md",
+        "chunk_id": 3
+      },
+      "rank": 8,
+      "score": 0.48600083589553833
+    },
+    {
+      "id": "embedding_bge",
+      "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+      "metadata": {
+        "eval_id": "embedding_bge",
+        "source": "embedding.md",
+        "chunk_id": 0
+      },
+      "rank": 9,
+      "score": 0.4788011312484741
+    },
+    {
+      "id": "faiss_ip",
+      "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+      "metadata": {
+        "eval_id": "faiss_ip",
+        "source": "faiss.md",
+        "chunk_id": 0
+      },
+      "rank": 10,
+      "score": 0.47059476375579834
+    }
+  ],
+  "reranked_candidates": [],
+  "retry_count": 0,
+  "finished_at": "2026-10-26T13:53:37.799410+00:00"
+}

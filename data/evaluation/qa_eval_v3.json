@@ -1,0 +1,732 @@
+{
+  "version": "3.0",
+  "corpus_sha256": "33a7d07e4554df865667592b3515133c210b23678c4fcb895a8cdfa9240e04d9",
+  "metadata": {
+    "name": "rag_qa_teaching_v3",
+    "corpus_file": "retrieval_eval_v3.json",
+    "purpose": "采集实际答案、提示词、上下文与来源，供人工独立评审；参考答案和标签不进入生成提示词。",
+    "answerable_definition": "true 表示已有资料能回答所请求的事实；false 表示所请求的事实或确定结论无法由现有资料支持，期望说明证据限制，而不是猜测。",
+    "limitations": "50 个教学问题（42 个可回答、8 个无法确定所请求事实的负例），基于同一份 18 Chunk 冻结正文；新增问题由 Codex 对照正文检查，不代表独立人工认证。CUDA 编号为示例，不是当前用户环境事实。"
+  },
+  "samples": [
+    {
+      "id": "qa_001",
+      "question": "RAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？",
+      "reference_answer": "RAG 检索外部知识，为生成模型提供相关事实和证据，减少仅凭参数记忆编造答案的情况。但检索错误、资料过时或模型误读仍会导致错误，因此不能保证完全消除幻觉。",
+      "required_facts": [
+        "检索外部知识",
+        "向生成模型提供相关事实和证据",
+        "不能保证完全消除幻觉"
+      ],
+      "relevant_document_ids": [
+        "rag_evidence",
+        "rag_limits",
+        "rag_overview"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_002",
+      "question": "FAISS IndexFlatIP 在什么条件下等价于余弦相似度检索？",
+      "reference_answer": "查询向量和文档向量都需要做 L2 归一化，使范数为 1；此时内积等于余弦相似度，IndexFlatIP 才能按余弦相似度进行检索。",
+      "required_facts": [
+        "查询向量和文档向量都需要 L2 归一化",
+        "归一化后的范数为 1",
+        "单位向量的内积等于余弦相似度"
+      ],
+      "relevant_document_ids": [
+        "faiss_ip",
+        "cosine_unit"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_003",
+      "question": "Cross-Encoder 为什么不能提前为每篇文档计算一个适用于所有问题的固定重排分数？",
+      "reference_answer": "Cross-Encoder 将问题和文档组成文本对联合编码，相关性分数同时依赖问题与文档。同一篇文档面对不同问题会得到不同分数，因此不能预计算适用于所有问题的固定分数。它只重排召回候选。",
+      "required_facts": [
+        "联合编码 query 与 document 文本对",
+        "相关性分数依赖具体问题",
+        "不能预计算适用于所有问题的固定重排分数"
+      ],
+      "relevant_document_ids": [
+        "reranker_pairs"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_004",
+      "question": "只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？",
+      "reference_answer": "不能仅凭这一编号确定显卡损坏，也不能给出唯一修复命令。知识库只有示例日志线索，缺少用户的完整日志和环境信息。应明确说明证据不足，并请求完整错误日志及驱动、运行时和框架版本。",
+      "required_facts": [
+        "不能仅凭错误编号认定显卡损坏",
+        "证据不足，不能给出唯一修复命令",
+        "需要完整日志和环境版本信息"
+      ],
+      "relevant_document_ids": [
+        "cuda_1175"
+      ],
+      "answerable": false
+    },
+    {
+      "id": "qa_005",
+      "question": "这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？",
+      "reference_answer": "知识库没有当前机器的实际硬件和软件版本信息，无法确定这些值。应说明资料不足，需要用户提供环境检测结果，不能把技术文档或示例日志当作当前机器的事实。",
+      "required_facts": [
+        "现有资料不能确定当前机器的型号和版本",
+        "不编造具体硬件型号或版本号",
+        "需要当前环境的实际检测信息"
+      ],
+      "relevant_document_ids": [],
+      "answerable": false
+    },
+    {
+      "id": "qa_006",
+      "question": "RAG 从用户问题到模型组织答案，资料描述了怎样的基本流程？",
+      "reference_answer": "RAG 先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+      "required_facts": [
+        "先从外部知识库检索与问题相关的信息",
+        "把检索结果放入提示词",
+        "交给大语言模型组织答案"
+      ],
+      "relevant_document_ids": [
+        "rag_overview"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_007",
+      "question": "rag_terms 这条资料能独立解释 RAG 降低幻觉的机制吗？",
+      "reference_answer": "不能。该条正文说明它只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+      "required_facts": [
+        "只是术语索引",
+        "不解释 RAG 为什么可以降低大模型幻觉",
+        "没有给出相关机制"
+      ],
+      "relevant_document_ids": [
+        "rag_terms"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_008",
+      "question": "知识库列举了哪些仍会使 RAG 回答出错的环节？",
+      "reference_answer": "资料列出检索错误、资料过时、上下文缺失或模型误读；这些情况都可能导致错误回答，因此不能将检索到资料等同于回答必然正确。",
+      "required_facts": [
+        "检索错误",
+        "资料过时",
+        "上下文缺失",
+        "模型误读"
+      ],
+      "relevant_document_ids": [
+        "rag_limits"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_009",
+      "question": "如果检索资料不足或缺乏答案，助手应如何表述，并做什么来源检查？",
+      "reference_answer": "资料不足时应说明无法回答；同时应该核查来源和引用，而不是在缺少答案时给出没有证据的确定结论。",
+      "required_facts": [
+        "资料不足时应说明无法回答",
+        "核查来源和引用"
+      ],
+      "relevant_document_ids": [
+        "rag_evidence",
+        "rag_limits"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_010",
+      "question": "Embedding 表示什么？含义接近的文本通常在表示空间中有什么关系？",
+      "reference_answer": "Embedding 将文本编码为稠密语义向量，含义接近的文本通常在向量空间更接近；这里的通常不意味着每个语义匹配都能保证正确。",
+      "required_facts": [
+        "将文本编码为稠密语义向量",
+        "含义接近的文本通常在向量空间更接近"
+      ],
+      "relevant_document_ids": [
+        "embedding_bge"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_011",
+      "question": "项目资料列出的中文 Embedding 模型、加载库和可提前计算的对象分别是什么？",
+      "reference_answer": "本项目资料使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+      "required_facts": [
+        "sentence-transformers",
+        "BAAI/bge-small-zh-v1.5",
+        "文档向量可以提前计算"
+      ],
+      "relevant_document_ids": [
+        "embedding_bge"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_012",
+      "question": "资料中的 L2 归一化怎样计算，归一化后的向量范数是多少？",
+      "reference_answer": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。",
+      "required_facts": [
+        "把向量除以它的欧几里得长度",
+        "使向量范数等于 1"
+      ],
+      "relevant_document_ids": [
+        "cosine_unit"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_013",
+      "question": "IndexFlatIP 搜索时检查哪些向量，按什么值选出 Top-K？",
+      "reference_answer": "IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。",
+      "required_facts": [
+        "对索引内全部文档向量执行精确内积搜索",
+        "返回内积最大的 Top-K"
+      ],
+      "relevant_document_ids": [
+        "faiss_ip"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_014",
+      "question": "BM25 的分数是根据哪些文本统计因素计算的？",
+      "reference_answer": "BM25 是基于词项匹配的检索方法，综合词频、文档频率和文档长度计算分数。",
+      "required_facts": [
+        "词频",
+        "文档频率",
+        "文档长度"
+      ],
+      "relevant_document_ids": [
+        "bm25_terms"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_015",
+      "question": "检索错误编号或型号时，BM25 的词项方法相对纯向量检索能补充什么？",
+      "reference_answer": "BM25 基于词项匹配；资料中的 BM25L 与 jieba 分词用于保留错误编号、产品型号等精确关键词，而纯向量语义检索可能混淆很相似的编号。它提供关键词方面的补充，不保证所有编号都排在第一名。",
+      "required_facts": [
+        "基于词项匹配",
+        "错误编号、产品型号等精确关键词",
+        "纯向量语义检索可能混淆很相似的编号"
+      ],
+      "relevant_document_ids": [
+        "bm25_terms"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_016",
+      "question": "Hybrid 融合哪两种匹配方式，为什么要先归一化两路分数？",
+      "reference_answer": "Hybrid Search 融合向量语义匹配和 BM25 关键词匹配。两路原始分数范围不同，应分别做 Min-Max 归一化，再执行加权融合。",
+      "required_facts": [
+        "融合向量语义匹配和 BM25 关键词匹配",
+        "两路原始分数范围不同",
+        "分别做 Min-Max 归一化"
+      ],
+      "relevant_document_ids": [
+        "hybrid_fusion"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_017",
+      "question": "项目默认的 Hybrid 权重参数和融合表达式是什么？",
+      "reference_answer": "本项目默认 alpha=0.7，融合表达式为 alpha*vector_norm+(1-alpha)*bm25_norm；参与融合的是两路归一化后的分数。",
+      "required_facts": [
+        "默认 alpha=0.7",
+        "alpha*vector_norm+(1-alpha)*bm25_norm"
+      ],
+      "relevant_document_ids": [
+        "hybrid_fusion"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_018",
+      "question": "L2 向量归一化与 Hybrid 的分数 Min-Max 各在处理什么？",
+      "reference_answer": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。Hybrid 面对的是两路原始分数范围不同，因此分别做 Min-Max 归一化；一个处理向量长度，一个处理检索分数尺度。",
+      "required_facts": [
+        "把向量除以它的欧几里得长度",
+        "使向量范数等于 1",
+        "两路原始分数范围不同",
+        "分别做 Min-Max 归一化"
+      ],
+      "relevant_document_ids": [
+        "cosine_unit",
+        "hybrid_fusion"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_019",
+      "question": "为什么要把长文档切成 chunk，并让相邻块有一段重复内容？",
+      "reference_answer": "文本切块把长文档拆成较短的 chunk；chunk_overlap 让相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。",
+      "required_facts": [
+        "把长文档拆成较短的 chunk",
+        "相邻块保留一段重复内容",
+        "减少句子和上下文在边界被截断的影响"
+      ],
+      "relevant_document_ids": [
+        "chunk_overlap"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_020",
+      "question": "chunk_overlap 和 chunk_size 应满足什么关系，不满足时会影响什么？",
+      "reference_answer": "overlap 必须小于 chunk_size；如果不满足这个约束，步长不能正常前进。",
+      "required_facts": [
+        "overlap 必须小于 chunk_size",
+        "步长不能正常前进"
+      ],
+      "relevant_document_ids": [
+        "chunk_overlap"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_021",
+      "question": "Cross-Encoder 对每个候选实际接收什么输入，并输出什么？",
+      "reference_answer": "Cross-Encoder 把 query 与 document.text 组成文本对，联合编码后输出相关性分数。",
+      "required_facts": [
+        "query 与 document.text 组成文本对",
+        "联合编码后输出相关性分数"
+      ],
+      "relevant_document_ids": [
+        "reranker_pairs"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_022",
+      "question": "一个相关 Chunk 根本没有进入召回候选，Cross-Encoder 能靠重排把它找回来吗？",
+      "reference_answer": "不能靠这次重排把候选外的 Chunk 找回来。资料规定 Cross-Encoder 只重排检索召回的候选，处理范围不包括未召回文档。",
+      "required_facts": [
+        "只重排检索召回的候选"
+      ],
+      "relevant_document_ids": [
+        "reranker_pairs"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_023",
+      "question": "文档 Embedding 和适用于所有问题的固定 rerank score，哪一种可提前计算，原因是什么？",
+      "reference_answer": "文档向量可以提前计算；而 Cross-Encoder 中同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。",
+      "required_facts": [
+        "文档向量可以提前计算",
+        "同一篇文档面对不同问题会得到不同分数",
+        "不能提前计算适用于所有问题的固定 rerank score"
+      ],
+      "relevant_document_ids": [
+        "embedding_bge",
+        "reranker_pairs"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_024",
+      "question": "示例 CUDA error 1175 后跟什么日志线索，继续排查应记录和核对哪些信息？",
+      "reference_answer": "这份示例中的线索是 driver initialization failed。应先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本，不能只凭编号猜测修复方法。",
+      "required_facts": [
+        "driver initialization failed",
+        "记录完整错误日志",
+        "GPU 驱动、CUDA 运行时与框架版本"
+      ],
+      "relevant_document_ids": [
+        "cuda_1175"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_025",
+      "question": "示例 CUDA error 1176 指向什么线索，应检查什么，能否照搬 1175 的线索？",
+      "reference_answer": "该示例出现 device index out of range，应检查请求的设备序号和可见 GPU 列表；不能把 CUDA error 1175 的日志线索直接套过来。",
+      "required_facts": [
+        "device index out of range",
+        "请求的设备序号和可见 GPU 列表",
+        "不能把 CUDA error 1175 的日志线索直接套过来"
+      ],
+      "relevant_document_ids": [
+        "cuda_1176"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_026",
+      "question": "CUDA out of memory 表示什么，资料给出了哪些初步处理方向？",
+      "reference_answer": "它表示当前计算需要的 GPU 显存不足。可减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存。",
+      "required_facts": [
+        "当前计算需要的 GPU 显存不足",
+        "减少 batch size、缩短输入或释放不再使用的张量",
+        "其他进程占用显存"
+      ],
+      "relevant_document_ids": [
+        "cuda_oom"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_027",
+      "question": "两份示例日志中的 1175 和 1176 分别对应哪些线索与排查对象？",
+      "reference_answer": "1175 示例是 driver initialization failed，应核对 GPU 驱动、CUDA 运行时与框架版本；1176 示例是 device index out of range，应检查请求的设备序号和可见 GPU 列表。两者不能直接套用同一日志线索。",
+      "required_facts": [
+        "driver initialization failed",
+        "device index out of range",
+        "核对 GPU 驱动、CUDA 运行时与框架版本",
+        "请求的设备序号和可见 GPU 列表"
+      ],
+      "relevant_document_ids": [
+        "cuda_1175",
+        "cuda_1176"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_028",
+      "question": "显存不足与示例中的设备序号越界是同一种问题吗，初步检查各是什么？",
+      "reference_answer": "不是同一种示例问题。OOM 是 GPU 显存不足，可先减少 batch size 等；device index out of range 则应检查设备序号和可见 GPU 列表，不能用显存措施替代设备索引检查。",
+      "required_facts": [
+        "GPU 显存不足",
+        "device index out of range",
+        "减少 batch size",
+        "设备序号和可见 GPU 列表"
+      ],
+      "relevant_document_ids": [
+        "cuda_oom",
+        "cuda_1176"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_029",
+      "question": "为什么扫描版 PDF 可能读不出文字，资料要求在入库前先做什么？",
+      "reference_answer": "扫描页面可能只有图片，没有可提取的文本层；应先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。",
+      "required_facts": [
+        "只有图片，没有可提取的文本层",
+        "先用 OCR 把图片转成文字",
+        "清洗、切块和 Embedding"
+      ],
+      "relevant_document_ids": [
+        "pdf_ocr"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_030",
+      "question": "扫描文档识别成文字以后，如何衔接长文档切块并减少边界截断？",
+      "reference_answer": "先用 OCR 把图片转成文字，再用文本切块把长文档拆成较短的 chunk，并让相邻块保留一段重复内容，以减少句子和上下文在边界被截断的影响。",
+      "required_facts": [
+        "先用 OCR 把图片转成文字",
+        "把长文档拆成较短的 chunk",
+        "相邻块保留一段重复内容",
+        "减少句子和上下文在边界被截断的影响"
+      ],
+      "relevant_document_ids": [
+        "pdf_ocr",
+        "chunk_overlap"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_031",
+      "question": "OCR 和 Embedding 分别把什么转换成什么，它们的输出作用相同吗？",
+      "reference_answer": "两者作用不同：OCR 把图片转成文字；Embedding 将文本编码为稠密语义向量，前者解决图像文字提取，后者提供文本的向量表示。",
+      "required_facts": [
+        "OCR 把图片转成文字",
+        "Embedding 将文本编码为稠密语义向量"
+      ],
+      "relevant_document_ids": [
+        "pdf_ocr",
+        "embedding_bge"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_032",
+      "question": "Self-Attention 用哪些表示让 Token 交互，注意力权重来自什么？",
+      "reference_answer": "Self-Attention 让 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系；注意力权重来自缩放点积及 softmax，不是简单词频匹配。",
+      "required_facts": [
+        "Query、Key、Value",
+        "建模上下文关系",
+        "缩放点积及 softmax"
+      ],
+      "relevant_document_ids": [
+        "transformer_attention"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_033",
+      "question": "BM25 和 Self-Attention 都处理文本，它们使用词频和上下文关系的方式有什么不同？",
+      "reference_answer": "BM25 以词项匹配为基础，综合词频、文档频率和文档长度评分；Self-Attention 让 Token 与其他 Token 交互，并用缩放点积及 softmax 得到权重，不能把它当成简单词频匹配。",
+      "required_facts": [
+        "词频、文档频率和文档长度",
+        "与其他 Token 交互",
+        "缩放点积及 softmax"
+      ],
+      "relevant_document_ids": [
+        "bm25_terms",
+        "transformer_attention"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_034",
+      "question": "在 PowerShell 的项目根目录怎样使用虚拟环境 Python 启动程序，依赖要装到哪里？",
+      "reference_answer": "在 PowerShell 的项目根目录使用虚拟环境 Python 执行 .\\.venv\\Scripts\\python.exe main.py。路径前缀 .\\ 表示当前目录，项目依赖应安装到同一个 .venv 环境，避免启动解释器与依赖不一致。",
+      "required_facts": [
+        "虚拟环境 Python",
+        ".\\.venv\\Scripts\\python.exe main.py",
+        "当前目录",
+        "同一个 .venv 环境"
+      ],
+      "relevant_document_ids": [
+        "python_venv"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_035",
+      "question": "在 RAG 系统中 FastAPI 的职责是什么，它本身是在做知识向量化吗？",
+      "reference_answer": "资料中 FastAPI 可以把 RAG 问答封装为 HTTP 接口；向量化则由 Embedding 将文本编码为稠密语义向量完成，两者职责不同。",
+      "required_facts": [
+        "FastAPI 可以把 RAG 问答封装为 HTTP 接口",
+        "将文本编码为稠密语义向量"
+      ],
+      "relevant_document_ids": [
+        "api_stream",
+        "embedding_bge"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_036",
+      "question": "普通响应和 StreamingResponse 在答案的返回时机及用户看到输出的时间上有何区别？",
+      "reference_answer": "普通响应在答案生成结束后一次返回；StreamingResponse 可以随生成进度逐段发送内容，让客户端更早看到输出。这是返回时机的差别，不能据此算出具体节省的毫秒数。",
+      "required_facts": [
+        "普通响应在答案生成结束后一次返回",
+        "随生成进度逐段发送内容",
+        "更早看到输出"
+      ],
+      "relevant_document_ids": [
+        "api_stream"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_037",
+      "question": "把 RAG 封装成 HTTP 服务后，检索结果、生成模型和 FastAPI 各负什么职责？",
+      "reference_answer": "RAG 把检索结果放入提示词，交给大语言模型组织答案；FastAPI 则把 RAG 问答封装为 HTTP 接口。HTTP 封装没有取代检索资料或生成模型的职责。",
+      "required_facts": [
+        "把检索结果放入提示词",
+        "交给大语言模型组织答案",
+        "封装为 HTTP 接口"
+      ],
+      "relevant_document_ids": [
+        "rag_overview",
+        "api_stream"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_038",
+      "question": "Hybrid 和 Cross-Encoder 都影响候选顺序，它们的评分依据分别是什么？",
+      "reference_answer": "Hybrid 融合向量语义匹配和 BM25 关键词匹配，两路分数分别做 Min-Max 归一化，再按 alpha*vector_norm+(1-alpha)*bm25_norm 加权融合。Cross-Encoder 将问题和文档组成文本对，联合编码后输出相关性分数，而且只重排检索召回的候选。",
+      "required_facts": [
+        "融合向量语义匹配和 BM25 关键词匹配",
+        "分别做 Min-Max 归一化",
+        "alpha*vector_norm+(1-alpha)*bm25_norm",
+        "联合编码后输出相关性分数",
+        "只重排检索召回的候选"
+      ],
+      "relevant_document_ids": [
+        "hybrid_fusion",
+        "reranker_pairs"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_039",
+      "question": "Embedding 与 FAISS IndexFlatIP 在语义检索中分别负责表示还是搜索？",
+      "reference_answer": "Embedding 将文本编码为稠密语义向量；IndexFlatIP 对索引内全部文档向量执行精确内积搜索，返回内积最大的 Top-K。一个生成表示，一个在已有向量中搜索。",
+      "required_facts": [
+        "将文本编码为稠密语义向量",
+        "对索引内全部文档向量执行精确内积搜索",
+        "返回内积最大的 Top-K"
+      ],
+      "relevant_document_ids": [
+        "embedding_bge",
+        "faiss_ip"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_040",
+      "question": "结合切块、向量表示、内积搜索和 RAG 提示词，说明文档进入回答流程的顺序。",
+      "reference_answer": "先把长文档拆成较短的 chunk，再将文本编码为稠密语义向量；IndexFlatIP 搜索这些向量并返回内积最大的 Top-K，RAG 随后把检索结果放入提示词，交给大语言模型组织答案。",
+      "required_facts": [
+        "把长文档拆成较短的 chunk",
+        "将文本编码为稠密语义向量",
+        "返回内积最大的 Top-K",
+        "把检索结果放入提示词"
+      ],
+      "relevant_document_ids": [
+        "chunk_overlap",
+        "embedding_bge",
+        "faiss_ip",
+        "rag_overview"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_041",
+      "question": "语义向量匹配有什么帮助和编号混淆风险，Hybrid 如何补充这一点？",
+      "reference_answer": "含义接近的文本通常在向量空间更接近，适合表达语义接近；但纯向量语义检索可能混淆很相似的编号。Hybrid 结合向量语义匹配和 BM25 关键词匹配，补充精确词项方面的信息，不保证所有错误编号都检索正确。",
+      "required_facts": [
+        "含义接近的文本通常在向量空间更接近",
+        "纯向量语义检索可能混淆很相似的编号",
+        "向量语义匹配和 BM25 关键词匹配"
+      ],
+      "relevant_document_ids": [
+        "embedding_bge",
+        "bm25_terms",
+        "hybrid_fusion"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_042",
+      "question": "知识库资料可能过时时，应怎样对待 RAG 答案的证据和引用？",
+      "reference_answer": "资料过时可能导致错误回答，应核查来源和引用；并在知识库缺乏答案时明确说明，不能仅因为已检索到资料就认为结论必然可靠。",
+      "required_facts": [
+        "资料过时",
+        "核查来源和引用",
+        "知识库缺乏答案时明确说明"
+      ],
+      "relevant_document_ids": [
+        "rag_limits"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_043",
+      "question": "Self-Attention 和 IndexFlatIP 都提到点积，它们的任务和输出有何不同？",
+      "reference_answer": "Self-Attention 用 Token 交互来建模上下文关系，注意力权重来自缩放点积及 softmax；IndexFlatIP 则搜索文档向量并返回内积最大的 Top-K，不能把注意力权重与检索 Top-K 当作同一种输出。",
+      "required_facts": [
+        "建模上下文关系",
+        "注意力权重来自缩放点积及 softmax",
+        "返回内积最大的 Top-K"
+      ],
+      "relevant_document_ids": [
+        "transformer_attention",
+        "faiss_ip"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_044",
+      "question": "检索到相似 CUDA 编号后，为什么还需要核对原始日志，而不能直接套用修复线索？",
+      "reference_answer": "BM25 能做词项匹配，但编号本身不足以确定修复方法；示例 1176 也明确不能把 CUDA error 1175 的日志线索直接套过来，因此应核对完整日志和对应示例的线索，而非只按相似编号下结论。",
+      "required_facts": [
+        "词项匹配",
+        "编号本身不足以确定修复方法",
+        "不能把 CUDA error 1175 的日志线索直接套过来"
+      ],
+      "relevant_document_ids": [
+        "bm25_terms",
+        "cuda_1175",
+        "cuda_1176"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "qa_045",
+      "question": "知识库是否足以认定 alpha=0.7 是本数据集上效果最好的融合权重？",
+      "reference_answer": "不能认定。资料只给出了默认 alpha=0.7 和融合方式，没有提供不同权重在同一数据集上的对比结果；需要实际对比依据，不能把默认值当成已证明的最优值。",
+      "required_facts": [
+        "资料只提供默认权重和融合方式",
+        "缺少不同权重的对比依据",
+        "不能断言默认值最优"
+      ],
+      "relevant_document_ids": [
+        "hybrid_fusion"
+      ],
+      "answerable": false
+    },
+    {
+      "id": "qa_046",
+      "question": "只看知识库，能给出 IndexFlatIP 在我机器上搜索十万条向量的具体毫秒耗时吗？",
+      "reference_answer": "不能。资料描述了精确内积搜索，但没有该机器、指定数据规模和运行条件下的实测耗时；应说明缺少基准信息，需要实际环境和测量结果，不能编造毫秒数。",
+      "required_facts": [
+        "缺少指定机器和规模下的耗时测量",
+        "不能给出确定毫秒数",
+        "需要实际环境与测量结果"
+      ],
+      "relevant_document_ids": [
+        "faiss_ip"
+      ],
+      "answerable": false
+    },
+    {
+      "id": "qa_047",
+      "question": "知识库能说明我这份扫描 PDF 的 OCR 准确率，并保证表格文字全部正确吗？",
+      "reference_answer": "不能。知识库只说明扫描 PDF 可先做 OCR，没有这份文件的识别结果和准确率核验。应请求实际文件对应的识别与核验资料，不能给出准确率或保证完全正确。",
+      "required_facts": [
+        "缺少当前文件的 OCR 结果与核验",
+        "不能编造准确率或保证完全正确",
+        "需要对应文件的识别核验资料"
+      ],
+      "relevant_document_ids": [
+        "pdf_ocr"
+      ],
+      "answerable": false
+    },
+    {
+      "id": "qa_048",
+      "question": "采用 StreamingResponse 后，我这次问答会具体减少多少毫秒延迟？",
+      "reference_answer": "资料不足以计算。它只说明可以逐段发送、让客户端更早看到输出，没有本次请求的计时或对照结果；不能推断具体减少的毫秒数，需要实际请求的测量数据。",
+      "required_facts": [
+        "资料只有逐段返回的定性说明",
+        "没有本次请求的计时对照",
+        "不能给出确定的延迟减少量"
+      ],
+      "relevant_document_ids": [
+        "api_stream"
+      ],
+      "answerable": false
+    },
+    {
+      "id": "qa_049",
+      "question": "只根据 1176 的示例日志，能确定我有几张 GPU 并替我填一个正确设备序号吗？",
+      "reference_answer": "不能。示例只要求检查设备序号和可见 GPU 列表，没有当前机器的实际 GPU 清单或设备配置；需要这些实际信息才能判断，不能编造 GPU 数量或指定序号。",
+      "required_facts": [
+        "示例没有当前机器的实际 GPU 清单",
+        "不能确定 GPU 数量或设备序号",
+        "需要当前可见 GPU 和设备配置信息"
+      ],
+      "relevant_document_ids": [
+        "cuda_1176"
+      ],
+      "answerable": false
+    },
+    {
+      "id": "qa_050",
+      "question": "知识库有没有给出“向量检索”这句话的实际 Embedding 数值，可以直接列出来吗？",
+      "reference_answer": "没有。资料只描述文本向量化及模型名称，没有该句的实际编码结果；不能凭模型名称编造向量数值，需要该文本的实际编码输出。",
+      "required_facts": [
+        "没有该句的实际向量数值",
+        "不能凭模型名称编造向量",
+        "需要实际编码结果"
+      ],
+      "relevant_document_ids": [
+        "embedding_bge"
+      ],
+      "answerable": false
+    }
+  ]
+}

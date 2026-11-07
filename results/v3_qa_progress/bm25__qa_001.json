@@ -1,0 +1,269 @@
+{
+  "method": "bm25",
+  "qa_id": "qa_001",
+  "query_id": "qa_001",
+  "question": "RAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？",
+  "retrieval_eval_query_ids": [],
+  "experiment_id": "9915eade108441c49d79ca173144894d",
+  "unit_id": "bm25__qa_001",
+  "state": "finished",
+  "started_at": "2026-10-26T13:47:23.975838+00:00",
+  "http_attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-10-26T13:47:23.994363+00:00",
+      "http_status": 200
+    }
+  ],
+  "usage": {
+    "input_tokens": 342,
+    "output_tokens": 165,
+    "total_tokens": 507,
+    "cached_input_tokens": 0
+  },
+  "timings_ms": {
+    "llm": 1791.2802999999258,
+    "retrieval": 0.4620000036084093,
+    "rerank": null,
+    "total": 1815.0727999964147
+  },
+  "llm_called": true,
+  "unit_digest": "df3465b15928f4ad04a2811234d788bedbc0a741ebe03dd4c8b8e05739e816de",
+  "actual_prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: rag.md\nchunk_id: 3\nrank: 1\nscore: 32.30586278185182\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\n[Document 2]\nsource: rag.md\nchunk_id: 1\nrank: 2\nscore: 20.271269621341254\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 3]\nsource: rag.md\nchunk_id: 2\nrank: 3\nscore: 17.157043152080597\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\nQuestion:\n\nRAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？",
+  "returned_generation_parameters": {
+    "temperature": 1.0,
+    "top_p": 1.0
+  },
+  "provider_response_status": "completed",
+  "returned_model": "deepseek-flash",
+  "status": "success",
+  "record": {
+    "id": "qa_001",
+    "question": "RAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？",
+    "reference_answer": "RAG 检索外部知识，为生成模型提供相关事实和证据，减少仅凭参数记忆编造答案的情况。但检索错误、资料过时或模型误读仍会导致错误，因此不能保证完全消除幻觉。",
+    "required_facts": [
+      "检索外部知识",
+      "向生成模型提供相关事实和证据",
+      "不能保证完全消除幻觉"
+    ],
+    "relevant_document_ids": [
+      "rag_evidence",
+      "rag_limits",
+      "rag_overview"
+    ],
+    "answerable": true,
+    "answer": "根据资料：\n\n- **RAG 可以降低大模型幻觉**，因为它向模型提供可参考的**外部事实和证据**，减少模型仅凭参数记忆编造答案的情况；同时要求模型根据检索到的资料作答，资料不足时应说明无法回答。（Document 2）\n\n- **RAG 不能保证完全消除幻觉**。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。因此还应核查来源和引用，并在知识库缺乏答案时明确说明。（Document 3）",
+    "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: rag.md\nchunk_id: 3\nrank: 1\nscore: 32.30586278185182\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\n[Document 2]\nsource: rag.md\nchunk_id: 1\nrank: 2\nscore: 20.271269621341254\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 3]\nsource: rag.md\nchunk_id: 2\nrank: 3\nscore: 17.157043152080597\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。\n\nQuestion:\n\nRAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？",
+    "context": "[Document 1]\nsource: rag.md\nchunk_id: 3\nrank: 1\nscore: 32.30586278185182\neval_id: rag_terms\n\ncontent:\nRAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。\n\n[Document 2]\nsource: rag.md\nchunk_id: 1\nrank: 2\nscore: 20.271269621341254\neval_id: rag_evidence\n\ncontent:\nRAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。\n\n[Document 3]\nsource: rag.md\nchunk_id: 2\nrank: 3\nscore: 17.157043152080597\neval_id: rag_limits\n\ncontent:\nRAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+    "pipeline_status": "answered",
+    "llm_called": true,
+    "context_documents": [
+      {
+        "id": "rag_terms",
+        "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+        "metadata": {
+          "eval_id": "rag_terms",
+          "source": "rag.md",
+          "chunk_id": 3
+        },
+        "rank": 1,
+        "score": 32.30586278185182
+      },
+      {
+        "id": "rag_evidence",
+        "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+        "metadata": {
+          "eval_id": "rag_evidence",
+          "source": "rag.md",
+          "chunk_id": 1
+        },
+        "rank": 2,
+        "score": 20.271269621341254
+      },
+      {
+        "id": "rag_limits",
+        "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+        "metadata": {
+          "eval_id": "rag_limits",
+          "source": "rag.md",
+          "chunk_id": 2
+        },
+        "rank": 3,
+        "score": 17.157043152080597
+      }
+    ],
+    "context_document_ids": [
+      "rag_terms",
+      "rag_evidence",
+      "rag_limits"
+    ],
+    "retrieval_query": "RAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "started_at": "2026-10-26T13:47:23.977845+00:00",
+    "elapsed_seconds": 1.814915099996142,
+    "review": {
+      "status": "pending",
+      "reviewer": null,
+      "reviewed_at": null,
+      "faithfulness": null,
+      "answer_relevance": null,
+      "factual_correctness": null,
+      "factual_correctness_basis": null,
+      "required_facts_covered": [
+        {
+          "fact": "检索外部知识",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "向生成模型提供相关事实和证据",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "不能保证完全消除幻觉",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        }
+      ],
+      "unsupported_claims": null,
+      "insufficient_evidence_handled": null,
+      "review_notes": ""
+    }
+  },
+  "bundle_run": {
+    "id": "c76c7072553348fe83725c4d09af588c",
+    "started_at": "2026-10-26T13:47:23.977845+00:00",
+    "qa_dataset": {
+      "version": "3.0",
+      "sha256": "b854564a846d0ca022ffcdea59deb6487cbeab9ecdae828d4a41a749775548c4",
+      "metadata": {
+        "name": "rag_qa_teaching_v3",
+        "corpus_file": "retrieval_eval_v3.json",
+        "purpose": "采集实际答案、提示词、上下文与来源，供人工独立评审；参考答案和标签不进入生成提示词。",
+        "answerable_definition": "true 表示已有资料能回答所请求的事实；false 表示所请求的事实或确定结论无法由现有资料支持，期望说明证据限制，而不是猜测。",
+        "limitations": "50 个教学问题（42 个可回答、8 个无法确定所请求事实的负例），基于同一份 18 Chunk 冻结正文；新增问题由 Codex 对照正文检查，不代表独立人工认证。CUDA 编号为示例，不是当前用户环境事实。"
+      }
+    },
+    "corpus_sha256": "33a7d07e4554df865667592b3515133c210b23678c4fcb895a8cdfa9240e04d9",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "pipeline": {
+      "retriever": {
+        "implementation": "TimedSearch"
+      },
+      "reranker": null,
+      "query_rewriter": null,
+      "context_top_k": 3
+    },
+    "quality_scope": "pending_human_review",
+    "finished_at": "2026-10-26T13:47:25.792686+00:00",
+    "elapsed_seconds": 1.814972399995895
+  },
+  "exception_type": null,
+  "pipeline_status": "answered",
+  "failed_stage": null,
+  "retrieval_candidates": [
+    {
+      "id": "rag_terms",
+      "text": "RAG、大模型、幻觉、检索增强生成是这一页的关键词。这只是术语索引，不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制。",
+      "metadata": {
+        "eval_id": "rag_terms",
+        "source": "rag.md",
+        "chunk_id": 3
+      },
+      "rank": 1,
+      "score": 32.30586278185182
+    },
+    {
+      "id": "rag_evidence",
+      "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+      "metadata": {
+        "eval_id": "rag_evidence",
+        "source": "rag.md",
+        "chunk_id": 1
+      },
+      "rank": 2,
+      "score": 20.271269621341254
+    },
+    {
+      "id": "rag_limits",
+      "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+      "metadata": {
+        "eval_id": "rag_limits",
+        "source": "rag.md",
+        "chunk_id": 2
+      },
+      "rank": 3,
+      "score": 17.157043152080597
+    },
+    {
+      "id": "api_stream",
+      "text": "FastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+      "metadata": {
+        "eval_id": "api_stream",
+        "source": "api.md",
+        "chunk_id": 0
+      },
+      "rank": 4,
+      "score": 6.110947401038656
+    },
+    {
+      "id": "rag_overview",
+      "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+      "metadata": {
+        "eval_id": "rag_overview",
+        "source": "rag.md",
+        "chunk_id": 0
+      },
+      "rank": 5,
+      "score": 5.43272316400715
+    },
+    {
+      "id": "embedding_bge",
+      "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+      "metadata": {
+        "eval_id": "embedding_bge",
+        "source": "embedding.md",
+        "chunk_id": 0
+      },
+      "rank": 6,
+      "score": 3.4111981703456773
+    },
+    {
+      "id": "cosine_unit",
+      "text": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。",
+      "metadata": {
+        "eval_id": "cosine_unit",
+        "source": "faiss.md",
+        "chunk_id": 1
+      },
+      "rank": 7,
+      "score": 2.107201324481012
+    },
+    {
+      "id": "reranker_pairs",
+      "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+      "metadata": {
+        "eval_id": "reranker_pairs",
+        "source": "retrieval.md",
+        "chunk_id": 2
+      },
+      "rank": 8,
+      "score": 2.013579327988259
+    }
+  ],
+  "reranked_candidates": [],
+  "retry_count": 0,
+  "finished_at": "2026-10-26T13:47:25.792686+00:00"
+}

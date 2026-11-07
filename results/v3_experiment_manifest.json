@@ -1,0 +1,43 @@
+{
+  "experiment_id": "9915eade108441c49d79ca173144894d",
+  "started_at": "2026-10-26T13:46:51.440034+00:00",
+  "config": {
+    "provider": "DeepSeek",
+    "model": "deepseek-flash",
+    "base_url": "https://api.deepseek.com",
+    "retrieval_sha256": "33a7d07e4554df865667592b3515133c210b23678c4fcb895a8cdfa9240e04d9",
+    "qa_sha256": "b854564a846d0ca022ffcdea59deb6487cbeab9ecdae828d4a41a749775548c4",
+    "candidate_k": 10,
+    "context_top_k": 3,
+    "ks": [
+      3,
+      5,
+      10
+    ],
+    "alpha": 0.7,
+    "embedding_model": "BAAI/bge-small-zh-v1.5",
+    "reranker_model": "BAAI/bge-reranker-base",
+    "prompt_source_sha256": "12a96aa1195f6534d5e2d43822c3ec5a1ecec7e161273f49aa360061b0ecb1ab",
+    "runner_sha256": "cbd3c1dfc6f635dafe7d373032c313e5d553c282972b3ae4d4d945dfa65b01d5",
+    "request_parameters": "Existing OpenAILLM sends model and input only; no additional generation parameters",
+    "query_id_definition": "QA query_id equals qa_id; retrieval_eval_query_ids contains exact question matches only"
+  },
+  "initialization": {
+    "embedding_init_ms": 258.1237999984296,
+    "index_init_ms": 812.8017999988515,
+    "reranker_init_ms": 1092.7329999976791,
+    "total_ms": 7265.80660000036,
+    "models": {
+      "BAAI/bge-small-zh-v1.5": {
+        "local_path": "C:\\Users\\吴志武\\.cache\\huggingface\\hub\\models--BAAI--bge-small-zh-v1.5\\snapshots\\7999e1d3359715c523056ef9478215996d62a620",
+        "revision": "7999e1d3359715c523056ef9478215996d62a620"
+      },
+      "BAAI/bge-reranker-base": {
+        "local_path": "C:\\Users\\吴志武\\.cache\\huggingface\\hub\\models--BAAI--bge-reranker-base\\snapshots\\2cfc18c9415c912f9d8155881c133215df768a70",
+        "revision": "2cfc18c9415c912f9d8155881c133215df768a70"
+      }
+    },
+    "torch_threads": 14,
+    "device": "cpu"
+  }
+}

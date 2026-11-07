@@ -1,0 +1,83 @@
+model=BAAI/bge-small-zh-v1.5, alpha=0.7, top_k=4
+Vector=IndexFlatIP + normalized embeddings; lexical=BM25L
+Documents（每篇短文直接作为一个检索单元）:
+A.txt: RAG 是一种检索增强生成技术，通过从外部知识库检索相关信息，再将检索结果提供给大语言模型。
+B.txt: FAISS 是用于高维向量相似度搜索的库，可以通过 IndexFlatIP 进行精确内积搜索。
+C.txt: CUDA error 1175 是 GPU/CUDA 环境中的一个具体错误，需要根据错误日志进行排查。
+D.txt: Transformer 使用 Self-Attention 机制建模不同 Token 之间的关系。
+BM25L: k1=1.5, b=0.75, delta=0.5
+Document token lengths=[23, 17, 18, 10], avgdl=17.000000
+
+Query: 什么是 RAG？
+Query tokens: ['什么', '是', 'rag']
+
+Vector Retriever Top-K
+rank | document | raw vector score
+1 | A.txt | 0.747747
+2 | B.txt | 0.456423
+3 | C.txt | 0.451067
+4 | D.txt | 0.400901
+
+BM25 Retriever Top-K（仅返回原始分数 > 0 的结果）
+rank | document | raw BM25 score
+1 | A.txt | 1.804499
+2 | B.txt | 0.445844
+3 | C.txt | 0.439474
+
+Hybrid Retriever Top-K
+rank | document | raw vector | normalized vector | raw BM25 | normalized BM25 | final
+1 | A.txt | 0.747747 | 1.000000 | 1.804499 | 1.000000 | 1.000000
+2 | B.txt | 0.456423 | 0.160077 | 0.445844 | 0.004666 | 0.113453
+3 | C.txt | 0.451067 | 0.144634 | 0.439474 | 0.000000 | 0.101244
+4 | D.txt | 0.400901 | 0.000000 | None | 0.000000 | 0.000000
+
+Normalization ranges（实际返回集）:
+Vector: min=0.400901, max=0.747747
+BM25: min=0.439474, max=1.804499
+
+BM25L per-token contributions（各项相加得到 raw BM25）:
+'什么': idf=0.000000; no match
+'是': idf=0.356675; A.txt=0.412405, B.txt=0.445844, C.txt=0.439474
+'rag': idf=1.203973; A.txt=1.392094
+
+Vector order: ['A.txt', 'B.txt', 'C.txt', 'D.txt']
+Hybrid order: ['A.txt', 'B.txt', 'C.txt', 'D.txt']
+排序是否改变: False
+None 表示该侧未返回结果，归一化贡献为 0；分数不是正确率。
+
+Query: CUDA error 1175 怎么解决？
+Query tokens: ['cuda', 'error', '1175', '怎么', '解决']
+
+Vector Retriever Top-K
+rank | document | raw vector score
+1 | C.txt | 0.839239
+2 | A.txt | 0.418254
+3 | B.txt | 0.413852
+4 | D.txt | 0.402255
+
+BM25 Retriever Top-K（仅返回原始分数 > 0 的结果）
+rank | document | raw BM25 score
+1 | C.txt | 6.680626
+
+Hybrid Retriever Top-K
+rank | document | raw vector | normalized vector | raw BM25 | normalized BM25 | final
+1 | C.txt | 0.839239 | 1.000000 | 6.680626 | 1.000000 | 1.000000
+2 | A.txt | 0.418254 | 0.036612 | None | 0.000000 | 0.025628
+3 | B.txt | 0.413852 | 0.026538 | None | 0.000000 | 0.018577
+4 | D.txt | 0.402255 | 0.000000 | None | 0.000000 | 0.000000
+
+Normalization ranges（实际返回集）:
+Vector: min=0.402255, max=0.839239
+BM25: min=6.680626, max=6.680626
+
+BM25L per-token contributions（各项相加得到 raw BM25）:
+'cuda': idf=1.203973; C.txt=3.713693
+'error': idf=1.203973; C.txt=1.483466
+'1175': idf=1.203973; C.txt=1.483466
+'怎么': idf=0.000000; no match
+'解决': idf=0.000000; no match
+
+Vector order: ['C.txt', 'A.txt', 'B.txt', 'D.txt']
+Hybrid order: ['C.txt', 'A.txt', 'B.txt', 'D.txt']
+排序是否改变: False
+None 表示该侧未返回结果，归一化贡献为 0；分数不是正确率。

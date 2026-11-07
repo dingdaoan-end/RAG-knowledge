@@ -1,0 +1,289 @@
+{
+  "method": "vector",
+  "qa_id": "qa_004",
+  "query_id": "qa_004",
+  "question": "只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？",
+  "retrieval_eval_query_ids": [],
+  "experiment_id": "9915eade108441c49d79ca173144894d",
+  "unit_id": "vector__qa_004",
+  "state": "finished",
+  "started_at": "2026-10-26T13:47:38.252214+00:00",
+  "http_attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-10-26T13:47:38.276195+00:00",
+      "http_status": 200
+    }
+  ],
+  "usage": {
+    "input_tokens": 391,
+    "output_tokens": 283,
+    "total_tokens": 674,
+    "cached_input_tokens": 0
+  },
+  "timings_ms": {
+    "llm": 2252.1921999941696,
+    "retrieval": 9.652900000219233,
+    "rerank": null,
+    "total": 2279.5991000020877
+  },
+  "llm_called": true,
+  "unit_digest": "3c09c25d2a401803198f4f5b55f4a763579a83c2d2402fcc70ea08588ac20b12",
+  "actual_prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 1\nscore: 0.7393121719360352\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 2\nscore: 0.7214365601539612\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 0.6165299415588379\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\nQuestion:\n\n只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？",
+  "returned_generation_parameters": {
+    "temperature": 1.0,
+    "top_p": 1.0
+  },
+  "provider_response_status": "completed",
+  "returned_model": "deepseek-flash",
+  "status": "success",
+  "record": {
+    "id": "qa_004",
+    "question": "只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？",
+    "reference_answer": "不能仅凭这一编号确定显卡损坏，也不能给出唯一修复命令。知识库只有示例日志线索，缺少用户的完整日志和环境信息。应明确说明证据不足，并请求完整错误日志及驱动、运行时和框架版本。",
+    "required_facts": [
+      "不能仅凭错误编号认定显卡损坏",
+      "证据不足，不能给出唯一修复命令",
+      "需要完整日志和环境版本信息"
+    ],
+    "relevant_document_ids": [
+      "cuda_1175"
+    ],
+    "answerable": false,
+    "answer": "不能。\n\n根据资料，CUDA error 1175 的示例日志中后面出现的是 `driver initialization failed`。排查时应先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。资料明确说明：**编号本身不足以确定修复方法，不应猜测**。\n\n因此，只看到 CUDA error 1175：\n\n1. **不能确定显卡已经损坏**；\n2. **不能给出唯一的修复命令**；\n3. 资料中也没有提供可直接执行的唯一修复命令。\n\n你需要先收集完整错误日志，并检查 GPU 驱动、CUDA 运行时和框架版本。",
+    "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 1\nscore: 0.7393121719360352\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 2\nscore: 0.7214365601539612\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 0.6165299415588379\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\nQuestion:\n\n只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？",
+    "context": "[Document 1]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 1\nscore: 0.7393121719360352\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 2\nscore: 0.7214365601539612\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 3\nscore: 0.6165299415588379\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+    "pipeline_status": "answered",
+    "llm_called": true,
+    "context_documents": [
+      {
+        "id": "cuda_1175",
+        "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+        "metadata": {
+          "eval_id": "cuda_1175",
+          "source": "cuda_examples.md",
+          "chunk_id": 0
+        },
+        "rank": 1,
+        "score": 0.7393121719360352
+      },
+      {
+        "id": "cuda_1176",
+        "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+        "metadata": {
+          "eval_id": "cuda_1176",
+          "source": "cuda_examples.md",
+          "chunk_id": 1
+        },
+        "rank": 2,
+        "score": 0.7214365601539612
+      },
+      {
+        "id": "cuda_oom",
+        "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+        "metadata": {
+          "eval_id": "cuda_oom",
+          "source": "cuda_examples.md",
+          "chunk_id": 2
+        },
+        "rank": 3,
+        "score": 0.6165299415588379
+      }
+    ],
+    "context_document_ids": [
+      "cuda_1175",
+      "cuda_1176",
+      "cuda_oom"
+    ],
+    "retrieval_query": "只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "started_at": "2026-10-26T13:47:38.253196+00:00",
+    "elapsed_seconds": 2.2794585000010557,
+    "review": {
+      "status": "pending",
+      "reviewer": null,
+      "reviewed_at": null,
+      "faithfulness": null,
+      "answer_relevance": null,
+      "factual_correctness": null,
+      "factual_correctness_basis": null,
+      "required_facts_covered": [
+        {
+          "fact": "不能仅凭错误编号认定显卡损坏",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "证据不足，不能给出唯一修复命令",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "需要完整日志和环境版本信息",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        }
+      ],
+      "unsupported_claims": null,
+      "insufficient_evidence_handled": null,
+      "review_notes": ""
+    }
+  },
+  "bundle_run": {
+    "id": "23641d61555d4e46b5d5e8f35a6f7772",
+    "started_at": "2026-10-26T13:47:38.253196+00:00",
+    "qa_dataset": {
+      "version": "3.0",
+      "sha256": "b854564a846d0ca022ffcdea59deb6487cbeab9ecdae828d4a41a749775548c4",
+      "metadata": {
+        "name": "rag_qa_teaching_v3",
+        "corpus_file": "retrieval_eval_v3.json",
+        "purpose": "采集实际答案、提示词、上下文与来源，供人工独立评审；参考答案和标签不进入生成提示词。",
+        "answerable_definition": "true 表示已有资料能回答所请求的事实；false 表示所请求的事实或确定结论无法由现有资料支持，期望说明证据限制，而不是猜测。",
+        "limitations": "50 个教学问题（42 个可回答、8 个无法确定所请求事实的负例），基于同一份 18 Chunk 冻结正文；新增问题由 Codex 对照正文检查，不代表独立人工认证。CUDA 编号为示例，不是当前用户环境事实。"
+      }
+    },
+    "corpus_sha256": "33a7d07e4554df865667592b3515133c210b23678c4fcb895a8cdfa9240e04d9",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "pipeline": {
+      "retriever": {
+        "implementation": "TimedSearch"
+      },
+      "reranker": null,
+      "query_rewriter": null,
+      "context_top_k": 3
+    },
+    "quality_scope": "pending_human_review",
+    "finished_at": "2026-10-26T13:47:40.533382+00:00",
+    "elapsed_seconds": 2.279499999996915
+  },
+  "exception_type": null,
+  "pipeline_status": "answered",
+  "failed_stage": null,
+  "retrieval_candidates": [
+    {
+      "id": "cuda_1175",
+      "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+      "metadata": {
+        "eval_id": "cuda_1175",
+        "source": "cuda_examples.md",
+        "chunk_id": 0
+      },
+      "rank": 1,
+      "score": 0.7393121719360352
+    },
+    {
+      "id": "cuda_1176",
+      "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+      "metadata": {
+        "eval_id": "cuda_1176",
+        "source": "cuda_examples.md",
+        "chunk_id": 1
+      },
+      "rank": 2,
+      "score": 0.7214365601539612
+    },
+    {
+      "id": "cuda_oom",
+      "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+      "metadata": {
+        "eval_id": "cuda_oom",
+        "source": "cuda_examples.md",
+        "chunk_id": 2
+      },
+      "rank": 3,
+      "score": 0.6165299415588379
+    },
+    {
+      "id": "rag_limits",
+      "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+      "metadata": {
+        "eval_id": "rag_limits",
+        "source": "rag.md",
+        "chunk_id": 2
+      },
+      "rank": 4,
+      "score": 0.5434647798538208
+    },
+    {
+      "id": "rag_evidence",
+      "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+      "metadata": {
+        "eval_id": "rag_evidence",
+        "source": "rag.md",
+        "chunk_id": 1
+      },
+      "rank": 5,
+      "score": 0.48348695039749146
+    },
+    {
+      "id": "chunk_overlap",
+      "text": "文本切块把长文档拆成较短的 chunk。chunk_overlap 使相邻块保留一段重复内容，减少句子和上下文在边界被截断的影响。overlap 必须小于 chunk_size，否则步长不能正常前进。",
+      "metadata": {
+        "eval_id": "chunk_overlap",
+        "source": "chunking.md",
+        "chunk_id": 0
+      },
+      "rank": 6,
+      "score": 0.4628232717514038
+    },
+    {
+      "id": "api_stream",
+      "text": "FastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+      "metadata": {
+        "eval_id": "api_stream",
+        "source": "api.md",
+        "chunk_id": 0
+      },
+      "rank": 7,
+      "score": 0.4535253643989563
+    },
+    {
+      "id": "reranker_pairs",
+      "text": "Cross-Encoder 将 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，因此不能提前计算适用于所有问题的固定 rerank score。它只重排检索召回的候选。",
+      "metadata": {
+        "eval_id": "reranker_pairs",
+        "source": "retrieval.md",
+        "chunk_id": 2
+      },
+      "rank": 8,
+      "score": 0.44625359773635864
+    },
+    {
+      "id": "pdf_ocr",
+      "text": "扫描版 PDF 的页面可能只有图片，没有可提取的文本层。普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。",
+      "metadata": {
+        "eval_id": "pdf_ocr",
+        "source": "ingestion_notes.md",
+        "chunk_id": 0
+      },
+      "rank": 9,
+      "score": 0.4331831932067871
+    },
+    {
+      "id": "cosine_unit",
+      "text": "L2 归一化把向量除以它的欧几里得长度，使向量范数等于 1。若查询向量 q 和文档向量 d 都已归一化，cosine(q,d)=q·d，因此可用 IndexFlatIP 实现余弦检索。",
+      "metadata": {
+        "eval_id": "cosine_unit",
+        "source": "faiss.md",
+        "chunk_id": 1
+      },
+      "rank": 10,
+      "score": 0.42036008834838867
+    }
+  ],
+  "reranked_candidates": [],
+  "retry_count": 0,
+  "finished_at": "2026-10-26T13:47:40.533382+00:00"
+}

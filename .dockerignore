@@ -1,0 +1,21 @@
+# 默认拒绝整个上下文，只允许构建所需源文件。
+**
+!Dockerfile
+!requirements.txt
+!requirements-docker.txt
+!main.py
+!config.py
+!app/
+!app/**
+**/__pycache__/
+**/*.py[cod]
+**/.env
+**/.env.*
+.env
+.env.*
+.venv/
+.git/
+data/
+results/
+models/
+.cache/

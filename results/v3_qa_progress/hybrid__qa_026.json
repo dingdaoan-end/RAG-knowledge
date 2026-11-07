@@ -1,0 +1,339 @@
+{
+  "method": "hybrid",
+  "qa_id": "qa_026",
+  "query_id": "qa_026",
+  "question": "CUDA out of memory 表示什么，资料给出了哪些初步处理方向？",
+  "retrieval_eval_query_ids": [],
+  "experiment_id": "9915eade108441c49d79ca173144894d",
+  "unit_id": "hybrid__qa_026",
+  "state": "finished",
+  "started_at": "2026-10-26T13:50:35.308303+00:00",
+  "http_attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-10-26T13:50:35.330302+00:00",
+      "http_status": 200
+    }
+  ],
+  "usage": {
+    "input_tokens": 379,
+    "output_tokens": 169,
+    "total_tokens": 548,
+    "cached_input_tokens": 0
+  },
+  "timings_ms": {
+    "llm": 1560.4997999980696,
+    "retrieval": 8.85289999860106,
+    "rerank": null,
+    "total": 1588.3217000009608
+  },
+  "llm_called": true,
+  "unit_digest": "d7cefbb9e705f9ae8ea3931e3b1cbb5624d754715b5d943315e7596c93d263a7",
+  "actual_prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 1\nscore: 1.0\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 2\nscore: 0.627424331968298\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 3\nscore: 0.5409345415530034\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\nQuestion:\n\nCUDA out of memory 表示什么，资料给出了哪些初步处理方向？",
+  "returned_generation_parameters": {
+    "temperature": 1.0,
+    "top_p": 1.0
+  },
+  "provider_response_status": "completed",
+  "returned_model": "deepseek-flash",
+  "status": "success",
+  "record": {
+    "id": "qa_026",
+    "question": "CUDA out of memory 表示什么，资料给出了哪些初步处理方向？",
+    "reference_answer": "它表示当前计算需要的 GPU 显存不足。可减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存。",
+    "required_facts": [
+      "当前计算需要的 GPU 显存不足",
+      "减少 batch size、缩短输入或释放不再使用的张量",
+      "其他进程占用显存"
+    ],
+    "relevant_document_ids": [
+      "cuda_oom"
+    ],
+    "answerable": true,
+    "answer": "CUDA out of memory 表示当前计算所需的 GPU 显存不足。\n\n资料给出的初步处理方向包括：\n- 减少 batch size\n- 缩短输入\n- 释放不再使用的张量\n- 检查是否有其他进程占用显存\n\n资料还说明，这与示例错误编号 1175 的“驱动初始化失败”线索不同。",
+    "prompt": "System:\n\n你是一个专业知识库助手。\n\n要求：\n1. 根据提供的资料回答问题\n2. 不要使用资料之外的信息猜测\n3. 如果资料中没有答案，明确告诉用户\n\nContext:\n\n[Document 1]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 1\nscore: 1.0\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 2\nscore: 0.627424331968298\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 3\nscore: 0.5409345415530034\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。\n\nQuestion:\n\nCUDA out of memory 表示什么，资料给出了哪些初步处理方向？",
+    "context": "[Document 1]\nsource: cuda_examples.md\nchunk_id: 2\nrank: 1\nscore: 1.0\neval_id: cuda_oom\n\ncontent:\nCUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。\n\n[Document 2]\nsource: cuda_examples.md\nchunk_id: 1\nrank: 2\nscore: 0.627424331968298\neval_id: cuda_1176\n\ncontent:\n另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。\n\n[Document 3]\nsource: cuda_examples.md\nchunk_id: 0\nrank: 3\nscore: 0.5409345415530034\neval_id: cuda_1175\n\ncontent:\n这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+    "pipeline_status": "answered",
+    "llm_called": true,
+    "context_documents": [
+      {
+        "id": "cuda_oom",
+        "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+        "metadata": {
+          "eval_id": "cuda_oom",
+          "source": "cuda_examples.md",
+          "chunk_id": 2
+        },
+        "rank": 1,
+        "score": 1.0
+      },
+      {
+        "id": "cuda_1176",
+        "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+        "metadata": {
+          "eval_id": "cuda_1176",
+          "source": "cuda_examples.md",
+          "chunk_id": 1
+        },
+        "rank": 2,
+        "score": 0.627424331968298
+      },
+      {
+        "id": "cuda_1175",
+        "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+        "metadata": {
+          "eval_id": "cuda_1175",
+          "source": "cuda_examples.md",
+          "chunk_id": 0
+        },
+        "rank": 3,
+        "score": 0.5409345415530034
+      }
+    ],
+    "context_document_ids": [
+      "cuda_oom",
+      "cuda_1176",
+      "cuda_1175"
+    ],
+    "retrieval_query": "CUDA out of memory 表示什么，资料给出了哪些初步处理方向？",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "started_at": "2026-10-26T13:50:35.309302+00:00",
+    "elapsed_seconds": 1.5881967000022996,
+    "review": {
+      "status": "pending",
+      "reviewer": null,
+      "reviewed_at": null,
+      "faithfulness": null,
+      "answer_relevance": null,
+      "factual_correctness": null,
+      "factual_correctness_basis": null,
+      "required_facts_covered": [
+        {
+          "fact": "当前计算需要的 GPU 显存不足",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "减少 batch size、缩短输入或释放不再使用的张量",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        },
+        {
+          "fact": "其他进程占用显存",
+          "covered": null,
+          "answer_quote": null,
+          "notes": ""
+        }
+      ],
+      "unsupported_claims": null,
+      "insufficient_evidence_handled": null,
+      "review_notes": ""
+    }
+  },
+  "bundle_run": {
+    "id": "99bc6817cab642db9252f4a6e59e3849",
+    "started_at": "2026-10-26T13:50:35.309302+00:00",
+    "qa_dataset": {
+      "version": "3.0",
+      "sha256": "b854564a846d0ca022ffcdea59deb6487cbeab9ecdae828d4a41a749775548c4",
+      "metadata": {
+        "name": "rag_qa_teaching_v3",
+        "corpus_file": "retrieval_eval_v3.json",
+        "purpose": "采集实际答案、提示词、上下文与来源，供人工独立评审；参考答案和标签不进入生成提示词。",
+        "answerable_definition": "true 表示已有资料能回答所请求的事实；false 表示所请求的事实或确定结论无法由现有资料支持，期望说明证据限制，而不是猜测。",
+        "limitations": "50 个教学问题（42 个可回答、8 个无法确定所请求事实的负例），基于同一份 18 Chunk 冻结正文；新增问题由 Codex 对照正文检查，不代表独立人工认证。CUDA 编号为示例，不是当前用户环境事实。"
+      }
+    },
+    "corpus_sha256": "33a7d07e4554df865667592b3515133c210b23678c4fcb895a8cdfa9240e04d9",
+    "generation": {
+      "mode": "real_api",
+      "implementation": "OpenAILLM",
+      "model": "deepseek-flash"
+    },
+    "pipeline": {
+      "retriever": {
+        "implementation": "TimedSearch"
+      },
+      "reranker": null,
+      "query_rewriter": null,
+      "context_top_k": 3
+    },
+    "quality_scope": "pending_human_review",
+    "finished_at": "2026-10-26T13:50:36.898214+00:00",
+    "elapsed_seconds": 1.588233599999512
+  },
+  "exception_type": null,
+  "pipeline_status": "answered",
+  "failed_stage": null,
+  "retrieval_candidates": [
+    {
+      "id": "cuda_oom",
+      "text": "CUDA out of memory 表示当前计算需要的 GPU 显存不足。可先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存；这与示例错误编号 1175 的驱动初始化线索不同。",
+      "metadata": {
+        "eval_id": "cuda_oom",
+        "source": "cuda_examples.md",
+        "chunk_id": 2
+      },
+      "rank": 1,
+      "score": 1.0,
+      "vector_score": 0.7111480236053467,
+      "bm25_score": 12.204573434376837,
+      "normalized_vector_score": 1.0,
+      "normalized_bm25_score": 1.0,
+      "final_score": 1.0
+    },
+    {
+      "id": "cuda_1176",
+      "text": "另一份示例日志中的 CUDA error 1176 后面出现 device index out of range。该示例应检查请求的设备序号和可见 GPU 列表，不能把 CUDA error 1175 的日志线索直接套过来。",
+      "metadata": {
+        "eval_id": "cuda_1176",
+        "source": "cuda_examples.md",
+        "chunk_id": 1
+      },
+      "rank": 2,
+      "score": 0.627424331968298,
+      "vector_score": 0.5729364156723022,
+      "bm25_score": 10.12466593949513,
+      "normalized_vector_score": 0.5603789209935396,
+      "normalized_bm25_score": 0.7838636242427345,
+      "final_score": 0.627424331968298
+    },
+    {
+      "id": "cuda_1175",
+      "text": "这份示例日志中的 CUDA error 1175 后面出现 driver initialization failed。排查时先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。编号本身不足以确定修复方法，不应猜测。",
+      "metadata": {
+        "eval_id": "cuda_1175",
+        "source": "cuda_examples.md",
+        "chunk_id": 0
+      },
+      "rank": 3,
+      "score": 0.5409345415530034,
+      "vector_score": 0.6034165620803833,
+      "bm25_score": 5.173397986793326,
+      "normalized_vector_score": 0.6573296406370508,
+      "normalized_bm25_score": 0.2693459770235592,
+      "final_score": 0.5409345415530034
+    },
+    {
+      "id": "rag_evidence",
+      "text": "RAG 可以降低大模型幻觉，因为它向模型提供可参考的外部事实和证据，减少仅凭参数记忆编造答案的情况。模型需要根据检索到的资料作答，资料不足时应说明无法回答。",
+      "metadata": {
+        "eval_id": "rag_evidence",
+        "source": "rag.md",
+        "chunk_id": 1
+      },
+      "rank": 4,
+      "score": 0.38539228693364813,
+      "vector_score": 0.5196690559387207,
+      "bm25_score": 6.165400239142724,
+      "normalized_vector_score": 0.3909470294750876,
+      "normalized_bm25_score": 0.3724312210036227,
+      "final_score": 0.38539228693364813
+    },
+    {
+      "id": "rag_overview",
+      "text": "RAG 是检索增强生成技术。系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。",
+      "metadata": {
+        "eval_id": "rag_overview",
+        "source": "rag.md",
+        "chunk_id": 0
+      },
+      "rank": 5,
+      "score": 0.3010183037207302,
+      "vector_score": 0.5319550633430481,
+      "bm25_score": null,
+      "normalized_vector_score": 0.43002614817247176,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.3010183037207302
+    },
+    {
+      "id": "faiss_ip",
+      "text": "FAISS IndexFlatIP 对索引内全部文档向量执行精确内积搜索，再返回内积最大的 Top-K。只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。",
+      "metadata": {
+        "eval_id": "faiss_ip",
+        "source": "faiss.md",
+        "chunk_id": 0
+      },
+      "rank": 6,
+      "score": 0.2975238484528366,
+      "vector_score": 0.5303856134414673,
+      "bm25_score": null,
+      "normalized_vector_score": 0.425034069218338,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.2975238484528366
+    },
+    {
+      "id": "transformer_attention",
+      "text": "Transformer 的 Self-Attention 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。注意力权重来自缩放点积及 softmax，而不是简单按词频匹配。",
+      "metadata": {
+        "eval_id": "transformer_attention",
+        "source": "transformer.md",
+        "chunk_id": 0
+      },
+      "rank": 7,
+      "score": 0.2918299473927284,
+      "vector_score": 0.5278283357620239,
+      "bm25_score": null,
+      "normalized_vector_score": 0.41689992484675487,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.2918299473927284
+    },
+    {
+      "id": "rag_limits",
+      "text": "RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。应该核查来源和引用，并在知识库缺乏答案时明确说明。",
+      "metadata": {
+        "eval_id": "rag_limits",
+        "source": "rag.md",
+        "chunk_id": 2
+      },
+      "rank": 8,
+      "score": 0.2807180547519071,
+      "vector_score": 0.5228376984596252,
+      "bm25_score": 2.5814478147561477,
+      "normalized_vector_score": 0.4010257925027244,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.2807180547519071
+    },
+    {
+      "id": "embedding_bge",
+      "text": "Embedding 将文本编码为稠密语义向量，使含义接近的文本通常在向量空间更接近。本项目使用 sentence-transformers 加载 BAAI/bge-small-zh-v1.5 中文模型，文档向量可以提前计算。",
+      "metadata": {
+        "eval_id": "embedding_bge",
+        "source": "embedding.md",
+        "chunk_id": 0
+      },
+      "rank": 9,
+      "score": 0.26283344038815776,
+      "vector_score": 0.514805257320404,
+      "bm25_score": null,
+      "normalized_vector_score": 0.375476343411654,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.26283344038815776
+    },
+    {
+      "id": "api_stream",
+      "text": "FastAPI 可以把 RAG 问答封装为 HTTP 接口。普通响应在答案生成结束后一次返回；StreamingResponse 则可以随生成进度逐段发送内容，让客户端更早看到输出。",
+      "metadata": {
+        "eval_id": "api_stream",
+        "source": "api.md",
+        "chunk_id": 0
+      },
+      "rank": 10,
+      "score": 0.25409816485027364,
+      "vector_score": 0.5108820199966431,
+      "bm25_score": null,
+      "normalized_vector_score": 0.3629973783575338,
+      "normalized_bm25_score": 0.0,
+      "final_score": 0.25409816485027364
+    }
+  ],
+  "reranked_candidates": [],
+  "retry_count": 0,
+  "finished_at": "2026-10-26T13:50:36.898214+00:00"
+}

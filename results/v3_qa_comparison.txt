@@ -1,0 +1,1779 @@
+V3 real QA comparison
+experiment_id=9915eade108441c49d79ca173144894d
+Manual quality review pending; no automatic quality scores.
+{
+  "vector": {
+    "units": 50,
+    "statuses": {
+      "success": 49,
+      "failed": 1
+    },
+    "http_requests": 52,
+    "retries": 2,
+    "http_response_statuses": {
+      "200": 49,
+      "None": 3
+    },
+    "usage_available_units": 49,
+    "tokens": {
+      "input_tokens": 18179,
+      "output_tokens": 10878,
+      "total_tokens": 29057,
+      "cached_input_tokens": 0
+    },
+    "timings_ms": {
+      "retrieval": {
+        "n": 50,
+        "mean": 11.485634000855498,
+        "median": 9.408850000909297,
+        "p95": 23.777125000924563,
+        "min": 6.266700002015568,
+        "max": 32.50310000294121
+      },
+      "rerank": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "llm": {
+        "n": 50,
+        "mean": 2296.477888000227,
+        "median": 1888.3817000059935,
+        "p95": 4327.4367100002555,
+        "min": 931.3341999950353,
+        "max": 10212.350100002368
+      },
+      "total": {
+        "n": 50,
+        "mean": 2331.340124000126,
+        "median": 1915.3526500012958,
+        "p95": 4399.544070000773,
+        "min": 965.6376000057207,
+        "max": 10238.484900000913
+      }
+    },
+    "steady_total_ms_excluding_first_unit": {
+      "n": 49,
+      "mean": 2323.2112714288132,
+      "median": 1910.7308000020566,
+      "p95": 4424.561540001011,
+      "min": 965.6376000057207,
+      "max": 10238.484900000913
+    },
+    "human_quality_metrics": null
+  },
+  "bm25": {
+    "units": 50,
+    "statuses": {
+      "success": 49,
+      "failed": 1
+    },
+    "http_requests": 52,
+    "retries": 2,
+    "http_response_statuses": {
+      "200": 50,
+      "None": 2
+    },
+    "usage_available_units": 49,
+    "tokens": {
+      "input_tokens": 18095,
+      "output_tokens": 10958,
+      "total_tokens": 29053,
+      "cached_input_tokens": 0
+    },
+    "timings_ms": {
+      "retrieval": {
+        "n": 50,
+        "mean": 0.5436939999344759,
+        "median": 0.3586000020732172,
+        "p95": 1.3391850025072924,
+        "min": 0.27070000214735046,
+        "max": 4.505400000198279
+      },
+      "rerank": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "llm": {
+        "n": 50,
+        "mean": 16111.62185800029,
+        "median": 1880.1942499994766,
+        "p95": 3824.9780849993836,
+        "min": 1161.654700001236,
+        "max": 701034.5178999996
+      },
+      "total": {
+        "n": 50,
+        "mean": 16131.567128000315,
+        "median": 1895.1043500019296,
+        "p95": 3849.5253950015463,
+        "min": 1174.9503000028199,
+        "max": 701124.1776999959
+      }
+    },
+    "steady_total_ms_excluding_first_unit": {
+      "n": 49,
+      "mean": 16423.740481633045,
+      "median": 1899.559000004956,
+      "p95": 3858.92114000162,
+      "min": 1174.9503000028199,
+      "max": 701124.1776999959
+    },
+    "human_quality_metrics": null
+  },
+  "hybrid": {
+    "units": 50,
+    "statuses": {
+      "success": 50
+    },
+    "http_requests": 50,
+    "retries": 0,
+    "http_response_statuses": {
+      "200": 50
+    },
+    "usage_available_units": 50,
+    "tokens": {
+      "input_tokens": 18377,
+      "output_tokens": 11752,
+      "total_tokens": 30129,
+      "cached_input_tokens": 0
+    },
+    "timings_ms": {
+      "retrieval": {
+        "n": 50,
+        "mean": 12.576218000467634,
+        "median": 9.471599998505553,
+        "p95": 31.513720001021277,
+        "min": 6.025700000463985,
+        "max": 67.6032000046689
+      },
+      "rerank": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "llm": {
+        "n": 50,
+        "mean": 2151.7696479993174,
+        "median": 1981.6811499986215,
+        "p95": 3661.224399997444,
+        "min": 979.1217000019969,
+        "max": 5624.175500001002
+      },
+      "total": {
+        "n": 50,
+        "mean": 2186.754484000412,
+        "median": 2011.0848000003898,
+        "p95": 3687.4167350000776,
+        "min": 1009.800500003621,
+        "max": 5653.9050999999745
+      }
+    },
+    "steady_total_ms_excluding_first_unit": {
+      "n": 49,
+      "mean": 2174.4453081637216,
+      "median": 1994.597500000964,
+      "p95": 3710.1407199996147,
+      "min": 1009.800500003621,
+      "max": 5653.9050999999745
+    },
+    "human_quality_metrics": null
+  },
+  "hybrid_reranker": {
+    "units": 50,
+    "statuses": {
+      "success": 49,
+      "failed": 1
+    },
+    "http_requests": 52,
+    "retries": 2,
+    "http_response_statuses": {
+      "200": 49,
+      "None": 3
+    },
+    "usage_available_units": 49,
+    "tokens": {
+      "input_tokens": 18155,
+      "output_tokens": 11199,
+      "total_tokens": 29354,
+      "cached_input_tokens": 767
+    },
+    "timings_ms": {
+      "retrieval": {
+        "n": 50,
+        "mean": 15.083517999446485,
+        "median": 9.224299999914365,
+        "p95": 27.568804998008996,
+        "min": 6.729499997163657,
+        "max": 192.29440000344766
+      },
+      "rerank": {
+        "n": 50,
+        "mean": 501.6975219997403,
+        "median": 409.74294999978156,
+        "p95": 1085.3531650001967,
+        "min": 325.51400000374997,
+        "max": 1552.9959999985294
+      },
+      "llm": {
+        "n": 50,
+        "mean": 2347.049983999459,
+        "median": 1837.4833000016224,
+        "p95": 4927.822109995393,
+        "min": 1247.955999999249,
+        "max": 10321.81610000407
+      },
+      "total": {
+        "n": 50,
+        "mean": 2887.692716000456,
+        "median": 2364.459000000352,
+        "p95": 5563.656980000813,
+        "min": 1692.4708999940776,
+        "max": 11405.341700003191
+      }
+    },
+    "steady_total_ms_excluding_first_unit": {
+      "n": 49,
+      "mean": 2902.9165653065525,
+      "median": 2370.3022000045166,
+      "p95": 5592.710860000803,
+      "min": 1692.4708999940776,
+      "max": 11405.341700003191
+    },
+    "human_quality_metrics": null
+  }
+}
+
+vector__qa_001 status=success
+question: RAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？
+sources: rag_evidence, rag_terms, rag_limits
+answer: RAG 可以降低大模型幻觉，是因为它向模型提供可参考的外部事实和证据，减少模型仅凭参数记忆编造答案的情况；模型需要根据检索到的资料作答，资料不足时应说明无法回答。
+
+但 RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。因此应核查来源和引用，并在知识库缺乏答案时明确说明。
+
+bm25__qa_001 status=success
+question: RAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？
+sources: rag_terms, rag_evidence, rag_limits
+answer: 根据资料：
+
+- **RAG 可以降低大模型幻觉**，因为它向模型提供可参考的**外部事实和证据**，减少模型仅凭参数记忆编造答案的情况；同时要求模型根据检索到的资料作答，资料不足时应说明无法回答。（Document 2）
+
+- **RAG 不能保证完全消除幻觉**。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。因此还应核查来源和引用，并在知识库缺乏答案时明确说明。（Document 3）
+
+hybrid__qa_001 status=success
+question: RAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？
+sources: rag_evidence, rag_terms, rag_limits
+answer: RAG 可以降低大模型幻觉，是因为它向模型提供可参考的外部事实和证据，减少模型仅凭参数记忆编造答案的情况；模型需要根据检索到的资料作答，资料不足时应说明无法回答。
+
+RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。因此应核查来源和引用，并在知识库缺乏答案时明确说明。
+
+hybrid_reranker__qa_001 status=success
+question: RAG 为什么可以降低大模型幻觉？它能保证完全消除幻觉吗？
+sources: rag_evidence, rag_limits, rag_terms
+answer: 根据资料：
+
+1. **RAG 可以降低大模型幻觉的原因**：RAG 向模型提供可参考的外部事实和证据，减少模型仅凭参数记忆编造答案的情况；模型需要根据检索到的资料作答，资料不足时应说明无法回答。
+
+2. **不能保证完全消除幻觉**：RAG 不能保证完全消除幻觉。检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。因此应核查来源和引用，并在知识库缺乏答案时明确说明。
+
+bm25__qa_004 status=success
+question: 只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？
+sources: cuda_1175, cuda_1176, cuda_oom
+answer: 不能确定显卡已经损坏，也不能给出唯一修复命令。
+
+资料中说明：CUDA error 1175 的示例后面出现了 `driver initialization failed`，排查时应先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本；**错误编号本身不足以确定修复方法，不应猜测**。因此仅看到 CUDA error 1175 时，无法据此判断显卡损坏，也没有资料支持的唯一修复命令。
+
+hybrid__qa_004 status=success
+question: 只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？
+sources: cuda_1175, cuda_1176, cuda_oom
+answer: 不能。
+
+根据资料，CUDA error 1175 的示例日志后面出现了 `driver initialization failed`，但**编号本身不足以确定修复方法，不应猜测**。只能看到 CUDA error 1175，不能据此确定显卡已经损坏，也不能给出唯一的修复命令。
+
+资料建议的排查方向是：先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。资料中没有提供针对该错误的唯一修复命令。
+
+hybrid_reranker__qa_004 status=success
+question: 只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？
+sources: cuda_1175, cuda_oom, cuda_1176
+answer: 不能。
+
+资料明确说明：**CUDA error 1175 的编号本身不足以确定修复方法，不应猜测**。只看到 1175，不能据此判断显卡已经损坏，也不能给出唯一的修复命令。
+
+资料中对该错误的排查线索是：先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本；示例日志中 1175 后出现的是 `driver initialization failed`。资料没有提供“唯一修复命令”。
+
+vector__qa_004 status=success
+question: 只看到 CUDA error 1175，能否确定我的显卡已经损坏，并给出唯一的修复命令？
+sources: cuda_1175, cuda_1176, cuda_oom
+answer: 不能。
+
+根据资料，CUDA error 1175 的示例日志中后面出现的是 `driver initialization failed`。排查时应先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。资料明确说明：**编号本身不足以确定修复方法，不应猜测**。
+
+因此，只看到 CUDA error 1175：
+
+1. **不能确定显卡已经损坏**；
+2. **不能给出唯一的修复命令**；
+3. 资料中也没有提供可直接执行的唯一修复命令。
+
+你需要先收集完整错误日志，并检查 GPU 驱动、CUDA 运行时和框架版本。
+
+hybrid__qa_002 status=success
+question: FAISS IndexFlatIP 在什么条件下等价于余弦相似度检索？
+sources: faiss_ip, cosine_unit, bm25_terms
+answer: 当查询向量和文档向量都先做 **L2 单位长度归一化**（范数为 1）时，`FAISS IndexFlatIP` 的内积搜索等价于余弦相似度检索，即 `cosine(q,d)=q·d`。
+
+hybrid_reranker__qa_002 status=success
+question: FAISS IndexFlatIP 在什么条件下等价于余弦相似度检索？
+sources: faiss_ip, cosine_unit, bm25_terms
+answer: 当**查询向量和文档向量都做了 L2 归一化（单位长度归一化，范数为 1）**时，FAISS `IndexFlatIP` 的内积搜索等价于余弦相似度检索。资料说明：若查询向量 \(q\) 和文档向量 \(d\) 都已归一化，则 \(\text{cosine}(q,d)=q\cdot d\)，因此可用 `IndexFlatIP` 实现余弦检索。
+
+vector__qa_002 status=success
+question: FAISS IndexFlatIP 在什么条件下等价于余弦相似度检索？
+sources: faiss_ip, cosine_unit, hybrid_fusion
+answer: 当查询向量和文档向量都做了单位长度归一化（L2 归一化，使向量范数为 1）时，内积等于余弦相似度。此时使用 FAISS `IndexFlatIP` 执行内积搜索，就等价于余弦相似度检索。
+
+bm25__qa_002 status=success
+question: FAISS IndexFlatIP 在什么条件下等价于余弦相似度检索？
+sources: faiss_ip, cosine_unit, bm25_terms
+answer: 只有当**查询向量和文档向量都做了单位长度归一化（L2 归一化，范数为 1）**时，FAISS `IndexFlatIP` 的内积检索才等价于余弦相似度检索。此时 `cosine(q,d)=q·d`，因此可用 `IndexFlatIP` 实现余弦检索。
+
+hybrid_reranker__qa_003 status=success
+question: Cross-Encoder 为什么不能提前为每篇文档计算一个适用于所有问题的固定重排分数？
+sources: reranker_pairs, embedding_bge, faiss_ip
+answer: 因为 Cross-Encoder 需要将 **query 与 document.text 组成文本对**后联合编码，才能输出相关性分数。同一篇文档面对不同问题会得到不同分数，所以不能提前计算一个适用于所有问题的固定重排分数；它只用于重排检索召回的候选。
+
+vector__qa_003 status=success
+question: Cross-Encoder 为什么不能提前为每篇文档计算一个适用于所有问题的固定重排分数？
+sources: reranker_pairs, cuda_1175, chunk_overlap
+answer: 因为 Cross-Encoder 需要把 query 与 document.text 组成文本对，联合编码后输出相关性分数。同一篇文档面对不同问题会得到不同分数，所以不能提前计算一个适用于所有问题的固定 rerank score；它只用于重排检索召回的候选。
+
+bm25__qa_003 status=success
+question: Cross-Encoder 为什么不能提前为每篇文档计算一个适用于所有问题的固定重排分数？
+sources: reranker_pairs, embedding_bge, bm25_terms
+answer: 因为 Cross-Encoder 是将 **query 与 document.text 组成文本对，联合编码后输出相关性分数**。同一篇文档面对不同问题会得到不同分数，所以不能提前计算一个适用于所有问题的固定 rerank score；它只用于重排检索召回的候选。
+
+hybrid__qa_003 status=success
+question: Cross-Encoder 为什么不能提前为每篇文档计算一个适用于所有问题的固定重排分数？
+sources: reranker_pairs, cuda_1175, chunk_overlap
+answer: 因为 Cross-Encoder 会把 query 与 document.text 组成文本对联合编码后输出相关性分数；同一篇文档面对不同问题会得到不同分数，所以不能提前计算一个适用于所有问题的固定 rerank score。它只用于重排检索召回的候选。
+
+vector__qa_005 status=success
+question: 这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？
+sources: cuda_oom, cuda_1175, cuda_1176
+answer: 资料中没有提供这台机器的 GPU 具体型号、驱动版本和 CUDA 版本信息，因此无法根据现有资料确定。现有内容只提到排查时应核对 GPU 驱动、CUDA 运行时与框架版本，但没有给出实际型号或版本号。
+
+bm25__qa_005 status=success
+question: 这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？
+sources: cuda_1175, cuda_oom, cuda_1176
+answer: 资料中没有提供这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本，因此无法根据现有资料回答。资料仅建议排查时核对 GPU 驱动、CUDA 运行时与框架版本，但未给出实际型号或版本号。
+
+hybrid__qa_005 status=success
+question: 这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？
+sources: cuda_1175, cuda_oom, cuda_1176
+answer: 资料中没有提供这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本，因此无法确定。现有内容仅涉及 CUDA 错误示例及排查线索。
+
+hybrid_reranker__qa_005 status=success
+question: 这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本分别是什么？
+sources: cuda_oom, cuda_1175, rag_overview
+answer: 根据提供的资料，无法确定这台机器当前安装的 GPU 具体型号、驱动版本和 CUDA 版本。
+
+资料中只涉及 CUDA out of memory 的通用排查建议，以及 CUDA error 1175 伴随 driver initialization failed 时的排查方向（记录完整日志、核对驱动/CUDA 运行时/框架版本），并未给出任何具体的 GPU 型号或版本号信息。
+
+bm25__qa_006 status=success
+question: RAG 从用户问题到模型组织答案，资料描述了怎样的基本流程？
+sources: rag_evidence, rag_overview, rag_terms
+answer: 根据资料，基本流程是：
+
+1. 系统先根据用户问题，从外部知识库中检索与问题相关的信息；
+2. 再把检索结果放入提示词；
+3. 交给大语言模型组织答案；
+4. 模型需要根据检索到的资料作答，资料不足时应说明无法回答。
+
+hybrid__qa_006 status=success
+question: RAG 从用户问题到模型组织答案，资料描述了怎样的基本流程？
+sources: rag_overview, rag_evidence, api_stream
+answer: 根据资料，基本流程是：用户提出问题后，RAG 系统先从外部知识库检索与问题相关的信息；然后把检索结果放入提示词；再交给大语言模型组织答案。模型需要根据检索到的资料作答，资料不足时应说明无法回答。
+
+hybrid_reranker__qa_006 status=success
+question: RAG 从用户问题到模型组织答案，资料描述了怎样的基本流程？
+sources: rag_overview, api_stream, rag_evidence
+answer: 资料描述的基本流程是：
+
+1. 针对用户问题，系统先从外部知识库检索与问题相关的信息；
+2. 将检索结果放入提示词；
+3. 把提示词交给大语言模型，由模型组织答案；
+4. 模型应根据检索到的资料作答，资料不足时应说明无法回答。
+
+vector__qa_006 status=success
+question: RAG 从用户问题到模型组织答案，资料描述了怎样的基本流程？
+sources: rag_overview, api_stream, rag_evidence
+answer: 根据资料，RAG 的基本流程是：
+
+1. 系统先从外部知识库中检索与用户问题相关的信息；
+2. 将检索结果放入提示词；
+3. 交给大语言模型组织答案。
+
+同时，模型需要根据检索到的资料作答；如果资料不足，应说明无法回答。
+
+hybrid__qa_007 status=success
+question: rag_terms 这条资料能独立解释 RAG 降低幻觉的机制吗？
+sources: rag_terms, rag_evidence, rag_limits
+answer: 不能。`rag_terms` 这条资料只是术语索引，明确说明它“不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制”。因此它不能独立解释 RAG 降低幻觉的机制。
+
+根据资料，解释该机制的是另一条资料：RAG 通过提供可参考的外部事实和证据，减少模型仅凭参数记忆编造答案的情况；资料不足时应说明无法回答。
+
+hybrid_reranker__qa_007 status=success
+question: rag_terms 这条资料能独立解释 RAG 降低幻觉的机制吗？
+sources: rag_evidence, rag_limits, rag_terms
+answer: 不能。`rag_terms` 这条资料只是术语索引，列出了“RAG、大模型、幻觉、检索增强生成”等关键词，**没有解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制**。因此它不能独立解释该机制。
+
+vector__qa_007 status=success
+question: rag_terms 这条资料能独立解释 RAG 降低幻觉的机制吗？
+sources: rag_evidence, rag_limits, rag_terms
+answer: 不能。`rag_terms` 这条资料只是术语索引，明确说明它“不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制”，因此不能独立解释该机制。
+
+根据其他资料，RAG 降低幻觉的机制是：向模型提供可参考的外部事实和证据，减少模型仅凭参数记忆编造答案；模型应根据检索资料作答，资料不足时应说明无法回答。
+
+bm25__qa_007 status=success
+question: rag_terms 这条资料能独立解释 RAG 降低幻觉的机制吗？
+sources: rag_terms, rag_evidence, rag_limits
+answer: 不能。`rag_terms` 这条资料只是术语索引，明确说明它**不解释 RAG 为什么可以降低大模型幻觉，也没有给出相关机制**。因此它不能独立解释该机制。
+
+hybrid_reranker__qa_008 status=success
+question: 知识库列举了哪些仍会使 RAG 回答出错的环节？
+sources: rag_limits, rag_evidence, rag_overview
+answer: 根据资料，仍可能导致 RAG 回答出错的环节包括：
+
+- 检索错误
+- 资料过时
+- 上下文缺失
+- 模型误读
+
+资料还指出，RAG 不能保证完全消除幻觉；因此应核查来源和引用，并在知识库缺乏答案时明确说明。
+
+vector__qa_008 status=success
+question: 知识库列举了哪些仍会使 RAG 回答出错的环节？
+sources: rag_limits, rag_overview, rag_evidence
+answer: 资料中列举的仍可能导致 RAG 回答出错的环节包括：
+
+1. 检索错误  
+2. 资料过时  
+3. 上下文缺失  
+4. 模型误读  
+
+这些情况都可能导致错误回答。
+
+bm25__qa_008 status=success
+question: 知识库列举了哪些仍会使 RAG 回答出错的环节？
+sources: rag_limits, rag_overview, rag_terms
+answer: 知识库列举的仍会使 RAG 回答出错的环节包括：**检索错误、资料过时、上下文缺失、模型误读**。这些情况都可能导致错误回答，因此 RAG 不能保证完全消除幻觉。
+
+hybrid__qa_008 status=success
+question: 知识库列举了哪些仍会使 RAG 回答出错的环节？
+sources: rag_limits, rag_overview, rag_terms
+answer: 知识库列举的环节包括：**检索错误、资料过时、上下文缺失，或模型误读**。这些情况都可能导致 RAG 回答出错。
+
+vector__qa_009 status=success
+question: 如果检索资料不足或缺乏答案，助手应如何表述，并做什么来源检查？
+sources: rag_limits, rag_overview, cuda_1176
+answer: 如果检索资料不足或知识库中缺乏答案，助手应明确说明“根据现有资料无法回答/资料不足”，不能猜测或使用资料外信息作答。
+
+同时应核查来源和引用，确认检索来源是否可靠、引用是否能支持回答；并注意检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。
+
+bm25__qa_009 status=success
+question: 如果检索资料不足或缺乏答案，助手应如何表述，并做什么来源检查？
+sources: rag_limits, rag_evidence, cuda_oom
+answer: 根据资料，当检索资料不足或知识库缺乏答案时，助手应明确说明“资料不足，无法回答”或“无法根据现有资料作答”，不能编造答案。同时应核查来源和引用。资料只提到要核查来源和引用，未进一步说明具体检查项。
+
+hybrid__qa_009 status=success
+question: 如果检索资料不足或缺乏答案，助手应如何表述，并做什么来源检查？
+sources: rag_limits, rag_overview, rag_evidence
+answer: 如果检索资料不足或缺乏答案，助手应明确说明无法回答，或说明知识库中缺乏答案，不能凭猜测作答。  
+同时应核查来源和引用，以避免检索错误、资料过时、上下文缺失或模型误读导致的错误回答。
+
+hybrid_reranker__qa_009 status=success
+question: 如果检索资料不足或缺乏答案，助手应如何表述，并做什么来源检查？
+sources: rag_limits, rag_evidence, rag_overview
+answer: 根据资料，如果检索资料不足或知识库缺乏答案，助手应**明确说明无法回答/知识库缺乏答案**，不要编造答案。
+
+来源检查方面，应**核查来源和引用**；因为检索错误、资料过时、上下文缺失或模型误读都可能导致错误回答。资料未提供更具体的来源检查流程。
+
+bm25__qa_010 status=success
+question: Embedding 表示什么？含义接近的文本通常在表示空间中有什么关系？
+sources: embedding_bge, cuda_oom, python_venv
+answer: Embedding 表示将文本编码为稠密语义向量。含义接近的文本，在向量空间中通常会更接近。
+
+hybrid__qa_010 status=success
+question: Embedding 表示什么？含义接近的文本通常在表示空间中有什么关系？
+sources: embedding_bge, transformer_attention, chunk_overlap
+answer: Embedding 将文本编码为**稠密语义向量**。含义接近的文本通常在**向量空间中更接近**。
+
+hybrid_reranker__qa_010 status=success
+question: Embedding 表示什么？含义接近的文本通常在表示空间中有什么关系？
+sources: embedding_bge, pdf_ocr, transformer_attention
+answer: 根据资料，Embedding 将文本编码为**稠密语义向量**；含义接近的文本通常在**向量空间更接近**。
+
+vector__qa_010 status=success
+question: Embedding 表示什么？含义接近的文本通常在表示空间中有什么关系？
+sources: embedding_bge, transformer_attention, bm25_terms
+answer: 根据资料，Embedding 将文本编码为**稠密语义向量**。含义接近的文本通常在**向量空间（表示空间）中更接近**。
+
+hybrid__qa_011 status=success
+question: 项目资料列出的中文 Embedding 模型、加载库和可提前计算的对象分别是什么？
+sources: embedding_bge, rag_evidence, transformer_attention
+answer: 项目资料列出的内容是：
+
+- 中文 Embedding 模型：`BAAI/bge-small-zh-v1.5`
+- 加载库：`sentence-transformers`
+- 可提前计算的对象：文档向量
+
+hybrid_reranker__qa_011 status=success
+question: 项目资料列出的中文 Embedding 模型、加载库和可提前计算的对象分别是什么？
+sources: embedding_bge, reranker_pairs, faiss_ip
+answer: - 中文 Embedding 模型：BAAI/bge-small-zh-v1.5  
+- 加载库：sentence-transformers  
+- 可提前计算的对象：文档向量
+
+vector__qa_011 status=success
+question: 项目资料列出的中文 Embedding 模型、加载库和可提前计算的对象分别是什么？
+sources: embedding_bge, transformer_attention, rag_overview
+answer: - 中文 Embedding 模型：`BAAI/bge-small-zh-v1.5`
+- 加载库：`sentence-transformers`
+- 可提前计算的对象：文档向量
+
+bm25__qa_011 status=success
+question: 项目资料列出的中文 Embedding 模型、加载库和可提前计算的对象分别是什么？
+sources: embedding_bge, rag_evidence, python_venv
+answer: - 中文 Embedding 模型：`BAAI/bge-small-zh-v1.5`
+- 加载库：`sentence-transformers`
+- 可提前计算的对象：文档向量
+
+hybrid_reranker__qa_012 status=success
+question: 资料中的 L2 归一化怎样计算，归一化后的向量范数是多少？
+sources: cosine_unit, faiss_ip, hybrid_fusion
+answer: 资料中 L2 归一化的计算方式是：**将向量除以它的欧几里得长度**。归一化后的向量**范数等于 1**。
+
+vector__qa_012 status=success
+question: 资料中的 L2 归一化怎样计算，归一化后的向量范数是多少？
+sources: cosine_unit, faiss_ip, hybrid_fusion
+answer: 根据资料，L2 归一化的计算方式是：**把向量除以它的欧几里得长度**。归一化后的**向量范数等于 1**。
+
+bm25__qa_012 status=success
+question: 资料中的 L2 归一化怎样计算，归一化后的向量范数是多少？
+sources: cosine_unit, embedding_bge, faiss_ip
+answer: 根据资料，L2 归一化是把向量除以它的欧几里得长度。若向量为 \(v\)，则计算为：
+
+\[
+v_{\text{normalized}} = \frac{v}{\|v\|_2}
+\]
+
+归一化后的向量范数为 **1**。
+
+hybrid__qa_012 status=success
+question: 资料中的 L2 归一化怎样计算，归一化后的向量范数是多少？
+sources: cosine_unit, faiss_ip, hybrid_fusion
+answer: 根据资料，L2 归一化是：**把向量除以它的欧几里得长度**。  
+归一化后的向量范数是：**1**。
+
+vector__qa_013 status=success
+question: IndexFlatIP 搜索时检查哪些向量，按什么值选出 Top-K？
+sources: faiss_ip, cosine_unit, hybrid_fusion
+answer: IndexFlatIP 搜索时会检查**索引内的全部文档向量**，执行精确内积搜索，并按**内积值最大**来选出 Top-K。
+
+bm25__qa_013 status=success
+question: IndexFlatIP 搜索时检查哪些向量，按什么值选出 Top-K？
+sources: faiss_ip, cosine_unit, embedding_bge
+answer: IndexFlatIP 搜索时会检查**索引内的全部文档向量**，执行精确内积搜索，并按**内积最大**选出 Top-K。
+
+hybrid__qa_013 status=success
+question: IndexFlatIP 搜索时检查哪些向量，按什么值选出 Top-K？
+sources: faiss_ip, cosine_unit, hybrid_fusion
+answer: IndexFlatIP 搜索时会检查**索引内的全部文档向量**，执行精确内积搜索，然后按**内积值最大**选出 Top-K。
+
+hybrid_reranker__qa_013 status=success
+question: IndexFlatIP 搜索时检查哪些向量，按什么值选出 Top-K？
+sources: faiss_ip, cosine_unit, hybrid_fusion
+answer: IndexFlatIP 搜索时会检查**索引内的全部文档向量**，执行精确内积搜索，并按照**内积值最大**选出 Top-K。  
+资料还说明：只有当查询向量和文档向量都做单位长度归一化时，内积才等于余弦相似度。
+
+bm25__qa_014 status=success
+question: BM25 的分数是根据哪些文本统计因素计算的？
+sources: reranker_pairs, bm25_terms, embedding_bge
+answer: 根据资料，BM25 的分数综合以下文本统计因素计算：
+
+1. 词频
+2. 文档频率
+3. 文档长度
+
+hybrid__qa_014 status=success
+question: BM25 的分数是根据哪些文本统计因素计算的？
+sources: bm25_terms, reranker_pairs, hybrid_fusion
+answer: BM25 的分数综合**词频、文档频率和文档长度**计算。
+
+hybrid_reranker__qa_014 status=success
+question: BM25 的分数是根据哪些文本统计因素计算的？
+sources: bm25_terms, hybrid_fusion, reranker_pairs
+answer: 根据资料，BM25 的分数是综合以下文本统计因素计算的：
+
+1. 词频  
+2. 文档频率  
+3. 文档长度
+
+vector__qa_014 status=success
+question: BM25 的分数是根据哪些文本统计因素计算的？
+sources: bm25_terms, hybrid_fusion, faiss_ip
+answer: 根据资料，BM25 的分数综合以下文本统计因素计算：
+
+- 词频
+- 文档频率
+- 文档长度
+
+hybrid__qa_015 status=success
+question: 检索错误编号或型号时，BM25 的词项方法相对纯向量检索能补充什么？
+sources: bm25_terms, cosine_unit, cuda_1175
+answer: 根据资料，BM25 的词项方法相对纯向量检索能补充**对精确关键词的保留和匹配能力**：BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词，而纯向量语义检索可能混淆很相似的编号。因此检索错误编号或型号时，BM25 更有利于避免把相似编号误判为同一项。
+
+hybrid_reranker__qa_015 status=success
+question: 检索错误编号或型号时，BM25 的词项方法相对纯向量检索能补充什么？
+sources: bm25_terms, hybrid_fusion, cosine_unit
+answer: BM25 的词项匹配方法能补充精确关键词匹配能力：在检索错误编号、产品型号等场景中，BM25L 和 jieba 分词适合保留这类精确关键词，而纯向量语义检索可能混淆很相似的编号。
+
+vector__qa_015 status=success
+question: 检索错误编号或型号时，BM25 的词项方法相对纯向量检索能补充什么？
+sources: bm25_terms, hybrid_fusion, cuda_1175
+answer: BM25 的词项方法能补充**精确关键词匹配能力**：它适合保留错误编号、产品型号等精确关键词，而纯向量语义检索可能混淆很相似的编号。
+
+bm25__qa_015 status=success
+question: 检索错误编号或型号时，BM25 的词项方法相对纯向量检索能补充什么？
+sources: bm25_terms, rag_overview, cosine_unit
+answer: BM25 的词项方法能补充对错误编号、产品型号等**精确关键词**的匹配能力：它基于词项匹配计算分数，适合保留这些精确关键词；而纯向量语义检索可能混淆很相似的编号。
+
+hybrid_reranker__qa_016 status=success
+question: Hybrid 融合哪两种匹配方式，为什么要先归一化两路分数？
+sources: hybrid_fusion, cosine_unit, faiss_ip
+answer: Hybrid 融合的是**向量语义匹配**和 **BM25 关键词匹配**两种方式。
+
+要先归一化两路分数，是因为**两路原始分数的范围不同**，需要分别做 **Min-Max 归一化**后，再按  
+`alpha*vector_norm+(1-alpha)*bm25_norm`  
+进行融合。资料中说明项目默认 `alpha=0.7`。
+
+vector__qa_016 status=success
+question: Hybrid 融合哪两种匹配方式，为什么要先归一化两路分数？
+sources: hybrid_fusion, cosine_unit, transformer_attention
+answer: Hybrid 融合的是**向量语义匹配**和 **BM25 关键词匹配**两种方式。
+
+需要先归一化两路分数，是因为**两路原始分数的取值范围不同**，不能直接融合；应分别做 **Min-Max 归一化**，再按  
+`alpha*vector_norm+(1-alpha)*bm25_norm`  
+进行融合。资料中默认 `alpha=0.7`。
+
+bm25__qa_016 status=success
+question: Hybrid 融合哪两种匹配方式，为什么要先归一化两路分数？
+sources: hybrid_fusion, cosine_unit, reranker_pairs
+answer: Hybrid 融合的是**向量语义匹配**和 **BM25 关键词匹配**两种方式。
+
+需要先归一化两路分数，是因为**两路原始分数的范围不同**，应分别做 **Min-Max 归一化**后，再按 `alpha*vector_norm+(1-alpha)*bm25_norm` 融合。资料中默认 `alpha=0.7`。
+
+hybrid__qa_016 status=success
+question: Hybrid 融合哪两种匹配方式，为什么要先归一化两路分数？
+sources: hybrid_fusion, cosine_unit, transformer_attention
+answer: Hybrid 融合的是**向量语义匹配**和 **BM25 关键词匹配**两种方式。
+
+需要先归一化两路分数，是因为**两路原始分数的范围不同**，所以应分别做 **Min-Max 归一化**，再按  
+`alpha * vector_norm + (1-alpha) * bm25_norm` 融合。资料中提到本项目默认 `alpha=0.7`。
+
+vector__qa_017 status=success
+question: 项目默认的 Hybrid 权重参数和融合表达式是什么？
+sources: hybrid_fusion, transformer_attention, faiss_ip
+answer: 项目默认的 Hybrid 权重参数是 **alpha = 0.7**。
+
+融合表达式为：
+
+**alpha × vector_norm + (1 - alpha) × bm25_norm**
+
+其中两路原始分数应分别做 **Min-Max 归一化**后再融合。
+
+bm25__qa_017 status=success
+question: 项目默认的 Hybrid 权重参数和融合表达式是什么？
+sources: hybrid_fusion, python_venv, rag_evidence
+answer: 项目默认 Hybrid 权重参数为 **alpha=0.7**。
+
+融合表达式为：
+
+**alpha * vector_norm + (1 - alpha) * bm25_norm**
+
+其中，向量语义匹配和 BM25 关键词匹配两路原始分数应先分别做 **Min-Max 归一化**，再按上述表达式融合。
+
+hybrid__qa_017 status=success
+question: 项目默认的 Hybrid 权重参数和融合表达式是什么？
+sources: hybrid_fusion, transformer_attention, faiss_ip
+answer: 项目默认 Hybrid 权重参数为 **alpha=0.7**。
+
+融合表达式为：
+
+**alpha * vector_norm + (1 - alpha) * bm25_norm**
+
+其中向量语义匹配和 BM25 关键词匹配的原始分数需先分别做 **Min-Max 归一化**，再按上述表达式融合。
+
+hybrid_reranker__qa_017 status=success
+question: 项目默认的 Hybrid 权重参数和融合表达式是什么？
+sources: hybrid_fusion, transformer_attention, cosine_unit
+answer: 项目默认 Hybrid 权重参数为 **alpha=0.7**；融合表达式为：
+
+**alpha * vector_norm + (1 - alpha) * bm25_norm**
+
+其中两路原始分数需分别做 Min-Max 归一化后再融合。
+
+bm25__qa_018 status=success
+question: L2 向量归一化与 Hybrid 的分数 Min-Max 各在处理什么？
+sources: cosine_unit, hybrid_fusion, embedding_bge
+answer: - **L2 向量归一化**：处理的是**向量本身**，把向量除以它的欧几里得长度，使其范数等于 1。查询向量和文档向量都归一化后，可用内积实现 cosine 检索。
+- **Hybrid 的分数 Min-Max 归一化**：处理的是**两路检索的原始分数**。因为向量语义匹配和 BM25 的原始分数范围不同，所以分别做 Min-Max 归一化，再按融合公式合并。
+
+简言之：**L2 归一化处理向量长度；Min-Max 归一化处理不同检索分数的量纲/范围。**
+
+hybrid__qa_018 status=success
+question: L2 向量归一化与 Hybrid 的分数 Min-Max 各在处理什么？
+sources: cosine_unit, hybrid_fusion, faiss_ip
+answer: - **L2 向量归一化**：处理的是**向量本身的欧几里得长度**。它把向量除以自身欧几里得长度，使向量范数等于 1；当查询向量和文档向量都归一化后，内积就等于余弦相似度，可用 `IndexFlatIP` 实现余弦检索。
+
+- **Hybrid 的分数 Min-Max 归一化**：处理的是**两路检索原始分数范围不同**的问题。向量语义匹配和 BM25 关键词匹配的原始分数范围不同，因此需要分别做 Min-Max 归一化，再按 `alpha*vector_norm+(1-alpha)*bm25_norm` 融合。
+
+简言之：**L2 归一化处理向量长度；Min-Max 归一化处理 Hybrid 两路分数的量纲/范围差异。**
+
+hybrid_reranker__qa_018 status=success
+question: L2 向量归一化与 Hybrid 的分数 Min-Max 各在处理什么？
+sources: cosine_unit, hybrid_fusion, faiss_ip
+answer: - **L2 向量归一化**：处理的是**向量本身的长度/范数**。它把向量除以欧几里得长度，使向量范数等于 1；查询向量和文档向量都归一化后，内积等于余弦相似度，可用 `IndexFlatIP` 实现余弦检索。
+
+- **Hybrid 的分数 Min-Max 归一化**：处理的是**向量语义匹配和 BM25 关键词匹配两路原始分数的范围不同**。需要分别做 Min-Max 归一化，再按 `alpha*vector_norm+(1-alpha)*bm25_norm` 融合；资料中默认 `alpha=0.7`。
+
+vector__qa_018 status=success
+question: L2 向量归一化与 Hybrid 的分数 Min-Max 各在处理什么？
+sources: cosine_unit, hybrid_fusion, faiss_ip
+answer: - **L2 向量归一化**：处理的是**向量长度**。它把向量除以自己的欧几里得长度，使向量范数等于 1；当查询向量和文档向量都归一化后，`cosine(q,d)=q·d`，因此可用 `IndexFlatIP` 实现余弦检索。
+
+- **Hybrid 的分数 Min-Max 归一化**：处理的是**向量语义匹配分数和 BM25 关键词匹配分数范围不同**的问题。资料要求两路原始分数分别做 Min-Max 归一化，再按 `alpha*vector_norm+(1-alpha)*bm25_norm` 融合，默认 `alpha=0.7`。
+
+hybrid__qa_019 status=success
+question: 为什么要把长文档切成 chunk，并让相邻块有一段重复内容？
+sources: chunk_overlap, pdf_ocr, transformer_attention
+answer: 根据资料：
+
+- 文本切块会把长文档拆成较短的 chunk，但资料没有进一步说明“为什么要切块”的更多原因。
+- 让相邻块保留一段重复内容（chunk_overlap）的目的，是**减少句子和上下文在块边界被截断的影响**。
+- 另外需要注意：`overlap` 必须小于 `chunk_size`，否则步长不能正常前进。
+
+hybrid_reranker__qa_019 status=success
+question: 为什么要把长文档切成 chunk，并让相邻块有一段重复内容？
+sources: chunk_overlap, faiss_ip, embedding_bge
+answer: 根据资料：文本切块是把长文档拆成较短的 **chunk**；让相邻块保留一段重复内容（**chunk_overlap**），是为了减少句子和上下文在块边界被截断的影响。
+
+另外，**overlap 必须小于 chunk_size**，否则步长不能正常前进。
+
+资料只说明“把长文档拆成较短 chunk”，没有进一步说明切块的其他目的。
+
+vector__qa_019 status=success
+question: 为什么要把长文档切成 chunk，并让相邻块有一段重复内容？
+sources: chunk_overlap, pdf_ocr, transformer_attention
+answer: 根据资料：
+
+- 把长文档切成 chunk，是为了将长文档拆成较短的块。
+- 让相邻块保留一段重复内容，即使用 `chunk_overlap`，是为了减少句子和上下文在 chunk 边界处被截断的影响。
+
+资料还说明：`overlap` 必须小于 `chunk_size`，否则步长不能正常前进。
+
+bm25__qa_019 status=success
+question: 为什么要把长文档切成 chunk，并让相邻块有一段重复内容？
+sources: chunk_overlap, api_stream, cuda_oom
+answer: 根据资料：
+
+- 文本切块会把长文档拆成较短的 chunk。
+- 让相邻块保留一段重复内容（`chunk_overlap`），是为了减少句子和上下文在块边界被截断的影响。
+- 另外，`overlap` 必须小于 `chunk_size`，否则步长不能正常前进。
+
+资料只说明切块是把长文档拆成较短 chunk，没有进一步展开切块的其他原因。
+
+hybrid_reranker__qa_020 status=success
+question: chunk_overlap 和 chunk_size 应满足什么关系，不满足时会影响什么？
+sources: chunk_overlap, transformer_attention, faiss_ip
+answer: 根据资料，`chunk_overlap` 必须小于 `chunk_size`，即：
+
+**chunk_overlap < chunk_size**
+
+如果不满足（即 overlap 大于或等于 chunk_size），会导致**步长不能正常前进**，从而影响文本切块流程。
+
+vector__qa_020 status=success
+question: chunk_overlap 和 chunk_size 应满足什么关系，不满足时会影响什么？
+sources: chunk_overlap, rag_limits, transformer_attention
+answer: 根据资料，`chunk_overlap` 必须小于 `chunk_size`。如果不满足，也就是 `chunk_overlap` 大于或等于 `chunk_size`，会导致步长不能正常前进。
+
+bm25__qa_020 status=success
+question: chunk_overlap 和 chunk_size 应满足什么关系，不满足时会影响什么？
+sources: chunk_overlap, cuda_1175, transformer_attention
+answer: `chunk_overlap` 必须小于 `chunk_size`。如果不满足，会导致步长不能正常前进。
+
+hybrid__qa_020 status=success
+question: chunk_overlap 和 chunk_size 应满足什么关系，不满足时会影响什么？
+sources: chunk_overlap, transformer_attention, rag_limits
+answer: `chunk_overlap` 必须小于 `chunk_size`。如果不满足这一关系，会导致步长不能正常前进。
+
+vector__qa_021 status=success
+question: Cross-Encoder 对每个候选实际接收什么输入，并输出什么？
+sources: reranker_pairs, api_stream, transformer_attention
+answer: 根据资料，Cross-Encoder 对每个候选实际接收的是：**query 与该候选文档的 `document.text` 组成的文本对**。  
+它将这些文本对**联合编码后输出相关性分数**，用于重排检索召回的候选。
+
+bm25__qa_021 status=success
+question: Cross-Encoder 对每个候选实际接收什么输入，并输出什么？
+sources: reranker_pairs, cuda_oom, transformer_attention
+answer: Cross-Encoder 对每个候选接收 **query 与候选文档文本（document.text）组成的文本对**，联合编码后输出 **相关性分数**。它只用于重排检索召回的候选。
+
+hybrid__qa_021 status=success
+question: Cross-Encoder 对每个候选实际接收什么输入，并输出什么？
+sources: reranker_pairs, transformer_attention, api_stream
+answer: Cross-Encoder 对每个候选实际接收的输入是：**query 与候选文档的 document.text 组成的文本对**。  
+它联合编码该文本对后，**输出一个相关性分数**。该分数用于重排检索召回的候选。
+
+hybrid_reranker__qa_021 status=success
+question: Cross-Encoder 对每个候选实际接收什么输入，并输出什么？
+sources: reranker_pairs, transformer_attention, api_stream
+answer: Cross-Encoder 对每个候选接收的是 **query 与 document.text 组成的文本对**；联合编码后输出一个**相关性分数**。它只用于重排检索召回的候选。
+
+bm25__qa_022 status=success
+question: 一个相关 Chunk 根本没有进入召回候选，Cross-Encoder 能靠重排把它找回来吗？
+sources: reranker_pairs, rag_terms, chunk_overlap
+answer: 不能。资料说明 Cross-Encoder **只重排检索召回的候选**。如果一个相关 Chunk 根本没有进入召回候选，它就不在重排范围内，因此 Cross-Encoder 无法靠重排把它找回来。
+
+hybrid__qa_022 status=success
+question: 一个相关 Chunk 根本没有进入召回候选，Cross-Encoder 能靠重排把它找回来吗？
+sources: reranker_pairs, chunk_overlap, cuda_1175
+answer: 不能。资料指出，Cross-Encoder “只重排检索召回的候选”。如果一个相关 Chunk 根本没有进入召回候选，就不在重排范围内，因此不能靠 Cross-Encoder 重排把它找回来。
+
+hybrid_reranker__qa_022 status=success
+question: 一个相关 Chunk 根本没有进入召回候选，Cross-Encoder 能靠重排把它找回来吗？
+sources: reranker_pairs, chunk_overlap, cuda_1175
+answer: 不能。资料说明 Cross-Encoder **只重排检索召回的候选**；如果一个相关 Chunk 根本没有进入召回候选，它就不在重排范围内，因此 Cross-Encoder 无法靠重排把它找回来。
+
+vector__qa_022 status=success
+question: 一个相关 Chunk 根本没有进入召回候选，Cross-Encoder 能靠重排把它找回来吗？
+sources: reranker_pairs, chunk_overlap, cuda_1175
+answer: 不能。资料说明 Cross-Encoder 只重排检索召回的候选；如果一个相关 Chunk 根本没有进入召回候选，就不在重排范围内，因此 Cross-Encoder 无法靠重排把它找回来。
+
+hybrid__qa_023 status=success
+question: 文档 Embedding 和适用于所有问题的固定 rerank score，哪一种可提前计算，原因是什么？
+sources: reranker_pairs, embedding_bge, chunk_overlap
+answer: 可以提前计算的是**文档 Embedding**。
+
+原因：
+- **文档 Embedding**：资料说明文本会被编码为稠密语义向量，且“文档向量可以提前计算”。
+- **适用于所有问题的固定 rerank score**：不能提前计算。因为 Cross-Encoder 需要把 **query 与 document.text 组成文本对**后联合编码并输出相关性分数；同一篇文档面对不同问题会得到不同分数，因此不存在适用于所有问题的固定 rerank score。
+
+hybrid_reranker__qa_023 status=success
+question: 文档 Embedding 和适用于所有问题的固定 rerank score，哪一种可提前计算，原因是什么？
+sources: reranker_pairs, embedding_bge, faiss_ip
+answer: 文档 **Embedding 可以提前计算**，因为资料中说明“文档向量可以提前计算”。
+
+**适用于所有问题的固定 rerank score 不能提前计算**，因为 Cross-Encoder 会将 query 与 document.text 组成文本对联合编码后输出相关性分数；同一篇文档面对不同问题会得到不同分数，因此不存在提前计算好、适用于所有问题的固定 rerank score。它只用于重排检索召回的候选。
+
+vector__qa_023 status=success
+question: 文档 Embedding 和适用于所有问题的固定 rerank score，哪一种可提前计算，原因是什么？
+sources: reranker_pairs, embedding_bge, chunk_overlap
+answer: **文档 Embedding 可以提前计算**。资料说明：Embedding 将文本编码为稠密语义向量，且“文档向量可以提前计算”。
+
+**适用于所有问题的固定 rerank score 不能提前计算**。因为 Cross-Encoder 会将 query 与 document 组成文本对联合编码后输出相关性分数；同一篇文档面对不同问题会得到不同分数，因此不存在适用于所有问题的固定 rerank score。它只用于重排检索召回的候选。
+
+bm25__qa_023 status=success
+question: 文档 Embedding 和适用于所有问题的固定 rerank score，哪一种可提前计算，原因是什么？
+sources: reranker_pairs, bm25_terms, embedding_bge
+answer: **文档 Embedding 可以提前计算**。资料中说明：Embedding 将文本编码为稠密语义向量，项目使用 sentence-transformers 加载中文模型，**文档向量可以提前计算**。
+
+**适用于所有问题的固定 rerank score 不能提前计算**。因为 Cross-Encoder 会把 query 与 document 组成文本对联合编码后输出相关性分数；同一篇文档面对不同问题会得到不同分数，因此不存在适用于所有问题的固定 rerank score，它只能用于重排检索召回的候选。
+
+hybrid_reranker__qa_024 status=success
+question: 示例 CUDA error 1175 后跟什么日志线索，继续排查应记录和核对哪些信息？
+sources: cuda_1175, cuda_1176, cuda_oom
+answer: 示例 CUDA error 1175 后出现的日志线索是：**driver initialization failed**。
+
+继续排查时应：
+1. **先记录完整错误日志**；
+2. 核对 **GPU 驱动、CUDA 运行时与框架版本**。
+
+注意：仅凭错误编号本身不足以确定修复方法，不应猜测。
+
+vector__qa_024 status=success
+question: 示例 CUDA error 1175 后跟什么日志线索，继续排查应记录和核对哪些信息？
+sources: cuda_1176, cuda_1175, cuda_oom
+answer: 示例 CUDA error 1175 后跟的日志线索是：**driver initialization failed**。
+
+继续排查应先**记录完整错误日志**，再**核对 GPU 驱动、CUDA 运行时与框架版本**；编号本身不足以确定修复方法，不应猜测。
+
+bm25__qa_024 status=success
+question: 示例 CUDA error 1175 后跟什么日志线索，继续排查应记录和核对哪些信息？
+sources: cuda_1176, cuda_1175, cuda_oom
+answer: 根据资料，示例 **CUDA error 1175** 后跟的日志线索是：**driver initialization failed**。
+
+继续排查应：
+1. 先记录**完整错误日志**；
+2. 核对 **GPU 驱动、CUDA 运行时与框架版本**。
+
+资料还指出：编号本身不足以确定修复方法，不应猜测。
+
+hybrid__qa_024 status=success
+question: 示例 CUDA error 1175 后跟什么日志线索，继续排查应记录和核对哪些信息？
+sources: cuda_1176, cuda_1175, cuda_oom
+answer: 示例 CUDA error 1175 后跟的日志线索是 **driver initialization failed**。
+
+继续排查时应：
+1. 先记录完整错误日志；
+2. 核对 GPU 驱动、CUDA 运行时与框架版本。
+
+同时，资料指出编号本身不足以确定修复方法，不应猜测。
+
+vector__qa_025 status=success
+question: 示例 CUDA error 1176 指向什么线索，应检查什么，能否照搬 1175 的线索？
+sources: cuda_1176, cuda_1175, cuda_oom
+answer: 示例 CUDA error 1176 的线索是：后面出现 **device index out of range**。应检查**请求的设备序号**和**可见 GPU 列表**。不能把 CUDA error 1175 的日志线索直接套用到 1176 上。
+
+bm25__qa_025 status=success
+question: 示例 CUDA error 1176 指向什么线索，应检查什么，能否照搬 1175 的线索？
+sources: cuda_1176, cuda_oom, cuda_1175
+answer: 示例 **CUDA error 1176** 后面出现的线索是 **device index out of range**。
+
+应检查：
+- 请求的设备序号是否正确；
+- 可见 GPU 列表是否与请求的设备序号匹配。
+
+**不能照搬 CUDA error 1175 的线索**。资料明确说明，不能把 1175 的日志线索直接套到 1176 上；1175 对应的是 driver initialization failed，排查方向是记录完整错误日志并核对 GPU 驱动、CUDA 运行时与框架版本。
+
+hybrid__qa_025 status=success
+question: 示例 CUDA error 1176 指向什么线索，应检查什么，能否照搬 1175 的线索？
+sources: cuda_1176, cuda_1175, cuda_oom
+answer: 示例 CUDA error 1176 后面出现的线索是 **device index out of range**，即请求的设备序号超出范围。应检查**请求的设备序号**以及**可见 GPU 列表**。
+
+不能照搬 CUDA error 1175 的线索；1175 对应的是 **driver initialization failed**，与 1176 的设备序号问题不同。
+
+hybrid_reranker__qa_025 status=success
+question: 示例 CUDA error 1176 指向什么线索，应检查什么，能否照搬 1175 的线索？
+sources: cuda_1176, cuda_oom, cuda_1175
+answer: 示例 CUDA error 1176 后面出现的线索是 **device index out of range**。应检查**请求的设备序号**以及**可见 GPU 列表**，确认请求的 GPU 序号是否有效、是否在可见设备范围内。
+
+**不能照搬 CUDA error 1175 的线索。** 资料中说明 1175 的日志线索与驱动初始化相关，但不应直接套用到 1176。
+
+bm25__qa_026 status=success
+question: CUDA out of memory 表示什么，资料给出了哪些初步处理方向？
+sources: cuda_oom, cuda_1176, rag_evidence
+answer: CUDA out of memory 表示当前计算需要的 GPU 显存不足。
+
+资料给出的初步处理方向包括：
+- 减少 batch size
+- 缩短输入
+- 释放不再使用的张量
+- 检查是否有其他进程占用显存
+
+资料还特别说明：这与示例错误编号 1175 的驱动初始化线索不同。
+
+hybrid__qa_026 status=success
+question: CUDA out of memory 表示什么，资料给出了哪些初步处理方向？
+sources: cuda_oom, cuda_1176, cuda_1175
+answer: CUDA out of memory 表示当前计算所需的 GPU 显存不足。
+
+资料给出的初步处理方向包括：
+- 减少 batch size
+- 缩短输入
+- 释放不再使用的张量
+- 检查是否有其他进程占用显存
+
+资料还说明，这与示例错误编号 1175 的“驱动初始化失败”线索不同。
+
+hybrid_reranker__qa_026 status=success
+question: CUDA out of memory 表示什么，资料给出了哪些初步处理方向？
+sources: cuda_oom, cuda_1176, cuda_1175
+answer: CUDA out of memory 表示当前计算需要的 GPU 显存不足。
+
+资料给出的初步处理方向包括：
+
+1. 减少 batch size；
+2. 缩短输入；
+3. 释放不再使用的张量；
+4. 检查是否有其他进程占用显存。
+
+资料还特别说明，这与“示例错误编号 1175 的驱动初始化线索”不同。
+
+vector__qa_026 status=success
+question: CUDA out of memory 表示什么，资料给出了哪些初步处理方向？
+sources: cuda_oom, cuda_1175, cuda_1176
+answer: CUDA out of memory 表示当前计算需要的 GPU 显存不足。
+
+资料给出的初步处理方向包括：
+1. 减少 batch size
+2. 缩短输入
+3. 释放不再使用的张量
+4. 检查是否有其他进程占用显存
+
+资料还提示：这与示例错误编号 1175 的驱动初始化线索不同。
+
+hybrid__qa_027 status=success
+question: 两份示例日志中的 1175 和 1176 分别对应哪些线索与排查对象？
+sources: cuda_1176, cuda_1175, bm25_terms
+answer: 根据提供的资料：
+
+- **1175**：日志中后面出现 **driver initialization failed**。排查对象是：先记录完整错误日志，再核对 **GPU 驱动、CUDA 运行时与框架版本**。资料还强调编号本身不足以确定修复方法，不应猜测。
+
+- **1176**：日志中后面出现 **device index out of range**。排查对象是：检查**请求的设备序号**和**可见 GPU 列表**。不能把 **1175** 的日志线索直接套用到 **1176** 上。
+
+hybrid_reranker__qa_027 status=success
+question: 两份示例日志中的 1175 和 1176 分别对应哪些线索与排查对象？
+sources: cuda_1176, cuda_1175, cuda_oom
+answer: - **CUDA error 1175**：日志后面出现 **driver initialization failed**。排查时应先记录完整错误日志，再核对 **GPU 驱动、CUDA 运行时与框架版本**。资料还强调：编号本身不足以确定修复方法，不应猜测。
+
+- **CUDA error 1176**：日志后面出现 **device index out of range**。排查对象是**请求的设备序号**和**可见 GPU 列表**；不能把 1175 的日志线索直接套用到 1176 上。
+
+vector__qa_027 status=success
+question: 两份示例日志中的 1175 和 1176 分别对应哪些线索与排查对象？
+sources: cuda_1176, bm25_terms, cuda_1175
+answer: 根据资料：
+
+- **CUDA error 1175**：后面出现 **driver initialization failed**。排查时应先记录完整错误日志，再核对 **GPU 驱动、CUDA 运行时与框架版本**。资料特别说明：编号本身不足以确定修复方法，不应猜测。
+- **CUDA error 1176**：后面出现 **device index out of range**。应检查 **请求的设备序号和可见 GPU 列表**，并且不能把 1175 的日志线索直接套用到 1176 上。
+
+bm25__qa_027 status=success
+question: 两份示例日志中的 1175 和 1176 分别对应哪些线索与排查对象？
+sources: cuda_1176, cuda_1175, cuda_oom
+answer: - **1175**：日志线索是 `driver initialization failed`。排查对象包括：先记录完整错误日志，再核对 **GPU 驱动、CUDA 运行时与框架版本**。资料还强调编号本身不足以确定修复方法，不应猜测。
+- **1176**：日志线索是 `device index out of range`。排查对象是**请求的设备序号**和**可见 GPU 列表**；不能把 1175 的日志线索直接套用到 1176 上。
+
+hybrid_reranker__qa_028 status=success
+question: 显存不足与示例中的设备序号越界是同一种问题吗，初步检查各是什么？
+sources: cuda_1176, cuda_oom, cuda_1175
+answer: 不是同一种问题。
+
+- **显存不足（CUDA out of memory）**：表示当前计算需要的 GPU 显存不足。初步检查可先**减少 batch size、缩短输入、释放不再使用的张量，并检查是否有其他进程占用显存**。资料还说明它与示例错误编号 1175 的驱动初始化线索不同。
+- **设备序号越界（示例中 CUDA error 1176 后的 device index out of range）**：初步应**检查请求的设备序号和可见 GPU 列表**，不能把 CUDA error 1175 的日志线索直接套过来。
+
+vector__qa_028 status=success
+question: 显存不足与示例中的设备序号越界是同一种问题吗，初步检查各是什么？
+sources: cuda_oom, cuda_1176, cuda_1175
+answer: 不是同一种问题。
+
+- **显存不足**：先减少 batch size、缩短输入或释放不再使用的张量，并检查是否有其他进程占用显存。
+- **示例中的设备序号越界**：应检查请求的设备序号和可见 GPU 列表；资料特别说明不能把 CUDA error 1175 的日志线索直接套用到 1176 的设备序号越界问题上。
+
+bm25__qa_028 status=success
+question: 显存不足与示例中的设备序号越界是同一种问题吗，初步检查各是什么？
+sources: cuda_1176, cuda_oom, reranker_pairs
+answer: 不是同一种问题。
+
+- **显存不足（CUDA out of memory）**：表示当前计算需要的 GPU 显存不足。初步可检查/处理：减少 batch size、缩短输入、释放不再使用的张量，并检查是否有其他进程占用显存。
+- **设备序号越界（device index out of range，示例中与 CUDA error 1176 相关）**：应检查请求的设备序号和可见 GPU 列表。资料还特别说明，不能把 CUDA error 1175 的日志线索直接套用到这个 1176 示例上。
+
+hybrid__qa_028 status=success
+question: 显存不足与示例中的设备序号越界是同一种问题吗，初步检查各是什么？
+sources: cuda_oom, cuda_1176, cuda_1175
+answer: 不是同一种问题。
+
+- **显存不足（CUDA out of memory）**：初步检查可先**减少 batch size、缩短输入、释放不再使用的张量**，并**检查是否有其他进程占用显存**。
+- **示例中的设备序号越界（CUDA error 1176，后面出现 device index out of range）**：初步应**检查请求的设备序号和可见 GPU 列表**，不能把 CUDA error 1175 的日志线索直接套过来。
+
+资料还说明，显存不足与示例错误编号 1175 的驱动初始化线索不同。
+
+vector__qa_029 status=success
+question: 为什么扫描版 PDF 可能读不出文字，资料要求在入库前先做什么？
+sources: pdf_ocr, chunk_overlap, cuda_1175
+answer: 扫描版 PDF 的页面可能只有图片、没有可提取的文本层，所以普通文本提取会返回空字符串。资料要求在入库前先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。
+
+bm25__qa_029 status=success
+question: 为什么扫描版 PDF 可能读不出文字，资料要求在入库前先做什么？
+sources: pdf_ocr, rag_limits, rag_evidence
+answer: 扫描版 PDF 的页面可能只有图片、没有可提取的文本层，所以普通文本提取会返回空字符串，导致读不出文字。
+
+资料要求在入库前：**先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。**
+
+hybrid__qa_029 status=success
+question: 为什么扫描版 PDF 可能读不出文字，资料要求在入库前先做什么？
+sources: pdf_ocr, rag_limits, chunk_overlap
+answer: 扫描版 PDF 的页面可能只有图片、没有可提取的文本层，所以普通文本提取会返回空字符串，读不出文字。
+
+资料要求在入库前先用 **OCR 把图片转成文字**，然后再进行 **清洗、切块和 Embedding**。
+
+hybrid_reranker__qa_029 status=success
+question: 为什么扫描版 PDF 可能读不出文字，资料要求在入库前先做什么？
+sources: pdf_ocr, reranker_pairs, faiss_ip
+answer: 扫描版 PDF 的页面可能只有图片、没有可提取的文本层，普通文本提取会返回空字符串，所以读不出文字。资料要求在入库前先用 OCR 把图片转成文字，然后再进行清洗、切块和 Embedding。
+
+bm25__qa_030 status=success
+question: 扫描文档识别成文字以后，如何衔接长文档切块并减少边界截断？
+sources: chunk_overlap, pdf_ocr, faiss_ip
+answer: 扫描文档经 OCR 转成文字后，应先进行清洗，再做长文档切块。为减少句子和上下文在切块边界被截断的影响，切块时使用 `chunk_overlap`，让相邻 chunk 保留一段重复内容；同时必须保证 `overlap` 小于 `chunk_size`，否则步长不能正常前进。
+
+hybrid__qa_030 status=success
+question: 扫描文档识别成文字以后，如何衔接长文档切块并减少边界截断？
+sources: chunk_overlap, pdf_ocr, faiss_ip
+answer: 扫描文档先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。切成长文档时，把长文档拆成较短的 chunk，并设置 `chunk_overlap`，让相邻块保留一段重复内容，以减少句子和上下文在边界被截断的影响。需要注意：`chunk_overlap` 必须小于 `chunk_size`，否则步长不能正常前进。
+
+hybrid_reranker__qa_030 status=success
+question: 扫描文档识别成文字以后，如何衔接长文档切块并减少边界截断？
+sources: chunk_overlap, pdf_ocr, faiss_ip
+answer: 扫描文档先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。长文档切块时，使用 `chunk_overlap` 让相邻 chunk 保留一段重复内容，以减少句子和上下文在边界被截断的影响；同时 `overlap` 必须小于 `chunk_size`，否则步长无法正常前进。
+
+vector__qa_030 status=success
+question: 扫描文档识别成文字以后，如何衔接长文档切块并减少边界截断？
+sources: pdf_ocr, chunk_overlap, embedding_bge
+answer: 扫描文档先用 OCR 转成文字，然后进行清洗，再进入长文档切块和 Embedding 流程。
+
+为减少切块边界造成的句子和上下文截断，切块时应使用 `chunk_overlap`，让相邻 chunk 保留一段重复内容；同时必须保证 `overlap < chunk_size`，否则步长不能正常前进。资料中没有给出具体的 overlap 数值。
+
+hybrid__qa_031 status=success
+question: OCR 和 Embedding 分别把什么转换成什么，它们的输出作用相同吗？
+sources: pdf_ocr, embedding_bge, hybrid_fusion
+answer: 根据资料：
+
+- **OCR**：把扫描版 PDF 页面中的**图片转换成文字**。当普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。
+- **Embedding**：把**文本编码成稠密语义向量**，使含义接近的文本在向量空间更接近。
+
+它们的**输出作用不相同**：OCR 的输出是可供后续清洗、切块和 Embedding 的文本；Embedding 的输出是语义向量，用于表示文本语义，使相近含义的文本在向量空间中更接近。
+
+hybrid_reranker__qa_031 status=success
+question: OCR 和 Embedding 分别把什么转换成什么，它们的输出作用相同吗？
+sources: embedding_bge, pdf_ocr, reranker_pairs
+answer: 根据资料：
+
+- **OCR**：把扫描版 PDF 中只有图片、没有可提取文本层的页面图片转换成**文字**，之后再进行清洗、切块和 Embedding。
+- **Embedding**：把**文本**编码成**稠密语义向量**，使含义接近的文本在向量空间中更接近，可用于检索等语义匹配。
+
+因此，它们的输出**作用不相同**：OCR 输出的是可供后续处理的文本；Embedding 输出的是表示文本语义的向量。
+
+vector__qa_031 status=success
+question: OCR 和 Embedding 分别把什么转换成什么，它们的输出作用相同吗？
+sources: pdf_ocr, embedding_bge, transformer_attention
+answer: 根据资料：
+
+- **OCR**：把扫描版 PDF 中的**图片页面转换成文字**。资料提到，扫描版 PDF 可能只有图片、没有可提取文本层；普通文本提取返回空字符串时，需要先用 OCR 把图片转成文字，再进行清洗、切块和 Embedding。
+- **Embedding**：把**文本编码成稠密语义向量**，使含义接近的文本在向量空间中更接近。
+
+它们的输出作用**不相同**：
+
+- OCR 的输出是**可继续处理的文字**，用于解决扫描页面没有文本层的问题；
+- Embedding 的输出是**语义向量**，用于表示文本语义、计算文本之间的向量接近程度等。
+
+因此，OCR 是“图片 → 文字”，Embedding 是“文本 → 稠密语义向量”，二者输出作用和后续用途不同。
+
+bm25__qa_031 status=success
+question: OCR 和 Embedding 分别把什么转换成什么，它们的输出作用相同吗？
+sources: pdf_ocr, hybrid_fusion, api_stream
+answer: 根据资料：
+
+- **OCR**：把扫描版 PDF 页面中的**图片转换成文字**，以便后续清洗、切块和 Embedding。
+- **Embedding**：资料只说明文本经过清洗、切块后进入 Embedding 流程，但**没有明确说明它把什么转换成什么**。
+
+因此，资料中也**没有说明 OCR 和 Embedding 的输出作用是否相同**，无法据此判断。
+
+hybrid_reranker__qa_032 status=success
+question: Self-Attention 用哪些表示让 Token 交互，注意力权重来自什么？
+sources: transformer_attention, embedding_bge, hybrid_fusion
+answer: Self-Attention 让每个 Token 根据 **Query、Key、Value** 与其他 Token 交互。
+
+注意力权重来自 **缩放点积及 softmax**，而不是简单按词频匹配。
+
+vector__qa_032 status=success
+question: Self-Attention 用哪些表示让 Token 交互，注意力权重来自什么？
+sources: transformer_attention, rag_overview, api_stream
+answer: Self-Attention 让每个 Token 通过 **Query、Key、Value** 与其他 Token 交互；注意力权重来自**缩放点积及 softmax**，而不是简单按词频匹配。
+
+bm25__qa_032 status=success
+question: Self-Attention 用哪些表示让 Token 交互，注意力权重来自什么？
+sources: transformer_attention, pdf_ocr, python_venv
+answer: Self-Attention 让每个 Token 通过 **Query、Key、Value** 与其他 Token 交互；注意力权重来自**缩放点积及 softmax**，而不是简单按词频匹配。
+
+hybrid__qa_032 status=success
+question: Self-Attention 用哪些表示让 Token 交互，注意力权重来自什么？
+sources: transformer_attention, rag_overview, api_stream
+answer: Self-Attention 让每个 Token 根据 **Query、Key、Value** 与其他 Token 交互，以建模上下文关系。注意力权重来自**缩放点积及 softmax**，而不是简单按词频匹配。
+
+vector__qa_033 status=success
+question: BM25 和 Self-Attention 都处理文本，它们使用词频和上下文关系的方式有什么不同？
+sources: bm25_terms, transformer_attention, chunk_overlap
+answer: 根据资料，两者的不同是：
+
+- **BM25** 是基于**词项匹配**的检索方法，会综合**词频、文档频率和文档长度**来计算分数，重点在词项层面的匹配程度。
+- **Self-Attention** 不是简单按词频匹配，而是让每个 Token 通过 **Query、Key、Value** 与其他 Token 交互，从而建模上下文关系；其注意力权重来自**缩放点积及 softmax**。
+
+因此，BM25 主要利用词频等统计信息做检索打分；Self-Attention 主要通过 Token 间交互和注意力权重来建模上下文关系。资料中没有进一步说明二者在其他方面的差异。
+
+bm25__qa_033 status=success
+question: BM25 和 Self-Attention 都处理文本，它们使用词频和上下文关系的方式有什么不同？
+sources: transformer_attention, bm25_terms, cuda_oom
+answer: 根据资料，两者的不同在于：
+
+- **BM25**：属于基于**词项匹配**的检索方法，分数综合**词频、文档频率和文档长度**来计算。它关注的是查询词与文档在词项层面的匹配程度。
+- **Self-Attention**：让每个 Token 通过 **Query、Key、Value** 与其他 Token 交互，从而建模**上下文关系**。注意力权重来自**缩放点积及 softmax**，不是简单按词频匹配。
+
+因此，BM25 主要利用词频等统计信息做词项匹配；Self-Attention 则通过 Q/K/V 交互建模 Token 间的上下文关系，而不是简单按词频匹配。
+
+hybrid__qa_033 status=success
+question: BM25 和 Self-Attention 都处理文本，它们使用词频和上下文关系的方式有什么不同？
+sources: bm25_terms, transformer_attention, embedding_bge
+answer: 两者不同主要体现在：
+
+- **BM25**：基于**词项匹配**，通过**词频、文档频率和文档长度**等统计信息计算分数。它更偏向关键词/词项层面的匹配，资料还指出其适合保留错误编号、产品型号等精确关键词。
+- **Self-Attention**：让每个 **Token** 根据 **Query、Key、Value** 与其他 Token 交互，从而建模**上下文关系**。其注意力权重来自**缩放点积及 softmax**，而不是简单按词频匹配。
+
+简言之：**BM25 主要依赖词频等统计量做词项匹配；Self-Attention 通过 Token 间交互建模上下文，注意力权重并非简单词频匹配。**
+
+hybrid_reranker__qa_033 status=success
+question: BM25 和 Self-Attention 都处理文本，它们使用词频和上下文关系的方式有什么不同？
+sources: transformer_attention, bm25_terms, hybrid_fusion
+answer: 根据资料，两者的不同在于：
+
+- **BM25**：是基于**词项匹配**的检索方法，分数综合**词频、文档频率和文档长度**计算。资料没有提到 BM25 通过 Token 之间的交互来建模上下文关系；它更偏向关键词/词项层面的匹配打分。
+- **Self-Attention**：每个 Token 通过 **Query、Key、Value** 与其他 Token 交互，从而建模上下文关系；注意力权重来自**缩放点积及 softmax**，而不是简单按词频匹配。
+
+因此，资料中体现出的核心区别是：**BM25 主要用词频等统计信息做词项匹配检索；Self-Attention 则通过 Token 间交互建模上下文关系，而不是简单依赖词频匹配。**
+
+bm25__qa_034 status=success
+question: 在 PowerShell 的项目根目录怎样使用虚拟环境 Python 启动程序，依赖要装到哪里？
+sources: python_venv, embedding_bge, rag_evidence
+answer: 在 PowerShell 的项目根目录下运行：
+
+```powershell
+.\.venv\Scripts\python.exe main.py
+```
+
+其中 `.\` 表示当前目录。项目依赖应安装到同一个 `.venv` 虚拟环境中。
+
+hybrid__qa_034 status=success
+question: 在 PowerShell 的项目根目录怎样使用虚拟环境 Python 启动程序，依赖要装到哪里？
+sources: python_venv, api_stream, cuda_oom
+answer: 在 PowerShell 的项目根目录运行以下命令启动程序：
+
+```powershell
+.\.venv\Scripts\python.exe main.py
+```
+
+其中开头的 `.\` 表示当前目录。项目依赖应安装到同一个 `.venv` 虚拟环境中。
+
+hybrid_reranker__qa_034 status=success
+question: 在 PowerShell 的项目根目录怎样使用虚拟环境 Python 启动程序，依赖要装到哪里？
+sources: python_venv, cuda_1175, chunk_overlap
+answer: 在 PowerShell 的项目根目录中，使用虚拟环境 Python 启动程序：
+
+```powershell
+.\.venv\Scripts\python.exe main.py
+```
+
+其中路径开头的 `.\` 表示当前目录。项目依赖应安装到同一个 `.venv` 环境中。
+
+vector__qa_034 status=success
+question: 在 PowerShell 的项目根目录怎样使用虚拟环境 Python 启动程序，依赖要装到哪里？
+sources: python_venv, api_stream, cuda_1175
+answer: 在 PowerShell 的项目根目录运行：
+
+```powershell
+.\.venv\Scripts\python.exe main.py
+```
+
+其中路径开头的 `.\` 表示当前目录。项目依赖应安装到同一个 `.venv` 虚拟环境中。
+
+hybrid__qa_035 status=success
+question: 在 RAG 系统中 FastAPI 的职责是什么，它本身是在做知识向量化吗？
+sources: rag_overview, api_stream, rag_terms
+answer: 根据资料，FastAPI 在 RAG 系统中的职责是：**把 RAG 问答封装为 HTTP 接口**。它可以用普通响应在答案生成结束后一次返回，也可以用 `StreamingResponse` 随生成进度逐段发送内容，让客户端更早看到输出。
+
+资料中**没有说明 FastAPI 本身在做知识向量化**，也没有提供关于“知识向量化”由谁负责或如何实现的信息。因此，不能根据这些资料判断或确认 FastAPI 是否负责知识向量化。
+
+hybrid_reranker__qa_035 status=success
+question: 在 RAG 系统中 FastAPI 的职责是什么，它本身是在做知识向量化吗？
+sources: api_stream, rag_overview, rag_evidence
+answer: 根据资料，FastAPI 在 RAG 系统中的作用是：把 RAG 问答封装为 HTTP 接口；普通响应在答案生成结束后一次返回，也可以使用 `StreamingResponse` 随生成进度逐段发送内容，让客户端更早看到输出。
+
+资料中没有提到 FastAPI 本身是否负责“知识向量化”。因此，不能根据现有资料判断 FastAPI 在做知识向量化；资料对此没有答案。
+
+vector__qa_035 status=success
+question: 在 RAG 系统中 FastAPI 的职责是什么，它本身是在做知识向量化吗？
+sources: rag_overview, api_stream, rag_evidence
+answer: 根据资料，FastAPI 在 RAG 系统中的职责是：**把 RAG 问答封装为 HTTP 接口**，并支持普通响应或通过 `StreamingResponse` 随生成进度逐段返回内容，让客户端更早看到输出。
+
+资料中**没有提到 FastAPI 本身在做知识向量化**。因此不能根据现有资料认为 FastAPI 负责知识向量化；它在这里主要承担的是 HTTP 接口封装和响应发送职责。
+
+bm25__qa_035 status=success
+question: 在 RAG 系统中 FastAPI 的职责是什么，它本身是在做知识向量化吗？
+sources: rag_overview, rag_terms, api_stream
+answer: 根据资料，FastAPI 在 RAG 系统中的职责是：**把 RAG 问答封装为 HTTP 接口**。它支持普通响应在答案生成结束后一次返回，也可以通过 `StreamingResponse` 随生成进度逐段发送内容。
+
+资料中**没有说明 FastAPI 本身负责知识向量化**，因此不能根据现有资料判断它在做知识向量化；资料只说明它承担 HTTP 接口封装与响应返回的角色。
+
+hybrid_reranker__qa_036 status=success
+question: 普通响应和 StreamingResponse 在答案的返回时机及用户看到输出的时间上有何区别？
+sources: api_stream, faiss_ip, transformer_attention
+answer: 普通响应会在答案生成结束后**一次性返回**，因此用户要等完整答案生成完才能看到输出。
+
+**StreamingResponse** 则会随着生成进度**逐段发送内容**，让客户端更早看到输出。
+
+vector__qa_036 status=success
+question: 普通响应和 StreamingResponse 在答案的返回时机及用户看到输出的时间上有何区别？
+sources: api_stream, transformer_attention, reranker_pairs
+answer: 普通响应是在答案生成结束后，一次性返回完整内容；用户通常要等生成完成才能看到输出。
+
+StreamingResponse 是随着生成进度逐段发送内容，客户端可以更早看到部分输出，而不必等到全部答案生成结束。
+
+bm25__qa_036 status=success
+question: 普通响应和 StreamingResponse 在答案的返回时机及用户看到输出的时间上有何区别？
+sources: api_stream, pdf_ocr, cuda_oom
+answer: 普通响应是在答案生成结束后**一次性返回**，用户通常要等生成完成才能看到输出。  
+StreamingResponse 则会**随生成进度逐段发送内容**，让客户端更早看到输出。
+
+hybrid__qa_036 status=success
+question: 普通响应和 StreamingResponse 在答案的返回时机及用户看到输出的时间上有何区别？
+sources: api_stream, transformer_attention, reranker_pairs
+answer: 根据资料：
+
+- **普通响应**：在答案生成结束后**一次返回**，因此用户通常要等生成完成才能看到答案。
+- **StreamingResponse**：会随生成进度**逐段发送内容**，让客户端更早看到输出。
+
+区别核心是：普通响应是“生成完后一次性拿到”，StreamingResponse 是“生成过程中逐步拿到、用户更早看到输出”。
+
+vector__qa_037 status=success
+question: 把 RAG 封装成 HTTP 服务后，检索结果、生成模型和 FastAPI 各负什么职责？
+sources: api_stream, rag_overview, rag_evidence
+answer: 根据提供的资料：
+
+- **检索结果**：提供与问题相关的外部知识、事实和证据，并被放入提示词中供生成模型参考，从而降低模型只凭参数记忆编造答案的情况。
+- **生成模型**：根据检索到的资料组织答案；资料不足时应说明无法回答，而不是编造。
+- **FastAPI**：负责把 RAG 问答封装为 HTTP 接口。它可以用普通响应在答案生成结束后一次返回，也可以用 `StreamingResponse` 随生成进度逐段发送内容，让客户端更早看到输出。
+
+资料没有进一步说明检索模块本身的具体实现职责。
+
+bm25__qa_037 status=success
+question: 把 RAG 封装成 HTTP 服务后，检索结果、生成模型和 FastAPI 各负什么职责？
+sources: api_stream, rag_overview, rag_terms
+answer: 根据资料：
+
+- **检索结果**：由 RAG 系统从外部知识库中检索出与问题相关的信息，并被放入提示词中，作为大语言模型组织答案的参考内容。
+- **生成模型**：即大语言模型，负责根据包含检索结果的提示词来组织答案。
+- **FastAPI**：负责把 RAG 问答封装成 HTTP 接口；普通响应在答案生成结束后一次返回，`StreamingResponse` 则可以随生成进度逐段发送内容。
+
+资料没有进一步说明三者在具体实现中的更细分工。
+
+hybrid__qa_037 status=success
+question: 把 RAG 封装成 HTTP 服务后，检索结果、生成模型和 FastAPI 各负什么职责？
+sources: api_stream, rag_overview, rag_terms
+answer: 根据资料，可以这样划分职责：
+
+- **检索结果**：来自外部知识库中与问题相关的信息，会被放入提示词中，供生成模型使用。资料没有进一步说明“检索结果”本身作为独立模块还承担其他职责。
+- **生成模型（大语言模型）**：接收包含检索结果的提示词，负责组织并生成答案。
+- **FastAPI**：把 RAG 问答封装成 HTTP 接口。普通响应在答案生成结束后一次返回；使用 `StreamingResponse` 时可以随生成进度逐段发送内容。
+
+资料只说明到这些层面，未进一步给出更细的服务职责划分。
+
+hybrid_reranker__qa_037 status=success
+question: 把 RAG 封装成 HTTP 服务后，检索结果、生成模型和 FastAPI 各负什么职责？
+sources: api_stream, rag_overview, rag_evidence
+answer: 根据资料，职责可以这样划分：
+
+- **检索结果**：提供与问题相关的外部知识、事实和证据；这些结果会被放入提示词，供生成模型参考，从而降低模型仅凭参数记忆编造答案的情况。
+- **生成模型**：根据检索到的资料组织答案；资料不足时，应说明无法回答。
+- **FastAPI**：负责把 RAG 问答封装成 HTTP 接口。它可以让普通响应在答案生成结束后一次返回，也可以使用 `StreamingResponse` 随生成进度逐段发送内容。
+
+bm25__qa_038 status=success
+question: Hybrid 和 Cross-Encoder 都影响候选顺序，它们的评分依据分别是什么？
+sources: hybrid_fusion, reranker_pairs, bm25_terms
+answer: - **Hybrid 的评分依据**：融合两路检索分数——向量语义匹配分数和 BM25 关键词匹配分数。两路原始分数先分别做 Min-Max 归一化，再按 `alpha * vector_norm + (1-alpha) * bm25_norm` 融合，资料中默认 `alpha=0.7`。  
+- **Cross-Encoder 的评分依据**：将 `query` 与 `document.text` 组成文本对，联合编码后输出相关性分数。该分数依赖具体问题与文档，不能预先计算固定 rerank score，只用于重排检索召回的候选。
+
+hybrid__qa_038 status=success
+question: Hybrid 和 Cross-Encoder 都影响候选顺序，它们的评分依据分别是什么？
+sources: reranker_pairs, hybrid_fusion, bm25_terms
+answer: - **Hybrid Search 的评分依据**：融合两路检索分数——向量语义匹配分数和 BM25 关键词匹配分数。两路原始分数先分别做 Min-Max 归一化，再按 `alpha*vector_norm+(1-alpha)*bm25_norm` 融合；资料中默认 `alpha=0.7`。
+
+- **Cross-Encoder 的评分依据**：将 query 与 `document.text` 组成文本对，联合编码后输出相关性分数。该分数会随不同 query 变化，不能提前计算固定 rerank score；它只用于重排检索召回的候选。
+
+hybrid_reranker__qa_038 status=success
+question: Hybrid 和 Cross-Encoder 都影响候选顺序，它们的评分依据分别是什么？
+sources: reranker_pairs, hybrid_fusion, cosine_unit
+answer: Hybrid 的评分依据是：融合**向量语义匹配分数**和 **BM25 关键词匹配分数**。由于两路原始分数范围不同，需分别做 Min-Max 归一化，再按 `alpha*vector_norm+(1-alpha)*bm25_norm` 融合，资料中默认 `alpha=0.7`。
+
+Cross-Encoder 的评分依据是：将 **query 与 document.text 组成文本对，联合编码后输出相关性分数**。同一篇文档面对不同问题会得到不同分数，因此不能提前计算固定 rerank score；它只用于重排检索召回的候选。
+
+vector__qa_038 status=success
+question: Hybrid 和 Cross-Encoder 都影响候选顺序，它们的评分依据分别是什么？
+sources: reranker_pairs, hybrid_fusion, bm25_terms
+answer: Hybrid 的评分依据是：融合**向量语义匹配分数**和 **BM25 关键词匹配分数**。由于两路原始分数范围不同，需分别做 Min-Max 归一化，再按  
+`alpha*vector_norm + (1-alpha)*bm25_norm` 融合；资料中默认 `alpha=0.7`。其中 BM25 基于词项匹配，综合词频、文档频率和文档长度计算分数。
+
+Cross-Encoder 的评分依据是：将 **query 与 document.text 组成文本对，联合编码后输出相关性分数**。同一篇文档面对不同问题会得到不同分数，因此它不能提前计算固定 rerank score，只用于重排检索召回的候选。
+
+hybrid__qa_039 status=success
+question: Embedding 与 FAISS IndexFlatIP 在语义检索中分别负责表示还是搜索？
+sources: faiss_ip, embedding_bge, bm25_terms
+answer: Embedding 负责**表示**：把文本编码为稠密语义向量，使语义接近的文本在向量空间中更接近。  
+FAISS `IndexFlatIP` 负责**搜索**：对索引内全部文档向量执行精确内积搜索，并返回内积最大的 Top-K。资料还指出，只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。
+
+hybrid_reranker__qa_039 status=success
+question: Embedding 与 FAISS IndexFlatIP 在语义检索中分别负责表示还是搜索？
+sources: faiss_ip, embedding_bge, cosine_unit
+answer: Embedding 负责**表示**：把文本编码为稠密语义向量，让含义接近的文本在向量空间中更接近。  
+FAISS IndexFlatIP 负责**搜索**：对索引内的全部文档向量执行精确内积搜索，返回内积最大的 Top-K；当查询向量和文档向量都归一化时，内积等价于余弦相似度。
+
+vector__qa_039 status=success
+question: Embedding 与 FAISS IndexFlatIP 在语义检索中分别负责表示还是搜索？
+sources: faiss_ip, bm25_terms, embedding_bge
+answer: - **Embedding 负责“表示”**：把文本编码为稠密语义向量，使含义接近的文本在向量空间中更接近；文档向量可以提前计算。
+- **FAISS IndexFlatIP 负责“搜索”**：对索引内全部文档向量执行精确内积搜索，并返回内积最大的 Top-K。
+
+补充：只有当查询向量和文档向量都做单位长度归一化时，内积才等于余弦相似度。
+
+bm25__qa_039 status=success
+question: Embedding 与 FAISS IndexFlatIP 在语义检索中分别负责表示还是搜索？
+sources: faiss_ip, rag_overview, embedding_bge
+answer: Embedding 负责**表示**：把文本编码为稠密语义向量，使语义接近的文本在向量空间中更接近。  
+FAISS IndexFlatIP 负责**搜索**：对索引内全部文档向量执行精确内积搜索，返回内积最大的 Top-K。
+
+补充：只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。
+
+hybrid_reranker__qa_040 status=success
+question: 结合切块、向量表示、内积搜索和 RAG 提示词，说明文档进入回答流程的顺序。
+sources: faiss_ip, rag_overview, api_stream
+answer: 根据提供的资料，只能确定以下顺序和关系：
+
+1. **内积搜索**：`FAISS IndexFlatIP` 会对索引内全部文档向量执行精确内积搜索，返回内积最大的 Top-K；只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。
+2. **RAG 检索与提示词**：RAG 系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。
+
+因此，资料支持的流程是：
+
+**文档向量已在索引中 → 通过 FAISS IndexFlatIP 做内积搜索并返回 Top-K → 将检索结果放入 RAG 提示词 → 交给大语言模型组织答案。**
+
+但资料中没有说明“切块”和“向量表示”的具体步骤，也没有说明它们与内积搜索、RAG 提示词之间的完整先后顺序。因此，**无法仅根据这些资料完整说明“切块、向量表示、内积搜索和 RAG 提示词”的文档进入回答流程顺序**。
+
+vector__qa_040 status=success
+question: 结合切块、向量表示、内积搜索和 RAG 提示词，说明文档进入回答流程的顺序。
+sources: rag_overview, faiss_ip, api_stream
+answer: 根据提供的资料，无法完整说明“切块、向量表示、内积搜索和 RAG 提示词”的完整顺序，因为资料中没有说明“切块”和“向量表示”的具体步骤。资料只能确认以下流程：
+
+1. RAG 系统先从外部知识库检索与问题相关的信息。  
+2. FAISS `IndexFlatIP` 会对索引内全部文档向量执行精确内积搜索，返回内积最大的 Top-K；只有当查询向量和文档向量都做单位长度归一化时，内积才等于余弦相似度。  
+3. 检索结果会被放入提示词。  
+4. 提示词交给大语言模型组织答案。
+
+因此，资料中可确认的文档进入回答流程是：**外部知识库中的文档向量参与内积搜索并得到 Top-K 检索结果 → 检索结果放入 RAG 提示词 → 交给大语言模型生成答案**。至于“切块”和“向量表示”在这之前如何具体进行，资料未提供，不能据此确定。
+
+bm25__qa_040 status=success
+question: 结合切块、向量表示、内积搜索和 RAG 提示词，说明文档进入回答流程的顺序。
+sources: faiss_ip, cosine_unit, bm25_terms
+answer: 根据提供的资料，**无法完整说明“文档进入回答流程”的顺序**，因为资料中没有涉及“切块”和“RAG 提示词”的内容，也没有给出从文档处理到回答生成的完整流程。
+
+资料中只明确说明了以下相关环节：
+
+1. **向量表示与归一化**：L2 归一化会把向量除以欧几里得长度，使范数等于 1；若查询向量 q 和文档向量 d 都已归一化，则 `cosine(q,d)=q·d`。
+2. **内积搜索**：`FAISS IndexFlatIP` 会对索引内全部文档向量执行精确内积搜索，并返回内积最大的 Top-K。
+3. **余弦检索实现**：当查询和文档向量都做单位长度归一化时，内积等于余弦相似度，因此可用 `IndexFlatIP` 实现余弦检索。
+
+但资料中**没有说明切块如何进行、向量表示如何生成、RAG 提示词如何组织，以及这些步骤进入回答流程的先后顺序**。因此，基于现有资料不能给出完整顺序。
+
+hybrid__qa_040 status=success
+question: 结合切块、向量表示、内积搜索和 RAG 提示词，说明文档进入回答流程的顺序。
+sources: faiss_ip, rag_overview, bm25_terms
+answer: 资料中没有完整说明“切块、向量表示、内积搜索、RAG 提示词”的全部先后顺序，尤其没有提供“切块”和“向量表示”的具体步骤及其在流程中的位置，因此不能根据资料完整推断文档进入回答流程的顺序。
+
+资料能确定的部分是：
+
+1. **FAISS IndexFlatIP 内积搜索**：对索引内全部文档向量执行精确内积搜索，返回内积最大的 Top-K；只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度。
+2. **RAG 流程**：系统先从外部知识库检索与问题相关的信息，再把检索结果放入提示词，交给大语言模型组织答案。
+
+因此，仅依据现有资料可表述为：**文档向量进入索引后，可通过 FAISS IndexFlatIP 做内积搜索得到 Top-K 检索结果；随后 RAG 将检索结果放入提示词并交给大语言模型生成答案。**  
+但“切块”和“向量表示”在资料中没有说明，无法确定它们在完整流程中的具体顺序。
+
+vector__qa_041 status=success
+question: 语义向量匹配有什么帮助和编号混淆风险，Hybrid 如何补充这一点？
+sources: hybrid_fusion, embedding_bge, bm25_terms
+answer: 根据资料：
+
+- **语义向量匹配的帮助**：Embedding 会把文本编码成稠密语义向量，使**含义接近的文本在向量空间更接近**，因此可以按语义相似性进行检索。
+- **编号混淆风险**：资料明确指出，**纯向量语义检索可能混淆很相似的编号**；对于错误编号、产品型号等精确关键词，需要保留精确匹配能力。
+- **Hybrid 的补充方式**：Hybrid Search 融合**向量语义匹配**和 **BM25 关键词匹配**。由于两路原始分数范围不同，应先分别做 **Min-Max 归一化**，再按  
+  `alpha * vector_norm + (1-alpha) * bm25_norm` 融合；本项目默认 `alpha=0.7`。  
+  其中 BM25 是基于词项匹配的方法，资料提到 **BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词**，因此可以补充纯向量检索在相似编号上的混淆风险。
+
+简言之：语义向量帮助按含义检索，但可能混淆相似编号；Hybrid 通过引入 BM25 关键词匹配并归一化融合，补充精确关键词匹配能力。
+
+bm25__qa_041 status=success
+question: 语义向量匹配有什么帮助和编号混淆风险，Hybrid 如何补充这一点？
+sources: bm25_terms, hybrid_fusion, cosine_unit
+answer: 根据资料：
+
+- **语义向量匹配的作用**：资料只说明 Hybrid Search 会融合“向量语义匹配”和“BM25 关键词匹配”，但没有进一步展开语义向量匹配的具体帮助。
+- **编号混淆风险**：纯向量语义检索可能混淆很相似的编号；BM25L 和 jieba 分词更适合保留错误编号、产品型号等精确关键词。
+- **Hybrid 如何补充**：Hybrid Search 同时使用向量语义匹配和 BM25 关键词匹配。由于两路原始分数范围不同，需要分别做 Min-Max 归一化，再按  
+  `alpha*vector_norm + (1-alpha)*bm25_norm`  
+  融合，本项目默认 `alpha=0.7`。这样可以用 BM25 的关键词匹配能力补充纯向量检索对相似编号的混淆风险。
+
+hybrid__qa_041 status=success
+question: 语义向量匹配有什么帮助和编号混淆风险，Hybrid 如何补充这一点？
+sources: hybrid_fusion, bm25_terms, embedding_bge
+answer: 语义向量匹配的帮助是：Embedding 会把文本编码为稠密语义向量，使含义接近的文本在向量空间中更接近，因此有助于按语义相似性进行匹配。
+
+编号混淆风险是：资料指出，纯向量语义检索可能混淆很相似的编号。
+
+Hybrid 的补充方式是：Hybrid Search 融合向量语义匹配和 BM25 关键词匹配。BM25 基于词项匹配，适合保留错误编号、产品型号等精确关键词；两路原始分数范围不同，应分别做 Min-Max 归一化，再按 `alpha*vector_norm+(1-alpha)*bm25_norm` 融合，本项目默认 `alpha=0.7`。因此，Hybrid 通过 BM25 的关键词精确匹配来补充纯语义向量检索对相似编号可能混淆的问题。
+
+hybrid_reranker__qa_041 status=success
+question: 语义向量匹配有什么帮助和编号混淆风险，Hybrid 如何补充这一点？
+sources: hybrid_fusion, bm25_terms, embedding_bge
+answer: 语义向量匹配的帮助是：把文本编码为稠密语义向量，使**含义接近的文本在向量空间更接近**，从而支持语义层面的匹配；资料中还提到本项目使用 `sentence-transformers` 加载 `BAAI/bge-small-zh-v1.5` 中文模型，文档向量可以提前计算。
+
+编号混淆风险是：**纯向量语义检索可能混淆很相似的编号**。资料指出，BM25L 和 jieba 分词适合保留错误编号、产品型号等精确关键词。
+
+Hybrid 的补充方式是：融合**向量语义匹配**和 **BM25 关键词匹配**。两路原始分数范围不同，应分别做 Min-Max 归一化，再按  
+`alpha*vector_norm+(1-alpha)*bm25_norm`  
+融合；本项目默认 `alpha=0.7`。因此 Hybrid 既利用语义匹配，又通过 BM25 关键词匹配增强对编号、型号等精确关键词的保留，降低纯向量检索混淆相似编号的风险。
+
+bm25__qa_042 status=success
+question: 知识库资料可能过时时，应怎样对待 RAG 答案的证据和引用？
+sources: rag_evidence, rag_limits, rag_overview
+answer: 当知识库资料可能过时时，不能把 RAG 答案及其引用视为完全可靠。应核查答案所依据的来源和引用，注意资料过时可能导致错误回答；如果知识库缺乏答案或资料不足，应明确说明无法回答。
+
+hybrid__qa_042 status=success
+question: 知识库资料可能过时时，应怎样对待 RAG 答案的证据和引用？
+sources: rag_limits, rag_evidence, rag_overview
+answer: 知识库资料可能过时时，不能盲目依赖 RAG 答案及其证据和引用。应核查来源和引用，确认其时效性与适用性；如果资料不足或已过时，应明确说明无法回答，而不要猜测。RAG 能降低幻觉，但不能保证完全消除幻觉，资料过时仍可能导致错误回答。
+
+hybrid_reranker__qa_042 status=success
+question: 知识库资料可能过时时，应怎样对待 RAG 答案的证据和引用？
+sources: rag_limits, rag_evidence, rag_overview
+answer: 知识库资料可能过时时，不能把 RAG 答案中的证据和引用当成绝对可靠。资料过时本身可能导致错误回答；应当核查来源和引用，确认答案所依据的资料是否可靠，并在知识库缺乏答案或资料不足时明确说明无法回答。RAG 可以降低幻觉，但不能保证完全消除幻觉。
+
+vector__qa_042 status=success
+question: 知识库资料可能过时时，应怎样对待 RAG 答案的证据和引用？
+sources: rag_limits, rag_evidence, rag_overview
+answer: 应核查 RAG 答案所依据的来源和引用，不能盲信。因为 RAG 虽通过提供外部事实和证据降低幻觉，但资料过时、检索错误、上下文缺失或模型误读都可能导致错误回答；当知识库缺乏答案或资料不足时，应明确说明无法回答。
+
+hybrid__qa_043 status=success
+question: Self-Attention 和 IndexFlatIP 都提到点积，它们的任务和输出有何不同？
+sources: transformer_attention, faiss_ip, cosine_unit
+answer: 两者虽然都涉及点积，但任务和输出不同：
+
+| 方面 | Self-Attention | FAISS IndexFlatIP |
+|---|---|---|
+| 任务 | 让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系 | 对索引内全部文档向量执行精确内积搜索，做向量检索 |
+| 点积的作用 | 点积用于计算注意力权重，且经过缩放和 softmax | 点积用于计算查询向量与文档向量的内积，并按内积大小排序 |
+| 输出 | 资料明确提到输出“注意力权重”；该权重用于 Token 间交互、建模上下文关系。资料未进一步说明 Self-Attention 最终上下文表示的具体形式 | 返回内积最大的 Top-K 文档 |
+| 与余弦相似度的关系 | 资料未说明其使用余弦相似度 | 只有查询和文档向量都做单位长度归一化时，内积才等于余弦相似度；因此可用 IndexFlatIP 实现余弦检索 |
+
+简言之：Self-Attention 中的点积服务于 Token 间上下文关系建模，并产生注意力权重；IndexFlatIP 中的点积服务于文档向量检索，输出内积最大的 Top-K。
+
+hybrid_reranker__qa_043 status=success
+question: Self-Attention 和 IndexFlatIP 都提到点积，它们的任务和输出有何不同？
+sources: faiss_ip, transformer_attention, cosine_unit
+answer: 两者的点积用途、任务和输出不同：
+
+- **Self-Attention（Transformer）**
+  - **任务**：让每个 Token 根据 Query、Key、Value 与其他 Token 交互，建模上下文关系。
+  - **点积作用**：注意力权重来自“缩放点积 + softmax”，点积用于计算注意力分数，而不是简单按词频匹配。
+  - **输出**：资料明确的是注意力权重及其上下文交互建模；未进一步说明最终输出形式。
+
+- **IndexFlatIP（FAISS）**
+  - **任务**：对索引内全部文档向量执行精确内积搜索。
+  - **点积作用**：直接计算查询向量与文档向量的内积，并据此排序。
+  - **输出**：返回内积最大的 **Top-K** 文档向量/结果。若查询和文档向量都做了单位长度归一化，内积才等于余弦相似度，因此可用于余弦检索。
+
+简要概括：**Self-Attention 用缩放点积生成注意力权重以建模上下文关系；IndexFlatIP 用内积做向量相似度搜索并返回 Top-K。**
+
+vector__qa_043 status=success
+question: Self-Attention 和 IndexFlatIP 都提到点积，它们的任务和输出有何不同？
+sources: faiss_ip, transformer_attention, cosine_unit
+answer: 根据资料：
+
+- **Self-Attention**
+  - **任务**：让每个 Token 根据 Query、Key、Value 与其他 Token 交互，从而建模上下文关系。
+  - **点积的作用**：用于产生注意力权重；资料说明注意力权重来自“缩放点积及 softmax”，不是简单按词频匹配。
+  - **输出**：资料没有明确描述 Self-Attention 的最终输出形式，只说明了其交互机制和注意力权重来源。
+
+- **FAISS IndexFlatIP**
+  - **任务**：对索引内全部文档向量执行精确内积搜索，返回内积最大的 Top-K；当查询和文档向量都做单位长度归一化时，内积等于余弦相似度，因此也可用于余弦检索。
+  - **点积的作用**：作为检索打分/排序依据。
+  - **输出**：返回内积最大的 **Top-K 文档向量**。
+
+简要区别：Self-Attention 中的点积用于 Token 间交互并形成注意力权重；IndexFlatIP 中的点积用于向量检索打分并返回 Top-K。资料未说明 Self-Attention 的最终输出细节，因此不能据资料进一步断言其输出等同于 Top-K 或检索结果。
+
+bm25__qa_043 status=failed
+question: Self-Attention 和 IndexFlatIP 都提到点积，它们的任务和输出有何不同？
+failure: llm/APIConnectionError
+
+hybrid_reranker__qa_044 status=failed
+question: 检索到相似 CUDA 编号后，为什么还需要核对原始日志，而不能直接套用修复线索？
+failure: llm/APIConnectionError
+
+vector__qa_044 status=failed
+question: 检索到相似 CUDA 编号后，为什么还需要核对原始日志，而不能直接套用修复线索？
+failure: llm/APIConnectionError
+
+bm25__qa_044 status=success
+question: 检索到相似 CUDA 编号后，为什么还需要核对原始日志，而不能直接套用修复线索？
+sources: cuda_1175, cuda_1176, bm25_terms
+answer: 因为资料明确指出：**编号本身不足以确定修复方法，不应猜测**。相似的 CUDA 编号可能对应不同错误上下文，例如：
+
+- CUDA error 1175 的示例日志后出现 `driver initialization failed`，排查时要记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本。
+- CUDA error 1176 的示例日志后出现 `device index out of range`，应检查请求的设备序号和可见 GPU 列表，**不能把 CUDA error 1175 的日志线索直接套过来**。
+
+另外，检索层面即使使用 BM25L、jieba 分词保留错误编号等精确关键词，纯向量语义检索也可能混淆很相似的编号。因此，检索到相似编号只能作为线索，仍需核对原始完整日志和具体错误上下文，确认对应关系后再排查，避免直接套用错误修复线索。
+
+hybrid__qa_044 status=success
+question: 检索到相似 CUDA 编号后，为什么还需要核对原始日志，而不能直接套用修复线索？
+sources: cuda_1175, cuda_1176, cuda_oom
+answer: 因为相似 CUDA 编号本身不足以确定具体错误和修复方法，不能直接套用其他编号的修复线索。资料中：
+
+- CUDA error 1175 后面出现的是 `driver initialization failed`，排查时要先记录完整错误日志，再核对 GPU 驱动、CUDA 运行时与框架版本；编号本身不足以确定修复方法，不应猜测。
+- CUDA error 1176 后面出现的是 `device index out of range`，应检查请求的设备序号和可见 GPU 列表，不能把 1175 的日志线索直接套过来。
+- CUDA out of memory 表示显存不足，和 1175 的驱动初始化线索也不同。
+
+因此，检索到相似编号后仍需核对原始日志，是因为真正有诊断价值的是完整错误日志及其上下文；相似编号可能对应完全不同的错误原因，直接套用修复线索可能误导排查。
+
+vector__qa_045 status=success
+question: 知识库是否足以认定 alpha=0.7 是本数据集上效果最好的融合权重？
+sources: hybrid_fusion, transformer_attention, faiss_ip
+answer: 不足以认定。
+
+资料中仅说明“Hybrid Search 融合……本项目默认 alpha=0.7”，但没有提供在本数据集上对不同 alpha 值的实验比较或效果评估结果。因此，知识库不足以认定 alpha=0.7 是本数据集上效果最好的融合权重。
+
+bm25__qa_045 status=success
+question: 知识库是否足以认定 alpha=0.7 是本数据集上效果最好的融合权重？
+sources: hybrid_fusion, rag_overview, cuda_oom
+answer: 不足以认定。
+
+资料只能说明：Hybrid Search 使用 `alpha*vector_norm+(1-alpha)*bm25_norm` 融合，且“本项目默认 alpha=0.7”。但资料中没有提供在本数据集上对不同 alpha 取值进行效果对比的实验结果，也没有说明 alpha=0.7 是效果最好的融合权重。因此，知识库不足以认定 alpha=0.7 是本数据集上效果最好的融合权重。
+
+hybrid__qa_045 status=success
+question: 知识库是否足以认定 alpha=0.7 是本数据集上效果最好的融合权重？
+sources: hybrid_fusion, transformer_attention, rag_overview
+answer: 不足以认定。资料中只说明“本项目默认 alpha=0.7”，但没有提供在本数据集上的效果比较、评测结果或其他 alpha 取值的对照实验。因此不能据此认定 alpha=0.7 是本数据集上效果最好的融合权重。
+
+hybrid_reranker__qa_045 status=success
+question: 知识库是否足以认定 alpha=0.7 是本数据集上效果最好的融合权重？
+sources: hybrid_fusion, faiss_ip, cosine_unit
+answer: 不足以认定。
+
+资料中仅说明“本项目默认 alpha=0.7”，但没有提供在该数据集上与其他融合权重进行效果比较、评估或“效果最好”的结论。因此，不能据此认定 alpha=0.7 是本数据集上效果最好的融合权重。
+
+bm25__qa_046 status=success
+question: 只看知识库，能给出 IndexFlatIP 在我机器上搜索十万条向量的具体毫秒耗时吗？
+sources: cosine_unit, faiss_ip, embedding_bge
+answer: 不能。知识库只说明 `IndexFlatIP` 会对全部文档向量执行精确内积搜索并返回 Top-K，以及归一化后内积等于余弦相似度；没有提供任何关于你机器配置、十万条向量搜索的具体毫秒耗时或性能基准数据。因此无法根据知识库给出该具体耗时。
+
+hybrid__qa_046 status=success
+question: 只看知识库，能给出 IndexFlatIP 在我机器上搜索十万条向量的具体毫秒耗时吗？
+sources: faiss_ip, cosine_unit, embedding_bge
+answer: 不能。知识库只说明 `IndexFlatIP` 会对索引内全部文档向量执行精确内积搜索并返回 Top-K，以及归一化后可用于余弦检索；没有提供任何关于“十万条向量”的具体毫秒耗时、性能基准或机器配置数据。因此无法根据现有资料给出你机器上的具体耗时。
+
+hybrid_reranker__qa_046 status=success
+question: 只看知识库，能给出 IndexFlatIP 在我机器上搜索十万条向量的具体毫秒耗时吗？
+sources: faiss_ip, cosine_unit, hybrid_fusion
+answer: 不能。知识库资料只说明 FAISS `IndexFlatIP` 会对索引内全部文档向量执行精确内积搜索并返回内积最大的 Top-K，以及归一化后可用于余弦检索；没有提供在具体机器上搜索十万条向量的毫秒耗时数据。因此无法根据知识库给出具体毫秒数，需要实际测试。
+
+vector__qa_046 status=success
+question: 只看知识库，能给出 IndexFlatIP 在我机器上搜索十万条向量的具体毫秒耗时吗？
+sources: faiss_ip, cosine_unit, embedding_bge
+answer: 不能。知识库只说明 `IndexFlatIP` 会对索引内全部文档向量执行精确内积搜索并返回 Top-K，以及归一化后可用于余弦检索；没有提供在你机器上搜索十万条向量的具体毫秒耗时，也没有相关硬件或性能基准数据。
+
+hybrid__qa_047 status=success
+question: 知识库能说明我这份扫描 PDF 的 OCR 准确率，并保证表格文字全部正确吗？
+sources: pdf_ocr, rag_limits, faiss_ip
+answer: 不能。
+
+资料只说明：扫描版 PDF 可能没有文本层，返回空文本时需要先用 OCR 转成文字，再进行清洗、切块和 Embedding。资料中没有提供你这份扫描 PDF 的具体 OCR 准确率，也不能保证表格文字全部正确。  
+同时，资料明确说明 RAG 不能保证完全消除错误，应核查来源和引用；知识库缺乏答案时应明确说明。
+
+hybrid_reranker__qa_047 status=success
+question: 知识库能说明我这份扫描 PDF 的 OCR 准确率，并保证表格文字全部正确吗？
+sources: pdf_ocr, rag_limits, faiss_ip
+answer: 不能。
+
+现有资料只能说明：扫描版 PDF 如果页面只有图片、没有可提取文本层，需要先 OCR 再进行清洗、切块和 Embedding；但资料中没有提供你这份扫描 PDF 的 OCR 准确率，也不能保证表格文字全部正确。
+
+资料还指出，RAG 不能保证完全消除幻觉，检索错误、上下文缺失或模型误读等都可能导致错误回答。因此，对本问题，知识库没有足够信息给出准确率或“全部正确”的保证，需要你自行核查原始 PDF 与 OCR 结果。
+
+vector__qa_047 status=success
+question: 知识库能说明我这份扫描 PDF 的 OCR 准确率，并保证表格文字全部正确吗？
+sources: pdf_ocr, rag_limits, reranker_pairs
+answer: 不能。提供的资料只说明：扫描版 PDF 若没有可提取文本层，需要先做 OCR，再进行清洗、切块和 Embedding；但没有给出你这份 PDF 的 OCR 准确率，也没有任何资料能保证表格文字全部正确。资料还提示 RAG 不能保证完全消除错误，应核查来源和引用。
+
+bm25__qa_047 status=success
+question: 知识库能说明我这份扫描 PDF 的 OCR 准确率，并保证表格文字全部正确吗？
+sources: pdf_ocr, rag_limits, rag_evidence
+answer: 不能。根据现有资料，知识库没有提供你这份扫描 PDF 的 OCR 准确率，也不能保证表格文字全部正确。
+
+资料只说明：扫描版 PDF 可能需要先 OCR 转文字；同时 RAG 不能完全消除错误，检索或模型误读等都可能导致错误回答，因此应核查来源和引用。若知识库缺乏相关信息，应明确说明无法回答。
+
+hybrid_reranker__qa_048 status=success
+question: 采用 StreamingResponse 后，我这次问答会具体减少多少毫秒延迟？
+sources: api_stream, transformer_attention, embedding_bge
+answer: 资料中没有提供具体的延迟减少毫秒数，因此无法确定这次问答会减少多少毫秒。资料仅说明 `StreamingResponse` 可以随生成进度逐段发送内容，让客户端更早看到输出。
+
+vector__qa_048 status=success
+question: 采用 StreamingResponse 后，我这次问答会具体减少多少毫秒延迟？
+sources: api_stream, rag_evidence, transformer_attention
+answer: 资料中没有提供采用 `StreamingResponse` 后具体减少多少毫秒延迟的数据，因此无法确定本次问答会减少多少毫秒。资料仅说明它可以随生成进度逐段发送内容，让客户端更早看到输出。
+
+bm25__qa_048 status=success
+question: 采用 StreamingResponse 后，我这次问答会具体减少多少毫秒延迟？
+sources: api_stream, reranker_pairs, chunk_overlap
+answer: 资料中没有提供具体的延迟毫秒数，因此无法回答“这次问答具体减少多少毫秒”。  
+根据资料只能确定：使用 `StreamingResponse` 可以随生成进度逐段发送内容，让客户端更早看到输出，但没有给出具体减少的毫秒延迟数据。
+
+hybrid__qa_048 status=success
+question: 采用 StreamingResponse 后，我这次问答会具体减少多少毫秒延迟？
+sources: api_stream, reranker_pairs, rag_evidence
+answer: 资料中没有提供采用 `StreamingResponse` 后具体减少多少毫秒延迟的数据，因此无法确定本次问答会减少多少毫秒。资料只说明它可以随生成进度逐段发送内容，让客户端更早看到输出。
+
+vector__qa_049 status=success
+question: 只根据 1176 的示例日志，能确定我有几张 GPU 并替我填一个正确设备序号吗？
+sources: cuda_1176, cuda_1175, cuda_oom
+answer: 不能。根据 1176 的示例日志，只能看到 CUDA error 1176 后面出现 `device index out of range`，提示应检查请求的设备序号和可见 GPU 列表；日志没有说明你实际有几张 GPU，也没有给出一个可确认正确的设备序号。因此不能仅凭这个示例日志确定 GPU 数量或替你填写正确设备序号。
+
+bm25__qa_049 status=success
+question: 只根据 1176 的示例日志，能确定我有几张 GPU 并替我填一个正确设备序号吗？
+sources: cuda_1176, cuda_1175, cuda_oom
+answer: 不能。只根据 1176 的示例日志，只能知道出现的是 `device index out of range`，应检查“请求的设备序号”和“可见 GPU 列表”。资料没有提供你机器上有几张 GPU，也没有提供哪个设备序号是正确的，因此不能确定 GPU 数量，也不能替你填一个正确的设备序号。
+
+hybrid__qa_049 status=success
+question: 只根据 1176 的示例日志，能确定我有几张 GPU 并替我填一个正确设备序号吗？
+sources: cuda_1176, cuda_1175, cuda_oom
+answer: 不能。
+
+根据资料中 1176 的示例日志，只能知道错误后出现的是 `device index out of range`，应检查“请求的设备序号”和“可见 GPU 列表”。资料没有提供你的实际 GPU 数量或可见 GPU 列表，因此无法确定你有几张 GPU，也不能替你填写一个正确的设备序号。
+
+hybrid_reranker__qa_049 status=success
+question: 只根据 1176 的示例日志，能确定我有几张 GPU 并替我填一个正确设备序号吗？
+sources: cuda_1176, cuda_1175, cuda_oom
+answer: 不能。只根据 1176 的示例日志，只能看到 `CUDA error 1176` 后面出现 `device index out of range`，资料要求检查“请求的设备序号和可见 GPU 列表”。日志本身没有给出你有几张 GPU，也没有给出可见 GPU 列表，因此无法确定 GPU 数量，也不能替你填一个“正确设备序号”。需要进一步查看实际机器的可见 GPU 列表后再确认。
+
+bm25__qa_050 status=success
+question: 知识库有没有给出“向量检索”这句话的实际 Embedding 数值，可以直接列出来吗？
+sources: rag_terms, embedding_bge, cosine_unit
+answer: 没有。知识库资料中没有给出“向量检索”这句话的实际 Embedding 数值，因此无法直接列出具体向量。资料只提到了使用 `sentence-transformers` 加载 `BAAI/bge-small-zh-v1.5` 中文模型、文档向量可提前计算，以及归一化和余弦检索机制，但没有提供任何实际向量数值。
+
+hybrid__qa_050 status=success
+question: 知识库有没有给出“向量检索”这句话的实际 Embedding 数值，可以直接列出来吗？
+sources: embedding_bge, cosine_unit, faiss_ip
+answer: 资料中没有给出“向量检索”这句话的实际 Embedding 数值，因此无法直接列出具体向量。现有内容只说明了 Embedding 的用途、使用的模型，以及 FAISS 内积/余弦检索的原理，未包含任何具体文本对应的向量数值。
+
+hybrid_reranker__qa_050 status=success
+question: 知识库有没有给出“向量检索”这句话的实际 Embedding 数值，可以直接列出来吗？
+sources: embedding_bge, cosine_unit, rag_overview
+answer: 没有。知识库资料中没有给出“向量检索”这句话的实际 Embedding 数值，因此无法直接列出。
+
+现有资料只说明了：
+- 使用 `sentence-transformers` 加载 `BAAI/bge-small-zh-v1.5` 中文模型；
+- 文档向量可以提前计算；
+- 但没有提供“向量检索”这句话对应的具体向量数值。
+
+vector__qa_050 status=success
+question: 知识库有没有给出“向量检索”这句话的实际 Embedding 数值，可以直接列出来吗？
+sources: embedding_bge, cosine_unit, faiss_ip
+answer: 资料中没有给出“向量检索”这句话的实际 Embedding 数值，因此不能直接列出具体数值。资料仅说明了使用 `BAAI/bge-small-zh-v1.5` 模型进行中文文本向量化，以及归一化和 FAISS 内积检索的原理，但没有提供该句的向量计算结果。

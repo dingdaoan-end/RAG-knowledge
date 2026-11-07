@@ -1,0 +1,14 @@
+{
+  "capture_sha256": "c5a1bd05995d007fde1330aaae2aa55330dc8b603d729678eb2b9cf5c6deeafd",
+  "generation": {
+    "mode": "mock",
+    "implementation": "MockLLM",
+    "model": "MockLLM"
+  },
+  "total_count": 5,
+  "reviewed_count": 0,
+  "pending_count": 5,
+  "human_review_metrics": null,
+  "real_llm_quality_metrics": null,
+  "message": "尚无已审核评分；当前为 Mock 或未验证自定义 LLM，不能视为真实生成模型质量"
+}
